@@ -1,0 +1,22 @@
+[
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/activity_sign_up.xml",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_sign_up.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/activity_log_in.xml",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_log_in.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/activity_search_home.xml",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_search_home.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/activity_main.xml",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.example.gathernow.app-mergeDebugResources-27:/layout/activity_sign_up.xml",
+        "source": "com.example.gathernow.app-main-30:/layout/activity_sign_up.xml"
+    }
+]

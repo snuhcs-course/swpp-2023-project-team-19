@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Gathernow"
         tools:targetApi="31">
         <activity
+            android:name=".logIn"
+            android:exported="false" />
+        <activity
             android:name=".searchHome"
             android:exported="false" />
         <activity
