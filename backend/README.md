@@ -29,6 +29,7 @@ These files are:
 
 To install the necessary libraries for this project from PyPI:
 ```
+sudo apt-get install libmysqlclient-dev
 pip install -r requirements.txt
 ```
 
