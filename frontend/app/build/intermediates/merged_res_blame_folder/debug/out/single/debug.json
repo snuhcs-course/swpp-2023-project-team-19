@@ -1,0 +1,334 @@
+[
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_profile_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_profile_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_launcher_round.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_profile_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_profile_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_create_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_create_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_profile.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_profile.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_events.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_events.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_create.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_create.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/xml_data_extraction_rules.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/xml/data_extraction_rules.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_events_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_events_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_create_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_create_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_search_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_search_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_profile_round.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_profile_round.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_profile_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_profile_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_search.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_search.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_search_background.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_search_background.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_search.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_search.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_create_foreground.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_create_foreground.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_search.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_search.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_edittext_bg.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/edittext_bg.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_create_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_create_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/menu_bottom_nav_menu.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/menu/bottom_nav_menu.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_edittext_unfocused.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/edittext_unfocused.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_profile.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_profile.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_profile_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_profile_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_create.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_create.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/layout_activity_log_in.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_log_in.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_profile_background.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_profile_background.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_search_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_search_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_events_round.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_events_round.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.gathernow.app-merged_res-28:/layout_activity_sign_up.xml.flat",
+        "source": "com.example.gathernow.app-main-30:/layout/activity_sign_up.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_events.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_events.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_create_round.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_create_round.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_launcher.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_create.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_create.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_profile.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_profile.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_create_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_create_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_create.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_create.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/layout_activity_sign_up.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_sign_up.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_events_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_events_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_events_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_events_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_create.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_create.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_events_foreground.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_events_foreground.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_search.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_search.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_launcher_foreground.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_search_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_search_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_search_round.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_search_round.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_search.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_search.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_profile.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_profile.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_search_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_search_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_profile_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_profile_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_events_background.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_events_background.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_create_background.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_create_background.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/xml_backup_rules.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/xml/backup_rules.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_create.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_create.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_edittext_focused.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/edittext_focused.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_search_foreground.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_search_foreground.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_launcher_background.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_launcher_background.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_events.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_events.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_events_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_events_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_events.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_events.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_search_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_search_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_white_button_bg.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/white_button_bg.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_search.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_search.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_profile.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_profile.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_events_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_events_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_profile.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_profile.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_profile_foreground.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_profile_foreground.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_events.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_events.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_create_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_create_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_button_bg.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/button_bg.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/layout_activity_search_home.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_search_home.xml"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_events.webp.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_events.webp"
+    },
+    {
+        "merged": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/layout_activity_main.xml.flat",
+        "source": "/Users/minhlgdo/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_main.xml"
+    }
+]
