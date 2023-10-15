@@ -15,7 +15,10 @@ backend/
     requirements.txt
     users/
         migrations
+        __init__.py
+        apps.py
         models.py
+        tests.py
 ```
 
 These files are:
