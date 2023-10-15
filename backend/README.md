@@ -44,8 +44,26 @@ To install the necessary libraries for this project from PyPI:
 pip3 install -r requirements.txt 
 ```
 
+Connecting with Database
+`backend/backend/settings.py` is already configured the setting for connecting our Django backend with our mySQL server. Because project is public, so USER and PASSWORD is currently hidden, please type the USER and PASSWORD when making deployment.
+
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'gather_now_dev',
+        'USER': '', # Please type own DB username here
+        'PASSWORD': '', # Please type own DB password here
+        'HOST': 'gather-now.c9wff7eeyede.ap-south-1.rds.amazonaws.com',
+        'PORT': '3306',
+    }
+}
+```
+
 Run the following commands to start the services:
 ```
 python manage.py runserver 
 ```
 The web server will be live on `http://127.0.0.1:8000/`.
+
+
