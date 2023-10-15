@@ -44,12 +44,7 @@ To install the necessary libraries for this project from PyPI:
 pip3 install -r requirements.txt 
 ```
 
-Run the following commands to start the services:
-```
-python manage.py runserver 
-```
-
-## Connecting with Database
+Connecting with Database
 `backend/backend/settings.py` is already configured the setting for connecting our Django backend with our mySQL server. Because project is public, so USER and PASSWORD is currently hidden, please type the USER and PASSWORD when making deployment.
 
 ```
@@ -65,4 +60,10 @@ DATABASES = {
 }
 ```
 
+Run the following commands to start the services:
+```
+python manage.py runserver 
+```
 The web server will be live on `http://127.0.0.1:8000/`.
+
+
