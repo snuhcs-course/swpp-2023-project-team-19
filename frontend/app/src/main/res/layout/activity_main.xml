@@ -7,14 +7,20 @@
     android:padding="30dp"
     tools:context=".MainActivity">
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.25" />
+
     <TextView
         android:id="@+id/onboardingText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf ="parent"
+        app:layout_constraintTop_toTopOf="@id/horizontalGuideline"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginTop="250dp"
         android:text="Finding an event using foreign languages\nin Korea?\nUse Gather Now!"
         android:textSize="34sp"
         android:textStyle="bold"
