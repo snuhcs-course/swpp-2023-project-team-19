@@ -85,8 +85,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'gather_now_dev',
-        'USER': 'admin', # Please type own DB username here
-        'PASSWORD': 'gather12$', # Please type own DB password here
+        'USER': '', # Please type own DB username here
+        'PASSWORD': '', # Please type own DB password here
         'HOST': 'gather-now.c9wff7eeyede.ap-south-1.rds.amazonaws.com',
         'PORT': '3306',
     }
