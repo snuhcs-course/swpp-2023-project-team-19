@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from users.models import User
 from users.serializers import UserSerializer
+from users.utils import assign_random_avatar_image
 
 class UserSignup(APIView):
     def post(self, request):
@@ -14,7 +15,8 @@ class UserSignup(APIView):
             if User.objects.filter(email=email).exists():
                 return Response({'message': 'Email already exists.'}, status=status.HTTP_400_BAD_REQUEST)
 
-            serializer.save()
+            user = serializer.save()
+            assign_random_avatar_image(user)
             return Response({'message': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -31,7 +33,7 @@ class UserLogin(APIView):
         if user.password == password:
             response_data = {
                 'message': 'Login successful.',
-                'user_id': user.user_id
+                'user_id': user.user_id,
             }
             return Response(response_data, status=status.HTTP_200_OK)
         else:
