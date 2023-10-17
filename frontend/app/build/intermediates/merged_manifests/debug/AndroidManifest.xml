@@ -28,10 +28,13 @@
         android:testOnly="true"
         android:theme="@style/Theme.Gathernow" >
         <activity
+            android:name="com.example.gathernow.createSuccessful"
+            android:exported="false" />
+        <activity
             android:name="com.example.gathernow.logIn"
             android:exported="false" />
         <activity
-            android:name="com.example.gathernow.searchHome"
+            android:name="com.example.gathernow.fragHome"
             android:exported="false" />
         <activity
             android:name="com.example.gathernow.signUp"

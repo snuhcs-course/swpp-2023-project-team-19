@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -78,11 +77,11 @@ public class signUp extends AppCompatActivity {
 
                 else {
                     // just for reference, to be deleted later
-                    String alert_msg = "signing in...";
-                    alert.setText(alert_msg);
+                    //String alert_msg = "signing in...";
+                    //alert.setText(alert_msg);
 
                     // Link to the login page or homepage
-                    Intent intent = new Intent(v.getContext(), searchHome.class);
+                    Intent intent = new Intent(v.getContext(), fragHome.class);
                     startActivity(intent);
                 }
             }
