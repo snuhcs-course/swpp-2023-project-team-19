@@ -40,3 +40,13 @@ def event_detail(request, pk):
     elif request.method == 'DELETE':
         event.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view(['GET'])
+#@permission_classes([IsAuthenticated])  # Optional: If you want to protect the endpoint
+def events_by_user(request, user_id):
+    if request.method == 'GET':
+        events = Event.objects.filter(host_id=user_id)
+        serializer = EventSerializer(events, many=True)
+        return Response(serializer.data)
+    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
