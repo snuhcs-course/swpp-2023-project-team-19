@@ -88,14 +88,13 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gather_now_dev',
+        'NAME': 'dbgathernow',
         'USER': '', # Please type own DB username here
         'PASSWORD': '', # Please type own DB password here
-        'HOST': 'gather-now.c9wff7eeyede.ap-south-1.rds.amazonaws.com',
+        'HOST': 'dbgathernow.mysql.database.azure.com',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
