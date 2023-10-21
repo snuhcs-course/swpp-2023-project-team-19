@@ -1,10 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string-array name="language_array">
+        <item>Korean</item>
+        <item>English</item>
+        <item>Japanese</item>
+        <item>Chinese</item>
+        <item>Russian</item>
+        <item>Vietnamese</item>
+        <item>Thai</item>
+        <item>Uzbek</item>
+        <item>Khmer</item>
+        <item>Filipino</item>
+        <item>Nepali</item>
+        <item>Indonesian</item>
+        <item>Kazakh</item>
+        <item>Mongolian</item>
+        <item>Burmese</item>
+        <item>Spanish</item>
+        <item>Portuguese</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Hindi</item>
+        <item>Arabic</item>
+        <item>Bengali</item>
+        <item>Urdu</item>
+        <item>Turkish</item>
+        <item>Other (specify in descriptions)</item>
+    </string-array>
     <color name="black">#FF000000</color>
     <color name="gray">#BEBEBEBE</color>
     <color name="red">#FF0000</color>
     <color name="white">#FFFFFFFF</color>
     <string name="app_name">gathernow</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_event_create">eventCreate</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_home">Home</string>

@@ -41,7 +41,7 @@ public class logIn extends AppCompatActivity {
         // TODO: Wrong password
 
         else {
-            Intent intent = new Intent(logIn.this, searchHome.class);
+            Intent intent = new Intent(logIn.this, fragHome.class);
             startActivity(intent);
         }
 

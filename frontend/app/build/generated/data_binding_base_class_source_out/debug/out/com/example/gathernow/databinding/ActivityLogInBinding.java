@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.gathernow.R;
@@ -31,6 +32,9 @@ public final class ActivityLogInBinding implements ViewBinding {
   public final TextView emailText;
 
   @NonNull
+  public final Guideline horizontalGuideline;
+
+  @NonNull
   public final AppCompatButton login;
 
   @NonNull
@@ -42,18 +46,24 @@ public final class ActivityLogInBinding implements ViewBinding {
   @NonNull
   public final TextView passwordText;
 
+  @NonNull
+  public final Guideline verticalGuideline;
+
   private ActivityLogInBinding(@NonNull ConstraintLayout rootView, @NonNull TextView alert,
-      @NonNull AppCompatEditText email, @NonNull TextView emailText, @NonNull AppCompatButton login,
+      @NonNull AppCompatEditText email, @NonNull TextView emailText,
+      @NonNull Guideline horizontalGuideline, @NonNull AppCompatButton login,
       @NonNull TextView loginText, @NonNull AppCompatEditText password,
-      @NonNull TextView passwordText) {
+      @NonNull TextView passwordText, @NonNull Guideline verticalGuideline) {
     this.rootView = rootView;
     this.alert = alert;
     this.email = email;
     this.emailText = emailText;
+    this.horizontalGuideline = horizontalGuideline;
     this.login = login;
     this.loginText = loginText;
     this.password = password;
     this.passwordText = passwordText;
+    this.verticalGuideline = verticalGuideline;
   }
 
   @Override
@@ -101,6 +111,12 @@ public final class ActivityLogInBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.horizontalGuideline;
+      Guideline horizontalGuideline = ViewBindings.findChildViewById(rootView, id);
+      if (horizontalGuideline == null) {
+        break missingId;
+      }
+
       id = R.id.login;
       AppCompatButton login = ViewBindings.findChildViewById(rootView, id);
       if (login == null) {
@@ -125,8 +141,14 @@ public final class ActivityLogInBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityLogInBinding((ConstraintLayout) rootView, alert, email, emailText, login,
-          loginText, password, passwordText);
+      id = R.id.verticalGuideline;
+      Guideline verticalGuideline = ViewBindings.findChildViewById(rootView, id);
+      if (verticalGuideline == null) {
+        break missingId;
+      }
+
+      return new ActivityLogInBinding((ConstraintLayout) rootView, alert, email, emailText,
+          horizontalGuideline, login, loginText, password, passwordText, verticalGuideline);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
