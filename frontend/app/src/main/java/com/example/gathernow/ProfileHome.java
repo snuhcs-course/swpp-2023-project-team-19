@@ -10,10 +10,10 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link profileHome#newInstance} factory method to
+ * Use the {@link ProfileHome#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class profileHome extends Fragment {
+public class ProfileHome extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +24,7 @@ public class profileHome extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public profileHome() {
+    public ProfileHome() {
         // Required empty public constructor
     }
 
@@ -37,8 +37,8 @@ public class profileHome extends Fragment {
      * @return A new instance of fragment profileHome.
      */
     // TODO: Rename and change types and number of parameters
-    public static profileHome newInstance(String param1, String param2) {
-        profileHome fragment = new profileHome();
+    public static ProfileHome newInstance(String param1, String param2) {
+        ProfileHome fragment = new ProfileHome();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

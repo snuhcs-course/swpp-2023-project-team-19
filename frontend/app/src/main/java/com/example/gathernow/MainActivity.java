@@ -16,14 +16,14 @@ public class MainActivity extends AppCompatActivity {
         // sign up button
         Button signUpButton = (Button) findViewById(R.id.signupButton);
         signUpButton.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), signUp.class);
+            Intent intent = new Intent(v.getContext(), SignUp.class);
             startActivity(intent);
         });
 
         // log in button
         Button logInButton = findViewById(R.id.loginButton);
         logInButton.setOnClickListener(view -> {
-            Intent intent = new Intent(view.getContext(), logIn.class);
+            Intent intent = new Intent(view.getContext(), LogIn.class);
             startActivity(intent);
         });
     }

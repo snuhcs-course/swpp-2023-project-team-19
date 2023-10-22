@@ -16,7 +16,6 @@ import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.NumberPicker;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -26,10 +25,10 @@ import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link eventCreate#newInstance} factory method to
+ * Use the {@link EventCreate#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class eventCreate extends Fragment {
+public class EventCreate extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,7 +39,7 @@ public class eventCreate extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public eventCreate() {
+    public EventCreate() {
         // Required empty public constructor
     }
 
@@ -53,8 +52,8 @@ public class eventCreate extends Fragment {
      * @return A new instance of fragment eventCreate.
      */
     // TODO: Rename and change types and number of parameters
-    public static eventCreate newInstance(String param1, String param2) {
-        eventCreate fragment = new eventCreate();
+    public static EventCreate newInstance(String param1, String param2) {
+        EventCreate fragment = new EventCreate();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -251,7 +250,7 @@ public class eventCreate extends Fragment {
                     alert.setText(alert_msg);
                 } else {
                     // Link to the createSuccessful page
-                    Intent intent = new Intent(v.getContext(), createSuccessful.class);
+                    Intent intent = new Intent(v.getContext(), CreateSuccessful.class);
                     startActivity(intent);
                 }
             }
@@ -264,7 +263,7 @@ public class eventCreate extends Fragment {
             @Override
             public void onClick(View v) {
                 // Link to the searchHomepage
-                Intent intent = new Intent(v.getContext(), fragHome.class);
+                Intent intent = new Intent(v.getContext(), FragHome.class);
                 startActivity(intent);
             }
         });
