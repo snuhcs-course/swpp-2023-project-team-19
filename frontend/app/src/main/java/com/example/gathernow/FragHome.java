@@ -8,7 +8,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-public class fragHome extends AppCompatActivity implements BottomNavigationView
+public class FragHome extends AppCompatActivity implements BottomNavigationView
                    .OnNavigationItemSelectedListener {
         BottomNavigationView bottomNavigationView;
 
@@ -21,10 +21,10 @@ public class fragHome extends AppCompatActivity implements BottomNavigationView
             bottomNavigationView.setOnItemSelectedListener(this);
             bottomNavigationView.setSelectedItemId(R.id.menu_search);
         }
-        eventHome eventHome = new eventHome();
-        eventSearch eventSearch = new eventSearch();
-        eventCreate eventCreate = new eventCreate();
-        profileHome profileHome = new profileHome();
+        EventHome eventHome = new EventHome();
+        EventSearch eventSearch = new EventSearch();
+        EventCreate eventCreate = new EventCreate();
+        ProfileHome profileHome = new ProfileHome();
         @Override
         public boolean onNavigationItemSelected (@NonNull MenuItem item){
             if (item.getItemId() == R.id.menu_search) {

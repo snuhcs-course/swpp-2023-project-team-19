@@ -15,13 +15,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".createSuccessful"
+            android:name=".CreateSuccessful"
             android:exported="false" />
         <activity
             android:name=".LogIn"
             android:exported="false" />
         <activity
-            android:name=".fragHome"
+            android:name=".FragHome"
             android:exported="false" />
         <activity
             android:name=".SignUp"
