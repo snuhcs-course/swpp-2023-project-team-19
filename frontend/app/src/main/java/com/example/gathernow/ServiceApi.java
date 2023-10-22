@@ -12,7 +12,7 @@ public interface ServiceApi {
     Call<CodeMessageResponse> userSignUp(@Body UserData data);
 
     // LogIn API
-    @GET("/api/login")
-    Call<CodeMessageResponse> userLogin(@Body UserData data);
+    @POST("/api/login/")
+    Call<CodeMessageResponse> userLogIn(@Body UserData data);
 
 }
