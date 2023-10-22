@@ -60,7 +60,7 @@ public class LogIn extends AppCompatActivity {
                                 Log.d("Log In", "successful");
 
                                 // Link to the login page
-                                Intent intent = new Intent(LogIn.this, searchHome.class);
+                                Intent intent = new Intent(LogIn.this, fragHome.class);
                                 startActivity(intent);
                             }
                         }
