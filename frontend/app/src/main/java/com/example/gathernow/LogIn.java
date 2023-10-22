@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class logIn extends AppCompatActivity {
+public class LogIn extends AppCompatActivity {
     private TextView email;
     private TextView password;
     private TextView alertMsg;
@@ -41,7 +41,7 @@ public class logIn extends AppCompatActivity {
         // TODO: Wrong password
 
         else {
-            Intent intent = new Intent(logIn.this, searchHome.class);
+            Intent intent = new Intent(LogIn.this, searchHome.class);
             startActivity(intent);
         }
 
