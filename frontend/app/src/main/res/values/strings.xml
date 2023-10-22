@@ -4,4 +4,35 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="language_array">
+        <item>Korean</item>
+        <item>English</item>
+        <item>Japanese</item>
+        <item>Chinese</item>
+        <item>Russian</item>
+        <item>Vietnamese</item>
+        <item>Thai</item>
+        <item>Uzbek</item>
+        <item>Khmer</item>
+        <item>Filipino</item>
+        <item>Nepali</item>
+        <item>Indonesian</item>
+        <item>Kazakh</item>
+        <item>Mongolian</item>
+        <item>Burmese</item>
+        <item>Spanish</item>
+        <item>Portuguese</item>
+        <item>French</item>
+        <item>German</item>
+        <item>Hindi</item>
+        <item>Arabic</item>
+        <item>Bengali</item>
+        <item>Urdu</item>
+        <item>Turkish</item>
+        <item>Other (specify in descriptions)</item>
+    </string-array>
+
 </resources>

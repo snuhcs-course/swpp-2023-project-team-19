@@ -4,7 +4,7 @@
             "outputFile": "com.example.gathernow.app-mergeDebugResources-26:/values-v26/values-v26.xml",
             "map": [
                 {
-                    "source": "/Users/minhlgdo/.gradle/caches/transforms-3/af575453595166fed38ef613cf3573b3/transformed/appcompat-1.6.1/res/values-v26/values-v26.xml",
+                    "source": "/Users/minkhi/.gradle/caches/transforms-3/af575453595166fed38ef613cf3573b3/transformed/appcompat-1.6.1/res/values-v26/values-v26.xml",
                     "from": {
                         "startLines": "2,3,4,8,12,16",
                         "startColumns": "4,4,4,4,4,4",

@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.Guideline;
 import androidx.viewbinding.ViewBinding;
 import androidx.viewbinding.ViewBindings;
 import com.example.gathernow.R;
@@ -21,6 +22,9 @@ public final class ActivityMainBinding implements ViewBinding {
   private final ConstraintLayout rootView;
 
   @NonNull
+  public final Guideline horizontalGuideline;
+
+  @NonNull
   public final AppCompatButton loginButton;
 
   @NonNull
@@ -30,9 +34,10 @@ public final class ActivityMainBinding implements ViewBinding {
   public final AppCompatButton signupButton;
 
   private ActivityMainBinding(@NonNull ConstraintLayout rootView,
-      @NonNull AppCompatButton loginButton, @NonNull TextView onboardingText,
-      @NonNull AppCompatButton signupButton) {
+      @NonNull Guideline horizontalGuideline, @NonNull AppCompatButton loginButton,
+      @NonNull TextView onboardingText, @NonNull AppCompatButton signupButton) {
     this.rootView = rootView;
+    this.horizontalGuideline = horizontalGuideline;
     this.loginButton = loginButton;
     this.onboardingText = onboardingText;
     this.signupButton = signupButton;
@@ -65,6 +70,12 @@ public final class ActivityMainBinding implements ViewBinding {
     // This is done to optimize the compiled bytecode for size and performance.
     int id;
     missingId: {
+      id = R.id.horizontalGuideline;
+      Guideline horizontalGuideline = ViewBindings.findChildViewById(rootView, id);
+      if (horizontalGuideline == null) {
+        break missingId;
+      }
+
       id = R.id.loginButton;
       AppCompatButton loginButton = ViewBindings.findChildViewById(rootView, id);
       if (loginButton == null) {
@@ -83,8 +94,8 @@ public final class ActivityMainBinding implements ViewBinding {
         break missingId;
       }
 
-      return new ActivityMainBinding((ConstraintLayout) rootView, loginButton, onboardingText,
-          signupButton);
+      return new ActivityMainBinding((ConstraintLayout) rootView, horizontalGuideline, loginButton,
+          onboardingText, signupButton);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
