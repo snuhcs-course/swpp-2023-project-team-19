@@ -4,7 +4,7 @@
             "outputFile": "com.example.gathernow.app-mergeDebugResources-26:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/minkhi/swpp-2023-project-team-19/frontend/app/src/main/res/values-night/themes.xml",
+                    "source": "/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/res/values-night/themes.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

@@ -15,4 +15,8 @@ public interface ServiceApi {
     @POST("/api/login/")
     Call<CodeMessageResponse> userLogIn(@Body UserData data);
 
+    // Event API: add new events
+    @POST("/api/events/")
+    Call<CodeMessageResponse> eventlist(@Body EventData data);
+
 }

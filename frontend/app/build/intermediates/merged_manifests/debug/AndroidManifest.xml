@@ -8,6 +8,8 @@
         android:minSdkVersion="24"
         android:targetSdkVersion="33" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <permission
         android:name="com.example.gathernow.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
         android:protectionLevel="signature" />
@@ -26,18 +28,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:testOnly="true"
-        android:theme="@style/Theme.Gathernow" >
+        android:theme="@style/Theme.Gathernow"
+        android:usesCleartextTraffic="true" >
         <activity
-            android:name="com.example.gathernow.createSuccessful"
+            android:name="com.example.gathernow.CreateSuccessful"
             android:exported="false" />
         <activity
-            android:name="com.example.gathernow.logIn"
+            android:name="com.example.gathernow.LogIn"
             android:exported="false" />
         <activity
-            android:name="com.example.gathernow.fragHome"
+            android:name="com.example.gathernow.FragHome"
             android:exported="false" />
         <activity
-            android:name="com.example.gathernow.signUp"
+            android:name="com.example.gathernow.SignUp"
             android:exported="false" />
         <activity
             android:name="com.example.gathernow.MainActivity"

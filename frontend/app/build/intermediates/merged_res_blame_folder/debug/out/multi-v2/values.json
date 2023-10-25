@@ -4,6 +4,23 @@
             "outputFile": "com.example.gathernow.app-mergeDebugResources-26:/values/values.xml",
             "map": [
                 {
+                    "source": "/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/res/values/colors.xml",
+                    "from": {
+                        "startLines": "2,4,5,3",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,139,180,97",
+                        "endColumns": "41,40,37,41",
+                        "endOffsets": "92,175,213,134"
+                    },
+                    "to": {
+                        "startLines": "665,721,971,984",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "33464,37365,56234,57090",
+                        "endColumns": "41,40,37,41",
+                        "endOffsets": "33501,37401,56267,57127"
+                    }
+                },
+                {
                     "source": "/Users/minkhi/.gradle/caches/transforms-3/04a0f34cf908c682d73fc22f94c08cc8/transformed/appcompat-resources-1.6.1/res/values/values.xml",
                     "from": {
                         "startLines": "2,18,24,34,50",
@@ -40,25 +57,6 @@
                     }
                 },
                 {
-                    "source": "/Users/minkhi/swpp-2023-project-team-19/frontend/app/src/main/res/values/themes.xml",
-                    "from": {
-                        "startLines": "2,7",
-                        "startColumns": "4,4",
-                        "startOffsets": "100,324",
-                        "endLines": "5,7",
-                        "endColumns": "12,66",
-                        "endOffsets": "318,386"
-                    },
-                    "to": {
-                        "startLines": "2467,6373",
-                        "startColumns": "4,4",
-                        "startOffsets": "171434,442798",
-                        "endLines": "2470,6373",
-                        "endColumns": "12,65",
-                        "endOffsets": "171546,442859"
-                    }
-                },
-                {
                     "source": "/Users/minkhi/.gradle/caches/transforms-3/05282c1f0a97c352c32a939bc2096859/transformed/cardview-1.0.0/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,35,36,37,38,45,47,50,7",
@@ -75,23 +73,6 @@
                         "endLines": "62,674,675,676,677,1067,1068,1069,2170,5487,5490,5493,10081",
                         "endColumns": "51,60,61,61,63,58,56,53,12,12,12,12,24",
                         "endOffsets": "2492,34203,34265,34327,34391,62700,62757,62811,152834,383791,383917,384045,662192"
-                    }
-                },
-                {
-                    "source": "/Users/minkhi/swpp-2023-project-team-19/frontend/app/src/main/res/values/colors.xml",
-                    "from": {
-                        "startLines": "2,4,5,3",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "55,139,180,97",
-                        "endColumns": "41,40,37,41",
-                        "endOffsets": "92,175,213,134"
-                    },
-                    "to": {
-                        "startLines": "665,721,971,984",
-                        "startColumns": "4,4,4,4",
-                        "startOffsets": "33464,37365,56234,57090",
-                        "endColumns": "41,40,37,41",
-                        "endOffsets": "33501,37401,56267,57127"
                     }
                 },
                 {
@@ -205,25 +186,6 @@
                     }
                 },
                 {
-                    "source": "/Users/minkhi/swpp-2023-project-team-19/frontend/app/src/main/res/values/strings.xml",
-                    "from": {
-                        "startLines": "9,1,7,2,4,3,5",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "420,16,349,63,175,131,229",
-                        "endLines": "35,1,7,2,4,3,5",
-                        "endColumns": "19,46,69,67,53,43,61",
-                        "endOffsets": "1220,58,414,126,224,170,286"
-                    },
-                    "to": {
-                        "startLines": "2,1970,1989,2112,2113,2114,2115",
-                        "startColumns": "4,4,4,4,4,4,4",
-                        "startOffsets": "150,129087,131378,148938,149006,149060,149104",
-                        "endLines": "28,1970,1989,2112,2113,2114,2115",
-                        "endColumns": "19,46,69,67,53,43,61",
-                        "endOffsets": "950,129129,131443,149001,149055,149099,149161"
-                    }
-                },
-                {
                     "source": "/Users/minkhi/.gradle/caches/transforms-3/e2d2d3c4dd62635dbea352ab171561e5/transformed/drawerlayout-1.1.1/res/values/values.xml",
                     "from": {
                         "startLines": "2,3,4,5",
@@ -262,24 +224,7 @@
                     }
                 },
                 {
-                    "source": "/Users/minkhi/.gradle/caches/transforms-3/e44573450bfeaacfbe89d93e4952b042/transformed/transition-1.2.0/res/values/values.xml",
-                    "from": {
-                        "startLines": "2,3,4,5,6,7,8,9,10,11",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "55,95,142,185,240,287,341,393,442,503",
-                        "endColumns": "39,46,42,54,46,53,51,48,60,49",
-                        "endOffsets": "90,137,180,235,282,336,388,437,498,548"
-                    },
-                    "to": {
-                        "startLines": "1802,1803,1824,1828,1829,1858,1859,1860,1861,1862",
-                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
-                        "startOffsets": "118788,118828,119960,120142,120197,121693,121747,121799,121848,121909",
-                        "endColumns": "39,46,42,54,46,53,51,48,60,49",
-                        "endOffsets": "118823,118870,119998,120192,120239,121742,121794,121843,121904,121954"
-                    }
-                },
-                {
-                    "source": "/Users/minkhi/swpp-2023-project-team-19/frontend/app/src/main/res/values/styles.xml",
+                    "source": "/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "10,17,37,28,4,24",
                         "startColumns": "4,4,4,4,4,4",
@@ -295,6 +240,42 @@
                         "endLines": "2142,5499,5598,5770,5775,6320",
                         "endColumns": "12,12,12,12,12,12",
                         "endOffsets": "150969,384312,390933,403578,403781,439443"
+                    }
+                },
+                {
+                    "source": "/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/res/values/strings.xml",
+                    "from": {
+                        "startLines": "9,1,7,2,4,3,5",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "420,16,349,63,175,131,229",
+                        "endLines": "35,1,7,2,4,3,5",
+                        "endColumns": "19,46,69,67,53,43,61",
+                        "endOffsets": "1220,58,414,126,224,170,286"
+                    },
+                    "to": {
+                        "startLines": "2,1970,1989,2112,2113,2114,2115",
+                        "startColumns": "4,4,4,4,4,4,4",
+                        "startOffsets": "150,129087,131378,148938,149006,149060,149104",
+                        "endLines": "28,1970,1989,2112,2113,2114,2115",
+                        "endColumns": "19,46,69,67,53,43,61",
+                        "endOffsets": "950,129129,131443,149001,149055,149099,149161"
+                    }
+                },
+                {
+                    "source": "/Users/minkhi/.gradle/caches/transforms-3/e44573450bfeaacfbe89d93e4952b042/transformed/transition-1.2.0/res/values/values.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7,8,9,10,11",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,95,142,185,240,287,341,393,442,503",
+                        "endColumns": "39,46,42,54,46,53,51,48,60,49",
+                        "endOffsets": "90,137,180,235,282,336,388,437,498,548"
+                    },
+                    "to": {
+                        "startLines": "1802,1803,1824,1828,1829,1858,1859,1860,1861,1862",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "118788,118828,119960,120142,120197,121693,121747,121799,121848,121909",
+                        "endColumns": "39,46,42,54,46,53,51,48,60,49",
+                        "endOffsets": "118823,118870,119998,120192,120239,121742,121794,121843,121904,121954"
                     }
                 },
                 {
@@ -386,6 +367,25 @@
                         "startOffsets": "122127",
                         "endColumns": "59",
                         "endOffsets": "122182"
+                    }
+                },
+                {
+                    "source": "/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/res/values/themes.xml",
+                    "from": {
+                        "startLines": "2,7",
+                        "startColumns": "4,4",
+                        "startOffsets": "100,324",
+                        "endLines": "5,7",
+                        "endColumns": "12,66",
+                        "endOffsets": "318,386"
+                    },
+                    "to": {
+                        "startLines": "2467,6373",
+                        "startColumns": "4,4",
+                        "startOffsets": "171434,442798",
+                        "endLines": "2470,6373",
+                        "endColumns": "12,65",
+                        "endOffsets": "171546,442859"
                     }
                 }
             ]

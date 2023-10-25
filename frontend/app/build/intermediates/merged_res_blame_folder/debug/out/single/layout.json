@@ -28,10 +28,6 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_log_in.xml"
     },
     {
-        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/activity_search_home.xml",
-        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_search_home.xml"
-    },
-    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/fragment_event_create.xml",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/fragment_event_create.xml"
     },

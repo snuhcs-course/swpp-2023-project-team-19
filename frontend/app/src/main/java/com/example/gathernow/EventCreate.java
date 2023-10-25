@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.app.DatePickerDialog;
@@ -20,7 +21,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Calendar;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -38,6 +46,7 @@ public class EventCreate extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private ServiceApi service;
 
     public EventCreate() {
         // Required empty public constructor
@@ -185,7 +194,7 @@ public class EventCreate extends Fragment {
                                 event_year_input[0] = year;
                                 event_month_input[0] = monthOfYear;
                                 event_date_input[0] = dayOfMonth;
-                                event_date.setText("Date: " + String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear) + "/" + String.valueOf(year));
+                                event_date.setText("Date: " + String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear+1) + "/" + String.valueOf(year));
                             }
                         },
                         year, month, day);
@@ -235,24 +244,105 @@ public class EventCreate extends Fragment {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // get event details in correct format
                 String event_name = event_name_text.getText().toString();
+                Integer event_num_participants = event_num_participants_input[0];
+
+                int year = event_year_input[0];
+                int month = event_month_input[0]; // Calendar months are 0-based (i.e., January is 0)
+                int date = event_date_input[0];
+
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, month, date);
+                java.util.Date utilDate = calendar.getTime();
+                java.sql.Date event_date = new java.sql.Date(utilDate.getTime());
+
+                int hour = event_hour_input[0];
+                int minute = event_min_input[0];
+
+                Calendar calendar2 = Calendar.getInstance();
+                calendar2.set(Calendar.HOUR_OF_DAY, hour);
+                calendar2.set(Calendar.MINUTE, minute);
+                calendar2.set(Calendar.SECOND, 0);
+                calendar2.set(Calendar.MILLISECOND, 0);
+                java.sql.Time event_time = new java.sql.Time(calendar2.getTimeInMillis());
+
                 String event_duration = event_duration_text.getText().toString();
-                String event_price = event_price_text.getText().toString();
+                String event_language = spinner.getSelectedItem().toString();
+                if(event_language.equals("Other (specify in descriptions)")){
+                    event_language = "Other";
+                }
+                String event_price_str = event_price_text.getText().toString();
+                int event_price;
+                try {
+                    event_price = Integer.parseInt(event_price_str);
+                } catch (NumberFormatException e) {
+                    // Handle exception if the string cannot be parsed to an integer
+                    e.printStackTrace();
+                    // set it to a default value or show an error message
+                    event_price = 0;
+                }
                 String event_description = event_description_text.getText().toString();
                 String event_location = event_location_text.getText().toString();
+                Integer event_num_joined = 0;
+
+                String event_type_in = "";
+
+                if (event_type_input[0] == 1) {
+                    event_type_in = "Leisure";
+                } else if (event_type_input[0] == 2) {
+                    event_type_in =  "Sports";
+                } else if (event_type_input[0] == 3) {
+                    event_type_in =  "Workshops";
+                } else if (event_type_input[0] == 4) {
+                    event_type_in =  "Parties";
+                } else if (event_type_input[0] == 5) {
+                    event_type_in = "Cultural activities";
+                } else if (event_type_input[0] == 6) {
+                    event_type_in = "Others";
+                }
+
 
                 TextView alert = (TextView) rootView.findViewById(R.id.alert);
-                // TODO: handle error here! (does not fill in all required fields)
-                if (event_name.isEmpty() || event_duration.isEmpty() || event_price.isEmpty() ||
+
+                if (event_name.isEmpty() || event_duration.isEmpty() || event_price_str.isEmpty() ||
                         event_description.isEmpty() || event_location.isEmpty() || event_date_input[0] == 0 ||
-                        event_hour_input[0] == 0 || event_num_participants_input[0] == 0 || event_type_input[0]==0) {
+                        event_hour_input[0] == 0 || event_num_participants_input[0] == 0 || event_type_in.isEmpty()) {
                     String alert_msg = "Please fill in all required fields";
                     alert.setText(alert_msg);
                 } else {
-                    // Link to the createSuccessful page
-                    Intent intent = new Intent(v.getContext(), CreateSuccessful.class);
-                    startActivity(intent);
+                    service = RetrofitClient.getClient().create(ServiceApi.class);
+                    EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description, event_num_joined);
+                    service.eventlist(requestData).enqueue(new Callback<CodeMessageResponse>() {
+                        @Override
+                        public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
+                            if (response.isSuccessful()) {
+                                CodeMessageResponse result = response.body();
+                                if (result != null) {
+                                    if (response.code() == 201) {
+                                        // Handle the case where the user registration was successful
+                                        //Toast.makeText(EventCreate.this, "Event created successfully.", Toast.LENGTH_SHORT).show();
+                                        // Link to the createSuccessful page
+                                        Intent intent = new Intent(v.getContext(), CreateSuccessful.class);
+                                        startActivity(intent);
+                                    }
+                                } else {
+                                    // Handle the case where the response body is null or empty
+                                    Toast.makeText(getActivity(), "Bad Request.", Toast.LENGTH_SHORT).show();
+                                }
+                            } else {
+                                // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
+                                Toast.makeText(getActivity(), "Event creation failed.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        @Override
+                        public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
+                            Toast.makeText(getActivity(), "Event creation Error", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
+
             }
         });
 
