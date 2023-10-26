@@ -9,7 +9,7 @@
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/horizontalGuideline"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.05" />
 
@@ -28,6 +28,7 @@
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintHeight_percent="0.84"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
@@ -42,25 +43,206 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.05" />
 
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/verticalRightGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
             <ImageView
                 android:id="@+id/event_img"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintHeight_percent="0.93"
                 android:background="@mipmap/ic_image1_leisure"
+                app:layout_constraintHeight_percent="0.4"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
+            <!--Event name -->
             <TextView
                 android:id="@+id/event_title"
                 style="@style/TitleField"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
                 android:text="Event Name"
-                app:layout_constraintTop_toBottomOf="@id/event_img"
                 app:layout_constraintLeft_toLeftOf="@id/verticalGuideline"
-                />
+                app:layout_constraintTop_toBottomOf="@id/event_img" />
 
+            <!--            User host-->
+            <ImageButton
+                android:id="@+id/profile_img"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@mipmap/ic_profile_round"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/event_title" />
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="10dp"
+                android:text="Luuuuuuuuuuuuuuuuuu"
+                android:layout_marginLeft="15dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/profile_img"
+                app:layout_constraintTop_toBottomOf="@id/event_title"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <!--Description -->
+            <TextView
+                android:id="@+id/event_description"
+                style="@style/TextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas imperdiet nulla purus, non suscipit tellus scelerisque vel. Donec hendrerit consectetur tellus, at finibus tortor rutrum vel. Sed vel mauris ut arcu iaculis eleifend. Vivamus ipsum sapien, vestibulum id tincidunt imperdiet, finibus non velit. Sed vitae lacus dui. Ut suscipit tortor et tellus ornare, at posuere augue dapibus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+                \n
+Ut varius tortor in gravida dapibus. Nullam quis ex ac neque euismod venenatis in vitae tellus. Mauris nec eleifend odio. Praesent eget fringilla est, a dignissim mi. Nulla semper ac mi id finibus. Aenean hendrerit varius pretium. Nullam id velit dolor. Suspendisse rhoncus elit felis, ut consequat tellus scelerisque a. Nullam massa massa, vehicula ac ex sit amet, finibus placerat leo. Aliquam et leo ex. Morbi et elit sit amet odio viverra facilisis. Sed dignissim elementum tristique. Nulla sagittis lorem urna, non fringilla purus tristique quis."
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/verticalGuideline"
+                app:layout_constraintRight_toRightOf="@id/verticalRightGuideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_img"
+                app:layout_constraintWidth_percent="0.9" />
+
+            <!--            Language-->
+            <TextView
+                android:id="@+id/language_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:text="Languages:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/event_description"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/languages"
+                style="@style/TextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:text="Korean, English"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/language_title"
+                app:layout_constraintTop_toBottomOf="@id/event_description"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <!--            Participants -->
+            <TextView
+                android:id="@+id/num_participants_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Participants:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/language_title"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/num_reg_participants"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/num_participants_title"
+                app:layout_constraintTop_toBottomOf="@id/language_title" />
+
+            <TextView
+                android:id="@+id/participants_dash"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="/"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/num_reg_participants"
+                app:layout_constraintTop_toBottomOf="@id/language_title" />
+
+            <TextView
+                android:id="@+id/num_max_participants"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="10"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/participants_dash"
+                app:layout_constraintTop_toBottomOf="@id/language_title" />
+
+            <!--            Event time-->
+            <TextView
+                android:id="@+id/event_time_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Time:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/num_participants_title"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/event_date"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="October 26, 2023"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/event_time_title"
+                app:layout_constraintTop_toBottomOf="@id/num_participants_title" />
+
+            <TextView
+                android:id="@+id/event_time"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:text="13:00"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/event_date"
+                app:layout_constraintTop_toBottomOf="@id/num_participants_title" />
+
+            <!--            Event duration-->
+            <TextView
+                android:id="@+id/event_duration_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Duration:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/event_time_title"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/event_duration"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="October 26, 2023"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/event_duration_title"
+                app:layout_constraintTop_toBottomOf="@id/event_time_title" />
+
+            <!--    Location-->
+            <TextView
+                android:id="@+id/location_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Location:"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/event_duration"
+                app:layout_constraintWidth_percent="0.25" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -71,12 +253,13 @@
         android:id="@+id/register_menu"
         style="@style/PositiveButton"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp"
         android:text="Register"
-        app:layout_constraintHeight_percent="0.05"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
         app:layout_constraintWidth_percent="0.5" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
