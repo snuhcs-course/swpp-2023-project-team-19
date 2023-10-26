@@ -13,4 +13,8 @@ public class CodeMessageResponse {
     public String getMessage() {
         return message;
     }
+
+    public String setMessage(String message) {
+        return message;
+    }
 }
