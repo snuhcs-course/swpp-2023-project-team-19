@@ -506,6 +506,12 @@ attr errorIconTintMode
 attr errorShown
 attr errorTextAppearance
 attr errorTextColor
+attr event_capacity
+attr event_datetime
+attr event_language
+attr event_location
+attr event_name
+attr event_photo
 attr expandActivityOverflowButtonDrawable
 attr expanded
 attr expandedHintEnabled
@@ -1350,6 +1356,7 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color color1
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -2930,6 +2937,8 @@ drawable ic_create_background
 drawable ic_create_foreground
 drawable ic_events_background
 drawable ic_events_foreground
+drawable ic_home_background
+drawable ic_home_foreground
 drawable ic_image2_sports_background
 drawable ic_image3_workshops_background
 drawable ic_image4_parties_background
@@ -3192,6 +3201,7 @@ id disableHome
 id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
+id discover_new
 id disjoint
 id dragAnticlockwise
 id dragClockwise
@@ -3216,8 +3226,13 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
+id eventCard
+id eventCard1
+id eventCardContainer
+id event_capacity
 id event_date
 id event_date_time_hint
+id event_datetime
 id event_description
 id event_description_hint
 id event_duration
@@ -3229,6 +3244,7 @@ id event_name
 id event_name_hint
 id event_num_participants
 id event_num_participants_hint
+id event_photo
 id event_price
 id event_price_hint
 id event_time
@@ -3267,6 +3283,7 @@ id header_title
 id hideable
 id home
 id homeAsUp
+id home_text
 id honorRequest
 id horizontalGuideline
 id horizontal_only
@@ -3286,6 +3303,7 @@ id image6_others
 id imageRadioGroup
 id immediateStop
 id included
+id indent
 id indeterminate
 id info
 id invisible
@@ -3296,6 +3314,8 @@ id jumpToEnd
 id jumpToStart
 id labeled
 id layout
+id layout_one
+id layout_two
 id left
 id leftToRight
 id legacy
@@ -3385,6 +3405,7 @@ id neverCompleteToEnd
 id neverCompleteToStart
 id noScroll
 id noState
+id no_event_text
 id none
 id normal
 id north
@@ -3420,6 +3441,7 @@ id pressed
 id progress_circular
 id progress_horizontal
 id pwConfirmationText
+id question_text
 id radio
 id ratio
 id rectangles
@@ -3441,7 +3463,6 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
-id search
 id search_badge
 id search_bar
 id search_bar_text_view
@@ -3510,6 +3531,7 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
+id subtitle_text
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3545,6 +3567,7 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id title_text
 id toggle
 id top
 id topPanel
@@ -3715,6 +3738,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout event_card_layout
 layout fragment_event_create
 layout fragment_event_home
 layout fragment_event_search
@@ -3787,6 +3811,8 @@ mipmap ic_create
 mipmap ic_create_round
 mipmap ic_events
 mipmap ic_events_round
+mipmap ic_home
+mipmap ic_home_round
 mipmap ic_image1_leisure
 mipmap ic_image2_sports
 mipmap ic_image2_sports_foreground
@@ -5136,6 +5162,7 @@ styleable CoordinatorLayout_Layout android_layout_gravity layout_anchor layout_a
 styleable CustomAttribute attributeName customBoolean customColorDrawableValue customColorValue customDimension customFloatValue customIntegerValue customPixelDimension customReference customStringValue methodName
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
 styleable DrawerLayout elevation
+styleable EventCardView event_capacity event_datetime event_language event_location event_name event_photo
 styleable ExtendedFloatingActionButton collapsedSize elevation extendMotionSpec extendStrategy hideMotionSpec showMotionSpec shrinkMotionSpec
 styleable ExtendedFloatingActionButton_Behavior_Layout behavior_autoHide behavior_autoShrink
 styleable FloatingActionButton android_enabled backgroundTint backgroundTintMode borderWidth elevation ensureMinTouchTargetSize fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec useCompatPadding

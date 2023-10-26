@@ -28,6 +28,7 @@
         <item>Other (specify in descriptions)</item>
     </string-array>
     <color name="black">#FF000000</color>
+    <color name="color1">#F5F5F5</color>
     <color name="gray">#BEBEBEBE</color>
     <color name="red">#FF0000</color>
     <color name="white">#FFFFFFFF</color>
@@ -77,4 +78,13 @@
         <item name="android:textSize">15sp</item>
     </style>
     <style name="Theme.Gathernow" parent="Base.Theme.Gathernow"/>
+    <declare-styleable name="EventCardView">
+        <attr format="reference" name="event_photo"/>
+        <attr format="string" name="event_name"/>
+        <attr format="string" name="event_capacity"/>
+        <attr format="string" name="event_language"/>
+        <attr format="string" name="event_datetime"/>
+        <attr format="string" name="event_location"/>
+        
+    </declare-styleable>
 </resources>

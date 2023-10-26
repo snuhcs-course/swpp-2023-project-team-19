@@ -7,6 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import java.sql.Date;
+import java.sql.Time;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +64,44 @@ public class EventSearch extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event_search, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_event_search, container, false);
+
+        // TODO: implement get event details from db and create event card view here
+
+        // modify the EventCardView contents:
+        // to be deleted
+        EventCardView eventCard = rootView.findViewById(R.id.eventCard);
+        eventCard.setEventName("Defined Event");
+        eventCard.setEventPhoto("Sports");
+        eventCard.setEventCapacity(3,10);
+        eventCard.setEventLocation("COEX, Gangnam-gu");
+        eventCard.setEventLanguage("Russian");
+        eventCard.setEventDateTime(new Date(1234567890123L), Time.valueOf("14:00:00"));
+
+        LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
+
+        // Create a new EventCardView dynamically
+        EventCardView newEventCard = new EventCardView(getContext(), null);
+        newEventCard.setEventName("Dynamic Event");
+        newEventCard.setEventPhoto("Leisure");
+        newEventCard.setEventCapacity(5, 20);
+        newEventCard.setEventLocation("Dongdaemun, Jongno-gu");
+        newEventCard.setEventLanguage("Korean");
+        newEventCard.setEventDateTime(new Date(1622534400000L), Time.valueOf("18:30:00"));
+
+        // Add vertical padding to the newEventCard
+        int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
+        newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
+        eventCardContainer.addView(newEventCard);
+
+        newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle the click event here
+                Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return rootView;
     }
 }

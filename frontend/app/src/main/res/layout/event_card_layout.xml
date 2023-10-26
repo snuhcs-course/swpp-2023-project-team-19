@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/color1"
+    android:padding="16dp">
+
+    <!-- ImageView (Left Side) -->
+    <ImageView
+        android:id="@+id/event_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_image6_others_foreground"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"/>
+
+    <!-- Event Title (Top Right) -->
+    <TextView
+        android:id="@+id/event_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Default Event"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_toRightOf="@id/event_photo"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="8dp"/>
+
+    <!-- Event Details (Below Title) -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/event_name"
+        android:layout_marginStart="8dp"
+        android:layout_toRightOf="@id/event_photo"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="3dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_close_foreground" />
+
+            <TextView
+                android:id="@+id/event_capacity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4/10"
+                android:textSize="14sp"
+                android:layout_marginStart="4dp" />
+
+            <TextView
+                android:id="@+id/indent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="          "
+                android:textSize="14sp"
+                android:layout_marginStart="4dp" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_close_foreground" />
+
+            <TextView
+                android:id="@+id/event_language"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="English"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="3dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_close_foreground" />
+
+            <TextView
+                android:id="@+id/event_datetime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15/10/2023 3:00 PM"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="3dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_close_foreground" />
+
+            <TextView
+                android:id="@+id/event_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gwanak-san Park, Gwanak-gu"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
+

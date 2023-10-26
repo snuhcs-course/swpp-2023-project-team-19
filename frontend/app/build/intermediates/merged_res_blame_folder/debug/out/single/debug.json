@@ -16,20 +16,20 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_events.webp"
     },
     {
-        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_image4_parties_round.webp.flat",
-        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_image4_parties_round.webp"
-    },
-    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_image2_sports_round.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_image2_sports_round.webp"
     },
     {
-        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_close.webp.flat",
-        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_close.webp"
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_image4_parties_round.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_image4_parties_round.webp"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_image2_sports_round.xml.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_image2_sports_round.xml"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_close.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_close.webp"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_image1_leisure.webp.flat",
@@ -52,12 +52,16 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_image3_workshops_round.xml"
     },
     {
-        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_image2_sports_foreground.webp.flat",
-        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_image2_sports_foreground.webp"
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_home_background.xml.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_home_background.xml"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_image5_cultural_activities_background.xml.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_image5_cultural_activities_background.xml"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_image2_sports_foreground.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_image2_sports_foreground.webp"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_image6_others_foreground.webp.flat",
@@ -180,6 +184,10 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_create_background.xml"
     },
     {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_home_round.xml.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_home_round.xml"
+    },
+    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/menu_bottom_nav_menu.xml.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/menu/bottom_nav_menu.xml"
     },
@@ -216,12 +224,24 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_success.webp"
     },
     {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_home.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_home.webp"
+    },
+    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/layout_fragment_event_home.xml.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/fragment_event_home.xml"
     },
     {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_home_round.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_home_round.webp"
+    },
+    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_create.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_create.webp"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/layout_event_card_layout.xml.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/event_card_layout.xml"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_edittext_bg.xml.flat",
@@ -256,6 +276,10 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_image2_sports_foreground.webp"
     },
     {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_home_round.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_home_round.webp"
+    },
+    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_image2_sports_round.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_image2_sports_round.webp"
     },
@@ -268,6 +292,10 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_image6_others_background.xml"
     },
     {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_home_round.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_home_round.webp"
+    },
+    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_close_round.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_close_round.webp"
     },
@@ -278,6 +306,10 @@
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_image4_parties.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_image4_parties.webp"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_home.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_home.webp"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_image2_sports_round.webp.flat",
@@ -384,6 +416,10 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_create_round.webp"
     },
     {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_home_round.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_home_round.webp"
+    },
+    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_image5_cultural_activities_round.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_image5_cultural_activities_round.webp"
     },
@@ -402,6 +438,10 @@
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_create.xml.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_create.xml"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_home.xml.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_home.xml"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_image2_sports_round.webp.flat",
@@ -612,8 +652,16 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_image6_others_round.webp"
     },
     {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_home.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxxhdpi/ic_home.webp"
+    },
+    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_launcher_round.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_launcher_round.webp"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_home_round.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-mdpi/ic_home_round.webp"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_success.webp.flat",
@@ -638,6 +686,10 @@
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_close_round.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_close_round.webp"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_home.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_home.webp"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_image5_cultural_activities.webp.flat",
@@ -674,6 +726,10 @@
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xhdpi_ic_return_round.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_return_round.webp"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_ic_home_foreground.xml.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/ic_home_foreground.xml"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_image6_others.webp.flat",
@@ -756,6 +812,10 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_main.xml"
     },
     {
+        "merged": "com.example.gathernow.app-merged_res-28:/layout_fragment_event_home.xml.flat",
+        "source": "com.example.gathernow.app-main-30:/layout/fragment_event_home.xml"
+    },
+    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_edittext_unfocused.xml.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/edittext_unfocused.xml"
     },
@@ -778,6 +838,10 @@
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_return_round.webp.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_return_round.webp"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-hdpi_ic_home.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_home.webp"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxxhdpi_ic_image5_cultural_activities.webp.flat",
@@ -860,10 +924,6 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xhdpi/ic_create_round.webp"
     },
     {
-        "merged": "com.example.gathernow.app-merged_res-28:/layout_fragment_event_create.xml.flat",
-        "source": "com.example.gathernow.app-main-30:/layout/fragment_event_create.xml"
-    },
-    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-anydpi-v26_ic_image3_workshops.xml.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-anydpi-v26/ic_image3_workshops.xml"
     },
@@ -876,12 +936,12 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-hdpi/ic_image5_cultural_activities.webp"
     },
     {
-        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_image4_parties_round.webp.flat",
-        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_image4_parties_round.webp"
-    },
-    {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/drawable_unselected_image.xml.flat",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/drawable/unselected_image.xml"
+    },
+    {
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-xxhdpi_ic_image4_parties_round.webp.flat",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/mipmap-xxhdpi/ic_image4_parties_round.webp"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-merged_res-28:/mipmap-mdpi_ic_image2_sports.webp.flat",

@@ -1,14 +1,87 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EventHome">
+    android:padding="30dp"
+    tools:context=".EventHome"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Events"
+        android:textSize="34sp"
+        android:textStyle="bold"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"/>
+
+    <TextView
+        android:id="@+id/subtitle_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upcoming events:"
+        android:textSize="20sp"
+        android:paddingVertical="10dp"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="implement event home" />
+        android:id="@+id/layout_one"
+        android:visibility="gone"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/no_event_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You have no events :("
+            android:textSize="15sp"
+            android:paddingVertical="10dp"/>
+
+        <TextView
+            android:id="@+id/discover_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:text="Click me to discover new events!"
+            android:clickable="true"
+            android:textStyle="italic"
+            android:textColor="@color/red"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout_two"
+        android:visibility="visible">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/eventCardContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <com.example.gathernow.EventCardView
+                    android:id="@+id/eventCard1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"/>
+
+                <com.example.gathernow.EventCardView
+                    android:id="@+id/eventCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="10dp"/>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</LinearLayout>

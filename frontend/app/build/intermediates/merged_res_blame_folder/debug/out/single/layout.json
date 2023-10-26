@@ -4,12 +4,12 @@
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/activity_sign_up.xml"
     },
     {
-        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/fragment_profile_home.xml",
-        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/fragment_profile_home.xml"
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/event_card_layout.xml",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/event_card_layout.xml"
     },
     {
-        "merged": "com.example.gathernow.app-mergeDebugResources-27:/layout/fragment_event_create.xml",
-        "source": "com.example.gathernow.app-main-30:/layout/fragment_event_create.xml"
+        "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/fragment_profile_home.xml",
+        "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/fragment_profile_home.xml"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/activity_main.xml",
@@ -30,6 +30,10 @@
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/fragment_event_create.xml",
         "source": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-main-30:/layout/fragment_event_create.xml"
+    },
+    {
+        "merged": "com.example.gathernow.app-mergeDebugResources-27:/layout/fragment_event_home.xml",
+        "source": "com.example.gathernow.app-main-30:/layout/fragment_event_home.xml"
     },
     {
         "merged": "/Users/minkhi/.gradle/daemon/8.0/com.example.gathernow.app-mergeDebugResources-27:/layout/fragment_event_home.xml",

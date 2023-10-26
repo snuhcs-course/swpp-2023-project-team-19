@@ -1,7 +1,14 @@
 R_DEF: Internal format may change without notice
 local
 array language_array
+attr? event_capacity
+attr? event_datetime
+attr? event_language
+attr? event_location
+attr? event_name
+attr? event_photo
 color black
+color color1
 color gray
 color red
 color white
@@ -15,6 +22,8 @@ drawable ic_create_background
 drawable ic_create_foreground
 drawable ic_events_background
 drawable ic_events_foreground
+drawable ic_home_background
+drawable ic_home_foreground
 drawable ic_image2_sports_background
 drawable ic_image3_workshops_background
 drawable ic_image4_parties_background
@@ -38,10 +47,16 @@ id alert
 id bottomNavigationView
 id close
 id create_successful
+id discover_new
 id email
 id emailText
+id eventCard
+id eventCard1
+id eventCardContainer
+id event_capacity
 id event_date
 id event_date_time_hint
+id event_datetime
 id event_description
 id event_description_hint
 id event_duration
@@ -53,12 +68,14 @@ id event_name
 id event_name_hint
 id event_num_participants
 id event_num_participants_hint
+id event_photo
 id event_price
 id event_price_hint
 id event_time
 id event_type
 id event_type_hint
 id flFragment
+id home_text
 id horizontalGuideline
 id ic_success
 id image1_leisure
@@ -68,6 +85,9 @@ id image4_parties
 id image5_cultural_activities
 id image6_others
 id imageRadioGroup
+id indent
+id layout_one
+id layout_two
 id login
 id loginButton
 id loginText
@@ -77,24 +97,29 @@ id menu_profile
 id menu_search
 id name
 id nameText
+id no_event_text
 id onboardingText
 id password
 id passwordText
 id password_confirm
 id post
 id pwConfirmationText
+id question_text
 id returnBtn
-id search
+id search_button
 id signup
 id signupButton
 id signupText
 id spinner_hint
+id subtitle_text
+id title_text
 id verticalGuideline
 layout activity_create_successful
 layout activity_frag_home
 layout activity_log_in
 layout activity_main
 layout activity_sign_up
+layout event_card_layout
 layout fragment_event_create
 layout fragment_event_home
 layout fragment_event_search
@@ -106,6 +131,8 @@ mipmap ic_create
 mipmap ic_create_round
 mipmap ic_events
 mipmap ic_events_round
+mipmap ic_home
+mipmap ic_home_round
 mipmap ic_image1_leisure
 mipmap ic_image2_sports
 mipmap ic_image2_sports_foreground
@@ -146,5 +173,6 @@ style PositiveButton
 style RedItalicText
 style TextField
 style Theme.Gathernow
+styleable EventCardView event_photo event_name event_capacity event_language event_datetime event_location
 xml backup_rules
 xml data_extraction_rules
