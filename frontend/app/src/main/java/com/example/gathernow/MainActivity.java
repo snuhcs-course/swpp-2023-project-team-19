@@ -1,8 +1,10 @@
 package com.example.gathernow;
 
-import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,5 +12,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // sign up button
+        Button signUpButton = (Button) findViewById(R.id.signupButton);
+        signUpButton.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), SignUp.class);
+            startActivity(intent);
+        });
+
+        // log in button
+        Button logInButton = findViewById(R.id.loginButton);
+        logInButton.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(), LogIn.class);
+            startActivity(intent);
+        });
     }
+
+
+
 }

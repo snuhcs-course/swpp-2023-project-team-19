@@ -11,9 +11,12 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+MEDIA_ROOT = os.path.join(BASE_DIR, 'avatar_image')
+MEDIA_URL = '/media/'
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,7 +42,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'rest_framework',
-    'users.apps.UsersConfig',
+    'users',
+    'events'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -84,14 +88,13 @@ pymysql.install_as_MySQLdb()
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gather_now_dev',
+        'NAME': 'dbgathernow',
         'USER': '', # Please type own DB username here
         'PASSWORD': '', # Please type own DB password here
-        'HOST': 'gather-now.c9wff7eeyede.ap-south-1.rds.amazonaws.com',
+        'HOST': 'dbgathernow.mysql.database.azure.com',
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

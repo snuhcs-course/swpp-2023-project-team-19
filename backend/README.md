@@ -34,36 +34,52 @@ These files are:
 
 
 ## Installation 
-Some necessary libraries should be installed as prerequisite if it is still missing:
+Some necessary libraries should be installed as prerequisite if it is still missing on the new server
 ```
 sudo apt-get install libmysqlclient-dev
+sudo apt install python3-virtualenv
+sudo python -m pip install Pillow
 ```
+
 
 To install the necessary libraries for this project from PyPI:
 ```
+virtualenv ~/project-virt
+source ~/project-virt/bin/activate
 pip3 install -r requirements.txt 
 ```
 
-Connecting with Database
+## Connecting with Database
 `backend/backend/settings.py` is already configured the setting for connecting our Django backend with our mySQL server. Because project is public, so USER and PASSWORD is currently hidden, please type the USER and PASSWORD when making deployment.
 
 ```
+ALLOWED_HOSTS = [''] # Need to add server IP address
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'gather_now_dev',
+        'NAME': 'dbgathernow',
         'USER': '', # Please type own DB username here
         'PASSWORD': '', # Please type own DB password here
-        'HOST': 'gather-now.c9wff7eeyede.ap-south-1.rds.amazonaws.com',
+        'HOST': 'dbgathernow.mysql.database.azure.com',
         'PORT': '3306',
     }
 }
 ```
 
+## Migrating Database
+### Make Migration
+python3 manage.py makemigrations users
+python3 manage.py makemigrations events
+
+### Migrate 
+python3 manage.py migrate users
+python3 manage.py migrate events
+
+
+## Run server
 Run the following commands to start the services:
 ```
-python manage.py runserver 
+python manage.py runserver 0.0.0.0:8000
 ```
-The web server will be live on `http://127.0.0.1:8000/`.
-
-
+The web server will be live on `http://[Server_IP_Address]:8000/`.
