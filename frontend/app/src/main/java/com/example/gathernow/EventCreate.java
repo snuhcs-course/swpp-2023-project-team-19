@@ -26,6 +26,8 @@ import android.widget.Toast;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
+import java.util.Locale;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -253,20 +255,12 @@ public class EventCreate extends Fragment {
                 int month = event_month_input[0]; // Calendar months are 0-based (i.e., January is 0)
                 int date = event_date_input[0];
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(year, month, date);
-                java.util.Date utilDate = calendar.getTime();
-                java.sql.Date event_date = new java.sql.Date(utilDate.getTime());
+                String event_date = String.format(Locale.ENGLISH, "%d-%02d-%02d", year, month + 1, date);
 
                 int hour = event_hour_input[0];
                 int minute = event_min_input[0];
 
-                Calendar calendar2 = Calendar.getInstance();
-                calendar2.set(Calendar.HOUR_OF_DAY, hour);
-                calendar2.set(Calendar.MINUTE, minute);
-                calendar2.set(Calendar.SECOND, 0);
-                calendar2.set(Calendar.MILLISECOND, 0);
-                java.sql.Time event_time = new java.sql.Time(calendar2.getTimeInMillis());
+                String event_time = String.format(Locale.ENGLISH,"%02d:%02d:00", hour, minute);
 
                 String event_duration = event_duration_text.getText().toString();
                 String event_language = spinner.getSelectedItem().toString();
@@ -313,7 +307,7 @@ public class EventCreate extends Fragment {
                     alert.setText(alert_msg);
                 } else {
                     service = RetrofitClient.getClient().create(ServiceApi.class);
-                    EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description, event_num_joined);
+                    EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description);
                     service.eventlist(requestData).enqueue(new Callback<CodeMessageResponse>() {
                         @Override
                         public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
