@@ -36,9 +36,12 @@ public class EventData {
     @SerializedName("event_description")
     String event_description;
 
+    @SerializedName("event_num_joined")
+    Integer event_num_joined;
+
 
     // Create event
-    public EventData(String event_type, String event_title, Integer event_num_participants, String event_date, String event_time, String event_duration, String event_language, Integer event_price, String event_location, String event_description){
+    public EventData(String event_type, String event_title, Integer event_num_participants, String event_date, String event_time, String event_duration, String event_language, Integer event_price, String event_location, String event_description, Integer event_num_joined){
         this.event_type = event_type;
         this.event_title = event_title;
         this.event_num_participants = event_num_participants;
@@ -49,6 +52,7 @@ public class EventData {
         this.event_price = event_price;
         this.event_location = event_location;
         this.event_description = event_description;
+        this.event_num_joined = event_num_joined;
 
     }
 

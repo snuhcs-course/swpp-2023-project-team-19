@@ -49,22 +49,7 @@
             android:id="@+id/eventCardContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <com.example.gathernow.EventCardView
-                android:id="@+id/eventCard1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp"/>
-
-            <com.example.gathernow.EventCardView
-                android:id="@+id/eventCard"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingVertical="10dp"/>
-
-        </LinearLayout>
-
+            android:orientation="vertical"/>
 
     </ScrollView>
 

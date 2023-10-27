@@ -7,6 +7,8 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Calendar;
@@ -251,6 +254,8 @@ public class EventCreate extends Fragment {
                 String event_name = event_name_text.getText().toString();
                 Integer event_num_participants = event_num_participants_input[0];
 
+                Integer event_num_joined = 0;
+
                 int year = event_year_input[0];
                 int month = event_month_input[0]; // Calendar months are 0-based (i.e., January is 0)
                 int date = event_date_input[0];
@@ -279,7 +284,7 @@ public class EventCreate extends Fragment {
                 }
                 String event_description = event_description_text.getText().toString();
                 String event_location = event_location_text.getText().toString();
-                Integer event_num_joined = 0;
+
 
                 String event_type_in = "";
 
@@ -307,7 +312,7 @@ public class EventCreate extends Fragment {
                     alert.setText(alert_msg);
                 } else {
                     service = RetrofitClient.getClient().create(ServiceApi.class);
-                    EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description);
+                    EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description, event_num_joined);
                     service.eventlist(requestData).enqueue(new Callback<CodeMessageResponse>() {
                         @Override
                         public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
@@ -324,6 +329,8 @@ public class EventCreate extends Fragment {
                                 } else {
                                     // Handle the case where the response body is null or empty
                                     Toast.makeText(getActivity(), "Bad Request.", Toast.LENGTH_SHORT).show();
+
+
                                 }
                             } else {
                                 // Handle the case where the response is not successful (e.g., non-2xx HTTP status)

@@ -1,5 +1,7 @@
 package com.example.gathernow;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -18,5 +20,8 @@ public interface ServiceApi {
     // Event API: add new events
     @POST("/api/events/")
     Call<CodeMessageResponse> eventlist(@Body EventData data);
+
+    @GET("/api/events/")
+    Call<List<EventData>> getALlEvents();
 
 }
