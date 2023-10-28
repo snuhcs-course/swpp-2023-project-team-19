@@ -17,6 +17,7 @@ import java.sql.Time;
 
 
 import java.net.HttpURLConnection;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -95,6 +96,8 @@ public class EventSearch extends Fragment {
                     LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
                     // TODO: Update UI with the list of events
 
+                    Collections.reverse(events_list);
+
 
                     for (int i = 0; i < events_list.size(); i++){
 
@@ -149,6 +152,8 @@ public class EventSearch extends Fragment {
 
         });
 
+        return rootView;
+
 
         /*
         // modify the EventCardView contents:
@@ -188,6 +193,6 @@ public class EventSearch extends Fragment {
 
          */
 
-        return rootView;
+
     }
 }

@@ -1,8 +1,10 @@
 package com.example.gathernow;
 
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -89,6 +91,11 @@ public class EventCreate extends Fragment {
     private TextView event_price_text;
     private TextView event_description_text;
     private TextView event_location_text;
+
+    private String getUserId(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("user_id", null); // Return null if the user_id doesn't exist
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -311,8 +318,11 @@ public class EventCreate extends Fragment {
                     String alert_msg = "Please fill in all required fields";
                     alert.setText(alert_msg);
                 } else {
+
+                    Integer host_id = Integer.valueOf(getUserId(getActivity()));
+
                     service = RetrofitClient.getClient().create(ServiceApi.class);
-                    EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description, event_num_joined);
+                    EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description, event_num_joined, host_id);
                     service.eventlist(requestData).enqueue(new Callback<CodeMessageResponse>() {
                         @Override
                         public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
@@ -320,7 +330,7 @@ public class EventCreate extends Fragment {
                                 CodeMessageResponse result = response.body();
                                 if (result != null) {
                                     if (response.code() == 201) {
-                                        // Handle the case where the user registration was successful
+
                                         //Toast.makeText(EventCreate.this, "Event created successfully.", Toast.LENGTH_SHORT).show();
                                         // Link to the createSuccessful page
                                         Intent intent = new Intent(v.getContext(), CreateSuccessful.class);

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'users',
-    'events'
+    'events',
+    'rest_framework.authtoken'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -89,8 +90,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbgathernow',
-        'USER': '', # Please type own DB username here
-        'PASSWORD': '', # Please type own DB password here
+        'USER': 'database', # Please type own DB username here
+        'PASSWORD': 'jf9eSCmFY75Pj3s', # Please type own DB password here
         'HOST': 'dbgathernow.mysql.database.azure.com',
         'PORT': '3306',
     }
