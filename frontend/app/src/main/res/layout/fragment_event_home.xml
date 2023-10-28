@@ -12,43 +12,71 @@
         android:layout_height="wrap_content"
         android:text="Events"
         android:textSize="34sp"
-        android:textStyle="bold"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"/>
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/subtitle_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upcoming events:"
-        android:textSize="20sp"
+        android:textSize="18dp"
         android:paddingVertical="10dp"/>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="16dp"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/layout_one"
-        android:visibility="gone"
+        android:visibility="visible"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/no_event_text"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="You have no events :("
-            android:textSize="15sp"
-            android:paddingVertical="10dp"/>
+            android:background="@drawable/edittext_bg"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/discover_new"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingVertical="10dp"
-            android:text="Click me to discover new events!"
-            android:clickable="true"
-            android:textStyle="italic"
-            android:textColor="@color/red"
-            android:textSize="15sp" />
+            <ImageView
+                android:id="@+id/sad_frog"
+                android:layout_width="173dp"
+                android:layout_height="156dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginVertical="0dp"
+                android:layout_marginBottom="-80dp"
+                android:src="@mipmap/ic_sad_frog_foreground" />
+
+            <TextView
+                android:id="@+id/no_event_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/sad_frog"
+                android:text="You have no events :("
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/discover_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/no_event_text"
+                android:layout_centerHorizontal="true"
+                android:clickable="true"
+                android:paddingVertical="10dp"
+                android:text="Let's discover new events!"
+                android:textColor="@color/green1"
+                android:textSize="15sp"
+                android:textStyle="italic"
+                android:padding="16dp"
+                android:layout_marginLeft="-16dp"
+                android:layout_marginTop="-16dp"
+                android:layout_marginRight="-16dp"
+                android:layout_marginBottom="16dp"/>
+
+        </RelativeLayout>
 
     </LinearLayout>
 
@@ -68,6 +96,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!--Can be deleted-->
                 <com.example.gathernow.EventCardView
                     android:id="@+id/eventCard1"
                     android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.example.gathernow;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -76,6 +77,7 @@ public class EventHome extends Fragment {
             layoutTwo.setVisibility(View.GONE);
 
             TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
+            discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
             discover_new.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -4,7 +4,7 @@
             "outputFile": "com.example.gathernow.app-mergeDebugResources-26:/values-ldrtl-v17/values-ldrtl-v17.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Chee_Yee\\.gradle\\caches\\transforms-3\\e5f321a248aa217236dda4759916dcd9\\transformed\\material-1.9.0\\res\\values-ldrtl-v17\\values-ldrtl-v17.xml",
+                    "source": "/Users/minkhi/.gradle/caches/transforms-3/e5f321a248aa217236dda4759916dcd9/transformed/material-1.9.0/res/values-ldrtl-v17/values-ldrtl-v17.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",
