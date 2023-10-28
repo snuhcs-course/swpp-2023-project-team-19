@@ -1,7 +1,14 @@
+asgiref==3.7.2
 distlib==0.3.7
+Django==4.2.6
+django-cors-headers==4.3.0
+djangorestframework==3.14.0
+filelock==3.12.4
+mysqlclient==2.0.3
 Pillow==10.1.0
 platformdirs==3.11.0
 PyMySQL==1.1.0
 pytz==2023.3.post1
 sqlparse==0.4.4
-tzdata==2023.3
+typing_extensions==4.8.0
+virtualenv==20.24.5
