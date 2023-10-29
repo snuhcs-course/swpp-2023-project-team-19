@@ -17,5 +17,9 @@ public class CodeMessageResponse {
         return message;
     }
 
+    public String setMessage(String message) {
+        return message;
+    }
+
     public Integer getUserId(){return user_id;}
 }
