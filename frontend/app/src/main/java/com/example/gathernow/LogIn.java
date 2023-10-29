@@ -3,6 +3,7 @@ package com.example.gathernow;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +21,13 @@ public class LogIn extends AppCompatActivity {
     private TextView passwordInput;
     private TextView alert;
     private ServiceApi service;
+
+    private void saveUserId(Integer userId) {
+        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("user_id", String.valueOf(userId));
+        editor.apply();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,8 @@ public class LogIn extends AppCompatActivity {
                             if ("Login successful.".equals(message)) {
                                 Toast.makeText(LogIn.this, "Login successful", Toast.LENGTH_SHORT).show();
                                 Log.d("Log In", "successful");
+
+                                saveUserId(result.getUserId());
 
                                 // Link to the login page
                                 Intent intent = new Intent(LogIn.this, FragHome.class);

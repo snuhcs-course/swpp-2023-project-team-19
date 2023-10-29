@@ -4,7 +4,7 @@
             "outputFile": "com.example.gathernow.app-mergeDebugResources-26:/values-lt/values-lt.xml",
             "map": [
                 {
-                    "source": "/Users/minkhi/.gradle/caches/transforms-3/af575453595166fed38ef613cf3573b3/transformed/appcompat-1.6.1/res/values-lt/values-lt.xml",
+                    "source": "C:\\Users\\Chee_Yee\\.gradle\\caches\\transforms-3\\af575453595166fed38ef613cf3573b3\\transformed\\appcompat-1.6.1\\res\\values-lt\\values-lt.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -21,24 +21,7 @@
                     }
                 },
                 {
-                    "source": "/Users/minkhi/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/res/values-lt/values-lt.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "100",
-                        "endOffsets": "151"
-                    },
-                    "to": {
-                        "startLines": "98",
-                        "startColumns": "4",
-                        "startOffsets": "8327",
-                        "endColumns": "100",
-                        "endOffsets": "8423"
-                    }
-                },
-                {
-                    "source": "/Users/minkhi/.gradle/caches/transforms-3/e5f321a248aa217236dda4759916dcd9/transformed/material-1.9.0/res/values-lt/values-lt.xml",
+                    "source": "C:\\Users\\Chee_Yee\\.gradle\\caches\\transforms-3\\e5f321a248aa217236dda4759916dcd9\\transformed\\material-1.9.0\\res\\values-lt\\values-lt.xml",
                     "from": {
                         "startLines": "2,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -54,6 +37,23 @@
                         "endLines": "7,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96",
                         "endColumns": "12,78,77,82,93,89,95,117,83,65,98,77,64,109,62,71,58,73,60,53,123,60,61,53,77,133,87,83,140,78,83,96,55,53,65,74,78,87,75,77,72,76,86,80,89,91,71,80,91,54,65,84,86,61,63,62,110,114,100,113,59,57,81",
                         "endOffsets": "420,3268,3346,3429,3523,3613,3709,3827,3911,3977,4076,4154,4219,4329,4392,4464,4523,4597,4658,4712,4836,4897,4959,5013,5091,5225,5313,5397,5538,5617,5701,5798,5854,5908,5974,6049,6128,6216,6292,6370,6443,6520,6607,6688,6778,6870,6942,7023,7115,7170,7236,7321,7408,7470,7534,7597,7708,7823,7924,8038,8098,8156,8238"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Chee_Yee\\.gradle\\caches\\transforms-3\\28a7af075d5af218c19b63a2f54b1523\\transformed\\core-1.9.0\\res\\values-lt\\values-lt.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "98",
+                        "startColumns": "4",
+                        "startOffsets": "8327",
+                        "endColumns": "100",
+                        "endOffsets": "8423"
                     }
                 }
             ]
