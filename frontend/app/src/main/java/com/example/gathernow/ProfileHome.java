@@ -185,6 +185,9 @@ public class ProfileHome extends Fragment {
                                 public void onClick(View v) {
                                     // Handle the click event here
                                     Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+                                    // Simulate to see if the event info page can be opened
+                                    Intent intent = new Intent(v.getContext(), EventInfo.class);
+                                    startActivity(intent);
                                 }
                             });
                         }
