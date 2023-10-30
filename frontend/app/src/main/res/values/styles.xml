@@ -26,6 +26,17 @@
         <item name="android:textSize">15sp</item>
     </style>
 
+    <style name="TitleField">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style>
+
+    <style name="HeadingTextField">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="PositiveButton">
         <item name="android:background">@drawable/button_bg</item>
         <item name="android:textSize">20sp</item>
