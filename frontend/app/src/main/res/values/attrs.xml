@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="EventCardView">
+        <attr name="event_photo" format="reference" />
+        <attr name="event_name" format="string" />
+        <attr name="event_capacity" format="string" />
+        <attr name="event_language" format="string" />
+        <attr name="event_datetime" format="string" />
+        <attr name="event_location" format="string" />
+        <!-- Add other attributes for the component -->
+    </declare-styleable>
+
+</resources>

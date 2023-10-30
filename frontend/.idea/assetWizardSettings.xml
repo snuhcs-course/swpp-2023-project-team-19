@@ -25,6 +25,7 @@
                                               <map>
                                                 <entry key="color" value="000000" />
                                                 <entry key="imagePath" value="/private/var/folders/xt/jxrhclx12vs3nfjmcpmh1w3r0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="opacityPercent" value="60" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -67,9 +68,8 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="color" value="7f7f7f" />
-                                                <entry key="imagePath" value="/private/var/folders/xt/jxrhclx12vs3nfjmcpmh1w3r0000gn/T/baseline_arrow_back_ios_24.xml" />
-                                                <entry key="scalingPercent" value="65" />
+                                                <entry key="color" value="404040" />
+                                                <entry key="imagePath" value="/private/var/folders/xt/jxrhclx12vs3nfjmcpmh1w3r0000gn/T/baseline_location_on_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -80,7 +80,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/arrow_back_ios/baseline_arrow_back_ios_24.xml" />
+                                                <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/location_on/baseline_location_on_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -92,7 +92,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Desktop/event_image/image6_others.png" />
+                                                <entry key="imagePath" value="$USER_HOME$/Desktop/sad_frog.png" />
                                                 <entry key="scalingPercent" value="75" />
                                               </map>
                                             </option>
@@ -125,7 +125,12 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="ic_image6_others" />
+                                      <entry key="foregroundAssetType" value="CLIP_ART" />
+                                      <entry key="generateLegacyIcon" value="false" />
+                                      <entry key="generatePlayStoreIcon" value="false" />
+                                      <entry key="generateRoundIcon" value="false" />
+                                      <entry key="generateWebpIcons" value="false" />
+                                      <entry key="outputName" value="ic_location" />
                                     </map>
                                   </option>
                                 </PersistentState>
