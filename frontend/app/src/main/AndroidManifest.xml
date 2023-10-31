@@ -22,13 +22,13 @@
             android:name=".CreateSuccessful"
             android:exported="false" />
         <activity
-            android:name=".LogIn"
+            android:name=".LogInActivity"
             android:exported="false" />
         <activity
             android:name=".FragHome"
             android:exported="false" />
         <activity
-            android:name=".SignUp"
+            android:name=".SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
