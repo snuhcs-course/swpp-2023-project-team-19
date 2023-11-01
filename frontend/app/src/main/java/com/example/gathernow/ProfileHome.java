@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.media.Image;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -29,6 +30,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -113,7 +116,27 @@ public class ProfileHome extends Fragment {
                     profile_text.setText(user_name + ", welcome back!");
 
                     // TODO: Call profile picture
-                    //profile_img.setImageResource(...);
+                    // Get the source of image on the server by calling API http://20.2.88.70:8000/api/useravatar/{user_id}/
+                    // Set the image source to the image view
+                    service2 = RetrofitClient.getClient().create(ServiceApi.class);
+                    service2.getUserInfo(userId).enqueue(new Callback<UserData1>() {
+                        @Override
+                        public void onResponse(Call<UserData1> call, Response<UserData1> response) {
+                            // Log response to console
+                            Log.d("UserAvatar", "Response: " + response.toString());
+                            if (response.isSuccessful()) {
+                                UserData1 current_useravatar = response.body();
+                                String user_avatar = current_useravatar.avatar;
+                                user_avatar = "http://20.2.88.70:8000" + user_avatar;
+                                ImageView profile_img = rootView.findViewById(R.id.profile_image);
+                                Picasso.get().load(user_avatar).into(profile_img);
+                            }
+                        }
+                        public void onFailure(Call<UserData1> call, Throwable t) {
+                            Toast.makeText(getActivity(), "Get User Avatar Error", Toast.LENGTH_SHORT).show();
+                            Log.e("UserAvatar", "Error occurred", t);
+                        }
+                    });
 
                 } else {
                     // Handle API error
@@ -139,13 +162,6 @@ public class ProfileHome extends Fragment {
                 Log.e("UserEventDisplay", "Error occurred", t);
             }
         });
-
-
-
-
-
-
-
 
         //Integer userId = Integer.valueOf(getUserId(getActivity()));
 

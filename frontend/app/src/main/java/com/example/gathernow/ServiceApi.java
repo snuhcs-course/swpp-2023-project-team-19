@@ -32,6 +32,4 @@ public interface ServiceApi {
     @GET("/api/events/by_user/{user_id}/")
     Call<List<EventData>> getEventsByUser(@Path("user_id") int userId);
 
-
-
 }
