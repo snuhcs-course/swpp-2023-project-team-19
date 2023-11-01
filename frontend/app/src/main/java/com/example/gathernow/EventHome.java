@@ -1,5 +1,7 @@
 package com.example.gathernow;
 
+import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +9,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +64,33 @@ public class EventHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_event_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_event_home, container, false);
+
+        LinearLayout layoutOne = rootView.findViewById(R.id.layout_one);
+        LinearLayout layoutTwo = rootView.findViewById(R.id.layout_two);
+
+
+        // TODO: check condition here, whether the user has any event
+        Integer condition = 1;
+        if (condition == 1) {   // no events
+            layoutOne.setVisibility(View.VISIBLE);
+            layoutTwo.setVisibility(View.GONE);
+
+            TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
+            discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+            discover_new.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), FragHome.class);
+                    startActivity(intent);
+                }
+            });
+
+        } else {
+            layoutOne.setVisibility(View.GONE);
+            layoutTwo.setVisibility(View.VISIBLE);
+        }
+
+        return rootView;
     }
 }

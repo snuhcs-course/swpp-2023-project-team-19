@@ -4,4 +4,18 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#BEBEBEBE</color>
     <color name="red">#FF0000</color>
+    <color name="color1">#F5F5F5</color>
+
+    <color name="green1">#2B8761</color>
+    <color name="green2">#C1E1C1</color>
+    <color name="green3">#86C4A9</color>
+    <color name="green4">#1E6647</color>
+
+    <!-- Night theme colors -->
+    <color name="night_green1">#23754D</color>
+    <color name="night_green2">#4F9E77</color>
+    <color name="night_green3">#145436</color>
+    <color name="night_green4">#0E4029</color>
+
+
 </resources>

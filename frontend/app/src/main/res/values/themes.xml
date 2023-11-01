@@ -5,5 +5,21 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Gathernow" parent="Base.Theme.Gathernow" />
+    <style name="Theme.Gathernow.Custom" parent="Base.Theme.Gathernow">
+        <!-- Primary color -->
+        <item name="colorPrimary">#2B8761</item>
+        <!-- Primary variant color, adjust if needed -->
+        <item name="colorPrimaryVariant">#247050</item>
+        <!-- On primary color (color for text and icons on primary color background), using white here -->
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <!-- Secondary color, using white here. Adjust if you need a different secondary color -->
+        <item name="colorSecondary">@color/green1</item>
+        <!-- On secondary color (color for text and icons on secondary color background), adjust if needed -->
+        <item name="colorOnSecondary">#000000</item>
+        <item name="colorPrimaryDark">#24734D</item>
+
+        <!-- Any other color customizations can be added here -->
+    </style>
+
+    <style name="Theme.Gathernow" parent="Theme.Gathernow.Custom" />
 </resources>

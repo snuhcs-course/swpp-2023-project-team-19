@@ -506,6 +506,12 @@ attr errorIconTintMode
 attr errorShown
 attr errorTextAppearance
 attr errorTextColor
+attr event_capacity
+attr event_datetime
+attr event_language
+attr event_location
+attr event_name
+attr event_photo
 attr expandActivityOverflowButtonDrawable
 attr expanded
 attr expandedHintEnabled
@@ -1350,6 +1356,7 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color color1
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -1397,6 +1404,10 @@ color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
 color gray
+color green1
+color green2
+color green3
+color green4
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color m3_appbar_overlay_color
@@ -2022,6 +2033,10 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
+color night_green1
+color night_green2
+color night_green3
+color night_green4
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary_dark_material_dark
@@ -2922,6 +2937,8 @@ drawable edittext_bg
 drawable edittext_focused
 drawable edittext_unfocused
 drawable ic_arrow_back_black_24
+drawable ic_capacity_background
+drawable ic_capacity_foreground
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_close_background
@@ -2930,14 +2947,20 @@ drawable ic_create_background
 drawable ic_create_foreground
 drawable ic_events_background
 drawable ic_events_foreground
+drawable ic_home_background
+drawable ic_home_foreground
 drawable ic_image2_sports_background
 drawable ic_image3_workshops_background
 drawable ic_image4_parties_background
 drawable ic_image5_cultural_activities_background
 drawable ic_image6_others_background
 drawable ic_keyboard_black_24dp
+drawable ic_language_background
+drawable ic_language_foreground
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_location_background
+drawable ic_location_foreground
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -2949,11 +2972,14 @@ drawable ic_profile_background
 drawable ic_profile_foreground
 drawable ic_return_background
 drawable ic_return_foreground
+drawable ic_sad_frog_background
 drawable ic_search_background
 drawable ic_search_black_24
 drawable ic_search_foreground
 drawable ic_success_background
 drawable ic_success_foreground
+drawable ic_time_background
+drawable ic_time_foreground
 drawable image_selector
 drawable m3_appbar_background
 drawable m3_avd_hide_password
@@ -3192,6 +3218,7 @@ id disableHome
 id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
+id discover_new
 id disjoint
 id dragAnticlockwise
 id dragClockwise
@@ -3216,8 +3243,14 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
+id eventCard
+id eventCard1
+id eventCardContainer
+id event_capacity
+id event_create_container
 id event_date
 id event_date_time_hint
+id event_datetime
 id event_description
 id event_description_hint
 id event_duration
@@ -3229,6 +3262,7 @@ id event_name
 id event_name_hint
 id event_num_participants
 id event_num_participants_hint
+id event_photo
 id event_price
 id event_price_hint
 id event_time
@@ -3267,6 +3301,7 @@ id header_title
 id hideable
 id home
 id homeAsUp
+id home_text
 id honorRequest
 id horizontalGuideline
 id horizontal_only
@@ -3286,6 +3321,7 @@ id image6_others
 id imageRadioGroup
 id immediateStop
 id included
+id indent
 id indeterminate
 id info
 id invisible
@@ -3296,6 +3332,8 @@ id jumpToEnd
 id jumpToStart
 id labeled
 id layout
+id layout_one
+id layout_two
 id left
 id leftToRight
 id legacy
@@ -3385,6 +3423,7 @@ id neverCompleteToEnd
 id neverCompleteToStart
 id noScroll
 id noState
+id no_event_text
 id none
 id normal
 id north
@@ -3417,9 +3456,12 @@ id position
 id post
 id postLayout
 id pressed
+id profile_image
+id profile_text
 id progress_circular
 id progress_horizontal
 id pwConfirmationText
+id question_text
 id radio
 id ratio
 id rectangles
@@ -3431,6 +3473,7 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
+id sad_frog
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3441,7 +3484,6 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
-id search
 id search_badge
 id search_bar
 id search_bar_text_view
@@ -3510,6 +3552,7 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
+id subtitle_text
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3545,6 +3588,7 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id title_text
 id toggle
 id top
 id topPanel
@@ -3581,6 +3625,7 @@ id wrap_content
 id wrap_content_constrained
 id x_left
 id x_right
+id your_event_text
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -3715,6 +3760,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout event_card_layout
 layout fragment_event_create
 layout fragment_event_home
 layout fragment_event_search
@@ -3781,12 +3827,15 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 menu bottom_nav_menu
+mipmap ic_capacity
 mipmap ic_close
 mipmap ic_close_round
 mipmap ic_create
 mipmap ic_create_round
 mipmap ic_events
 mipmap ic_events_round
+mipmap ic_home
+mipmap ic_home_round
 mipmap ic_image1_leisure
 mipmap ic_image2_sports
 mipmap ic_image2_sports_foreground
@@ -3803,16 +3852,22 @@ mipmap ic_image5_cultural_activities_round
 mipmap ic_image6_others
 mipmap ic_image6_others_foreground
 mipmap ic_image6_others_round
+mipmap ic_language
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap ic_location
 mipmap ic_profile
 mipmap ic_profile_round
 mipmap ic_return
 mipmap ic_return_round
+mipmap ic_sad_frog
+mipmap ic_sad_frog_foreground
+mipmap ic_sad_frog_round
 mipmap ic_search
 mipmap ic_search_round
 mipmap ic_success
 mipmap ic_success_round
+mipmap ic_time
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -4528,6 +4583,7 @@ style Theme_Design_Light_BottomSheetDialog
 style Theme_Design_Light_NoActionBar
 style Theme_Design_NoActionBar
 style Theme_Gathernow
+style Theme_Gathernow_Custom
 style Theme_Material3_Dark
 style Theme_Material3_Dark_BottomSheetDialog
 style Theme_Material3_Dark_Dialog
@@ -5136,6 +5192,7 @@ styleable CoordinatorLayout_Layout android_layout_gravity layout_anchor layout_a
 styleable CustomAttribute attributeName customBoolean customColorDrawableValue customColorValue customDimension customFloatValue customIntegerValue customPixelDimension customReference customStringValue methodName
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
 styleable DrawerLayout elevation
+styleable EventCardView event_capacity event_datetime event_language event_location event_name event_photo
 styleable ExtendedFloatingActionButton collapsedSize elevation extendMotionSpec extendStrategy hideMotionSpec showMotionSpec shrinkMotionSpec
 styleable ExtendedFloatingActionButton_Behavior_Layout behavior_autoHide behavior_autoShrink
 styleable FloatingActionButton android_enabled backgroundTint backgroundTintMode borderWidth elevation ensureMinTouchTargetSize fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec useCompatPadding
