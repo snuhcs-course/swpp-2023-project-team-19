@@ -1,6 +1,8 @@
 package com.example.gathernow;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -75,6 +77,12 @@ public class EventSearch extends Fragment {
         }
     }
 
+    // Get current user id (for intent)
+    private String getUserId(Context context) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        return sharedPreferences.getString("user_id", null); // Return null if the user_id doesn't exist
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -84,11 +92,11 @@ public class EventSearch extends Fragment {
         // TODO: implement get event details from db and create event card view here
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
-        service.getALlEvents().enqueue(new Callback<List<EventData>> (){
+        service.getALlEvents().enqueue(new Callback<List<EventData>>() {
             @Override
-            public void onResponse(Call<List<EventData>> call, Response<List<EventData>>  response){
+            public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response) {
                 if (response.isSuccessful()) {
-                    List<EventData>  events_list = response.body();
+                    List<EventData> events_list = response.body();
 
                     //GetEventData current_event = events_list.get(0);
 
@@ -100,16 +108,18 @@ public class EventSearch extends Fragment {
                     Collections.reverse(events_list);
 
 
-                    for (int i = 0; i < events_list.size(); i++){
-
+                    for (int i = 0; i < events_list.size(); i++) {
                         EventCardView newEventCard = new EventCardView(getContext(), null);
-                        EventData current_event = events_list.get(i);
-                        newEventCard.setEventName(current_event.event_title);
-                        newEventCard.setEventPhoto(current_event.event_type);
-                        newEventCard.setEventCapacity(current_event.event_num_joined, current_event.event_num_participants);
-                        newEventCard.setEventLocation(current_event.event_location);
-                        newEventCard.setEventLanguage(current_event.event_language);
-                        newEventCard.setEventDateTime(Date.valueOf(current_event.event_date), Time.valueOf(current_event.event_time));
+                        EventData currentEvent = events_list.get(i);
+                        newEventCard.setEventName(currentEvent.event_title);
+                        newEventCard.setEventPhoto(currentEvent.event_type);
+                        newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
+                        newEventCard.setEventLocation(currentEvent.event_location);
+                        newEventCard.setEventLanguage(currentEvent.event_language);
+                        newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
+
+                        Integer eventId = currentEvent.event_id;
+//                        Log.d("EventInfo Testing", "Clicked event id: " + events_list.get(i).event_id.toString());
 
                         // Add vertical padding to the newEventCard
                         int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
@@ -121,16 +131,19 @@ public class EventSearch extends Fragment {
                             public void onClick(View v) {
                                 // Handle the click event here
                                 Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
-                                // Simulate to see if the event info page can be opened
+
+                                // Send the user id to the EventInfo activity
                                 Intent intent = new Intent(v.getContext(), EventInfo.class);
+                                intent.putExtra("userId", getUserId(v.getContext()));
+                                intent.putExtra("eventId", currentEvent.event_id);
+
                                 startActivity(intent);
                             }
                         });
                     }
 
 
-                }
-                else {
+                } else {
                     // Handle API error
                     // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
                     Toast.makeText(getActivity(), "Event display failed.", Toast.LENGTH_SHORT).show();
@@ -148,8 +161,9 @@ public class EventSearch extends Fragment {
                     }
                 }
             }
+
             @Override
-            public void onFailure(Call<List<EventData>>  call, Throwable t) {
+            public void onFailure(Call<List<EventData>> call, Throwable t) {
                 Toast.makeText(getActivity(), "Get Event Error", Toast.LENGTH_SHORT).show();
                 Log.e("EventDisplay", "Error occurred", t);
             }
