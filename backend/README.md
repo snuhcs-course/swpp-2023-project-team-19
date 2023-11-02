@@ -18,7 +18,21 @@ backend/
         __init__.py
         apps.py
         models.py
+        serializers.py
+        urls.py
+        utils.py
         tests.py
+        views.py
+    events/
+        migrations
+        __init__.py
+        admin.py
+        apps.py
+        models.py
+        serializers.py
+        tests.py
+        urls.py
+        views.py
 ```
 
 These files are:
@@ -68,17 +82,28 @@ DATABASES = {
 ```
 
 ## Migrating Database
+If there is any changes for backend code, the database should be migrated. The following commands should be run in the backend directory. 
+
 ### Make Migration
+```
 python3 manage.py makemigrations users
 python3 manage.py makemigrations events
+```
 
 ### Migrate 
+```
 python3 manage.py migrate users
 python3 manage.py migrate events
-
+```
 
 ## Run server
-Run the following commands to start the services:
+To run the server locally, you can use the following command:
+```
+python manage.py runserver
+```
+The server will be live on `http://localhost:8000/` or `http://127.0.0.1:8000/`
+
+Run the following commands to start the service on Microsoft Azure. To make the port open on Azure, we need to run 0.0.0.0:8000 to open the port 8000.
 ```
 python manage.py runserver 0.0.0.0:8000
 ```

@@ -24,8 +24,19 @@ class UserSignup(APIView):
             if User.objects.filter(email=email).exists():
                 return Response({'message': 'Email already exists.'}, status=status.HTTP_400_BAD_REQUEST)
 
+            # Save the user without the avatar for now
             user = serializer.save()
-            assign_random_avatar_image(user)
+
+            # Check if an image was uploaded
+            avatar_image = request.data.get('avatar')
+            if avatar_image:
+                user.avatar = avatar_image
+                user.save()
+            else:
+                # Assign a random avatar image to the user
+                assign_random_avatar_image(user)
+
+
             return Response({'message': 'User registered successfully.'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -55,7 +66,19 @@ class UserLogin(APIView):
         else:
             return Response({'message': 'Invalid password.'}, status=status.HTTP_401_UNAUTHORIZED)
         
+class UserAvatarView(APIView):
+    def get(self, request, user_id):
+        try:
+            user = User.objects.get(user_id=user_id)
+        except User.DoesNotExist:
+            return Response({'message': 'User not found.'}, status=status.HTTP_404_NOT_FOUND)
 
+        if user.avatar:
+            # Get the URL of the avatar image
+            avatar_url = user.avatar.url
+            return Response({'avatar_url': avatar_url}, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'User has no avatar image.'}, status=status.HTTP_404_NOT_FOUND)
     
         
 #class UserInfo(APIView):

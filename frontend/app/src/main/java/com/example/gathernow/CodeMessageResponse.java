@@ -22,7 +22,6 @@ public class CodeMessageResponse {
         return message;
     }
 
-
     public Integer getUserId() {
         return user_id;
     }
