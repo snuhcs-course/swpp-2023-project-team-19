@@ -183,13 +183,13 @@ public class ProfileHome extends Fragment {
                         for (int i = 0; i < events_list.size(); i++){
 
                             EventCardView newEventCard = new EventCardView(getContext(), null);
-                            EventData current_event = events_list.get(i);
-                            newEventCard.setEventName(current_event.event_title);
-                            newEventCard.setEventPhoto(current_event.event_type);
-                            newEventCard.setEventCapacity(current_event.event_num_joined, current_event.event_num_participants);
-                            newEventCard.setEventLocation(current_event.event_location);
-                            newEventCard.setEventLanguage(current_event.event_language);
-                            newEventCard.setEventDateTime(Date.valueOf(current_event.event_date), Time.valueOf(current_event.event_time));
+                            EventData currentEvent = events_list.get(i);
+                            newEventCard.setEventName(currentEvent.event_title);
+                            newEventCard.setEventPhoto(currentEvent.event_type);
+                            newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
+                            newEventCard.setEventLocation(currentEvent.event_location);
+                            newEventCard.setEventLanguage(currentEvent.event_language);
+                            newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
 
                             // Add vertical padding to the newEventCard
                             int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
@@ -201,6 +201,11 @@ public class ProfileHome extends Fragment {
                                 public void onClick(View v) {
                                     // Handle the click event here
                                     Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+                                    // Send the user id to the EventInfo activity
+                                    Intent intent = new Intent(v.getContext(), EventInfo.class);
+                                    intent.putExtra("userId", getUserId(v.getContext()));
+                                    intent.putExtra("eventId", currentEvent.event_id);
+                                    startActivity(intent);
                                 }
                             });
                         }

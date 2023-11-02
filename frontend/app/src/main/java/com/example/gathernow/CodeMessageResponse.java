@@ -13,6 +13,7 @@ public class CodeMessageResponse {
     public int getCode() {
         return code;
     }
+
     public String getMessage() {
         return message;
     }
@@ -21,7 +22,8 @@ public class CodeMessageResponse {
         return message;
     }
 
-
-    public Integer getUserId(){return user_id;}
+    public Integer getUserId() {
+        return user_id;
+    }
 }
 
