@@ -13,6 +13,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -80,6 +82,28 @@ public class EventInfo extends AppCompatActivity {
                     setButtonVisibility(eventData.host_id);
 
                     // TODO: Update host's profile name
+                    service.getUserInfo(eventData.host_id).enqueue(new Callback<UserData1>() {
+                        @Override
+                        public void onResponse(Call<UserData1> call, Response<UserData1> response) {
+                            if (response.isSuccessful()) {
+                                UserData1 userData = response.body();
+                                TextView profileName = findViewById(R.id.profile_name);
+                                profileName.setText(userData.name);
+
+                                UserData1 currentHostAvatar = response.body();
+                                String host_avatar = currentHostAvatar.avatar;
+                                host_avatar = "http://20.2.88.70:8000" + host_avatar;
+                                ImageView profile_img = findViewById(R.id.profile_img);
+                                Picasso.get().load(host_avatar).into(profile_img);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<UserData1> call, Throwable t) {
+                            Log.d("EventInfo Testing", "Failed to get host name");
+
+                        }
+                    });
                 }
             }
 
