@@ -1,0 +1,5 @@
+<!-- res/drawable/circle_shape.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#000000" /> <!-- Change the background color as needed -->
+    <corners android:radius="45dp" /> <!-- Half of the desired width/height of the ImageView -->
+</shape>

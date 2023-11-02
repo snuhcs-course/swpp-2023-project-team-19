@@ -16,7 +16,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class LogIn extends AppCompatActivity {
+public class LogInActivity extends AppCompatActivity {
     private TextView emailInput;
     private TextView passwordInput;
     private TextView alert;
@@ -64,25 +64,25 @@ public class LogIn extends AppCompatActivity {
                         if (result != null) {
                             String message = result.getMessage();
                             if ("Login successful.".equals(message)) {
-                                Toast.makeText(LogIn.this, "Login successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LogInActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
                                 Log.d("Log In", "successful");
 
                                 saveUserId(result.getUserId());
 
                                 // Link to the login page
-                                Intent intent = new Intent(LogIn.this, FragHome.class);
+                                Intent intent = new Intent(LogInActivity.this, FragHome.class);
                                 startActivity(intent);
                             }
                         }
                         else {
-                            Toast.makeText(LogIn.this, "Empty response body", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogInActivity.this, "Empty response body", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         if(response.code() == HttpURLConnection.HTTP_NOT_FOUND){
                             alert.setText("User not found. Do you want to create an account?");
                             // Click text to sign up
                             alert.setOnClickListener(view1 -> {
-                                Intent intent = new Intent(LogIn.this, SignUp.class);
+                                Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
                                 startActivity(intent);
                             });
                         }
@@ -93,7 +93,7 @@ public class LogIn extends AppCompatActivity {
                 }
                 @Override
                 public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
-                    Toast.makeText(LogIn.this, "Sign Up Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LogInActivity.this, "Sign Up Error", Toast.LENGTH_SHORT).show();
                 }
             });
         }

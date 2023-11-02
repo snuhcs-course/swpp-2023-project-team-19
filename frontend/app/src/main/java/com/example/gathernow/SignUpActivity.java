@@ -13,7 +13,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class SignUp extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     private TextView nameInput;
     private TextView emailInput;
@@ -87,23 +87,23 @@ public class SignUp extends AppCompatActivity {
                                 if (result != null) {
                                     if (result.getMessage().equals("User registered successfully.")) {
                                         // Handle the case where the user registration was successful
-                                        Toast.makeText(SignUp.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(SignUpActivity.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
                                         // Link to the login page
-                                        Intent intent = new Intent(v.getContext(), LogIn.class);
+                                        Intent intent = new Intent(v.getContext(), LogInActivity.class);
                                         startActivity(intent);
                                     }
                                 } else {
                                     // Handle the case where the response body is null or empty
-                                    Toast.makeText(SignUp.this, "Empty response from the server", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(SignUpActivity.this, "Empty response from the server", Toast.LENGTH_SHORT).show();
                                 }
                             } else {
                                 // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
-                                Toast.makeText(SignUp.this, "Email already exists.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignUpActivity.this, "Email already exists.", Toast.LENGTH_SHORT).show();
                             }
                         }
                         @Override
                         public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
-                            Toast.makeText(SignUp.this, "Sign Up Error", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SignUpActivity.this, "Sign Up Error", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }
