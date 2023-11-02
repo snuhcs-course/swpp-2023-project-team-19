@@ -44,10 +44,11 @@
                 android:id="@+id/event_img"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:background="@mipmap/ic_image2_sports_foreground"
                 app:layout_constraintHeight_percent="0.55"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
             <!--Event name -->
             <TextView
                 android:id="@+id/event_title"
@@ -55,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="10dp"
-                android:text="Hiking Gwanaksan"
+                android:text="NA"
                 app:layout_constraintLeft_toLeftOf="@id/verticalGuideline"
                 app:layout_constraintTop_toBottomOf="@id/event_img" />
 
@@ -76,7 +77,7 @@
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
-                android:text="Ho Duc Hieu"
+                android:text="Host"
                 android:textSize="15dp"
                 android:textStyle="bold"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -91,7 +92,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:text="Let's hike up to Gwanak mountain and enjoy the view of SNU!"
+                android:text="Description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintLeft_toLeftOf="@id/verticalGuideline"
                 app:layout_constraintRight_toRightOf="@id/verticalRightGuideline"
@@ -118,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_marginTop="25dp"
-                android:text="Korean, English"
+                android:text="Language"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/language_title"
                 app:layout_constraintTop_toBottomOf="@id/event_description"
@@ -141,7 +142,7 @@
                 style="@style/TextField"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="5"
+                android:text="0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/num_participants_title"
                 app:layout_constraintTop_toBottomOf="@id/language_title" />
@@ -161,7 +162,7 @@
                 style="@style/TextField"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="10"
+                android:text="0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/participants_dash"
                 app:layout_constraintTop_toBottomOf="@id/language_title" />
@@ -216,10 +217,33 @@
                 style="@style/TextField"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="3 hours"
+                android:text="0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/event_duration_title"
                 app:layout_constraintTop_toBottomOf="@id/event_time_title" />
+
+            <!--    Price-->
+            <TextView
+                android:id="@+id/price_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Price:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintRight_toLeftOf="@id/event_price"
+                app:layout_constraintTop_toBottomOf="@id/event_duration"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/event_price"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/location_title"
+                app:layout_constraintTop_toBottomOf="@id/event_duration" />
 
             <!--    Location-->
             <TextView
@@ -230,19 +254,19 @@
                 android:text="Location:"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
-                app:layout_constraintRight_toLeftOf="@id/location"
-                app:layout_constraintTop_toBottomOf="@id/event_duration"
+                app:layout_constraintRight_toLeftOf="@id/event_location"
+                app:layout_constraintTop_toBottomOf="@id/event_price"
                 app:layout_constraintWidth_percent="0.25" />
 
             <TextView
-                android:id="@+id/location"
+                android:id="@+id/event_location"
                 style="@style/TextField"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Gwanaksan"
+                android:text="Location"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/location_title"
-                app:layout_constraintTop_toBottomOf="@id/event_duration" />
+                app:layout_constraintTop_toBottomOf="@id/event_price" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -291,12 +315,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="View participants"
+        android:textSize="18sp"
         android:visibility="invisible"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/delete_button"
         app:layout_constraintTop_toBottomOf="@id/content"
-        app:layout_constraintWidth_percent="0.45" />
+        app:layout_constraintWidth_percent="0.4"
+        />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/delete_button"
@@ -304,14 +330,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Delete event"
+        android:textSize="18sp"
         android:visibility="invisible"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintLeft_toRightOf="@id/view_applicants_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
-        app:layout_constraintWidth_percent="0.45" />
-
-
+        app:layout_constraintWidth_percent="0.4"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

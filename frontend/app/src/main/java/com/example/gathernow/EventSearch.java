@@ -118,7 +118,6 @@ public class EventSearch extends Fragment {
                         newEventCard.setEventLanguage(currentEvent.event_language);
                         newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
 
-                        Integer eventId = currentEvent.event_id;
 //                        Log.d("EventInfo Testing", "Clicked event id: " + events_list.get(i).event_id.toString());
 
                         // Add vertical padding to the newEventCard
