@@ -23,4 +23,5 @@ public class CodeMessageResponse {
 
 
     public Integer getUserId(){return user_id;}
+}
 
