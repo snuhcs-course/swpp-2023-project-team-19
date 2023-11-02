@@ -18,7 +18,7 @@
         android:id="@+id/subtitle_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Upcoming events:"
+        android:text="Registered events:"
         android:textSize="18dp"
         android:paddingVertical="10dp"/>
 
