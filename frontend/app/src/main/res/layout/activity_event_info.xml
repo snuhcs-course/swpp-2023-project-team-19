@@ -66,12 +66,10 @@
                 android:layout_width="45dp"
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/circle_shape"
+                android:background="@drawable/ic_profile_foreground"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
-                app:layout_constraintTop_toBottomOf="@id/event_title"
-                android:scaleType="centerCrop"
-                android:clipToOutline="true" />
+                app:layout_constraintTop_toBottomOf="@id/event_title" />
 
             <TextView
                 android:id="@+id/profile_name"
