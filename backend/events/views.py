@@ -52,11 +52,14 @@ def events_by_user(request, user_id):
         return Response(serializer.data)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-# Get events by id
-@api_view(['GET'])
+# Get & delete events by id
+@api_view(['GET', 'DELETE'])
 def events_by_id(request, event_id):
+    events = Event.objects.filter(event_id=event_id)
     if request.method == 'GET':
-        events = Event.objects.filter(event_id=event_id)
         serializer = EventSerializer(events, many=True)
         return Response(serializer.data)
+    elif request.method == 'DELETE':
+        events.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)

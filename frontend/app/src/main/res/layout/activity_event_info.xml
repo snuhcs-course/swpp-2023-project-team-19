@@ -325,6 +325,7 @@
         />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:onClick="onDeleteEvent"
         android:id="@+id/delete_button"
         style="@style/DangerButton"
         android:layout_width="0dp"

@@ -1,5 +1,6 @@
 package com.example.gathernow;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -20,7 +21,8 @@ import retrofit2.Response;
 
 public class EventInfo extends AppCompatActivity {
     private ServiceApi service;
-    int userId;
+    private int userId;
+    private int eventId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +34,17 @@ public class EventInfo extends AppCompatActivity {
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
         userId = Integer.parseInt(intent.getStringExtra("userId"));
-        int eventId = intent.getIntExtra("eventId", -1);
+        eventId = intent.getIntExtra("eventId", -1);
         if (eventId == -1) {
             Toast.makeText(EventInfo.this, "Event ID not found", Toast.LENGTH_SHORT).show();
         }
 
         // query event info from database
-        getEventInfo(eventId);
+        getEventInfo();
 
     }
 
-    private void getEventInfo(int eventId) {
+    private void getEventInfo() {
         // Get elements on the screen
         TextView eventTitle = findViewById(R.id.event_title);
         TextView eventDescription = findViewById(R.id.event_description);
@@ -150,4 +152,41 @@ public class EventInfo extends AppCompatActivity {
         // TODO: else if user attendance has approved, show cancel button
     }
 
+    public void onDeleteEvent(View view) {
+        Log.d("EventInfo Testing", "Delete button clicked");
+        // Set up an alert builder to ask users whether they want to delete the event
+        AlertDialog.Builder deleteAlertBuilder = new AlertDialog.Builder(this);
+        deleteAlertBuilder
+                .setTitle("Delete Event")
+                .setMessage("Are you sure you want to delete this event?")
+                .setPositiveButton("Yes", (dialog, which) -> {
+                    // TODO: Delete the event
+                    service.deleteEventByEventId(eventId).enqueue(new Callback<CodeMessageResponse>() {
+                        @Override
+                        public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
+                            Log.d("EventInfo Testing", "Event deleted");
+                            if (response.isSuccessful()) {
+                                Log.d("EventInfo Testing", response.body().toString());
+                                CodeMessageResponse codeMessageResponse = response.body();
+                                Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
+                            Log.d("EventInfo Testing", "Failed to delete event");
+                        }
+                    });
+
+                    // Direct to Home screen
+                    Intent intent = new Intent(view.getContext(), FragHome.class);
+                    startActivity(intent);
+                })
+                .setNegativeButton("No", (dialog, which) -> {
+                    // Do nothing
+                    dialog.dismiss();
+                });
+        deleteAlertBuilder.show();
+
+    }
 }
