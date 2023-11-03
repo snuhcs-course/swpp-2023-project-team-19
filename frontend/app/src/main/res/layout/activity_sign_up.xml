@@ -12,30 +12,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <TextView
         android:id="@+id/signupText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.11"
-        app:layout_constraintTop_toTopOf="@id/horizontalGuideline"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:text="Register"
         android:textSize="30sp"
         android:textStyle="bold"
-        />
+        app:layout_constraintHeight_percent="0.11"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/horizontalGuideline" />
 
     <TextView
-        style="@style/TextField"
         android:id="@+id/nameText"
+        style="@style/TextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Name"
-        app:layout_constraintTop_toBottomOf="@id/signupText"
         app:layout_constraintBottom_toTopOf="@id/name"
-        />
+        app:layout_constraintTop_toBottomOf="@id/signupText" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/name"
@@ -48,18 +46,17 @@
         android:inputType="text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameText"  />
+        app:layout_constraintTop_toBottomOf="@id/nameText" />
 
     <TextView
-        android:layout_marginTop="10dp"
-        style="@style/TextField"
         android:id="@+id/emailText"
+        style="@style/TextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Email"
-        app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintBottom_toTopOf="@id/email"
-        />
+        app:layout_constraintTop_toBottomOf="@id/name" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/email"
@@ -71,19 +68,17 @@
         android:inputType="text"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emailText"
-        />
+        app:layout_constraintTop_toBottomOf="@id/emailText" />
 
     <TextView
-        android:layout_marginTop="10dp"
-        style="@style/TextField"
         android:id="@+id/passwordText"
+        style="@style/TextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Password"
-        app:layout_constraintTop_toBottomOf="@id/email"
         app:layout_constraintBottom_toTopOf="@id/password"
-        />
+        app:layout_constraintTop_toBottomOf="@id/email" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/password"
@@ -95,19 +90,17 @@
         android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/passwordText"
-        />
+        app:layout_constraintTop_toBottomOf="@id/passwordText" />
 
     <TextView
-        android:layout_marginTop="10dp"
-        style="@style/TextField"
         android:id="@+id/pwConfirmationText"
+        style="@style/TextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:text="Confirm Password"
-        app:layout_constraintTop_toBottomOf="@id/password"
         app:layout_constraintBottom_toTopOf="@id/password_confirm"
-        />
+        app:layout_constraintTop_toBottomOf="@id/password" />
 
     <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/password_confirm"
@@ -119,33 +112,41 @@
         android:inputType="textPassword"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pwConfirmationText"
-        />
+        app:layout_constraintTop_toBottomOf="@id/pwConfirmationText" />
 
     <TextView
         android:id="@+id/alert"
         style="@style/RedItalicText"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.05"
         android:gravity="center"
         android:paddingVertical="10dp"
-        android:text=" "
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toBottomOf="@id/password_confirm" />
 
     <androidx.appcompat.widget.AppCompatButton
-        style="@style/PositiveButton"
-        android:id="@+id/signup"
-        android:layout_width="match_parent"
+        android:onClick="onUploadProfilePicture"
+        android:id="@+id/upload_profile_pic"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        android:text="Create Account"
+        android:textSize="15sp"
         app:layout_constraintTop_toBottomOf="@id/alert"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:text="Upload Profile Picture"
         />
 
-
+    <androidx.appcompat.widget.AppCompatButton
+        android:onClick="onSignUp"
+        android:id="@+id/signup"
+        style="@style/PositiveButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Account"
+        android:layout_marginTop="30dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/upload_profile_pic" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
