@@ -2144,6 +2144,7 @@ dimen abc_text_size_subhead_material
 dimen abc_text_size_subtitle_material_toolbar
 dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
+dimen app_bar_height
 dimen appcompat_dialog_background_inset
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
@@ -2207,6 +2208,7 @@ dimen design_tab_text_size_2line
 dimen design_textinput_caption_translate_y
 dimen disabled_alpha_material_dark
 dimen disabled_alpha_material_light
+dimen fab_margin
 dimen fastscroll_default_thickness
 dimen fastscroll_margin
 dimen fastscroll_minimum_range
@@ -2830,6 +2832,7 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen text_margin
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -3075,6 +3078,7 @@ id SYM
 id TOP_END
 id TOP_START
 id accelerate
+id accepted
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1
@@ -3141,6 +3145,11 @@ id animateToEnd
 id animateToStart
 id antiClockwise
 id anticipate
+id applicant_contact
+id applicant_image
+id applicant_message
+id applicant_name
+id approve_button
 id arc
 id asConfigured
 id async
@@ -3187,6 +3196,9 @@ id collapseActionView
 id compress
 id confirm_button
 id constraint
+id constraint1
+id constraint2
+id contact_hint
 id container
 id content
 id contentPanel
@@ -3390,6 +3402,7 @@ id menu_events
 id menu_profile
 id menu_search
 id message
+id message_hint
 id middle
 id mini
 id month_grid
@@ -3437,6 +3450,7 @@ id neverCompleteToEnd
 id neverCompleteToStart
 id noScroll
 id noState
+id no_applicant
 id no_event_text
 id none
 id normal
@@ -3488,6 +3502,7 @@ id radio
 id ratio
 id rectangles
 id register_button
+id reject_button
 id result_awaiting_button
 id returnBtn
 id reverseSawtooth
@@ -3535,6 +3550,7 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
+id send_application_button
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -3630,6 +3646,7 @@ id unlabeled
 id up
 id useLogo
 id user_info
+id user_name
 id verticalGuideline
 id verticalRightGuideline
 id vertical_only
@@ -3765,6 +3782,7 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_applicants_info
 layout activity_application_form
 layout activity_create_successful
 layout activity_delete_successful
@@ -3773,6 +3791,7 @@ layout activity_frag_home
 layout activity_log_in
 layout activity_main
 layout activity_sign_up
+layout applicant_card_layout
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3925,6 +3944,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_settings
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -3947,6 +3967,7 @@ string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string large_text
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
 string m3_ref_typeface_plain_medium
@@ -4059,6 +4080,7 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
 string title_activity_event_create
+string title_activity_participants_info
 string title_dashboard
 string title_home
 string title_notifications
@@ -4614,7 +4636,10 @@ style Theme_Design_Light_BottomSheetDialog
 style Theme_Design_Light_NoActionBar
 style Theme_Design_NoActionBar
 style Theme_Gathernow
+style Theme_Gathernow_AppBarOverlay
 style Theme_Gathernow_Custom
+style Theme_Gathernow_NoActionBar
+style Theme_Gathernow_PopupOverlay
 style Theme_Material3_Dark
 style Theme_Material3_Dark_BottomSheetDialog
 style Theme_Material3_Dark_Dialog

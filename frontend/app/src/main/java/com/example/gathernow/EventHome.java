@@ -70,9 +70,9 @@ public class EventHome extends Fragment {
         LinearLayout layoutTwo = rootView.findViewById(R.id.layout_two);
 
 
-        // TODO: check condition here, whether the user has any event
+        // TODO: check condition here, whether the user has any registered event
         Integer condition = 1;
-        if (condition == 1) {   // no events
+        if (condition == 1) {   // no registered events
             layoutOne.setVisibility(View.VISIBLE);
             layoutTwo.setVisibility(View.GONE);
 
@@ -86,7 +86,7 @@ public class EventHome extends Fragment {
                 }
             });
 
-        } else {
+        } else { // there is upcoming events, either in pending or confirmed state
             layoutOne.setVisibility(View.GONE);
             layoutTwo.setVisibility(View.VISIBLE);
         }

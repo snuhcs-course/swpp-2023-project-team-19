@@ -89,8 +89,6 @@ public class EventSearch extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_event_search, container, false);
 
-        // TODO: implement get event details from db and create event card view here
-
         service = RetrofitClient.getClient().create(ServiceApi.class);
         service.getALlEvents().enqueue(new Callback<List<EventData>>() {
             @Override
@@ -99,11 +97,9 @@ public class EventSearch extends Fragment {
                     List<EventData> events_list = response.body();
 
                     //GetEventData current_event = events_list.get(0);
-
                     //System.out.println(current_event.event_title);
 
                     LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-                    // TODO: Update UI with the list of events
 
                     Collections.reverse(events_list);
 

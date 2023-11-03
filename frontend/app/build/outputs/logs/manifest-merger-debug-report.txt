@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:2:1-50:12
-INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:2:1-50:12
+ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:2:1-53:12
+INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:2:1-53:12
 MERGED from [androidx.databinding:viewbinding:8.1.1] /Users/minkhi/.gradle/caches/transforms-3/af4688230c950b7e61247f9e88bd351f/transformed/viewbinding-8.1.1/AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.9.0] /Users/minkhi/.gradle/caches/transforms-3/e5f321a248aa217236dda4759916dcd9/transformed/material-1.9.0/AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/minkhi/.gradle/caches/transforms-3/5acf9a84f6874f66961cd7fc314b86a2/transformed/constraintlayout-2.1.4/AndroidManifest.xml:2:1-11:12
@@ -62,8 +62,8 @@ ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-20
 	android:name
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:5:22-64
 application
-ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:7:5-48:19
-INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:7:5-48:19
+ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:7:5-51:19
+INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:7:5-51:19
 MERGED from [com.google.android.material:material:1.9.0] /Users/minkhi/.gradle/caches/transforms-3/e5f321a248aa217236dda4759916dcd9/transformed/material-1.9.0/AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.9.0] /Users/minkhi/.gradle/caches/transforms-3/e5f321a248aa217236dda4759916dcd9/transformed/material-1.9.0/AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] /Users/minkhi/.gradle/caches/transforms-3/5acf9a84f6874f66961cd7fc314b86a2/transformed/constraintlayout-2.1.4/AndroidManifest.xml:9:5-20
@@ -104,64 +104,70 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/mink
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:9:9-65
 	android:usesCleartextTraffic
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:16:9-44
-activity#com.example.gathernow.ApplicationForm
+activity#com.example.gathernow.ApplicantsInfoActivity
 ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:18:9-20:40
 	android:exported
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:20:13-37
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:19:13-44
-activity#com.example.gathernow.DeleteSuccessful
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:19:13-51
+activity#com.example.gathernow.ApplicationForm
 ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:21:9-23:40
 	android:exported
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:22:13-45
-activity#com.example.gathernow.EventInfo
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:22:13-44
+activity#com.example.gathernow.DeleteSuccessful
 ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:24:9-26:40
 	android:exported
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:25:13-38
-activity#com.example.gathernow.CreateSuccessful
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:25:13-45
+activity#com.example.gathernow.EventInfo
 ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:27:9-29:40
 	android:exported
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:29:13-37
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:28:13-45
-activity#com.example.gathernow.LogInActivity
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:28:13-38
+activity#com.example.gathernow.CreateSuccessful
 ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:30:9-32:40
 	android:exported
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:31:13-42
-activity#com.example.gathernow.FragHome
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:31:13-45
+activity#com.example.gathernow.LogInActivity
 ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:33:9-35:40
 	android:exported
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:35:13-37
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:34:13-37
-activity#com.example.gathernow.SignUpActivity
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:34:13-42
+activity#com.example.gathernow.FragHome
 ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:36:9-38:40
 	android:exported
 		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:38:13-37
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:37:13-43
-activity#com.example.gathernow.MainActivity
-ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:39:9-47:20
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:37:13-37
+activity#com.example.gathernow.SignUpActivity
+ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:39:9-41:40
 	android:exported
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:41:13-36
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:41:13-37
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:40:13-41
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:40:13-43
+activity#com.example.gathernow.MainActivity
+ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:42:9-50:20
+	android:exported
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:44:13-36
+	android:name
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:43:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:42:13-46:29
+ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:45:13-49:29
 action#android.intent.action.MAIN
-ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:43:17-69
+ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:46:17-69
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:43:25-66
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:46:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:45:17-77
+ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:48:17-77
 	android:name
-		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:45:27-74
+		ADDED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:48:27-74
 uses-sdk
 INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml

@@ -24,7 +24,7 @@
 17-->[androidx.core:core:1.9.0] /Users/minkhi/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
 18
 19    <application
-19-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:7:5-48:19
+19-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:7:5-51:19
 20        android:allowBackup="true"
 20-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:8:9-35
 21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -50,93 +50,99 @@
 32-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:16:9-44
 33        <activity
 33-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:18:9-20:40
-34            android:name="com.example.gathernow.ApplicationForm"
-34-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:19:13-44
+34            android:name="com.example.gathernow.ApplicantsInfoActivity"
+34-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:19:13-51
 35            android:exported="false" />
 35-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:20:13-37
 36        <activity
 36-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:21:9-23:40
-37            android:name="com.example.gathernow.DeleteSuccessful"
-37-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:22:13-45
+37            android:name="com.example.gathernow.ApplicationForm"
+37-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:22:13-44
 38            android:exported="false" />
 38-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:23:13-37
 39        <activity
 39-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:24:9-26:40
-40            android:name="com.example.gathernow.EventInfo"
-40-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:25:13-38
+40            android:name="com.example.gathernow.DeleteSuccessful"
+40-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:25:13-45
 41            android:exported="false" />
 41-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:26:13-37
 42        <activity
 42-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:27:9-29:40
-43            android:name="com.example.gathernow.CreateSuccessful"
-43-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:28:13-45
+43            android:name="com.example.gathernow.EventInfo"
+43-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:28:13-38
 44            android:exported="false" />
 44-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:29:13-37
 45        <activity
 45-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:30:9-32:40
-46            android:name="com.example.gathernow.LogInActivity"
-46-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:31:13-42
+46            android:name="com.example.gathernow.CreateSuccessful"
+46-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:31:13-45
 47            android:exported="false" />
 47-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:32:13-37
 48        <activity
 48-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:33:9-35:40
-49            android:name="com.example.gathernow.FragHome"
-49-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:34:13-37
+49            android:name="com.example.gathernow.LogInActivity"
+49-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:34:13-42
 50            android:exported="false" />
 50-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:35:13-37
 51        <activity
 51-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:36:9-38:40
-52            android:name="com.example.gathernow.SignUpActivity"
-52-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:37:13-43
+52            android:name="com.example.gathernow.FragHome"
+52-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:37:13-37
 53            android:exported="false" />
 53-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:38:13-37
 54        <activity
-54-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:39:9-47:20
-55            android:name="com.example.gathernow.MainActivity"
-55-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:40:13-41
-56            android:exported="true" >
-56-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:41:13-36
-57            <intent-filter>
-57-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:42:13-46:29
-58                <action android:name="android.intent.action.MAIN" />
-58-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:43:17-69
-58-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:43:25-66
-59
-60                <category android:name="android.intent.category.LAUNCHER" />
-60-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:45:17-77
-60-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:45:27-74
-61            </intent-filter>
-62        </activity>
-63
-64        <provider
-64-->[com.squareup.picasso:picasso:2.71828] /Users/minkhi/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:8:9-11:40
-65            android:name="com.squareup.picasso.PicassoProvider"
-65-->[com.squareup.picasso:picasso:2.71828] /Users/minkhi/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:9:13-64
-66            android:authorities="com.example.gathernow.com.squareup.picasso"
-66-->[com.squareup.picasso:picasso:2.71828] /Users/minkhi/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:10:13-72
-67            android:exported="false" />
-67-->[com.squareup.picasso:picasso:2.71828] /Users/minkhi/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:11:13-37
-68        <provider
-68-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
-69            android:name="androidx.startup.InitializationProvider"
-69-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
-70            android:authorities="com.example.gathernow.androidx-startup"
-70-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
-71            android:exported="false" >
-71-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
-72            <meta-data
-72-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
-73                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-73-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
-74                android:value="androidx.startup" />
-74-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+54-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:39:9-41:40
+55            android:name="com.example.gathernow.SignUpActivity"
+55-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:40:13-43
+56            android:exported="false" />
+56-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:41:13-37
+57        <activity
+57-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:42:9-50:20
+58            android:name="com.example.gathernow.MainActivity"
+58-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:43:13-41
+59            android:exported="true" >
+59-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:44:13-36
+60            <intent-filter>
+60-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:45:13-49:29
+61                <action android:name="android.intent.action.MAIN" />
+61-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:46:17-69
+61-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:46:25-66
+62
+63                <category android:name="android.intent.category.LAUNCHER" />
+63-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:48:17-77
+63-->/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:48:27-74
+64            </intent-filter>
+65        </activity>
+66
+67        <provider
+67-->[com.squareup.picasso:picasso:2.71828] /Users/minkhi/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:8:9-11:40
+68            android:name="com.squareup.picasso.PicassoProvider"
+68-->[com.squareup.picasso:picasso:2.71828] /Users/minkhi/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:9:13-64
+69            android:authorities="com.example.gathernow.com.squareup.picasso"
+69-->[com.squareup.picasso:picasso:2.71828] /Users/minkhi/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:10:13-72
+70            android:exported="false" />
+70-->[com.squareup.picasso:picasso:2.71828] /Users/minkhi/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:11:13-37
+71        <provider
+71-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+72            android:name="androidx.startup.InitializationProvider"
+72-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+73            android:authorities="com.example.gathernow.androidx-startup"
+73-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+74            android:exported="false" >
+74-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
 75            <meta-data
-75-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/minkhi/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
-76                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-76-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/minkhi/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+75-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+76                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+76-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
 77                android:value="androidx.startup" />
-77-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/minkhi/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
-78        </provider>
-79    </application>
-80
-81</manifest>
+77-->[androidx.emoji2:emoji2:1.2.0] /Users/minkhi/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+78            <meta-data
+78-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/minkhi/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+79                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+79-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/minkhi/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+80                android:value="androidx.startup" />
+80-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/minkhi/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+81        </provider>
+82    </application>
+83
+84</manifest>

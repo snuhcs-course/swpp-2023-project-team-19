@@ -227,4 +227,9 @@ public class EventInfo extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+    public void onViewApplicants(View v) {
+        Intent intent = new Intent(v.getContext(), ApplicantsInfoActivity.class);
+        startActivity(intent);
+    }
 }

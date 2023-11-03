@@ -31,6 +31,9 @@
         android:theme="@style/Theme.Gathernow"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.gathernow.ApplicantsInfoActivity"
+            android:exported="false" />
+        <activity
             android:name="com.example.gathernow.ApplicationForm"
             android:exported="false" />
         <activity

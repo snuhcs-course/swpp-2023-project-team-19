@@ -312,6 +312,7 @@
         app:layout_constraintWidth_percent="0.75" />
 
     <androidx.appcompat.widget.AppCompatButton
+        android:onClick="onViewApplicants"
         android:id="@+id/view_applicants_button"
         style="@style/NegativeButton"
         android:layout_width="0dp"
