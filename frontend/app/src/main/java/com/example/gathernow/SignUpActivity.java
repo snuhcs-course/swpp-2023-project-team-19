@@ -53,37 +53,33 @@ public class SignUpActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.password);
         pwConfirmInput = findViewById(R.id.password_confirm);
 
-        pickProfilePic = registerForActivityResult(
-                new ActivityResultContracts.PickVisualMedia(),
-                uri -> {
-                    if (uri != null) {
-                        Log.d("SignUpActivity Testing", "Profile picture selected: " + uri);
-                        // Load picture from uri
-                        InputStream inputStream;
-                        File outputFile = new File(getApplicationContext().getFilesDir(), "tmp_file.jpg");
-                        try {
-                            inputStream = getContentResolver().openInputStream(uri);
-                            FileOutputStream outputStream = new FileOutputStream(outputFile);
-                            Bitmap selectedImgBitmap = BitmapFactory.decodeStream(inputStream);
-                            // Compress bitmap
-                            selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 10, outputStream);
-                            outputStream.close();
-                            avatarFilePath = outputFile.getPath();
-                            Log.d("SignUpActivity Testing", "Profile picture saved to: " + avatarFilePath);
-                        } catch (IOException e) {
-                            Log.e("SignUpActivity Testing", "Error");
-                            e.printStackTrace();
-                        }
-                    }
-                });
+        pickProfilePic = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
+            if (uri != null) {
+                Log.d("SignUpActivity Testing", "Profile picture selected: " + uri);
+                // Load picture from uri
+                InputStream inputStream;
+                File outputFile = new File(getApplicationContext().getFilesDir(), "tmp_file.jpg");
+                try {
+                    inputStream = getContentResolver().openInputStream(uri);
+                    FileOutputStream outputStream = new FileOutputStream(outputFile);
+                    Bitmap selectedImgBitmap = BitmapFactory.decodeStream(inputStream);
+                    // Compress bitmap
+                    selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
+                    outputStream.close();
+                    avatarFilePath = outputFile.getPath();
+                    Log.d("SignUpActivity Testing", "Profile picture saved to: " + avatarFilePath);
+                } catch (IOException e) {
+                    Log.e("SignUpActivity Testing", "Error");
+                    e.printStackTrace();
+                }
+            }
+        });
 
     }
 
     public void onUploadProfilePicture(View view) {
         // Launch the photo picker and let the user choose only images.
-        pickProfilePic.launch(new PickVisualMediaRequest.Builder()
-                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE)
-                .build());
+        pickProfilePic.launch(new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
     }
 
     public void onSignUp(View v) {
@@ -121,62 +117,62 @@ public class SignUpActivity extends AppCompatActivity {
         }
         // pass pre-check
         else {
+            MultipartBody.Part avatarPart = null;
             if (avatarFilePath != null) {
-                if (new File(getApplicationContext().getFilesDir(), "tmp_file.jpg").exists()) {
-
+                if (avatarFile.exists()) {
                     avatarFile = new File(avatarFilePath);
                     RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), avatarFile);
-                    MultipartBody.Part avatarPart = MultipartBody.Part.createFormData("avatar", avatarFile.getName(), requestFile);
+                    avatarPart = MultipartBody.Part.createFormData("avatar", avatarFile.getName(), requestFile);
 
-                    RequestBody nameBody = RequestBody.create(MediaType.parse("text/plain"), name1);
-                    RequestBody emailBody = RequestBody.create(MediaType.parse("text/plain"), email1);
-                    RequestBody passwordBody = RequestBody.create(MediaType.parse("text/plain"), password1);
-
-                    service = RetrofitClient.getClient().create(ServiceApi.class);
-                    // Send the request to the server using the 'service' instance
-                    Call<CodeMessageResponse> call = service.userSignUp(avatarPart, nameBody, emailBody, passwordBody);
-                    call.enqueue(new Callback<CodeMessageResponse>()  {
-                        @Override
-                        public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
-                            // Handle the response from the server
-                            if (response.isSuccessful()) {
-                                CodeMessageResponse result = response.body();
-                                if (result != null) {
-                                    if (result.getMessage().equals("User registered successfully.")) {
-                                        // Handle the case where the user registration was successful
-                                        Toast.makeText(SignUpActivity.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
-                                        // Link to the login page
-                                        Intent intent = new Intent(v.getContext(), LogInActivity.class);
-                                        startActivity(intent);
-                                    }
-                                } else {
-                                    // Handle the case where the response body is null or empty
-                                    Toast.makeText(SignUpActivity.this, "Empty response from the server", Toast.LENGTH_SHORT).show();
-                                }
-                            } else {
-                                // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
-                                Toast.makeText(SignUpActivity.this, "Email already exists.", Toast.LENGTH_SHORT).show();
-                                try {
-                                    String errorResponse = response.errorBody().string();
-                                    Log.e("SignUpActivity Testing", "Error Response: " + errorResponse);
-                                } catch (IOException e) {
-                                    e.printStackTrace();
-                                }                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
-                            // Handle the failure of the network request
-                            Log.e("SignUpActivity Testing", "Sign Up Error: " + t.getMessage()); // Log the error
-                            Toast.makeText(SignUpActivity.this, "Sign Up Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
                 } else {
                     Toast.makeText(this, "Avatar file does not exist", Toast.LENGTH_SHORT).show();
                 }
-            } else {
-                Toast.makeText(this, "Please upload a profile picture", Toast.LENGTH_SHORT).show();
             }
+
+            RequestBody nameBody = RequestBody.create(MediaType.parse("text/plain"), name1);
+            RequestBody emailBody = RequestBody.create(MediaType.parse("text/plain"), email1);
+            RequestBody passwordBody = RequestBody.create(MediaType.parse("text/plain"), password1);
+
+            service = RetrofitClient.getClient().create(ServiceApi.class);
+            // Send the request to the server using the 'service' instance
+            Call<CodeMessageResponse> call = service.userSignUp(avatarPart, nameBody, emailBody, passwordBody);
+            call.enqueue(new Callback<CodeMessageResponse>() {
+                @Override
+                public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
+                    // Handle the response from the server
+                    if (response.isSuccessful()) {
+                        CodeMessageResponse result = response.body();
+                        if (result != null) {
+                            if (result.getMessage().equals("User registered successfully.")) {
+                                // Handle the case where the user registration was successful
+                                Toast.makeText(SignUpActivity.this, "User registered successfully.", Toast.LENGTH_SHORT).show();
+                                // Link to the login page
+                                Intent intent = new Intent(v.getContext(), LogInActivity.class);
+                                startActivity(intent);
+                            }
+                        } else {
+                            // Handle the case where the response body is null or empty
+                            Toast.makeText(SignUpActivity.this, "Empty response from the server", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
+                        Toast.makeText(SignUpActivity.this, "Email already exists.", Toast.LENGTH_SHORT).show();
+                        try {
+                            String errorResponse = response.errorBody().string();
+                            Log.e("SignUpActivity Testing", "Error Response: " + errorResponse);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
+                    // Handle the failure of the network request
+                    Log.e("SignUpActivity Testing", "Sign Up Error: " + t.getMessage()); // Log the error
+                    Toast.makeText(SignUpActivity.this, "Sign Up Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
