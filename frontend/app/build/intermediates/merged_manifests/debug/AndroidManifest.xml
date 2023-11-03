@@ -46,6 +46,9 @@
             android:name="com.example.gathernow.CreateSuccessful"
             android:exported="false" />
         <activity
+            android:name="com.example.gathernow.ApplySuccessful"
+            android:exported="false" />
+        <activity
             android:name="com.example.gathernow.LogInActivity"
             android:exported="false" />
         <activity

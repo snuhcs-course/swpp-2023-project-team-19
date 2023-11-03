@@ -23,8 +23,17 @@ import retrofit2.Response;
 
 public class EventInfo extends AppCompatActivity {
     private ServiceApi service;
-    private int userId;
-    private int eventId;
+    public int userId;
+    public int eventId;
+
+    public String eventName;
+
+    public String userAvatar;
+
+    public String hostname;
+
+    public int hostId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +90,9 @@ public class EventInfo extends AppCompatActivity {
                     eventPrice.setText(eventData.event_price.toString());
                     setButtonVisibility(eventData.host_id);
 
+                    eventName = eventData.event_title;
+                    hostId = eventData.host_id;
+
                     // TODO: Update host's profile name
                     service.getUserInfo(eventData.host_id).enqueue(new Callback<UserData>() {
                         @Override
@@ -95,6 +107,10 @@ public class EventInfo extends AppCompatActivity {
                                 host_avatar = "http://20.2.88.70:8000" + host_avatar;
                                 ImageView profile_img = findViewById(R.id.profile_img);
                                 Picasso.get().load(host_avatar).into(profile_img);
+
+                                userAvatar = host_avatar;
+                                hostname = userData.name;
+
                             }
                         }
 
@@ -161,6 +177,7 @@ public class EventInfo extends AppCompatActivity {
         // Get the buttons from the layout
         Button registerButton = findViewById(R.id.register_button);
         Button waitingResultButton = findViewById(R.id.result_awaiting_button);
+        Button acceptedResultButton = findViewById(R.id.result_accepted_button);
         Button cancelRegButton = findViewById(R.id.cancel_button);
         Button viewApplicantsButton = findViewById(R.id.view_applicants_button);
         Button deleteEventButton = findViewById(R.id.delete_button);
@@ -171,10 +188,54 @@ public class EventInfo extends AppCompatActivity {
             deleteEventButton.setVisibility(View.VISIBLE);
         }
         else{
-            registerButton.setVisibility(View.VISIBLE);
+            service.check_if_applied(userId, eventId).enqueue(new Callback<ApplicationData>(){
+                @Override
+                public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response){
+                    if (response.isSuccessful()) {
+                        // User has applied for this event, check user application status (pending or accepted)
+                        ApplicationData current_application = response.body();
+                        //int status = -1;
+                        int status = current_application.request_status;
+
+
+                        if(status == 0){
+                            //Application is pending, show waiting button
+                            waitingResultButton.setVisibility(View.VISIBLE);
+                            cancelRegButton.setVisibility(View.VISIBLE);
+                        }
+                        else if (status == 1){
+                            acceptedResultButton.setVisibility(View.VISIBLE);
+                            cancelRegButton.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            Log.e("EventInfoDisplay", "Application status not found occurred");
+                        }
+
+                    } else if (response.code() == 404) {
+                        // User has not applied for this event, show register button
+                        registerButton.setVisibility(View.VISIBLE);
+                    }
+
+
+
+                    else{
+
+
+                        Log.e("EventInfoDisplay", "Check application error occurred"+ Integer.toString(response.code()));
+                    }
+                }
+                @Override
+                public void onFailure(Call<ApplicationData>  call, Throwable t) {
+                    Toast.makeText(EventInfo.this, "Check Event Status Error", Toast.LENGTH_SHORT).show();
+                    Log.e("EventInfoDisplay", "Error occurred", t);
+                }
+
+            });
+
+
         }
 
-        // TODO: else if user attendance has not approved, show register button
+        // TODO: else if user attendance has not applied, show register button
         // TODO: else if user attendance has not approved, show waiting button
         // TODO: else if user attendance has approved, show cancel button
     }
@@ -224,6 +285,15 @@ public class EventInfo extends AppCompatActivity {
     public void onRegisterEvent(View v){
 
         Intent intent = new Intent(v.getContext(), ApplicationForm.class);
+
+        // Send the user id to the EventInfo activity
+        intent.putExtra("userId", userId);
+        intent.putExtra("eventId", eventId);
+        intent.putExtra("hostId", hostId);
+        intent.putExtra("eventName", eventName);
+        intent.putExtra("hostName", hostname);
+        intent.putExtra("hostAvatar", userAvatar);
+
         startActivity(intent);
 
     }

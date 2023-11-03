@@ -39,15 +39,18 @@
         android:layout_marginBottom="10dp"
         android:orientation="horizontal">
 
-        <ImageView
+
+        <ImageButton
             android:id="@+id/profile_image"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/ic_profile_foreground"
-            android:scaleType="centerCrop"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
             android:background="@drawable/circle_shape"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="centerCrop"
+            android:clipToOutline="true" />
+
 
         <TextView
             android:id="@+id/user_name"
@@ -94,11 +97,16 @@
         android:id="@+id/applicant_message"
         style="@style/EditText"
         android:layout_width="match_parent"
-        android:layout_height="414dp"
+        android:layout_height="200dp"
         android:layout_marginTop="10dp"
         android:gravity="top"
         android:hint="Leave a short message to your host!"
         android:inputType="text" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/send_application_button"

@@ -3503,6 +3503,7 @@ id ratio
 id rectangles
 id register_button
 id reject_button
+id result_accepted_button
 id result_awaiting_button
 id returnBtn
 id reverseSawtooth
@@ -3784,6 +3785,7 @@ layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_applicants_info
 layout activity_application_form
+layout activity_apply_successful
 layout activity_create_successful
 layout activity_delete_successful
 layout activity_event_info

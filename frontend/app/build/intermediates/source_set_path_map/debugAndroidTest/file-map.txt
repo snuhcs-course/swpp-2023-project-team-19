@@ -1,6 +1,6 @@
-com.example.gathernow.test.app-annotation-experimental-1.3.0-0 /Users/minkhi/.gradle/caches/transforms-3/20950aba1c926ba887c70028c7b332ad/transformed/annotation-experimental-1.3.0/res
-com.example.gathernow.test.app-core-1.5.0-1 /Users/minkhi/.gradle/caches/transforms-3/55fc0ee08734532785d302f91c03f611/transformed/core-1.5.0/res
-com.example.gathernow.test.app-androidTest-2 /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/build/generated/res/resValues/androidTest/debug
-com.example.gathernow.test.app-mergeDebugAndroidTestResources-3 /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/merged.dir
-com.example.gathernow.test.app-mergeDebugAndroidTestResources-4 /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/build/intermediates/incremental/debugAndroidTest/mergeDebugAndroidTestResources/stripped.dir
-com.example.gathernow.test.app-merged_res-5 /Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/build/intermediates/merged_res/debugAndroidTest
+com.example.gathernow.test.app-annotation-experimental-1.3.0-0 C:\Users\Chee_Yee\.gradle\caches\transforms-3\20950aba1c926ba887c70028c7b332ad\transformed\annotation-experimental-1.3.0\res
+com.example.gathernow.test.app-core-1.5.0-1 C:\Users\Chee_Yee\.gradle\caches\transforms-3\55fc0ee08734532785d302f91c03f611\transformed\core-1.5.0\res
+com.example.gathernow.test.app-androidTest-2 C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\build\generated\res\resValues\androidTest\debug
+com.example.gathernow.test.app-mergeDebugAndroidTestResources-3 C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\merged.dir
+com.example.gathernow.test.app-mergeDebugAndroidTestResources-4 C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\build\intermediates\incremental\debugAndroidTest\mergeDebugAndroidTestResources\stripped.dir
+com.example.gathernow.test.app-merged_res-5 C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\build\intermediates\merged_res\debugAndroidTest

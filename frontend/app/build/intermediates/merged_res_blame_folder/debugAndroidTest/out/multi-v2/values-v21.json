@@ -4,7 +4,7 @@
             "outputFile": "com.example.gathernow.test.app-mergeDebugAndroidTestResources-3:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "/Users/minkhi/.gradle/caches/transforms-3/55fc0ee08734532785d302f91c03f611/transformed/core-1.5.0/res/values-v21/values.xml",
+                    "source": "C:\\Users\\Chee_Yee\\.gradle\\caches\\transforms-3\\55fc0ee08734532785d302f91c03f611\\transformed\\core-1.5.0\\res\\values-v21\\values.xml",
                     "from": {
                         "startLines": "4,13",
                         "startColumns": "0,0",
