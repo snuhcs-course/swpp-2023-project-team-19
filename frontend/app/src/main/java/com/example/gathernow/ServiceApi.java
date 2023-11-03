@@ -1,19 +1,28 @@
 package com.example.gathernow;
 
+import java.io.File;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface ServiceApi {
 
-    // SignUp API
+
+    // SignUp API PUT UserData and MultipartBody.Part avatarPart
+    @Multipart
     @POST("/api/signup/")
-    Call<CodeMessageResponse> userSignUp(@Body UserData data);
+    Call<CodeMessageResponse> userSignUp(@Part UserData data, @Part MultipartBody.Part avatarPart);
+
 
     // LogIn API
     @POST("/api/login/")
