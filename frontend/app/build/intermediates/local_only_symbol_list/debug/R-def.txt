@@ -88,6 +88,7 @@ id event_duration_hint
 id event_duration_title
 id event_img
 id event_language
+id event_language_hint
 id event_location
 id event_location_hint
 id event_name
@@ -157,7 +158,6 @@ id search_button
 id signup
 id signupButton
 id signupText
-id spinner_hint
 id subtitle_text
 id title_text
 id user_info
@@ -167,6 +167,7 @@ id view_applicants_button
 id your_event_text
 layout activity_application_form
 layout activity_create_successful
+layout activity_delete_successful
 layout activity_event_info
 layout activity_frag_home
 layout activity_log_in

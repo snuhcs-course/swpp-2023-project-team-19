@@ -207,8 +207,11 @@ public class EventInfo extends AppCompatActivity {
                     });
 
                     // Direct to Home screen
-                    Intent intent = new Intent(view.getContext(), FragHome.class);
+                    //Intent intent = new Intent(view.getContext(), FragHome.class);
+                    //startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
                     startActivity(intent);
+
                 })
                 .setNegativeButton("No", (dialog, which) -> {
                     // Do nothing

@@ -187,14 +187,13 @@
             android:inputType="text" />
 
         <TextView
-            android:id="@+id/spinner_hint"
+            android:id="@+id/event_language_hint"
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:paddingVertical="10dp"
-            android:text="Event language" />
-
+            android:text="Event language(s)"
+            android:layout_marginTop="10dp"/>
 
         <TextView
             android:id="@+id/event_language"

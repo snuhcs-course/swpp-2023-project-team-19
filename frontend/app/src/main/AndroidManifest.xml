@@ -19,6 +19,9 @@
             android:name=".ApplicationForm"
             android:exported="false" />
         <activity
+            android:name=".DeleteSuccessful"
+            android:exported="false" />
+        <activity
             android:name=".EventInfo"
             android:exported="false" />
         <activity

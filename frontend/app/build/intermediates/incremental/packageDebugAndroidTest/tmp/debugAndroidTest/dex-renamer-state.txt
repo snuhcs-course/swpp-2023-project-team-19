@@ -1,7 +1,7 @@
-#Fri Nov 03 23:38:32 KST 2023
-base.0=C\:\\Users\\Chee_Yee\\AndroidStudioProjects\\swpp-2023-project-team-19-ver2\\frontend\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
-base.1=C\:\\Users\\Chee_Yee\\AndroidStudioProjects\\swpp-2023-project-team-19-ver2\\frontend\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
-base.2=C\:\\Users\\Chee_Yee\\AndroidStudioProjects\\swpp-2023-project-team-19-ver2\\frontend\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\12\\classes.dex
+#Fri Nov 03 23:51:06 KST 2023
+base.0=/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/build/intermediates/dex/debugAndroidTest/mergeExtDexDebugAndroidTest/classes.dex
+base.1=/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/0/classes.dex
+base.2=/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/build/intermediates/dex/debugAndroidTest/mergeProjectDexDebugAndroidTest/12/classes.dex
 path.0=classes.dex
 path.1=0/classes.dex
 path.2=12/classes.dex

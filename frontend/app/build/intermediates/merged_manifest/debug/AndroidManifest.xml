@@ -34,6 +34,9 @@
             android:name="com.example.gathernow.ApplicationForm"
             android:exported="false" />
         <activity
+            android:name="com.example.gathernow.DeleteSuccessful"
+            android:exported="false" />
+        <activity
             android:name="com.example.gathernow.EventInfo"
             android:exported="false" />
         <activity

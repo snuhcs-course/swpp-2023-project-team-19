@@ -53,6 +53,9 @@ public final class FragmentEventCreateBinding implements ViewBinding {
   public final TextView eventLanguage;
 
   @NonNull
+  public final TextView eventLanguageHint;
+
+  @NonNull
   public final AppCompatEditText eventLocation;
 
   @NonNull
@@ -121,26 +124,23 @@ public final class FragmentEventCreateBinding implements ViewBinding {
   @NonNull
   public final ImageButton returnBtn;
 
-  @NonNull
-  public final TextView spinnerHint;
-
   private FragmentEventCreateBinding(@NonNull ScrollView rootView, @NonNull TextView alert,
       @NonNull ScrollView eventCreateContainer, @NonNull Button eventDate,
       @NonNull TextView eventDateTimeHint, @NonNull AppCompatEditText eventDescription,
       @NonNull TextView eventDescriptionHint, @NonNull AppCompatEditText eventDuration,
       @NonNull TextView eventDurationHint, @NonNull TextView eventLanguage,
-      @NonNull AppCompatEditText eventLocation, @NonNull TextView eventLocationHint,
-      @NonNull AppCompatEditText eventName, @NonNull TextView eventNameHint,
-      @NonNull AppCompatEditText eventNumParticipants, @NonNull TextView eventNumParticipantsHint,
-      @NonNull AppCompatEditText eventPrice, @NonNull TextView eventPriceHint,
-      @NonNull Button eventRegisterDate, @NonNull Button eventRegisterTime,
-      @NonNull TextView eventRegistrationHint, @NonNull Button eventTime,
-      @NonNull TextView eventType, @NonNull TextView eventTypeHint,
+      @NonNull TextView eventLanguageHint, @NonNull AppCompatEditText eventLocation,
+      @NonNull TextView eventLocationHint, @NonNull AppCompatEditText eventName,
+      @NonNull TextView eventNameHint, @NonNull AppCompatEditText eventNumParticipants,
+      @NonNull TextView eventNumParticipantsHint, @NonNull AppCompatEditText eventPrice,
+      @NonNull TextView eventPriceHint, @NonNull Button eventRegisterDate,
+      @NonNull Button eventRegisterTime, @NonNull TextView eventRegistrationHint,
+      @NonNull Button eventTime, @NonNull TextView eventType, @NonNull TextView eventTypeHint,
       @NonNull RadioButton image1Leisure, @NonNull RadioButton image2Sports,
       @NonNull RadioButton image3Workshops, @NonNull RadioButton image4Parties,
       @NonNull RadioButton image5CulturalActivities, @NonNull RadioButton image6Others,
       @NonNull RadioGroup imageRadioGroup, @NonNull AppCompatButton post,
-      @NonNull ImageButton returnBtn, @NonNull TextView spinnerHint) {
+      @NonNull ImageButton returnBtn) {
     this.rootView = rootView;
     this.alert = alert;
     this.eventCreateContainer = eventCreateContainer;
@@ -151,6 +151,7 @@ public final class FragmentEventCreateBinding implements ViewBinding {
     this.eventDuration = eventDuration;
     this.eventDurationHint = eventDurationHint;
     this.eventLanguage = eventLanguage;
+    this.eventLanguageHint = eventLanguageHint;
     this.eventLocation = eventLocation;
     this.eventLocationHint = eventLocationHint;
     this.eventName = eventName;
@@ -174,7 +175,6 @@ public final class FragmentEventCreateBinding implements ViewBinding {
     this.imageRadioGroup = imageRadioGroup;
     this.post = post;
     this.returnBtn = returnBtn;
-    this.spinnerHint = spinnerHint;
   }
 
   @Override
@@ -251,6 +251,12 @@ public final class FragmentEventCreateBinding implements ViewBinding {
       id = R.id.event_language;
       TextView eventLanguage = ViewBindings.findChildViewById(rootView, id);
       if (eventLanguage == null) {
+        break missingId;
+      }
+
+      id = R.id.event_language_hint;
+      TextView eventLanguageHint = ViewBindings.findChildViewById(rootView, id);
+      if (eventLanguageHint == null) {
         break missingId;
       }
 
@@ -392,19 +398,13 @@ public final class FragmentEventCreateBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.spinner_hint;
-      TextView spinnerHint = ViewBindings.findChildViewById(rootView, id);
-      if (spinnerHint == null) {
-        break missingId;
-      }
-
       return new FragmentEventCreateBinding((ScrollView) rootView, alert, eventCreateContainer,
           eventDate, eventDateTimeHint, eventDescription, eventDescriptionHint, eventDuration,
-          eventDurationHint, eventLanguage, eventLocation, eventLocationHint, eventName,
-          eventNameHint, eventNumParticipants, eventNumParticipantsHint, eventPrice, eventPriceHint,
-          eventRegisterDate, eventRegisterTime, eventRegistrationHint, eventTime, eventType,
-          eventTypeHint, image1Leisure, image2Sports, image3Workshops, image4Parties,
-          image5CulturalActivities, image6Others, imageRadioGroup, post, returnBtn, spinnerHint);
+          eventDurationHint, eventLanguage, eventLanguageHint, eventLocation, eventLocationHint,
+          eventName, eventNameHint, eventNumParticipants, eventNumParticipantsHint, eventPrice,
+          eventPriceHint, eventRegisterDate, eventRegisterTime, eventRegistrationHint, eventTime,
+          eventType, eventTypeHint, image1Leisure, image2Sports, image3Workshops, image4Parties,
+          image5CulturalActivities, image6Others, imageRadioGroup, post, returnBtn);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
