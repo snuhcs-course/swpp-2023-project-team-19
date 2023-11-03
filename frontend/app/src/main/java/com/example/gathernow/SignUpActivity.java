@@ -48,7 +48,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
-
         nameInput = findViewById(R.id.name);
         emailInput = findViewById(R.id.email);
         passwordInput = findViewById(R.id.password);
@@ -67,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
                             FileOutputStream outputStream = new FileOutputStream(outputFile);
                             Bitmap selectedImgBitmap = BitmapFactory.decodeStream(inputStream);
                             // Compress bitmap
-                            selectedImgBitmap.compress(Bitmap.CompressFormat.PNG, 10, outputStream);
+                            selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 10, outputStream);
                             outputStream.close();
                             avatarFilePath = outputFile.getPath();
                             Log.d("SignUpActivity Testing", "Profile picture saved to: " + avatarFilePath);
@@ -120,23 +119,26 @@ public class SignUpActivity extends AppCompatActivity {
         else if (password1.length() < 8 || password1.length() > 30) {
             alert.setText("Password must be between 8 and 30 characters");
         }
-
         // pass pre-check
         else {
-            if (avatarFilePath != null){
-                if (new File(getApplicationContext().getFilesDir(), "tmp_file.jpg").exists()){
-                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), new File(getApplicationContext().getFilesDir(), "tmp_file.jpg"));
-                    // Create a MultipartBody.Part from the request body
-                    MultipartBody.Part avatarPart = MultipartBody.Part.createFormData("avatar", new File(getApplicationContext().getFilesDir(), "tmp_file.jpg").getName(), requestFile);
-                    // Create a UserData object with name, email, and password
-                    UserData requestData = new UserData(name1, email1, password1);
-                    // Send the request to the server
+            if (avatarFilePath != null) {
+                if (new File(getApplicationContext().getFilesDir(), "tmp_file.jpg").exists()) {
+
+                    avatarFile = new File(avatarFilePath);
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), avatarFile);
+                    MultipartBody.Part avatarPart = MultipartBody.Part.createFormData("avatar", avatarFile.getName(), requestFile);
+
+                    RequestBody nameBody = RequestBody.create(MediaType.parse("text/plain"), name1);
+                    RequestBody emailBody = RequestBody.create(MediaType.parse("text/plain"), email1);
+                    RequestBody passwordBody = RequestBody.create(MediaType.parse("text/plain"), password1);
 
                     service = RetrofitClient.getClient().create(ServiceApi.class);
-                    service.userSignUp(requestData, avatarPart).enqueue(new Callback<CodeMessageResponse>() {
+                    // Send the request to the server using the 'service' instance
+                    Call<CodeMessageResponse> call = service.userSignUp(avatarPart, nameBody, emailBody, passwordBody);
+                    call.enqueue(new Callback<CodeMessageResponse>()  {
                         @Override
                         public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
-                            Log.d("SignUpActivity Testing", "HTTP Status Code: " + response.code());
+                            // Handle the response from the server
                             if (response.isSuccessful()) {
                                 CodeMessageResponse result = response.body();
                                 if (result != null) {
@@ -154,22 +156,25 @@ public class SignUpActivity extends AppCompatActivity {
                             } else {
                                 // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
                                 Toast.makeText(SignUpActivity.this, "Email already exists.", Toast.LENGTH_SHORT).show();
-                                Log.e("SignUpActivity Testing", "Sign Up Error: " + response.message());
-                            }
+                                try {
+                                    String errorResponse = response.errorBody().string();
+                                    Log.e("SignUpActivity Testing", "Error Response: " + errorResponse);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }                            }
                         }
 
                         @Override
                         public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
+                            // Handle the failure of the network request
                             Log.e("SignUpActivity Testing", "Sign Up Error: " + t.getMessage()); // Log the error
                             Toast.makeText(SignUpActivity.this, "Sign Up Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
-                else {
+                } else {
                     Toast.makeText(this, "Avatar file does not exist", Toast.LENGTH_SHORT).show();
                 }
-            }
-            else{
+            } else {
                 Toast.makeText(this, "Please upload a profile picture", Toast.LENGTH_SHORT).show();
             }
         }

@@ -18,10 +18,15 @@ import retrofit2.http.Query;
 public interface ServiceApi {
 
 
-    // SignUp API PUT UserData and MultipartBody.Part avatarPart
+    // SignUp API PUT UserData and File avatarFile
     @Multipart
-    @POST("/api/signup/")
-    Call<CodeMessageResponse> userSignUp(@Part UserData data, @Part MultipartBody.Part avatarPart);
+    @POST("api/signup/")
+    Call<CodeMessageResponse> userSignUp(
+            @Part MultipartBody.Part avatar,
+            @Part("name") RequestBody name,
+            @Part("email") RequestBody email,
+            @Part("password") RequestBody password
+    );
 
 
     // LogIn API
