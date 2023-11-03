@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:2:1-44:12
-INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:2:1-44:12
-INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:2:1-44:12
-INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:2:1-44:12
+ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:2:1-47:12
+INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:2:1-47:12
+INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:2:1-47:12
+INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:2:1-47:12
 MERGED from [androidx.databinding:viewbinding:8.1.1] C:\Users\Chee_Yee\.gradle\caches\transforms-3\af4688230c950b7e61247f9e88bd351f\transformed\viewbinding-8.1.1\AndroidManifest.xml:2:1-7:12
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\e5f321a248aa217236dda4759916dcd9\transformed\material-1.9.0\AndroidManifest.xml:17:1-26:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Chee_Yee\.gradle\caches\transforms-3\5acf9a84f6874f66961cd7fc314b86a2\transformed\constraintlayout-2.1.4\AndroidManifest.xml:2:1-11:12
@@ -62,8 +62,8 @@ ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver
 	android:name
 		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:5:22-64
 application
-ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:7:5-42:19
-INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:7:5-42:19
+ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:7:5-45:19
+INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:7:5-45:19
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\e5f321a248aa217236dda4759916dcd9\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [com.google.android.material:material:1.9.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\e5f321a248aa217236dda4759916dcd9\transformed\material-1.9.0\AndroidManifest.xml:24:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.1.4] C:\Users\Chee_Yee\.gradle\caches\transforms-3\5acf9a84f6874f66961cd7fc314b86a2\transformed\constraintlayout-2.1.4\AndroidManifest.xml:9:5-20
@@ -104,52 +104,58 @@ MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Ch
 		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:9:9-65
 	android:usesCleartextTraffic
 		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:16:9-44
-activity#com.example.gathernow.EventInfo
+activity#com.example.gathernow.ApplicationForm
 ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:18:9-20:40
 	android:exported
 		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:20:13-37
 	android:name
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:19:13-38
-activity#com.example.gathernow.CreateSuccessful
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:19:13-44
+activity#com.example.gathernow.EventInfo
 ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:21:9-23:40
 	android:exported
 		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:23:13-37
 	android:name
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:22:13-45
-activity#com.example.gathernow.LogInActivity
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:22:13-38
+activity#com.example.gathernow.CreateSuccessful
 ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:24:9-26:40
 	android:exported
 		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:26:13-37
 	android:name
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:25:13-42
-activity#com.example.gathernow.FragHome
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:25:13-45
+activity#com.example.gathernow.LogInActivity
 ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:27:9-29:40
 	android:exported
 		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:29:13-37
 	android:name
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:28:13-37
-activity#com.example.gathernow.SignUpActivity
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:28:13-42
+activity#com.example.gathernow.FragHome
 ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:30:9-32:40
 	android:exported
 		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:32:13-37
 	android:name
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:31:13-43
-activity#com.example.gathernow.MainActivity
-ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:33:9-41:20
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:31:13-37
+activity#com.example.gathernow.SignUpActivity
+ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:33:9-35:40
 	android:exported
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:35:13-36
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:35:13-37
 	android:name
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:34:13-41
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:34:13-43
+activity#com.example.gathernow.MainActivity
+ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:36:9-44:20
+	android:exported
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:38:13-36
+	android:name
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:37:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:36:13-40:29
+ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:39:13-43:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:37:17-69
+ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:40:17-69
 	android:name
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:37:25-66
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:40:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:39:17-77
+ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:42:17-77
 	android:name
-		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:39:27-74
+		ADDED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:42:27-74
 uses-sdk
 INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml

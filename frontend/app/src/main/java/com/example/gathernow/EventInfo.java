@@ -170,6 +170,9 @@ public class EventInfo extends AppCompatActivity {
             viewApplicantsButton.setVisibility(View.VISIBLE);
             deleteEventButton.setVisibility(View.VISIBLE);
         }
+        else{
+            registerButton.setVisibility(View.VISIBLE);
+        }
 
         // TODO: else if user attendance has not approved, show register button
         // TODO: else if user attendance has not approved, show waiting button
@@ -212,6 +215,13 @@ public class EventInfo extends AppCompatActivity {
                     dialog.dismiss();
                 });
         deleteAlertBuilder.show();
+
+    }
+
+    public void onRegisterEvent(View v){
+
+        Intent intent = new Intent(v.getContext(), ApplicationForm.class);
+        startActivity(intent);
 
     }
 }

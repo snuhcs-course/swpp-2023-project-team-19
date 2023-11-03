@@ -24,7 +24,7 @@
 17-->[androidx.core:core:1.9.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\28a7af075d5af218c19b63a2f54b1523\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
 18
 19    <application
-19-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:7:5-42:19
+19-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:7:5-45:19
 20        android:allowBackup="true"
 20-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:8:9-35
 21        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
@@ -50,81 +50,87 @@
 32-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:16:9-44
 33        <activity
 33-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:18:9-20:40
-34            android:name="com.example.gathernow.EventInfo"
-34-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:19:13-38
+34            android:name="com.example.gathernow.ApplicationForm"
+34-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:19:13-44
 35            android:exported="false" />
 35-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:20:13-37
 36        <activity
 36-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:21:9-23:40
-37            android:name="com.example.gathernow.CreateSuccessful"
-37-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:22:13-45
+37            android:name="com.example.gathernow.EventInfo"
+37-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:22:13-38
 38            android:exported="false" />
 38-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:23:13-37
 39        <activity
 39-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:24:9-26:40
-40            android:name="com.example.gathernow.LogInActivity"
-40-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:25:13-42
+40            android:name="com.example.gathernow.CreateSuccessful"
+40-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:25:13-45
 41            android:exported="false" />
 41-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:26:13-37
 42        <activity
 42-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:27:9-29:40
-43            android:name="com.example.gathernow.FragHome"
-43-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:28:13-37
+43            android:name="com.example.gathernow.LogInActivity"
+43-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:28:13-42
 44            android:exported="false" />
 44-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:29:13-37
 45        <activity
 45-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:30:9-32:40
-46            android:name="com.example.gathernow.SignUpActivity"
-46-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:31:13-43
+46            android:name="com.example.gathernow.FragHome"
+46-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:31:13-37
 47            android:exported="false" />
 47-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:32:13-37
 48        <activity
-48-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:33:9-41:20
-49            android:name="com.example.gathernow.MainActivity"
-49-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:34:13-41
-50            android:exported="true" >
-50-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:35:13-36
-51            <intent-filter>
-51-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:36:13-40:29
-52                <action android:name="android.intent.action.MAIN" />
-52-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:37:17-69
-52-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:37:25-66
-53
-54                <category android:name="android.intent.category.LAUNCHER" />
-54-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:39:17-77
-54-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:39:27-74
-55            </intent-filter>
-56        </activity>
-57
-58        <provider
-58-->[com.squareup.picasso:picasso:2.71828] C:\Users\Chee_Yee\.gradle\caches\transforms-3\a57c75994ad63c5648e46f3550b955ab\transformed\picasso-2.71828\AndroidManifest.xml:8:9-11:40
-59            android:name="com.squareup.picasso.PicassoProvider"
-59-->[com.squareup.picasso:picasso:2.71828] C:\Users\Chee_Yee\.gradle\caches\transforms-3\a57c75994ad63c5648e46f3550b955ab\transformed\picasso-2.71828\AndroidManifest.xml:9:13-64
-60            android:authorities="com.example.gathernow.com.squareup.picasso"
-60-->[com.squareup.picasso:picasso:2.71828] C:\Users\Chee_Yee\.gradle\caches\transforms-3\a57c75994ad63c5648e46f3550b955ab\transformed\picasso-2.71828\AndroidManifest.xml:10:13-72
-61            android:exported="false" />
-61-->[com.squareup.picasso:picasso:2.71828] C:\Users\Chee_Yee\.gradle\caches\transforms-3\a57c75994ad63c5648e46f3550b955ab\transformed\picasso-2.71828\AndroidManifest.xml:11:13-37
-62        <provider
-62-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
-63            android:name="androidx.startup.InitializationProvider"
-63-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
-64            android:authorities="com.example.gathernow.androidx-startup"
-64-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
-65            android:exported="false" >
-65-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
-66            <meta-data
-66-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
-67                android:name="androidx.emoji2.text.EmojiCompatInitializer"
-67-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
-68                android:value="androidx.startup" />
-68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+48-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:33:9-35:40
+49            android:name="com.example.gathernow.SignUpActivity"
+49-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:34:13-43
+50            android:exported="false" />
+50-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:35:13-37
+51        <activity
+51-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:36:9-44:20
+52            android:name="com.example.gathernow.MainActivity"
+52-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:37:13-41
+53            android:exported="true" >
+53-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:38:13-36
+54            <intent-filter>
+54-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:39:13-43:29
+55                <action android:name="android.intent.action.MAIN" />
+55-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:40:17-69
+55-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:40:25-66
+56
+57                <category android:name="android.intent.category.LAUNCHER" />
+57-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:42:17-77
+57-->C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\AndroidManifest.xml:42:27-74
+58            </intent-filter>
+59        </activity>
+60
+61        <provider
+61-->[com.squareup.picasso:picasso:2.71828] C:\Users\Chee_Yee\.gradle\caches\transforms-3\a57c75994ad63c5648e46f3550b955ab\transformed\picasso-2.71828\AndroidManifest.xml:8:9-11:40
+62            android:name="com.squareup.picasso.PicassoProvider"
+62-->[com.squareup.picasso:picasso:2.71828] C:\Users\Chee_Yee\.gradle\caches\transforms-3\a57c75994ad63c5648e46f3550b955ab\transformed\picasso-2.71828\AndroidManifest.xml:9:13-64
+63            android:authorities="com.example.gathernow.com.squareup.picasso"
+63-->[com.squareup.picasso:picasso:2.71828] C:\Users\Chee_Yee\.gradle\caches\transforms-3\a57c75994ad63c5648e46f3550b955ab\transformed\picasso-2.71828\AndroidManifest.xml:10:13-72
+64            android:exported="false" />
+64-->[com.squareup.picasso:picasso:2.71828] C:\Users\Chee_Yee\.gradle\caches\transforms-3\a57c75994ad63c5648e46f3550b955ab\transformed\picasso-2.71828\AndroidManifest.xml:11:13-37
+65        <provider
+65-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+66            android:name="androidx.startup.InitializationProvider"
+66-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:25:13-67
+67            android:authorities="com.example.gathernow.androidx-startup"
+67-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:26:13-68
+68            android:exported="false" >
+68-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:27:13-37
 69            <meta-data
-69-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Chee_Yee\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
-70                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
-70-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Chee_Yee\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+69-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+70                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+70-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:30:17-75
 71                android:value="androidx.startup" />
-71-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Chee_Yee\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
-72        </provider>
-73    </application>
-74
-75</manifest>
+71-->[androidx.emoji2:emoji2:1.2.0] C:\Users\Chee_Yee\.gradle\caches\transforms-3\9ec162b5cb5dad7a953e18733a42dbca\transformed\emoji2-1.2.0\AndroidManifest.xml:31:17-49
+72            <meta-data
+72-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Chee_Yee\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:31:13-33:52
+73                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+73-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Chee_Yee\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:32:17-78
+74                android:value="androidx.startup" />
+74-->[androidx.lifecycle:lifecycle-process:2.4.1] C:\Users\Chee_Yee\.gradle\caches\transforms-3\4eb4b953398cff91e70e367f7f0f5a04\transformed\lifecycle-process-2.4.1\AndroidManifest.xml:33:17-49
+75        </provider>
+76    </application>
+77
+78</manifest>

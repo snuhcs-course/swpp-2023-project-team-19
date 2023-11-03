@@ -30,4 +30,4 @@ urlpatterns = [
     # path('login/', UserLogin.as_view(), name='user-login'),
 ]
 
-urlpatterns += static(settings
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

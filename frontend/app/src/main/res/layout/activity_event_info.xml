@@ -276,6 +276,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/register_button"
+        android:onClick="onRegisterEvent"
         style="@style/PositiveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

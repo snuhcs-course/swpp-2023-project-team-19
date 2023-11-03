@@ -165,6 +165,7 @@ id verticalGuideline
 id verticalRightGuideline
 id view_applicants_button
 id your_event_text
+layout activity_application_form
 layout activity_create_successful
 layout activity_event_info
 layout activity_frag_home

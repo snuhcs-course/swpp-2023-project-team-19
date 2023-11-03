@@ -437,7 +437,6 @@ public class EventCreate extends Fragment {
 
                 String event_reg_time = String.format(Locale.ENGLISH,"%02d:%02d:00", r_hour, r_minute);
 
-
                 String event_duration = event_duration_text.getText().toString();
                 String event_language = selected_language[0].replace("(specify in descriptions)", "");
 
