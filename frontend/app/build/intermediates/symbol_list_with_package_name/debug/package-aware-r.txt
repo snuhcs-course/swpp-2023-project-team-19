@@ -2928,6 +2928,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_bg
+drawable circle_shape
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -3052,6 +3053,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable red_button_bg
 drawable selected_image
 drawable test_level_drawable
 drawable tooltip_frame_dark
@@ -3204,6 +3206,7 @@ id decelerate
 id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
+id delete_button
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -3255,6 +3258,8 @@ id event_description
 id event_description_hint
 id event_duration
 id event_duration_hint
+id event_duration_title
+id event_img
 id event_language
 id event_location
 id event_location_hint
@@ -3266,6 +3271,8 @@ id event_photo
 id event_price
 id event_price_hint
 id event_time
+id event_time_title
+id event_title
 id event_type
 id event_type_hint
 id exitUntilCollapsed
@@ -3331,6 +3338,8 @@ id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
 id labeled
+id language_title
+id languages
 id layout
 id layout_one
 id layout_two
@@ -3342,6 +3351,8 @@ id line3
 id linear
 id listMode
 id list_item
+id loading_layout
+id location_title
 id login
 id loginButton
 id loginText
@@ -3430,6 +3441,9 @@ id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id num_max_participants
+id num_participants_title
+id num_reg_participants
 id off
 id on
 id onInterceptTouchReturnSwipe
@@ -3443,6 +3457,7 @@ id parent
 id parentPanel
 id parentRelative
 id parent_matrix
+id participants_dash
 id password
 id passwordText
 id password_confirm
@@ -3456,8 +3471,12 @@ id position
 id post
 id postLayout
 id pressed
+id price_title
 id profile_image
+id profile_img
+id profile_name
 id profile_text
+id progressBar
 id progress_circular
 id progress_horizontal
 id pwConfirmationText
@@ -3465,6 +3484,8 @@ id question_text
 id radio
 id ratio
 id rectangles
+id register_button
+id result_awaiting_button
 id returnBtn
 id reverseSawtooth
 id right
@@ -3606,8 +3627,11 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id user_info
 id verticalGuideline
+id verticalRightGuideline
 id vertical_only
+id view_applicants_button
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3740,6 +3764,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_create_successful
+layout activity_event_info
 layout activity_frag_home
 layout activity_log_in
 layout activity_main
@@ -4319,7 +4344,9 @@ style Base_Widget_MaterialComponents_TextView
 style CardView
 style CardView_Dark
 style CardView_Light
+style DangerButton
 style EditText
+style HeadingTextField
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation
 style MaterialAlertDialog_Material3_Body_Text
@@ -4769,6 +4796,7 @@ style ThemeOverlay_MaterialComponents_TimePicker_Display_TextInputEditText
 style ThemeOverlay_MaterialComponents_Toolbar_Popup_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Surface
+style TitleField
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
 style Widget_AppCompat_ActionBar_TabBar

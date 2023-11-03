@@ -31,16 +31,19 @@
         android:theme="@style/Theme.Gathernow"
         android:usesCleartextTraffic="true" >
         <activity
+            android:name="com.example.gathernow.EventInfo"
+            android:exported="false" />
+        <activity
             android:name="com.example.gathernow.CreateSuccessful"
             android:exported="false" />
         <activity
-            android:name="com.example.gathernow.LogIn"
+            android:name="com.example.gathernow.LogInActivity"
             android:exported="false" />
         <activity
             android:name="com.example.gathernow.FragHome"
             android:exported="false" />
         <activity
-            android:name="com.example.gathernow.SignUp"
+            android:name="com.example.gathernow.SignUpActivity"
             android:exported="false" />
         <activity
             android:name="com.example.gathernow.MainActivity"
@@ -52,6 +55,10 @@
             </intent-filter>
         </activity>
 
+        <provider
+            android:name="com.squareup.picasso.PicassoProvider"
+            android:authorities="com.example.gathernow.com.squareup.picasso"
+            android:exported="false" />
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="com.example.gathernow.androidx-startup"

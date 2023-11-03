@@ -107,38 +107,54 @@ public class EventSearch extends Fragment {
 
                     Collections.reverse(events_list);
 
+                    // Get the current date and time
+                    Date currentDate = new Date(System.currentTimeMillis());
 
                     for (int i = 0; i < events_list.size(); i++) {
-                        EventCardView newEventCard = new EventCardView(getContext(), null);
+
                         EventData currentEvent = events_list.get(i);
-                        newEventCard.setEventName(currentEvent.event_title);
-                        newEventCard.setEventPhoto(currentEvent.event_type);
-                        newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
-                        newEventCard.setEventLocation(currentEvent.event_location);
-                        newEventCard.setEventLanguage(currentEvent.event_language);
-                        newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
+                        // Create Date and Time object from currentEvent.event_date
+                        Date eventDate = Date.valueOf(currentEvent.event_date);
+                        Time eventTime = Time.valueOf(currentEvent.event_time);
+
+                        // Combine the Date and Time into a single Date object
+                        long dateTimeMillis = eventDate.getTime() + eventTime.getTime();
+                        Date eventDateTime = new Date(dateTimeMillis);
+
+                        //Only display events that happens after the current datetime
+                        if (eventDateTime.after(currentDate)){
+                            EventCardView newEventCard = new EventCardView(getContext(), null);
+
+                            newEventCard.setEventName(currentEvent.event_title);
+                            newEventCard.setEventPhoto(currentEvent.event_type);
+                            newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
+                            newEventCard.setEventLocation(currentEvent.event_location);
+                            newEventCard.setEventLanguage(currentEvent.event_language);
+                            newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
 
 //                        Log.d("EventInfo Testing", "Clicked event id: " + events_list.get(i).event_id.toString());
 
-                        // Add vertical padding to the newEventCard
-                        int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
-                        newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
-                        eventCardContainer.addView(newEventCard);
+                            // Add vertical padding to the newEventCard
+                            int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
+                            newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
+                            eventCardContainer.addView(newEventCard);
 
-                        newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // Handle the click event here
-                                Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+                            newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    // Handle the click event here
+                                    Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
 
-                                // Send the user id to the EventInfo activity
-                                Intent intent = new Intent(v.getContext(), EventInfo.class);
-                                intent.putExtra("userId", getUserId(v.getContext()));
-                                intent.putExtra("eventId", currentEvent.event_id);
+                                    // Send the user id to the EventInfo activity
+                                    Intent intent = new Intent(v.getContext(), EventInfo.class);
+                                    intent.putExtra("userId", getUserId(v.getContext()));
+                                    intent.putExtra("eventId", currentEvent.event_id);
 
-                                startActivity(intent);
-                            }
-                        });
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+
                     }
 
 

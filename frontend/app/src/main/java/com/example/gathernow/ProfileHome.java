@@ -18,6 +18,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import java.sql.Date;
 import java.sql.Time;
 import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,13 +48,19 @@ public class ProfileHome extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+    private ExecutorService executorService;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private ServiceApi service;
-
     private ServiceApi service2;
+
+    private boolean isEventLoaded = false;
+    private boolean isUserLoaded = false;
+
+    //private ProgressBar progressBar;
 
     // Function to get user id
     private String getUserId(Context context) {
@@ -88,30 +97,41 @@ public class ProfileHome extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profile_home, container, false);
 
         LinearLayout layoutOne = rootView.findViewById(R.id.layout_one);
         LinearLayout layoutTwo = rootView.findViewById(R.id.layout_two);
+        RelativeLayout user_info = rootView.findViewById(R.id.user_info);
+
+        layoutOne.setVisibility(View.GONE);
+        layoutTwo.setVisibility(View.GONE);
+        user_info.setVisibility(View.GONE);
+        RelativeLayout loading_layout = rootView.findViewById(R.id.loading_layout);
+        loading_layout.setVisibility(View.VISIBLE);
 
         TextView profile_text = rootView.findViewById(R.id.subtitle_text);
-        ImageView profile_img = rootView.findViewById(R.id.profile_image);
-   
+        //ImageView profile_img = rootView.findViewById(R.id.profile_image);
+
 
         Integer userId = Integer.valueOf(getUserId(getActivity()));
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
-        service.getUserInfo(userId).enqueue(new Callback<UserData1>(){
+        service.getUserInfo(userId).enqueue(new Callback<UserData>(){
             @Override
-            public void onResponse(Call<UserData1> call, Response<UserData1> response) {
+            public void onResponse(Call<UserData> call, Response<UserData> response) {
                 if (response.isSuccessful()) {
-                    UserData1 current_userinfo = response.body();
+                    UserData current_userinfo = response.body();
                     String user_name = current_userinfo.name;
                     profile_text.setText(user_name + ", welcome back!");
 
@@ -119,20 +139,25 @@ public class ProfileHome extends Fragment {
                     // Get the source of image on the server by calling API http://20.2.88.70:8000/api/useravatar/{user_id}/
                     // Set the image source to the image view
                     service2 = RetrofitClient.getClient().create(ServiceApi.class);
-                    service2.getUserInfo(userId).enqueue(new Callback<UserData1>() {
+                    service2.getUserInfo(userId).enqueue(new Callback<UserData>() {
                         @Override
-                        public void onResponse(Call<UserData1> call, Response<UserData1> response) {
+                        public void onResponse(Call<UserData> call, Response<UserData> response) {
                             // Log response to console
                             Log.d("UserAvatar", "Response: " + response.toString());
                             if (response.isSuccessful()) {
-                                UserData1 current_useravatar = response.body();
+                                UserData current_useravatar = response.body();
                                 String user_avatar = current_useravatar.avatar;
                                 user_avatar = "http://20.2.88.70:8000" + user_avatar;
                                 ImageView profile_img = rootView.findViewById(R.id.profile_image);
                                 Picasso.get().load(user_avatar).into(profile_img);
+
+                                isUserLoaded = true;
                             }
                         }
-                        public void onFailure(Call<UserData1> call, Throwable t) {
+
+
+
+                        public void onFailure(Call<UserData> call, Throwable t) {
                             Toast.makeText(getActivity(), "Get User Avatar Error", Toast.LENGTH_SHORT).show();
                             Log.e("UserAvatar", "Error occurred", t);
                         }
@@ -157,61 +182,102 @@ public class ProfileHome extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<UserData1>  call, Throwable t) {
+            public void onFailure(Call<UserData>  call, Throwable t) {
                 Toast.makeText(getActivity(), "Get Event Error", Toast.LENGTH_SHORT).show();
                 Log.e("UserEventDisplay", "Error occurred", t);
             }
         });
 
-        //Integer userId = Integer.valueOf(getUserId(getActivity()));
 
-        //service = RetrofitClient.getClient().create(ServiceApi.class);
         service.getEventsByUser(userId).enqueue(new Callback<List<EventData>>(){
             @Override
             public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response){
                 if (response.isSuccessful()) {
                     List<EventData>  events_list = response.body();
                     if (response.body() != null){
-                        layoutOne.setVisibility(View.GONE);
-                        layoutTwo.setVisibility(View.VISIBLE);
+                        if(events_list.size() >0){
 
-                        LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
+                            isEventLoaded = true;
+                            loading_layout.setVisibility(View.GONE);
+                            user_info.setVisibility(View.VISIBLE);
+                            layoutOne.setVisibility(View.GONE);
+                            layoutTwo.setVisibility(View.VISIBLE);
 
+                            LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
 
-                        Collections.reverse(events_list);
+                            Collections.reverse(events_list);
 
-                        for (int i = 0; i < events_list.size(); i++){
+                            // Get the current date and time
+                            Date currentDate = new Date(System.currentTimeMillis());
 
-                            EventCardView newEventCard = new EventCardView(getContext(), null);
-                            EventData currentEvent = events_list.get(i);
-                            newEventCard.setEventName(currentEvent.event_title);
-                            newEventCard.setEventPhoto(currentEvent.event_type);
-                            newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
-                            newEventCard.setEventLocation(currentEvent.event_location);
-                            newEventCard.setEventLanguage(currentEvent.event_language);
-                            newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
+                            for (int i = 0; i < events_list.size(); i++){
 
-                            // Add vertical padding to the newEventCard
-                            int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
-                            newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
-                            eventCardContainer.addView(newEventCard);
+                                EventData currentEvent = events_list.get(i);
+                                // Create Date and Time object from currentEvent.event_date
+                                Date eventDate = Date.valueOf(currentEvent.event_date);
+                                Time eventTime = Time.valueOf(currentEvent.event_time);
 
-                            newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
+                                // Combine the Date and Time into a single Date object
+                                long dateTimeMillis = eventDate.getTime() + eventTime.getTime();
+                                Date eventDateTime = new Date(dateTimeMillis);
+
+                                //Only display events that happens after the current datetime
+                                if (eventDateTime.after(currentDate)){
+                                    EventCardView newEventCard = new EventCardView(getContext(), null);
+                                    newEventCard.setEventName(currentEvent.event_title);
+                                    newEventCard.setEventPhoto(currentEvent.event_type);
+                                    newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
+                                    newEventCard.setEventLocation(currentEvent.event_location);
+                                    newEventCard.setEventLanguage(currentEvent.event_language);
+                                    newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
+
+                                    // Add vertical padding to the newEventCard
+                                    int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
+                                    newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
+                                    eventCardContainer.addView(newEventCard);
+
+                                    newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            // Handle the click event here
+                                            Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+                                            // Send the user id to the EventInfo activity
+                                            Intent intent = new Intent(v.getContext(), EventInfo.class);
+                                            intent.putExtra("userId", getUserId(v.getContext()));
+                                            intent.putExtra("eventId", currentEvent.event_id);
+                                            startActivity(intent);
+                                        }
+                                    });
+                                }
+                            }
+
+                        }
+                        else{
+                            //status = 0;
+                            loading_layout.setVisibility(View.GONE);
+                            user_info.setVisibility(View.VISIBLE);
+                            layoutOne.setVisibility(View.VISIBLE);
+                            layoutTwo.setVisibility(View.GONE);
+
+                            TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
+                            discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+                            discover_new.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    // Handle the click event here
-                                    Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
-                                    // Send the user id to the EventInfo activity
-                                    Intent intent = new Intent(v.getContext(), EventInfo.class);
-                                    intent.putExtra("userId", getUserId(v.getContext()));
-                                    intent.putExtra("eventId", currentEvent.event_id);
+                                    Intent intent = new Intent(v.getContext(), FragHome.class);
                                     startActivity(intent);
                                 }
                             });
+
                         }
+
+
 
                     }
                     else{
+                        //status = 0;
+                        loading_layout.setVisibility(View.GONE);
+                        user_info.setVisibility(View.VISIBLE);
                         layoutOne.setVisibility(View.VISIBLE);
                         layoutTwo.setVisibility(View.GONE);
 
@@ -254,8 +320,10 @@ public class ProfileHome extends Fragment {
 
         });
 
-        return rootView;
 
+
+
+        return rootView;
 
 
     }

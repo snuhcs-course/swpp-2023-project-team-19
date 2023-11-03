@@ -82,15 +82,15 @@ public class EventInfo extends AppCompatActivity {
                     setButtonVisibility(eventData.host_id);
 
                     // TODO: Update host's profile name
-                    service.getUserInfo(eventData.host_id).enqueue(new Callback<UserData1>() {
+                    service.getUserInfo(eventData.host_id).enqueue(new Callback<UserData>() {
                         @Override
-                        public void onResponse(Call<UserData1> call, Response<UserData1> response) {
+                        public void onResponse(Call<UserData> call, Response<UserData> response) {
                             if (response.isSuccessful()) {
-                                UserData1 userData = response.body();
+                                UserData userData = response.body();
                                 TextView profileName = findViewById(R.id.profile_name);
                                 profileName.setText(userData.name);
 
-                                UserData1 currentHostAvatar = response.body();
+                                UserData currentHostAvatar = response.body();
                                 String host_avatar = currentHostAvatar.avatar;
                                 host_avatar = "http://20.2.88.70:8000" + host_avatar;
                                 ImageView profile_img = findViewById(R.id.profile_img);
@@ -99,7 +99,7 @@ public class EventInfo extends AppCompatActivity {
                         }
 
                         @Override
-                        public void onFailure(Call<UserData1> call, Throwable t) {
+                        public void onFailure(Call<UserData> call, Throwable t) {
                             Log.d("EventInfo Testing", "Failed to get host name");
 
                         }
@@ -115,18 +115,18 @@ public class EventInfo extends AppCompatActivity {
     }
 
     private void setHostName(int hostId) {
-        service.getUserInfo(hostId).enqueue(new Callback<UserData1>() {
+        service.getUserInfo(hostId).enqueue(new Callback<UserData>() {
             @Override
-            public void onResponse(Call<UserData1> call, Response<UserData1> response) {
+            public void onResponse(Call<UserData> call, Response<UserData> response) {
                 if (response.isSuccessful()) {
-                    UserData1 userData = response.body();
+                    UserData userData = response.body();
                     TextView profileName = findViewById(R.id.profile_name);
                     profileName.setText(userData.name);
                 }
             }
 
             @Override
-            public void onFailure(Call<UserData1> call, Throwable t) {
+            public void onFailure(Call<UserData> call, Throwable t) {
                 Log.d("EventInfo Testing", "Failed to get host name");
 
             }

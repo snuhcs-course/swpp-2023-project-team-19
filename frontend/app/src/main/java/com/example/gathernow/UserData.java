@@ -33,13 +33,14 @@ public class UserData {
         this.password = password;
     }
 
-    public UserData(String name, String email, String password, Integer user_id, String created_at, String avatar){
+    public UserData(String name, String email, Integer user_id, String created_at, String avatar){
         this.name = name;
         this.email = email;
-        this.password = password;
         this.user_id = user_id;
         this.created_at = created_at;
         this.avatar = avatar;
 
     }
+
+
 }

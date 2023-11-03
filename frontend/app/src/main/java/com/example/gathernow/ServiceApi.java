@@ -27,7 +27,7 @@ public interface ServiceApi {
     Call<List<EventData>> getALlEvents();
 
     @GET("/api/userinfo/{user_id}/")
-    Call<UserData1> getUserInfo(@Path("user_id") int userId);
+    Call<UserData> getUserInfo(@Path("user_id") int userId);
 
     // Events by User API
     @GET("/api/events/by_user/{user_id}/")

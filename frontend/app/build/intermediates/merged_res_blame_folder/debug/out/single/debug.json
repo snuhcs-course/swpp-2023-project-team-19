@@ -144,6 +144,10 @@
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\mipmap-xxhdpi\\ic_image3_workshops.webp"
     },
     {
+        "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\layout_loading_layout.xml.flat",
+        "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\layout\\loading_layout.xml"
+    },
+    {
         "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\drawable_ic_events_background.xml.flat",
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\drawable\\ic_events_background.xml"
     },
@@ -274,6 +278,10 @@
     {
         "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\mipmap-hdpi_ic_profile_round.webp.flat",
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\mipmap-hdpi\\ic_profile_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\layout_activity_event_info.xml.flat",
+        "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\layout\\activity_event_info.xml"
     },
     {
         "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\drawable_ic_image5_cultural_activities_background.xml.flat",
@@ -956,6 +964,10 @@
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\drawable\\ic_capacity_background.xml"
     },
     {
+        "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\drawable_circle_shape.xml.flat",
+        "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\drawable\\circle_shape.xml"
+    },
+    {
         "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\mipmap-hdpi_ic_image3_workshops_round.webp.flat",
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\mipmap-hdpi\\ic_image3_workshops_round.webp"
     },
@@ -1024,6 +1036,10 @@
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\mipmap-anydpi-v26\\ic_success.xml"
     },
     {
+        "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\drawable_red_button_bg.xml.flat",
+        "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\drawable\\red_button_bg.xml"
+    },
+    {
         "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\mipmap-mdpi_ic_success_round.webp.flat",
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\mipmap-mdpi\\ic_success_round.webp"
     },
@@ -1080,11 +1096,11 @@
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\mipmap-mdpi\\ic_image6_others_round.webp"
     },
     {
-        "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\mipmap-anydpi-v26\\ic_launcher.xml"
-    },
-    {
         "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\layout_activity_sign_up.xml.flat",
         "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\layout\\activity_sign_up.xml"
+    },
+    {
+        "merged": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-merged_res-28:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\Chee_Yee\\.gradle\\daemon\\8.0\\com.example.gathernow.app-main-30:\\mipmap-anydpi-v26\\ic_launcher.xml"
     }
 ]

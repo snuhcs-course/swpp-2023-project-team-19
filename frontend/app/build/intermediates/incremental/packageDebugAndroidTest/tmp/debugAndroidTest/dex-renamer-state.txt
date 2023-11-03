@@ -1,4 +1,4 @@
-#Fri Oct 27 14:47:24 KST 2023
+#Thu Nov 02 23:07:58 KST 2023
 base.0=C\:\\Users\\Chee_Yee\\AndroidStudioProjects\\swpp-2023-project-team-19-ver2\\frontend\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeExtDexDebugAndroidTest\\classes.dex
 base.1=C\:\\Users\\Chee_Yee\\AndroidStudioProjects\\swpp-2023-project-team-19-ver2\\frontend\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\0\\classes.dex
 base.2=C\:\\Users\\Chee_Yee\\AndroidStudioProjects\\swpp-2023-project-team-19-ver2\\frontend\\app\\build\\intermediates\\dex\\debugAndroidTest\\mergeProjectDexDebugAndroidTest\\12\\classes.dex

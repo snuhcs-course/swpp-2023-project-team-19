@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +38,9 @@ public final class FragmentProfileHomeBinding implements ViewBinding {
   public final LinearLayout layoutTwo;
 
   @NonNull
+  public final RelativeLayout loadingLayout;
+
+  @NonNull
   public final TextView noEventText;
 
   @NonNull
@@ -45,10 +50,16 @@ public final class FragmentProfileHomeBinding implements ViewBinding {
   public final TextView profileText;
 
   @NonNull
+  public final ProgressBar progressBar;
+
+  @NonNull
   public final ImageView sadFrog;
 
   @NonNull
   public final TextView subtitleText;
+
+  @NonNull
+  public final RelativeLayout userInfo;
 
   @NonNull
   public final TextView yourEventText;
@@ -56,20 +67,24 @@ public final class FragmentProfileHomeBinding implements ViewBinding {
   private FragmentProfileHomeBinding(@NonNull LinearLayout rootView,
       @NonNull LinearLayout container, @NonNull TextView discoverNew,
       @NonNull LinearLayout eventCardContainer, @NonNull LinearLayout layoutOne,
-      @NonNull LinearLayout layoutTwo, @NonNull TextView noEventText,
-      @NonNull ImageView profileImage, @NonNull TextView profileText, @NonNull ImageView sadFrog,
-      @NonNull TextView subtitleText, @NonNull TextView yourEventText) {
+      @NonNull LinearLayout layoutTwo, @NonNull RelativeLayout loadingLayout,
+      @NonNull TextView noEventText, @NonNull ImageView profileImage, @NonNull TextView profileText,
+      @NonNull ProgressBar progressBar, @NonNull ImageView sadFrog, @NonNull TextView subtitleText,
+      @NonNull RelativeLayout userInfo, @NonNull TextView yourEventText) {
     this.rootView = rootView;
     this.container = container;
     this.discoverNew = discoverNew;
     this.eventCardContainer = eventCardContainer;
     this.layoutOne = layoutOne;
     this.layoutTwo = layoutTwo;
+    this.loadingLayout = loadingLayout;
     this.noEventText = noEventText;
     this.profileImage = profileImage;
     this.profileText = profileText;
+    this.progressBar = progressBar;
     this.sadFrog = sadFrog;
     this.subtitleText = subtitleText;
+    this.userInfo = userInfo;
     this.yourEventText = yourEventText;
   }
 
@@ -126,6 +141,12 @@ public final class FragmentProfileHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.loading_layout;
+      RelativeLayout loadingLayout = ViewBindings.findChildViewById(rootView, id);
+      if (loadingLayout == null) {
+        break missingId;
+      }
+
       id = R.id.no_event_text;
       TextView noEventText = ViewBindings.findChildViewById(rootView, id);
       if (noEventText == null) {
@@ -144,6 +165,12 @@ public final class FragmentProfileHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.progressBar;
+      ProgressBar progressBar = ViewBindings.findChildViewById(rootView, id);
+      if (progressBar == null) {
+        break missingId;
+      }
+
       id = R.id.sad_frog;
       ImageView sadFrog = ViewBindings.findChildViewById(rootView, id);
       if (sadFrog == null) {
@@ -156,6 +183,12 @@ public final class FragmentProfileHomeBinding implements ViewBinding {
         break missingId;
       }
 
+      id = R.id.user_info;
+      RelativeLayout userInfo = ViewBindings.findChildViewById(rootView, id);
+      if (userInfo == null) {
+        break missingId;
+      }
+
       id = R.id.your_event_text;
       TextView yourEventText = ViewBindings.findChildViewById(rootView, id);
       if (yourEventText == null) {
@@ -163,8 +196,8 @@ public final class FragmentProfileHomeBinding implements ViewBinding {
       }
 
       return new FragmentProfileHomeBinding((LinearLayout) rootView, container, discoverNew,
-          eventCardContainer, layoutOne, layoutTwo, noEventText, profileImage, profileText, sadFrog,
-          subtitleText, yourEventText);
+          eventCardContainer, layoutOne, layoutTwo, loadingLayout, noEventText, profileImage,
+          profileText, progressBar, sadFrog, subtitleText, userInfo, yourEventText);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));

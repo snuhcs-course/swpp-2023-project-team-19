@@ -62,6 +62,21 @@
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style><style name="DangerButton">
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/red_button_bg</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:layout_marginTop">10dp</item>
+    </style><style name="HeadingTextField">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+    </style><style name="TitleField">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style></file><file path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\res\values\themes.xml" qualifiers=""><style name="Base.Theme.Gathernow" parent="Theme.Material3.DayNight.NoActionBar">
         
         
@@ -83,7 +98,7 @@
         
         
 
-    </style></file><file name="backup_rules" path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\res\xml\backup_rules.xml" qualifiers="" type="xml"/><file name="data_extraction_rules" path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\res\xml\data_extraction_rules.xml" qualifiers="" type="xml"/></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\build\generated\res\resValues\debug"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="EventCardView">
+    </style></file><file name="backup_rules" path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\res\xml\backup_rules.xml" qualifiers="" type="xml"/><file name="data_extraction_rules" path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\res\xml\data_extraction_rules.xml" qualifiers="" type="xml"/><file name="circle_shape" path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\res\drawable\circle_shape.xml" qualifiers="" type="drawable"/><file name="red_button_bg" path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\res\drawable\red_button_bg.xml" qualifiers="" type="drawable"/><file name="activity_event_info" path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\main\res\layout\activity_event_info.xml" qualifiers="" type="layout"/></source></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="debug" generated-set="debug$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\src\debug\res"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated$Generated" generated="true" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\build\generated\res\resValues\debug"/></dataSet><dataSet aapt-namespace="http://schemas.android.com/apk/res-auto" config="generated" generated-set="generated$Generated" ignore_pattern="!.svn:!.git:!.ds_store:!*.scc:.*:&lt;dir>_*:!CVS:!thumbs.db:!picasa.ini:!*~"><source path="C:\Users\Chee_Yee\AndroidStudioProjects\swpp-2023-project-team-19-ver2\frontend\app\build\generated\res\resValues\debug"/></dataSet><mergedItems><configuration qualifiers=""><declare-styleable name="EventCardView">
         <attr format="reference" name="event_photo"/>
         <attr format="string" name="event_name"/>
         <attr format="string" name="event_capacity"/>
