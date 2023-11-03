@@ -190,9 +190,10 @@ public class EventInfo extends AppCompatActivity {
                         public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
                             Log.d("EventInfo Testing", "Event deleted");
                             if (response.isSuccessful()) {
-                                Log.d("EventInfo Testing", response.body().toString());
+                                // !!! Commented lines here will cause crash!
+                                //Log.d("EventInfo Testing", response.body().toString());
                                 CodeMessageResponse codeMessageResponse = response.body();
-                                Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
 

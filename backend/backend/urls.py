@@ -25,8 +25,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('users.urls')), 
     path('api/', include('events.urls')),
+    path('api/', include('applications.urls'))
     # path('signup/', UserSignup.as_view(), name='user-signup'),
     # path('login/', UserLogin.as_view(), name='user-login'),
 ]
 
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+urlpatterns += static(settings
