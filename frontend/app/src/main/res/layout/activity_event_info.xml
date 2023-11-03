@@ -13,7 +13,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
-
     <ScrollView
         android:id="@+id/content"
         android:layout_width="match_parent"

@@ -97,6 +97,9 @@ id event_num_participants_hint
 id event_photo
 id event_price
 id event_price_hint
+id event_register_date
+id event_register_time
+id event_registration_hint
 id event_time
 id event_time_title
 id event_title
@@ -113,7 +116,6 @@ id image4_parties
 id image5_cultural_activities
 id image6_others
 id imageRadioGroup
-id indent
 id language_title
 id languages
 id layout_one

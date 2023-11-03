@@ -3270,6 +3270,9 @@ id event_num_participants_hint
 id event_photo
 id event_price
 id event_price_hint
+id event_register_date
+id event_register_time
+id event_registration_hint
 id event_time
 id event_time_title
 id event_title
@@ -3328,7 +3331,6 @@ id image6_others
 id imageRadioGroup
 id immediateStop
 id included
-id indent
 id indeterminate
 id info
 id invisible

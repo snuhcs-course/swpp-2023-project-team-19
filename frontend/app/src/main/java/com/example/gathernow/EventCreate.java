@@ -30,7 +30,9 @@ import android.widget.Toast;
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Locale;
 
 import retrofit2.Call;
@@ -91,6 +93,7 @@ public class EventCreate extends Fragment {
     private TextView event_price_text;
     private TextView event_description_text;
     private TextView event_location_text;
+    private TextView event_num_participants_text;
 
     private String getUserId(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
@@ -110,18 +113,29 @@ public class EventCreate extends Fragment {
         event_description_text = rootView.findViewById(R.id.event_description);
         event_location_text = rootView.findViewById(R.id.event_location);
         TextView event_type = (TextView) rootView.findViewById(R.id.event_type);
+        event_num_participants_text = rootView.findViewById(R.id.event_num_participants);
 
-        final int[] event_num_participants_input = {0};
+        // event date and time
         final int[] event_year_input = {0};
         final int[] event_month_input = {0};
         final int[] event_date_input = {0};
         final int[] event_hour_input = {0};
         final int[] event_min_input = {0};
+
         final int[] event_type_input = {0};
+
+        // event registration available until: data and time
+        final int[] event_reg_year_input = {0};
+        final int[] event_reg_month_input = {0};
+        final int[] event_reg_date_input = {0};
+        final int[] event_reg_hour_input = {0};
+        final int[] event_reg_min_input = {0};
 
         Button event_date = (Button) rootView.findViewById(R.id.event_date);
         Button event_time = (Button) rootView.findViewById(R.id.event_time);
-        Button event_num_participants = (Button) rootView.findViewById(R.id.event_num_participants);
+        Button event_reg_date = (Button) rootView.findViewById(R.id.event_register_date);
+        Button event_reg_time = (Button) rootView.findViewById(R.id.event_register_time);
+        //Button event_num_participants = (Button) rootView.findViewById(R.id.event_num_participants);
 
         RadioGroup radioGroup = rootView.findViewById(R.id.imageRadioGroup);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -158,6 +172,7 @@ public class EventCreate extends Fragment {
 
 
         // number of participants
+        /*
         event_num_participants.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -186,6 +201,8 @@ public class EventCreate extends Fragment {
                 builder[0].show();
             }
         });
+
+         */
 
         // event date
         event_date.setOnClickListener(new View.OnClickListener() {
@@ -234,7 +251,10 @@ public class EventCreate extends Fragment {
                                 // TODO: time
                                 event_hour_input[0] = hour;
                                 event_min_input[0] = mins;
-                                event_time.setText("Time: " + String.valueOf(hour) + ":" + String.valueOf(mins));
+                                String formattedHour = String.format("%02d", hour);
+                                String formattedMins = String.format("%02d", mins);
+                                event_time.setText("Time: " + formattedHour + ":" + formattedMins);
+                                //event_time.setText("Time: " + String.valueOf(hour) + ":" + String.valueOf(mins));
                             }
                         },
                         hour, minutes, false);
@@ -242,14 +262,146 @@ public class EventCreate extends Fragment {
             }
         });
 
-        Spinner spinner = (Spinner) rootView.findViewById(R.id.event_language);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                requireContext(),
-                R.array.language_array,
-                android.R.layout.simple_spinner_item
-        );
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        // event registration date
+        event_reg_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(
+                        requireContext(),
+                        new DatePickerDialog.OnDateSetListener() {
+                            @Override
+                            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                                // TODO: date
+                                event_reg_year_input[0] = year;
+                                event_reg_month_input[0] = monthOfYear;
+                                event_reg_date_input[0] = dayOfMonth;
+                                event_reg_date.setText("Date: " + String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear+1) + "/" + String.valueOf(year));
+                            }
+                        },
+                        year, month, day);
+                // set the minimum date to today
+                datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+                datePickerDialog.show();
+            }
+
+        });
+
+        // event registration time
+        event_reg_time.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final Calendar c = Calendar.getInstance();
+
+                int hour = c.get(Calendar.HOUR_OF_DAY);
+                int minutes = c.get(Calendar.MINUTE);
+
+                TimePickerDialog timePickerDialog = new TimePickerDialog(
+                        getContext(),
+                        new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int hour, int mins) {
+                                // TODO: time
+                                event_reg_hour_input[0] = hour;
+                                event_reg_min_input[0] = mins;
+                                String formattedHour = String.format("%02d", hour);
+                                String formattedMins = String.format("%02d", mins);
+                                event_reg_time.setText("Time: " + formattedHour + ":" + formattedMins);
+                            }
+                        },
+                        hour, minutes, false);
+                timePickerDialog.show();
+            }
+        });
+
+
+        // multiple languages selection
+        TextView textView;
+        boolean[] selectedLanguage;
+        ArrayList<Integer> langList = new ArrayList<>();
+        String[] langArray = {"Korean", "English", "Japanese", "Chinese", "Russian", "Vietnamese", "Thai", "Uzbek", "Khmer", "Filipino", "Nepali", "Indonesian", "Kazakh", "Mongolian", "Burmese", "Spanish", "Portuguese", "French", "German", "Hindi", "Arabic", "Bengali", "Urdu", "Turkish", "Other (specify in descriptions)"};
+
+        // assign variable
+        textView = rootView.findViewById(R.id.event_language);
+
+        // initialize selected language array
+        selectedLanguage = new boolean[langArray.length];
+        final String[] selected_language = {""};
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Initialize alert dialog
+                AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+                // set title
+                builder.setTitle("Select Language");
+                // set dialog non cancelable
+                builder.setCancelable(false);
+                builder.setMultiChoiceItems(langArray, selectedLanguage, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean b) {
+                        // check condition
+                        if (b) {
+                            langList.add(i);
+                            Collections.sort(langList);
+                        } else {
+                            langList.remove(Integer.valueOf(i));
+                        }
+                    }
+                });
+
+
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // Initialize string builder
+                        StringBuilder stringBuilder = new StringBuilder();
+                        // use for loop
+                        for (int j = 0; j < langList.size(); j++) {
+                            // concat array value
+                            stringBuilder.append(langArray[langList.get(j)]);
+                            // check condition
+                            if (j != langList.size() - 1) {
+                                // When j value  not equal to lang list size - 1, add comma
+                                stringBuilder.append(", ");
+                            }
+                        }
+                        // set text on textView
+                        textView.setText(stringBuilder.toString());
+                        selected_language[0] = stringBuilder.toString();
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // dismiss dialog
+                        dialogInterface.dismiss();
+                    }
+                });
+                builder.setNeutralButton("Clear All", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        // use for loop
+                        for (int j = 0; j < selectedLanguage.length; j++) {
+                            // remove all selection
+                            selectedLanguage[j] = false;
+                            // clear language list
+                            langList.clear();
+                            // clear text view value
+                            textView.setText("");
+                        }
+                    }
+                });
+                // show dialog
+                builder.show();
+            }
+        });
 
         // create button
         Button createButton = (Button) rootView.findViewById(R.id.post);
@@ -259,7 +411,7 @@ public class EventCreate extends Fragment {
 
                 // get event details in correct format
                 String event_name = event_name_text.getText().toString();
-                Integer event_num_participants = event_num_participants_input[0];
+                //Integer event_num_participants = event_num_participants_input[0];
 
                 Integer event_num_joined = 0;
 
@@ -274,11 +426,21 @@ public class EventCreate extends Fragment {
 
                 String event_time = String.format(Locale.ENGLISH,"%02d:%02d:00", hour, minute);
 
+                int r_year = event_reg_year_input[0];
+                int r_month = event_reg_month_input[0]; // Calendar months are 0-based (i.e., January is 0)
+                int r_date = event_reg_date_input[0];
+
+                String event_reg_date = String.format(Locale.ENGLISH, "%d-%02d-%02d", r_year, r_month + 1, r_date);
+
+                int r_hour = event_reg_hour_input[0];
+                int r_minute = event_reg_min_input[0];
+
+                String event_reg_time = String.format(Locale.ENGLISH,"%02d:%02d:00", r_hour, r_minute);
+
+
                 String event_duration = event_duration_text.getText().toString();
-                String event_language = spinner.getSelectedItem().toString();
-                if(event_language.equals("Other (specify in descriptions)")){
-                    event_language = "Other";
-                }
+                String event_language = selected_language[0].replace("(specify in descriptions)", "");
+
                 String event_price_str = event_price_text.getText().toString();
                 int event_price;
                 try {
@@ -289,6 +451,18 @@ public class EventCreate extends Fragment {
                     // set it to a default value or show an error message
                     event_price = 0;
                 }
+
+                String event_num_participants_str = event_num_participants_text.getText().toString();
+                int event_num_participants;
+                try {
+                    event_num_participants = Integer.parseInt(event_num_participants_str);
+                } catch (NumberFormatException e) {
+                    // Handle exception if the string cannot be parsed to an integer
+                    e.printStackTrace();
+                    // set it to a default value or show an error message
+                    event_num_participants = 0;
+                }
+
                 String event_description = event_description_text.getText().toString();
                 String event_location = event_location_text.getText().toString();
 
@@ -314,45 +488,48 @@ public class EventCreate extends Fragment {
 
                 if (event_name.isEmpty() || event_duration.isEmpty() || event_price_str.isEmpty() ||
                         event_description.isEmpty() || event_location.isEmpty() || event_date_input[0] == 0 ||
-                        event_hour_input[0] == 0 || event_num_participants_input[0] == 0 || event_type_in.isEmpty()) {
+                        event_hour_input[0] == 0 || event_num_participants_str.isEmpty() || event_type_in.isEmpty() ||
+                        event_reg_date_input[0] == 0 || event_reg_hour_input[0] == 0 || event_language.isEmpty()) {
                     String alert_msg = "Please fill in all required fields";
                     alert.setText(alert_msg);
+                } else if (event_num_participants == 0) {
+                    String alert_msg = "Number of participants should be at least 1!";
+                    alert.setText(alert_msg);
                 } else {
+                        Integer host_id = Integer.valueOf(getUserId(getActivity()));
 
-                    Integer host_id = Integer.valueOf(getUserId(getActivity()));
+                        service = RetrofitClient.getClient().create(ServiceApi.class);
+                        EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description, event_num_joined, host_id, event_reg_date, event_reg_time);
+                        service.eventlist(requestData).enqueue(new Callback<CodeMessageResponse>() {
+                            @Override
+                            public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
+                                if (response.isSuccessful()) {
+                                    CodeMessageResponse result = response.body();
+                                    if (result != null) {
+                                        if (response.code() == 201) {
 
-                    service = RetrofitClient.getClient().create(ServiceApi.class);
-                    EventData requestData = new EventData(event_type_in, event_name, event_num_participants, event_date, event_time, event_duration, event_language, event_price, event_location, event_description, event_num_joined, host_id);
-                    service.eventlist(requestData).enqueue(new Callback<CodeMessageResponse>() {
-                        @Override
-                        public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
-                            if (response.isSuccessful()) {
-                                CodeMessageResponse result = response.body();
-                                if (result != null) {
-                                    if (response.code() == 201) {
+                                            //Toast.makeText(EventCreate.this, "Event created successfully.", Toast.LENGTH_SHORT).show();
+                                            // Link to the createSuccessful page
+                                            Intent intent = new Intent(v.getContext(), CreateSuccessful.class);
+                                            startActivity(intent);
+                                        }
+                                    } else {
+                                        // Handle the case where the response body is null or empty
+                                        Toast.makeText(getActivity(), "Bad Request.", Toast.LENGTH_SHORT).show();
 
-                                        //Toast.makeText(EventCreate.this, "Event created successfully.", Toast.LENGTH_SHORT).show();
-                                        // Link to the createSuccessful page
-                                        Intent intent = new Intent(v.getContext(), CreateSuccessful.class);
-                                        startActivity(intent);
+
                                     }
                                 } else {
-                                    // Handle the case where the response body is null or empty
-                                    Toast.makeText(getActivity(), "Bad Request.", Toast.LENGTH_SHORT).show();
-
-
+                                    // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
+                                    Toast.makeText(getActivity(), "Event creation failed.", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
-                                Toast.makeText(getActivity(), "Event creation failed.", Toast.LENGTH_SHORT).show();
                             }
-                        }
-                        @Override
-                        public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
-                            Toast.makeText(getActivity(), "Event creation Error", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-                }
+                            @Override
+                            public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
+                                Toast.makeText(getActivity(), "Event creation Error", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
 
             }
         });

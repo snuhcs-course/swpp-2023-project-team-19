@@ -38,13 +38,9 @@ public final class EventCardLayoutBinding implements ViewBinding {
   @NonNull
   public final ImageView eventPhoto;
 
-  @NonNull
-  public final TextView indent;
-
   private EventCardLayoutBinding(@NonNull RelativeLayout rootView, @NonNull TextView eventCapacity,
       @NonNull TextView eventDatetime, @NonNull TextView eventLanguage,
-      @NonNull TextView eventLocation, @NonNull TextView eventName, @NonNull ImageView eventPhoto,
-      @NonNull TextView indent) {
+      @NonNull TextView eventLocation, @NonNull TextView eventName, @NonNull ImageView eventPhoto) {
     this.rootView = rootView;
     this.eventCapacity = eventCapacity;
     this.eventDatetime = eventDatetime;
@@ -52,7 +48,6 @@ public final class EventCardLayoutBinding implements ViewBinding {
     this.eventLocation = eventLocation;
     this.eventName = eventName;
     this.eventPhoto = eventPhoto;
-    this.indent = indent;
   }
 
   @Override
@@ -118,14 +113,8 @@ public final class EventCardLayoutBinding implements ViewBinding {
         break missingId;
       }
 
-      id = R.id.indent;
-      TextView indent = ViewBindings.findChildViewById(rootView, id);
-      if (indent == null) {
-        break missingId;
-      }
-
       return new EventCardLayoutBinding((RelativeLayout) rootView, eventCapacity, eventDatetime,
-          eventLanguage, eventLocation, eventName, eventPhoto, indent);
+          eventLanguage, eventLocation, eventName, eventPhoto);
     }
     String missingId = rootView.getResources().getResourceName(id);
     throw new NullPointerException("Missing required view with ID: ".concat(missingId));
