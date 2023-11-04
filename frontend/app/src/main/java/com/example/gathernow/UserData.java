@@ -2,6 +2,10 @@ package com.example.gathernow;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.File;
+
+import okhttp3.MultipartBody;
+
 public class UserData {
     @SerializedName("name")
     String name;
@@ -21,6 +25,7 @@ public class UserData {
     @SerializedName("avatar")
     String avatar;
 
+    transient MultipartBody.Part avatarPart;
     // SignUp
     public UserData(String name, String email, String password){
         this.name = name;
@@ -32,7 +37,6 @@ public class UserData {
         this.email = email;
         this.password = password;
     }
-
     public UserData(String name, String email, Integer user_id, String created_at, String avatar){
         this.name = name;
         this.email = email;
@@ -41,6 +45,4 @@ public class UserData {
         this.avatar = avatar;
 
     }
-
-
 }
