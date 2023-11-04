@@ -108,3 +108,20 @@ Run the following commands to start the service on Microsoft Azure. To make the 
 python manage.py runserver 0.0.0.0:8000
 ```
 The web server will be live on `http://[Server_IP_Address]:8000/`.
+
+## Testing 
+Currently, the test for each app is written in `tests.py` in each app directory. Thus, we have
+- `backend/users/tests.py` This is the test for user app
+- `backend/events/tests.py` This is the test for event app
+
+To run the test, you can use the following command:
+```
+coverage run manage.py test users events
+```
+
+To check the coverage of the test, you can use the following command:
+```
+coverage report -m
+```
+
+When writing the unit test, we should coverage the test at least 90% for each .py file.
