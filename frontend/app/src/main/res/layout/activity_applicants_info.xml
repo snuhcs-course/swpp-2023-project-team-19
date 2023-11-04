@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ApplicantsInfoActivity"
     android:orientation="vertical"
-    android:id="@+id/container">
+    android:id="@+id/container1">
 
     <TextView
         android:id="@+id/event_name"
@@ -55,6 +55,20 @@
 
 
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+
+
+    </ScrollView>
 
 
 

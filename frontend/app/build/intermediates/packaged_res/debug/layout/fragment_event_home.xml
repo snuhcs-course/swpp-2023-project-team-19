@@ -97,20 +97,24 @@
                 android:orientation="vertical">
 
                 <!--Can be deleted-->
-                <com.example.gathernow.EventCardView
-                    android:id="@+id/eventCard1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"/>
 
-                <com.example.gathernow.EventCardView
-                    android:id="@+id/eventCard"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingVertical="10dp"/>
 
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/loading_layout">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -316,6 +316,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_button"
         style="@style/DangerButton"
+        android:onClick="onDeleteApplication"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Withdraw"
@@ -332,7 +333,7 @@
         style="@style/NegativeButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="View participants"
+        android:text="View applicants"
         android:textSize="18sp"
         android:visibility="invisible"
         app:layout_constraintHorizontal_chainStyle="spread"

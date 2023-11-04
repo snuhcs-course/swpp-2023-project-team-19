@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         // sign up button
         Button signUpButton = (Button) findViewById(R.id.signupButton);
         signUpButton.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), FragHome.class);
+            Intent intent = new Intent(v.getContext(), SignUpActivity.class);
             startActivity(intent);
         });
 
