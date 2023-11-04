@@ -65,13 +65,22 @@ def events_application(request, event_id):
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-@api_view(['GET'])
+@api_view(['GET', 'DELETE'])
 def check_application(request, user_id, event_id):
     try:
         application = Application.objects.get(applicant_id=user_id, event_id=event_id)
-        serializer = ApplicationSerializer(application, many=False)
-        return Response(serializer.data)
     except Application.DoesNotExist:
         return Response({"message": "User has not applied for this event."}, status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ApplicationSerializer(application, many=False)
+        return Response(serializer.data)
+    
+    elif request.method == 'DELETE':
+        application.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+    
 
 
