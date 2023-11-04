@@ -1,25 +1,24 @@
 package com.example.gathernow;
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,19 +54,22 @@ public class SignUpActivity extends AppCompatActivity {
 
         pickProfilePic = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
             if (uri != null) {
-                Log.d("SignUpActivity Testing", "Profile picture selected: " + uri);
                 // Load picture from uri
                 InputStream inputStream;
-                File outputFile = new File(getApplicationContext().getFilesDir(), "tmp_file.jpg");
+                File outputFile = new File(getApplicationContext().getFilesDir(), "profile_img.jpg");
                 try {
                     inputStream = getContentResolver().openInputStream(uri);
                     FileOutputStream outputStream = new FileOutputStream(outputFile);
-                    Bitmap selectedImgBitmap = BitmapFactory.decodeStream(inputStream);
-                    // Compress bitmap
-                    selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
-                    outputStream.close();
-                    avatarFilePath = outputFile.getPath();
-                    Log.d("SignUpActivity Testing", "Profile picture saved to: " + avatarFilePath);
+                    Bitmap selectedImgBitmap = getRotatedImage(inputStream);
+
+                    if (selectedImgBitmap != null) {
+                        // Compress bitmap
+                        selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
+                        outputStream.close();
+                        avatarFilePath = outputFile.getPath();
+                        Log.d("SignUpActivity Testing", "Profile picture saved to: " + avatarFilePath);
+                    }
+
                 } catch (IOException e) {
                     Log.e("SignUpActivity Testing", "Error");
                     e.printStackTrace();
@@ -75,6 +77,52 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private Bitmap getRotatedImage(InputStream inputStream) {
+        // Clone the input stream because inputStream can only be read once
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        InputStream inputStreamClone;
+        InputStream inputStreamClone2;
+        try {
+            inputStream.transferTo(baos);
+            inputStreamClone = new ByteArrayInputStream(baos.toByteArray());
+            inputStreamClone2 = new ByteArrayInputStream(baos.toByteArray());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("SignUpActivity Testing", "IO Exception when cloning the input stream");
+            return null;
+        }
+
+        ExifInterface exifInterface = null;
+        try {
+            exifInterface = new ExifInterface(inputStreamClone);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("SignUpActivity Testing", "IO Exception when reading exif");
+        }
+        if (exifInterface != null) {
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+            int degrees = 0;
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degrees = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degrees = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degrees = 270;
+                    break;
+            }
+            Matrix matrix = new Matrix();
+            matrix.postRotate(degrees);
+            Bitmap selectedImgBitmap = BitmapFactory.decodeStream(inputStreamClone2);
+            return Bitmap.createBitmap(selectedImgBitmap, 0, 0, selectedImgBitmap.getWidth(), selectedImgBitmap.getHeight(), matrix, true);
+
+        }
+        return BitmapFactory.decodeStream(inputStream);
     }
 
     public void onUploadProfilePicture(View view) {
@@ -89,6 +137,7 @@ public class SignUpActivity extends AppCompatActivity {
         String password_confirm1 = pwConfirmInput.getText().toString();
 
         TextView alert = (TextView) findViewById(R.id.alert);
+        alert.setText("");
 
         // EXCEPTIONS
         // does not fill in all required fields
@@ -119,14 +168,9 @@ public class SignUpActivity extends AppCompatActivity {
         else {
             MultipartBody.Part avatarPart = null;
             if (avatarFilePath != null) {
-                if (avatarFile.exists()) {
-                    avatarFile = new File(avatarFilePath);
-                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), avatarFile);
-                    avatarPart = MultipartBody.Part.createFormData("avatar", avatarFile.getName(), requestFile);
-
-                } else {
-                    Toast.makeText(this, "Avatar file does not exist", Toast.LENGTH_SHORT).show();
-                }
+                avatarFile = new File(avatarFilePath);
+                RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), avatarFile);
+                avatarPart = MultipartBody.Part.createFormData("avatar", avatarFile.getName(), requestFile);
             }
 
             RequestBody nameBody = RequestBody.create(MediaType.parse("text/plain"), name1);
