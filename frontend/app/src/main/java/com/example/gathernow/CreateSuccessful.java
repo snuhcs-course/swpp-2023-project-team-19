@@ -19,7 +19,6 @@ public class CreateSuccessful extends AppCompatActivity {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent = new Intent(v.getContext(), FragHome.class);
                 startActivity(intent);
             }

@@ -127,13 +127,13 @@
             android:text="Number of participants"
             android:layout_marginTop="10dp"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/event_num_participants"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:clickable="true"
-            android:text="Number of participants"/>
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/event_date_time_hint"
@@ -187,19 +187,21 @@
             android:inputType="text" />
 
         <TextView
-            android:id="@+id/spinner_hint"
+            android:id="@+id/event_language_hint"
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="left"
-            android:paddingVertical="10dp"
-            android:text="Select language:" />
+            android:text="Event language(s)"
+            android:layout_marginTop="10dp"/>
 
-        <Spinner
-            style="@style/EditText"
+        <TextView
             android:id="@+id/event_language"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            style="@style/EditText"
+            android:hint="Select one or more languages" />
 
         <TextView
             android:id="@+id/event_price_hint"
@@ -236,6 +238,40 @@
             android:layout_marginTop="10dp"
             android:hint="Location"
             android:inputType="text" />
+
+        <TextView
+            android:id="@+id/event_registration_hint"
+            style="@style/TextField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="Registration available until: "
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/event_register_date"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:text="Date"  />
+
+            <Button
+                android:id="@+id/event_register_time"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:text="Time" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/event_description_hint"

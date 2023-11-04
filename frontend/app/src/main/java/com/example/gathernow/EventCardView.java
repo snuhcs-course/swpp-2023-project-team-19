@@ -79,7 +79,13 @@ public class EventCardView extends LinearLayout {
     }
 
     public void setEventLanguage(String eventLanguage) {
-        event_language.setText(eventLanguage);
+        // set limitation for display if too many languages
+        if (eventLanguage.length() <= 25) {
+            event_language.setText(eventLanguage);
+        } else {
+            String truncatedText = eventLanguage.substring(0, 22) + "...";
+            event_language.setText(truncatedText);
+        }
     }
 
     public void setEventDateTime(Date event_date, Time event_time) {

@@ -37,13 +37,15 @@ public interface ServiceApi {
     @POST("/api/events/")
     Call<CodeMessageResponse> eventlist(@Body EventData data);
 
+    // Get all events in the database
     @GET("/api/events/")
     Call<List<EventData>> getALlEvents();
 
+    // get user info based on user id
     @GET("/api/userinfo/{user_id}/")
-    Call<UserData1> getUserInfo(@Path("user_id") int userId);
+    Call<UserData> getUserInfo(@Path("user_id") int userId);
 
-    // Events by User API
+    // Get events hosted by user using user id
     @GET("/api/events/by_user/{user_id}/")
     Call<List<EventData>> getEventsByUser(@Path("user_id") int userId);
 
@@ -54,4 +56,11 @@ public interface ServiceApi {
     // Delete event by event id API
     @DELETE("/api/events/by_id/{event_id}/")
     Call<CodeMessageResponse> deleteEventByEventId(@Path("event_id") int eventId);
+
+    // Post new event application to application
+    @POST("/api/application/")
+    Call<CodeMessageResponse> apply_event(@Body ApplicationData data);
+
+    @GET("/api/application/check/{user_id}/{event_id}/")
+    Call<ApplicationData> check_if_applied( @Path("user_id") int user_id, @Path("event_id") int event_id);
 }

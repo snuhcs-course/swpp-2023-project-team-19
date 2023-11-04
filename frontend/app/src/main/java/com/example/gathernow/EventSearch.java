@@ -89,8 +89,6 @@ public class EventSearch extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_event_search, container, false);
 
-        // TODO: implement get event details from db and create event card view here
-
         service = RetrofitClient.getClient().create(ServiceApi.class);
         service.getALlEvents().enqueue(new Callback<List<EventData>>() {
             @Override
@@ -99,46 +97,60 @@ public class EventSearch extends Fragment {
                     List<EventData> events_list = response.body();
 
                     //GetEventData current_event = events_list.get(0);
-
                     //System.out.println(current_event.event_title);
 
                     LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-                    // TODO: Update UI with the list of events
 
                     Collections.reverse(events_list);
 
+                    // Get the current date and time
+                    Date currentDate = new Date(System.currentTimeMillis());
 
                     for (int i = 0; i < events_list.size(); i++) {
-                        EventCardView newEventCard = new EventCardView(getContext(), null);
+
                         EventData currentEvent = events_list.get(i);
-                        newEventCard.setEventName(currentEvent.event_title);
-                        newEventCard.setEventPhoto(currentEvent.event_type);
-                        newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
-                        newEventCard.setEventLocation(currentEvent.event_location);
-                        newEventCard.setEventLanguage(currentEvent.event_language);
-                        newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
+                        // Create Date and Time object from currentEvent.event_date
+                        Date eventDate = Date.valueOf(currentEvent.event_date);
+                        Time eventTime = Time.valueOf(currentEvent.event_time);
+
+                        // Combine the Date and Time into a single Date object
+                        long dateTimeMillis = eventDate.getTime() + eventTime.getTime();
+                        Date eventDateTime = new Date(dateTimeMillis);
+
+                        //Only display events that happens after the current datetime
+                        if (eventDateTime.after(currentDate)){
+                            EventCardView newEventCard = new EventCardView(getContext(), null);
+
+                            newEventCard.setEventName(currentEvent.event_title);
+                            newEventCard.setEventPhoto(currentEvent.event_type);
+                            newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
+                            newEventCard.setEventLocation(currentEvent.event_location);
+                            newEventCard.setEventLanguage(currentEvent.event_language);
+                            newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
 
 //                        Log.d("EventInfo Testing", "Clicked event id: " + events_list.get(i).event_id.toString());
 
-                        // Add vertical padding to the newEventCard
-                        int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
-                        newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
-                        eventCardContainer.addView(newEventCard);
+                            // Add vertical padding to the newEventCard
+                            int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
+                            newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
+                            eventCardContainer.addView(newEventCard);
 
-                        newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                // Handle the click event here
-                                Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+                            newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    // Handle the click event here
+                                    //Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
 
-                                // Send the user id to the EventInfo activity
-                                Intent intent = new Intent(v.getContext(), EventInfo.class);
-                                intent.putExtra("userId", getUserId(v.getContext()));
-                                intent.putExtra("eventId", currentEvent.event_id);
+                                    // Send the user id to the EventInfo activity
+                                    Intent intent = new Intent(v.getContext(), EventInfo.class);
+                                    intent.putExtra("userId", getUserId(v.getContext()));
+                                    intent.putExtra("eventId", currentEvent.event_id);
 
-                                startActivity(intent);
-                            }
-                        });
+                                    startActivity(intent);
+                                }
+                            });
+                        }
+
                     }
 
 
@@ -170,46 +182,6 @@ public class EventSearch extends Fragment {
         });
 
         return rootView;
-
-
-        /*
-        // modify the EventCardView contents:
-        // to be deleted
-        EventCardView eventCard = rootView.findViewById(R.id.eventCard);
-        eventCard.setEventName("Defined Event");
-        eventCard.setEventPhoto("Sports");
-        eventCard.setEventCapacity(3,10);
-        eventCard.setEventLocation("COEX, Gangnam-gu");
-        eventCard.setEventLanguage("Russian");
-        eventCard.setEventDateTime(new Date(1234567890123L), Time.valueOf("14:00:00"));
-
-        LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-
-        // Create a new EventCardView dynamically
-
-        EventCardView newEventCard = new EventCardView(getContext(), null);
-        newEventCard.setEventName("Dynamic Event");
-        newEventCard.setEventPhoto("Leisure");
-        newEventCard.setEventCapacity(5, 20);
-        newEventCard.setEventLocation("Dongdaemun, Jongno-gu");
-        newEventCard.setEventLanguage("Korean");
-        newEventCard.setEventDateTime(new Date(1622534400000L), Time.valueOf("18:30:00"));
-
-        // Add vertical padding to the newEventCard
-        int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
-        newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
-        eventCardContainer.addView(newEventCard);
-
-        newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle the click event here
-                Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-         */
-
 
     }
 }
