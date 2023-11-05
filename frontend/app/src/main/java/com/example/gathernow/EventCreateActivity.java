@@ -41,6 +41,9 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -64,6 +67,7 @@ public class EventCreateActivity extends Fragment {
     private ServiceApi service;
     private boolean imageUploaded = false;
     private String eventThumbnailFilePath = null;
+    private File eventThumbnailFile;
 
     public EventCreateActivity() {
         // Required empty public constructor
@@ -136,8 +140,10 @@ public class EventCreateActivity extends Fragment {
                         eventThumbnailFilePath = outputFile.getPath();
                         Log.d("EventCreateActivity Testing", "Thumbnail saved to: " + eventThumbnailFilePath);
                     }
+                    imageUploaded = true;
+                    uploadImgButton.setText("Delete");
                 } catch (IOException e) {
-                    Log.e("EventCreateActivity Testing", "Error");
+                    Log.e("EventCreateActivity Testing", "Error when uploading image");
                     e.printStackTrace();
                 }
             }
@@ -146,12 +152,11 @@ public class EventCreateActivity extends Fragment {
             if (!imageUploaded) {
                 Log.d("EventCreateActivity Testing", "Upload image button clicked");
                 pickProfilePic.launch(new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
-                imageUploaded = true;
-                uploadImgButton.setText("Delete");
             } else {
                 Log.d("EventCreateActivity Testing", "Delete img");
                 // TODO: Delete selected image
-                eventImage.setImageURI(null);
+                eventImage.setImageResource(R.mipmap.ic_sad_frog_foreground);
+                eventThumbnailFilePath = null;
                 uploadImgButton.setText("Upload");
                 imageUploaded = false;
             }
@@ -250,17 +255,14 @@ public class EventCreateActivity extends Fragment {
             int hour = c.get(Calendar.HOUR_OF_DAY);
             int minutes = c.get(Calendar.MINUTE);
 
-            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker timePicker, int hour, int mins) {
-                    // TODO: time
-                    event_hour_input[0] = hour;
-                    event_min_input[0] = mins;
-                    String formattedHour = String.format("%02d", hour);
-                    String formattedMins = String.format("%02d", mins);
-                    event_time.setText("Time: " + formattedHour + ":" + formattedMins);
-                    //event_time.setText("Time: " + String.valueOf(hour) + ":" + String.valueOf(mins));
-                }
+            TimePickerDialog timePickerDialog = new TimePickerDialog(getContext(), (timePicker, hour1, mins) -> {
+                // TODO: time
+                event_hour_input[0] = hour1;
+                event_min_input[0] = mins;
+                String formattedHour = String.format("%02d", hour1);
+                String formattedMins = String.format("%02d", mins);
+                event_time.setText("Time: " + formattedHour + ":" + formattedMins);
+                //event_time.setText("Time: " + String.valueOf(hour) + ":" + String.valueOf(mins));
             }, hour, minutes, false);
             timePickerDialog.show();
         });
@@ -321,7 +323,6 @@ public class EventCreateActivity extends Fragment {
         final String[] selected_language = {""};
 
         languageTextView.setOnClickListener(view ->
-
         {
 
             // Initialize alert dialog
@@ -383,7 +384,6 @@ public class EventCreateActivity extends Fragment {
 
             // get event details in correct format
             String event_name = eventNameText.getText().toString();
-            //Integer event_num_participants = event_num_participants_input[0];
 
             Integer event_num_joined = 0;
 
@@ -447,11 +447,36 @@ public class EventCreateActivity extends Fragment {
                 String alert_msg = "Number of participants should be at least 1!";
                 alert.setText(alert_msg);
             } else {
+                // send info to host
                 Integer host_id = Integer.valueOf(getUserId(getActivity()));
 
+                // Thumbnail
+                MultipartBody.Part thumbnailPart = null;
+                if (eventThumbnailFilePath != null) {
+                    eventThumbnailFile = new File(eventThumbnailFilePath);
+                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), eventThumbnailFile);
+                    thumbnailPart = MultipartBody.Part.createFormData("avatar", eventThumbnailFile.getName(), requestFile);
+                }
+
+                RequestBody eventTypeBody = RequestBody.create(MediaType.parse("text/plain"), eventTypeIn.get());
+                RequestBody eventNameBody = RequestBody.create(MediaType.parse("text/plain"), event_name);
+                RequestBody eventNumParticipantsBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(event_num_participants));
+                RequestBody eventDateBody = RequestBody.create(MediaType.parse("text/plain"), event_date1);
+                RequestBody eventTimeBody = RequestBody.create(MediaType.parse("text/plain"), event_time1);
+                RequestBody eventDurationBody = RequestBody.create(MediaType.parse("text/plain"), event_duration);
+                RequestBody eventLanguageBody = RequestBody.create(MediaType.parse("text/plain"), event_language);
+                RequestBody eventPriceBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(event_price));
+                RequestBody eventLocationBody = RequestBody.create(MediaType.parse("text/plain"), event_location);
+                RequestBody eventDescriptionBody = RequestBody.create(MediaType.parse("text/plain"), event_description);
+                RequestBody eventNumJoinedBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(event_num_joined));
+                RequestBody hostIdBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(host_id));
+                RequestBody eventRegDateBody = RequestBody.create(MediaType.parse("text/plain"), event_reg_date1);
+                RequestBody eventRegTimeBody = RequestBody.create(MediaType.parse("text/plain"), event_reg_time1);
+
                 service = RetrofitClient.getClient().create(ServiceApi.class);
-                EventData requestData = new EventData(eventTypeIn.get(), event_name, event_num_participants, event_date1, event_time1, event_duration, event_language, event_price, event_location, event_description, event_num_joined, host_id, event_reg_date1, event_reg_time1);
-                service.eventlist(requestData).enqueue(new Callback<CodeMessageResponse>() {
+//                EventData requestData = new EventData(eventTypeIn.get(), event_name, event_num_participants, event_date1, event_time1, event_duration, event_language, event_price, event_location, event_description, event_num_joined, host_id, event_reg_date1, event_reg_time1);
+                Call<CodeMessageResponse> call = service.eventlist(thumbnailPart, hostIdBody, eventTypeBody, eventNameBody, eventNumParticipantsBody, eventDateBody, eventTimeBody, eventDurationBody, eventLanguageBody, eventPriceBody, eventLocationBody, eventDescriptionBody, eventNumJoinedBody, eventRegDateBody, eventRegTimeBody);
+                call.enqueue(new Callback<CodeMessageResponse>() {
                     @Override
                     public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
                         if (response.isSuccessful()) {

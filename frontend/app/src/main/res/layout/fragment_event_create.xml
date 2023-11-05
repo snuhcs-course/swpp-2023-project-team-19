@@ -24,17 +24,18 @@
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:layout_marginTop="15dp"
+            android:src="@mipmap/ic_sad_frog_foreground"
             android:contentDescription="Event thumbnail" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/event_image_upload"
             style="@style/PositiveButton"
-            android:textSize="15sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Upload" />
+            android:text="Upload"
+            android:textSize="15sp" />
 
 
         <TextView
@@ -69,8 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:gravity="left"
-            />
+            android:gravity="left" />
 
         <TextView
             android:id="@+id/event_num_participants_hint"
@@ -252,8 +252,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingVertical="10dp"
-            />
+            android:paddingVertical="10dp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/post"

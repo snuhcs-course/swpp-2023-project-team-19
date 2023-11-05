@@ -34,8 +34,25 @@ public interface ServiceApi {
     Call<CodeMessageResponse> userLogIn(@Body UserData data);
 
     // Event API: add new events
+    @Multipart
     @POST("/api/events/")
-    Call<CodeMessageResponse> eventlist(@Body EventData data);
+    Call<CodeMessageResponse> eventlist(
+            @Part MultipartBody.Part thumbnail,
+            @Part("host_id") RequestBody host_id,
+            @Part("event_type") RequestBody event_type,
+            @Part("event_title") RequestBody event_title,
+            @Part("event_num_participants") RequestBody event_num_participants,
+            @Part("event_date") RequestBody event_date,
+            @Part("event_time") RequestBody event_time,
+            @Part("event_duration") RequestBody event_duration,
+            @Part("event_language") RequestBody event_language,
+            @Part("event_price") RequestBody event_price,
+            @Part("event_location") RequestBody event_location,
+            @Part("event_description") RequestBody event_description,
+            @Part("event_num_joined") RequestBody event_num_joined,
+            @Part("event_register_date") RequestBody event_register_date,
+            @Part("event_register_time") RequestBody event_register_time
+    );
 
     // Get all events in the database
     @GET("/api/events/")
