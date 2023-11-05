@@ -14,7 +14,11 @@ def event_list(request):
     elif request.method == 'POST':
         serializer = EventSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            event = serializer.save()
+            event_image = request.FILES.get('event_images')
+            if event_image:
+                event.event_image = event_image
+                event.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
