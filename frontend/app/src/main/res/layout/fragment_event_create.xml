@@ -1,114 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/event_create_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/event_create_container">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="30dp"
-        tools:context=".EventCreate"
-        android:orientation="vertical">
+        tools:context=".EventCreateActivity">
 
         <ImageButton
             android:id="@+id/returnBtn"
             android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_height="30dp"
             android:background="@null"
             android:src="@drawable/ic_return_foreground" />
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp">
-
-            <RadioGroup
-                android:id="@+id/imageRadioGroup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RadioButton
-                    android:id="@+id/image1_leisure"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/image_selector"
-                    android:button="@null"
-                    android:drawableStart="@mipmap/ic_image1_leisure" />
-
-                <RadioButton
-                    android:id="@+id/image2_sports"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/image_selector"
-                    android:button="@null"
-                    android:drawableStart="@mipmap/ic_image2_sports_foreground" />
-
-                <RadioButton
-                    android:id="@+id/image3_workshops"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/image_selector"
-                    android:button="@null"
-                    android:drawableStart="@mipmap/ic_image3_workshops_foreground" />
-
-                <RadioButton
-                    android:id="@+id/image4_parties"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/image_selector"
-                    android:button="@null"
-                    android:drawableStart="@mipmap/ic_image4_parties_foreground" />
-
-                <RadioButton
-                    android:id="@+id/image5_cultural_activities"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/image_selector"
-                    android:button="@null"
-                    android:drawableStart="@mipmap/ic_image5_cultural_activities_foreground" />
-
-                <RadioButton
-                    android:id="@+id/image6_others"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/image_selector"
-                    android:button="@null"
-                    android:drawableStart="@mipmap/ic_image6_others_foreground" />
-
-            </RadioGroup>
-
-        </HorizontalScrollView>
-
-        <TextView
-            android:id="@+id/event_type_hint"
-            style="@style/TextField"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:text="Type of event"
-            android:layout_marginTop="10dp"/>
-
-        <TextView
-            android:id="@+id/event_type"
-            style="@style/EditText"
+        <ImageView
+            android:id="@+id/event_image"
             android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:layout_marginTop="15dp"
+            android:contentDescription="Event thumbnail" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/event_image_upload"
+            style="@style/PositiveButton"
+            android:textSize="15sp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:hint="Select one photo above"
-            android:gravity="left"/>
+            android:text="Upload" />
+
 
         <TextView
             android:id="@+id/event_name_hint"
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Event name"
-            android:layout_marginTop="10dp"/>
+            android:text="Event name" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/event_name"
@@ -116,16 +52,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:inputType="text"/>
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/event_type_hint"
+            style="@style/TextField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            android:text="Type of event" />
+
+        <TextView
+            android:id="@+id/event_type"
+            style="@style/EditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="left"
+            />
 
         <TextView
             android:id="@+id/event_num_participants_hint"
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Number of participants"
-            android:layout_marginTop="10dp"/>
+            android:text="Number of participants" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/event_num_participants"
@@ -140,9 +94,9 @@
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Event date and time "
-            android:layout_marginTop="10dp"/>
+            android:text="Event date and time " />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -151,19 +105,19 @@
 
             <Button
                 android:id="@+id/event_date"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:clickable="true"
-                android:text="Date"  />
+                android:text="Date" />
 
             <Button
                 android:id="@+id/event_time"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:clickable="true"
                 android:text="Time" />
 
@@ -174,9 +128,9 @@
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Event duration"
-            android:layout_marginTop="10dp"/>
+            android:text="Event duration" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/event_duration"
@@ -191,16 +145,16 @@
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Event language(s)"
-            android:layout_marginTop="10dp"/>
+            android:text="Event language(s)" />
 
         <TextView
             android:id="@+id/event_language"
+            style="@style/EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            style="@style/EditText"
             android:hint="Select one or more languages" />
 
         <TextView
@@ -208,9 +162,9 @@
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Price (₩)"
-            android:layout_marginTop="10dp"/>
+            android:text="Price (₩)" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/event_price"
@@ -226,9 +180,9 @@
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Location"
-            android:layout_marginTop="10dp"/>
+            android:text="Location" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/event_location"
@@ -244,9 +198,9 @@
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Registration available until: "
-            android:layout_marginTop="10dp"/>
+            android:text="Registration available until: " />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -255,19 +209,19 @@
 
             <Button
                 android:id="@+id/event_register_date"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:clickable="true"
-                android:text="Date"  />
+                android:text="Date" />
 
             <Button
                 android:id="@+id/event_register_time"
-                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:layout_weight="1"
                 android:clickable="true"
                 android:text="Time" />
 
@@ -278,19 +232,19 @@
             style="@style/TextField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="left"
-            android:text="Descriptions"
-            android:layout_marginTop="10dp"/>
+            android:text="Descriptions" />
 
         <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/event_description"
             style="@style/EditText"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="250dp"
             android:layout_marginTop="10dp"
             android:gravity="top"
             android:hint="..."
-            android:inputType="text" />
+            android:inputType="textMultiLine" />
 
         <TextView
             android:id="@+id/alert"
@@ -299,15 +253,15 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:paddingVertical="10dp"
-            android:text=" "/>
+            />
 
         <androidx.appcompat.widget.AppCompatButton
-            style="@style/PositiveButton"
             android:id="@+id/post"
+            style="@style/PositiveButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Create"
-            android:layout_marginTop="20dp" />
+            android:layout_marginTop="20dp"
+            android:text="Create" />
 
 
     </LinearLayout>
