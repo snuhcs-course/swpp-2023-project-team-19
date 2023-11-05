@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <ScrollView
         android:id="@+id/content"
@@ -19,7 +19,7 @@
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
         app:layout_constraintHeight_percent="0.8"
-        app:layout_constraintTop_toTopOf="@id/horizontalGuideline">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
