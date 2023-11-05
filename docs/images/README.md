@@ -15,9 +15,9 @@ DB Diagram can updated via dbdiagram.io. The following is the current DB Diagram
 Table User as U {
   user_id int [pk, increment]
   name varchar 
-  created_at datetime 
-  email varchar 
   password varchar
+  created_at datetime
+  email varchar  
   avatar varchar 
 }
 
@@ -39,19 +39,15 @@ Table Event {
   event_num_joined int [default: 0]
 }
 
-Table UserEventHistory {
-  event_id int [ref: > Event.event_id]
-  user_id int [ref: > U.user_id]
-  user_role int
-  registration_status int
-  created_at datetime [default: `auto_now_add=True`]
-  updated_at datetime [default: `auto_now_add=True`]
-}
 
-Table UserHostEventStatus{
-  event_id int  [ref: > Event.event_id]
-  user_host int [ref: > Event.host_id]
-  user_id int
+Table Application {
+  application_id int [pk, increment]
+  event_id int [ref: > Event.event_id]
+  host_id int [ref: > Event.host_id]
+  applicant_id int [ref: > U.user_id]
+  applicant_name varchar [ref: > U.name]
+  applicant_avatar varchar [ref: > U.avatar]
+  applicant_contact varchar 
   message varchar
   request_status int
   created_at datetime [default: `auto_now_add=True`]
