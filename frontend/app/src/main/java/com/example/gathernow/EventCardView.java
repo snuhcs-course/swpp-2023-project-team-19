@@ -16,6 +16,8 @@ import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 
+import com.squareup.picasso.Picasso;
+
 public class EventCardView extends LinearLayout {
 
     private ImageView event_photo;
@@ -47,7 +49,12 @@ public class EventCardView extends LinearLayout {
     }
 
     // Setter methods to update the UI elements
-    public void setEventPhoto(String event_type) {
+    public void setEventPhoto(String event_type, String event_images) {
+        if (event_images != null) {
+            String eventThumbnail = "http://20.2.88.70:8000" + event_images;
+            Picasso.get().load(eventThumbnail).into(event_photo);
+            return;
+        }
         switch (event_type) {
             case "Leisure":
                 event_photo.setImageResource(R.mipmap.ic_image1_leisure);
@@ -75,7 +82,12 @@ public class EventCardView extends LinearLayout {
     }
 
     public void setEventLocation(String eventLocation) {
-        event_location.setText(eventLocation);
+        if (eventLocation.length() <= 25) {
+            event_location.setText(eventLocation);
+        } else {
+            String truncatedText = eventLocation.substring(0, 22) + "...";
+            event_location.setText(truncatedText);
+        }
     }
 
     public void setEventLanguage(String eventLanguage) {

@@ -123,6 +123,7 @@ public class EventCreateActivity extends Fragment {
         pickProfilePic = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
             if (uri != null) {
                 Log.d("EventCreateActivity Testing", "Profile picture selected");
+                eventImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 eventImage.setImageURI(uri);
                 // Load picture from uri
                 InputStream inputStream;
@@ -156,6 +157,7 @@ public class EventCreateActivity extends Fragment {
                 Log.d("EventCreateActivity Testing", "Delete img");
                 // TODO: Delete selected image
                 eventImage.setImageResource(R.mipmap.ic_sad_frog_foreground);
+                eventImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 eventThumbnailFilePath = null;
                 uploadImgButton.setText("Upload");
                 imageUploaded = false;
@@ -455,7 +457,7 @@ public class EventCreateActivity extends Fragment {
                 if (eventThumbnailFilePath != null) {
                     eventThumbnailFile = new File(eventThumbnailFilePath);
                     RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), eventThumbnailFile);
-                    thumbnailPart = MultipartBody.Part.createFormData("avatar", eventThumbnailFile.getName(), requestFile);
+                    thumbnailPart = MultipartBody.Part.createFormData("event_images", eventThumbnailFile.getName(), requestFile);
                 }
 
                 RequestBody eventTypeBody = RequestBody.create(MediaType.parse("text/plain"), eventTypeIn.get());

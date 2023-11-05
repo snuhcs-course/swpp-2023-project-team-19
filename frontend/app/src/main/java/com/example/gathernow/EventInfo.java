@@ -76,7 +76,7 @@ public class EventInfo extends AppCompatActivity {
                     EventData eventData = events_list.get(0); // Get the first event as the list only contains one event
 
                     // Update the UI with the event info
-                    setEventPhoto(eventData.event_type);
+                    setEventPhoto(eventData.event_type, eventData.event_images);
                     eventTitle.setText(eventData.event_title);
                     setHostName(eventData.host_id);
                     eventDescription.setText(eventData.event_description);
@@ -149,8 +149,15 @@ public class EventInfo extends AppCompatActivity {
         });
     }
 
-    private void setEventPhoto(String event_type) {
+    private void setEventPhoto(String event_type, String event_images) {
+        Log.d("EventInfo Testing", "Event thumbnail: " + event_images);
         ImageView eventImage = findViewById(R.id.event_img);
+        // if user uploaded image
+        if (event_images != null) {
+            String eventThumbnail = "http://20.2.88.70:8000" + event_images;
+            Picasso.get().load(eventThumbnail).into(eventImage);
+            return;
+        }
         switch (event_type) {
             case "Leisure":
                 eventImage.setImageResource(R.mipmap.ic_image1_leisure);
