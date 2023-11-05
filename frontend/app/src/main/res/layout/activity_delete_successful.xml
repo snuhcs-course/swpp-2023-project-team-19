@@ -29,7 +29,7 @@
         android:id="@+id/create_successful"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Event deleted successfully"
+        android:text="Deleted successfully"
         android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
