@@ -42,12 +42,16 @@ def application_detail(request, pk):
         applications.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-#get list of applications by user id
+#get list of applications by user(applicant) id
 @api_view(['GET'])
 #@permission_classes([IsAuthenticated])  # Optional: If you want to protect the endpoint
 def user_application(request, user_id):
+    try:
+        applications = Application.objects.filter(applicant_id=user_id)
+    except Application.DoesNotExist:
+        return Response({"message": "User has no applications."}, status=status.HTTP_404_NOT_FOUND)
+
     if request.method == 'GET':
-        applications = Application.objects.filter(host_id=user_id)
         serializer = ApplicationSerializer(applications, many=True)
         return Response(serializer.data)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
@@ -55,7 +59,11 @@ def user_application(request, user_id):
 # Get & delete applications by event id
 @api_view(['GET', 'DELETE'])
 def events_application(request, event_id):
-    applications = Application.objects.filter(event_id=event_id)
+    try:
+        applications = Application.objects.filter(event_id=event_id)
+    except Application.DoesNotExist:
+        return Response({"message": "No application for this event."}, status=status.HTTP_404_NOT_FOUND)
+
     if request.method == 'GET':
         serializer = ApplicationSerializer(applications, many=True)
         return Response(serializer.data)
@@ -81,6 +89,20 @@ def check_application(request, user_id, event_id):
         return Response(status=status.HTTP_204_NO_CONTENT)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
+
+# Update request status in application
+@api_view(['PUT'])
+def accept_application(request, application_id):
+    try:
+        application = Application.objects.get(application_id=application_id)
+    except Application.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        application.request_status = 1
+        application.save()
+        serializer = ApplicationSerializer(application)
+        return Response(serializer.data)
     
 
 

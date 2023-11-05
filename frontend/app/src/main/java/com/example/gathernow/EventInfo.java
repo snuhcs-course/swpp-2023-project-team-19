@@ -34,6 +34,8 @@ public class EventInfo extends AppCompatActivity {
 
     public int hostId;
 
+    private Integer applicationId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +115,7 @@ public class EventInfo extends AppCompatActivity {
 
                             }
                         }
+
 
                         @Override
                         public void onFailure(Call<UserData> call, Throwable t) {
@@ -204,6 +207,8 @@ public class EventInfo extends AppCompatActivity {
                         //int status = -1;
                         int status = current_application.request_status;
 
+                        applicationId = current_application.application_id;
+
 
                         if(status == 0){
                             //Application is pending, show waiting button
@@ -274,7 +279,7 @@ public class EventInfo extends AppCompatActivity {
                         }
                     });
 
-                    // Direct to Home screen
+                    // Direct to Delete Successful class
                     //Intent intent = new Intent(view.getContext(), FragHome.class);
                     //startActivity(intent);
                     Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
@@ -305,8 +310,43 @@ public class EventInfo extends AppCompatActivity {
 
     }
 
+    public void onDeleteApplication(View view){
+        service.delete_application(applicationId).enqueue(new Callback<ApplicationData>() {
+            @Override
+            public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response) {
+                Log.d("EventInfo Testing", "Event deleted");
+                if (response.isSuccessful()) {
+                    // !!! Commented lines here will cause crash!
+                    //Log.d("EventInfo Testing", response.body().toString());
+                    ApplicationData application_to_delete = response.body();
+                    //Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationData> call, Throwable t) {
+                Log.d("ApplicationDelete Testing", "Failed to delete application");
+            }
+        });
+
+        // Direct to Application Delete Successful class
+        //Intent intent = new Intent(view.getContext(), FragHome.class);
+        //startActivity(intent);
+        Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
+        startActivity(intent);
+
+    }
+
     public void onViewApplicants(View v) {
         Intent intent = new Intent(v.getContext(), ApplicantsInfoActivity.class);
+
+        // Send the user id to the EventInfo activity
+        intent.putExtra("userId", userId);
+        intent.putExtra("eventId", eventId);
+        intent.putExtra("hostId", hostId);
+        intent.putExtra("eventName", eventName);
+        intent.putExtra("hostName", hostname);
+        intent.putExtra("hostAvatar", userAvatar);
         startActivity(intent);
     }
 }

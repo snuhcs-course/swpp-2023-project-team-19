@@ -11,6 +11,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Part;
 import retrofit2.http.Query;
@@ -78,6 +79,26 @@ public interface ServiceApi {
     @POST("/api/application/")
     Call<CodeMessageResponse> apply_event(@Body ApplicationData data);
 
+    // Check if user has applied ot the event
     @GET("/api/application/check/{user_id}/{event_id}/")
     Call<ApplicationData> check_if_applied( @Path("user_id") int user_id, @Path("event_id") int event_id);
+
+
+    // Delete application based on application id
+    // Applicant is rejected by host and related application will be deleted
+    @DELETE("/api/application/one/{application_id}/")
+    Call<ApplicationData> delete_application(@Path("application_id") int application_id);
+
+    // Get applications for an event using event_id
+    @GET("/api/application/by_event/{event_id}/")
+    Call<List<ApplicationData>> getEventApplications(@Path("event_id") int event_id);
+
+    // Update request_status to 1 when application is accepted
+    @PUT("/api/application/accept/{application_id}/")
+    Call<ApplicationData> acceptStatus(@Path("application_id") int application_id);
+
+    // get list of events that a user applied for
+    @GET("api/application/by_user/{user_id}/")
+    Call<List<ApplicationData>> getUserAppliedEvents(@Path("user_id") int user_id);
+
 }
