@@ -15,7 +15,7 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-MEDIA_ROOT = os.path.join(BASE_DIR, 'avatar_image')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 
@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-ai8x6l-bl*=pk*ro0t#3w63-@vt8*#=o82hc+6-c2au=$oa$c0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'users',
-    'events'
+    'events',
+    'applications',
+    'rest_framework.authtoken'
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -62,7 +64,7 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'backend.urls'
 
 TEMPLATES = [
-    {
+    {   
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
         'APP_DIRS': True,
@@ -95,6 +97,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

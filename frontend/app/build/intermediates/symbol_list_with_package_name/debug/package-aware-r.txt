@@ -506,6 +506,12 @@ attr errorIconTintMode
 attr errorShown
 attr errorTextAppearance
 attr errorTextColor
+attr event_capacity
+attr event_datetime
+attr event_language
+attr event_location
+attr event_name
+attr event_photo
 attr expandActivityOverflowButtonDrawable
 attr expanded
 attr expandedHintEnabled
@@ -1350,6 +1356,7 @@ color cardview_dark_background
 color cardview_light_background
 color cardview_shadow_end_color
 color cardview_shadow_start_color
+color color1
 color design_bottom_navigation_shadow_color
 color design_box_stroke_color
 color design_dark_default_color_background
@@ -1397,6 +1404,10 @@ color error_color_material_light
 color foreground_material_dark
 color foreground_material_light
 color gray
+color green1
+color green2
+color green3
+color green4
 color highlighted_text_material_dark
 color highlighted_text_material_light
 color m3_appbar_overlay_color
@@ -2022,6 +2033,10 @@ color mtrl_textinput_disabled_color
 color mtrl_textinput_filled_box_default_background_color
 color mtrl_textinput_focused_box_stroke_color
 color mtrl_textinput_hovered_box_stroke_color
+color night_green1
+color night_green2
+color night_green3
+color night_green4
 color notification_action_color_filter
 color notification_icon_bg_color
 color primary_dark_material_dark
@@ -2129,6 +2144,7 @@ dimen abc_text_size_subhead_material
 dimen abc_text_size_subtitle_material_toolbar
 dimen abc_text_size_title_material
 dimen abc_text_size_title_material_toolbar
+dimen app_bar_height
 dimen appcompat_dialog_background_inset
 dimen cardview_compat_inset_shadow
 dimen cardview_default_elevation
@@ -2192,6 +2208,7 @@ dimen design_tab_text_size_2line
 dimen design_textinput_caption_translate_y
 dimen disabled_alpha_material_dark
 dimen disabled_alpha_material_light
+dimen fab_margin
 dimen fastscroll_default_thickness
 dimen fastscroll_margin
 dimen fastscroll_minimum_range
@@ -2815,6 +2832,7 @@ dimen notification_small_icon_size_as_large
 dimen notification_subtext_size
 dimen notification_top_pad
 dimen notification_top_pad_large_text
+dimen text_margin
 dimen tooltip_corner_radius
 dimen tooltip_horizontal_padding
 dimen tooltip_margin
@@ -2913,6 +2931,7 @@ drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
 drawable button_bg
+drawable circle_shape
 drawable design_fab_background
 drawable design_ic_visibility
 drawable design_ic_visibility_off
@@ -2922,6 +2941,8 @@ drawable edittext_bg
 drawable edittext_focused
 drawable edittext_unfocused
 drawable ic_arrow_back_black_24
+drawable ic_capacity_background
+drawable ic_capacity_foreground
 drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_close_background
@@ -2930,14 +2951,20 @@ drawable ic_create_background
 drawable ic_create_foreground
 drawable ic_events_background
 drawable ic_events_foreground
+drawable ic_home_background
+drawable ic_home_foreground
 drawable ic_image2_sports_background
 drawable ic_image3_workshops_background
 drawable ic_image4_parties_background
 drawable ic_image5_cultural_activities_background
 drawable ic_image6_others_background
 drawable ic_keyboard_black_24dp
+drawable ic_language_background
+drawable ic_language_foreground
 drawable ic_launcher_background
 drawable ic_launcher_foreground
+drawable ic_location_background
+drawable ic_location_foreground
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -2949,11 +2976,14 @@ drawable ic_profile_background
 drawable ic_profile_foreground
 drawable ic_return_background
 drawable ic_return_foreground
+drawable ic_sad_frog_background
 drawable ic_search_background
 drawable ic_search_black_24
 drawable ic_search_foreground
 drawable ic_success_background
 drawable ic_success_foreground
+drawable ic_time_background
+drawable ic_time_foreground
 drawable image_selector
 drawable m3_appbar_background
 drawable m3_avd_hide_password
@@ -3026,6 +3056,7 @@ drawable notification_template_icon_bg
 drawable notification_template_icon_low_bg
 drawable notification_tile_bg
 drawable notify_panel_notification_icon_bg
+drawable red_button_bg
 drawable selected_image
 drawable test_level_drawable
 drawable tooltip_frame_dark
@@ -3047,6 +3078,7 @@ id SYM
 id TOP_END
 id TOP_START
 id accelerate
+id accepted
 id accessibility_action_clickable_span
 id accessibility_custom_action_0
 id accessibility_custom_action_1
@@ -3113,6 +3145,11 @@ id animateToEnd
 id animateToStart
 id antiClockwise
 id anticipate
+id applicant_contact
+id applicant_image
+id applicant_message
+id applicant_name
+id approve_button
 id arc
 id asConfigured
 id async
@@ -3159,7 +3196,11 @@ id collapseActionView
 id compress
 id confirm_button
 id constraint
+id constraint1
+id constraint2
+id contact_hint
 id container
+id container1
 id content
 id contentPanel
 id contiguous
@@ -3178,6 +3219,7 @@ id decelerate
 id decelerateAndComplete
 id decor_content_parent
 id default_activity_button
+id delete_button
 id deltaRelative
 id dependency_ordering
 id design_bottom_sheet
@@ -3192,6 +3234,7 @@ id disableHome
 id disableIntraAutoTransition
 id disablePostScroll
 id disableScroll
+id discover_new
 id disjoint
 id dragAnticlockwise
 id dragClockwise
@@ -3216,22 +3259,35 @@ id end
 id endToStart
 id enterAlways
 id enterAlwaysCollapsed
+id eventCardContainer
+id event_capacity
+id event_create_container
 id event_date
 id event_date_time_hint
+id event_datetime
 id event_description
 id event_description_hint
 id event_duration
 id event_duration_hint
+id event_duration_title
+id event_img
 id event_language
+id event_language_hint
 id event_location
 id event_location_hint
 id event_name
 id event_name_hint
 id event_num_participants
 id event_num_participants_hint
+id event_photo
 id event_price
 id event_price_hint
+id event_register_date
+id event_register_time
+id event_registration_hint
 id event_time
+id event_time_title
+id event_title
 id event_type
 id event_type_hint
 id exitUntilCollapsed
@@ -3267,6 +3323,7 @@ id header_title
 id hideable
 id home
 id homeAsUp
+id home_text
 id honorRequest
 id horizontalGuideline
 id horizontal_only
@@ -3295,7 +3352,11 @@ id item_touch_helper_previous_elevation
 id jumpToEnd
 id jumpToStart
 id labeled
+id language_title
+id languages
 id layout
+id layout_one
+id layout_two
 id left
 id leftToRight
 id legacy
@@ -3304,6 +3365,8 @@ id line3
 id linear
 id listMode
 id list_item
+id loading_layout
+id location_title
 id login
 id loginButton
 id loginText
@@ -3338,6 +3401,7 @@ id menu_events
 id menu_profile
 id menu_search
 id message
+id message_hint
 id middle
 id mini
 id month_grid
@@ -3385,12 +3449,17 @@ id neverCompleteToEnd
 id neverCompleteToStart
 id noScroll
 id noState
+id no_applicant
+id no_event_text
 id none
 id normal
 id north
 id notification_background
 id notification_main_column
 id notification_main_column_container
+id num_max_participants
+id num_participants_title
+id num_reg_participants
 id off
 id on
 id onInterceptTouchReturnSwipe
@@ -3404,6 +3473,7 @@ id parent
 id parentPanel
 id parentRelative
 id parent_matrix
+id participants_dash
 id password
 id passwordText
 id password_confirm
@@ -3417,12 +3487,23 @@ id position
 id post
 id postLayout
 id pressed
+id price_title
+id profile_image
+id profile_img
+id profile_name
+id profile_text
+id progressBar
 id progress_circular
 id progress_horizontal
 id pwConfirmationText
+id question_text
 id radio
 id ratio
 id rectangles
+id register_button
+id reject_button
+id result_accepted_button
+id result_awaiting_button
 id returnBtn
 id reverseSawtooth
 id right
@@ -3431,6 +3512,7 @@ id right_icon
 id right_side
 id rounded
 id row_index_key
+id sad_frog
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3441,7 +3523,6 @@ id scrollIndicatorDown
 id scrollIndicatorUp
 id scrollView
 id scrollable
-id search
 id search_badge
 id search_bar
 id search_bar_text_view
@@ -3469,6 +3550,7 @@ id search_voice_btn
 id select_dialog_listview
 id selected
 id selection_type
+id send_application_button
 id sharedValueSet
 id sharedValueUnset
 id shortcut
@@ -3489,7 +3571,6 @@ id snapMargins
 id south
 id spacer
 id special_effects_controller_view_tag
-id spinner_hint
 id spline
 id split_action_bar
 id spread
@@ -3510,6 +3591,7 @@ id stop
 id stretch
 id submenuarrow
 id submit_area
+id subtitle_text
 id supportScrollUp
 id tabMode
 id tag_accessibility_actions
@@ -3545,6 +3627,7 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
+id title_text
 id toggle
 id top
 id topPanel
@@ -3562,8 +3645,12 @@ id uniform
 id unlabeled
 id up
 id useLogo
+id user_info
+id user_name
 id verticalGuideline
+id verticalRightGuideline
 id vertical_only
+id view_applicants_button
 id view_offset_helper
 id view_transition
 id view_tree_lifecycle_owner
@@ -3581,6 +3668,7 @@ id wrap_content
 id wrap_content_constrained
 id x_left
 id x_right
+id your_event_text
 integer abc_config_activityDefaultDur
 integer abc_config_activityShortDur
 integer app_bar_elevation_anim_duration
@@ -3694,11 +3782,17 @@ layout abc_search_dropdown_item_icons_2line
 layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
+layout activity_applicants_info
+layout activity_application_form
+layout activity_apply_successful
 layout activity_create_successful
+layout activity_delete_successful
+layout activity_event_info
 layout activity_frag_home
 layout activity_log_in
 layout activity_main
 layout activity_sign_up
+layout applicant_card_layout
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
@@ -3715,6 +3809,7 @@ layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_end_icon
 layout design_text_input_start_icon
+layout event_card_layout
 layout fragment_event_create
 layout fragment_event_home
 layout fragment_event_search
@@ -3781,12 +3876,15 @@ layout select_dialog_multichoice_material
 layout select_dialog_singlechoice_material
 layout support_simple_spinner_dropdown_item
 menu bottom_nav_menu
+mipmap ic_capacity
 mipmap ic_close
 mipmap ic_close_round
 mipmap ic_create
 mipmap ic_create_round
 mipmap ic_events
 mipmap ic_events_round
+mipmap ic_home
+mipmap ic_home_round
 mipmap ic_image1_leisure
 mipmap ic_image2_sports
 mipmap ic_image2_sports_foreground
@@ -3803,16 +3901,22 @@ mipmap ic_image5_cultural_activities_round
 mipmap ic_image6_others
 mipmap ic_image6_others_foreground
 mipmap ic_image6_others_round
+mipmap ic_language
 mipmap ic_launcher
 mipmap ic_launcher_round
+mipmap ic_location
 mipmap ic_profile
 mipmap ic_profile_round
 mipmap ic_return
 mipmap ic_return_round
+mipmap ic_sad_frog
+mipmap ic_sad_frog_foreground
+mipmap ic_sad_frog_round
 mipmap ic_search
 mipmap ic_search_round
 mipmap ic_success
 mipmap ic_success_round
+mipmap ic_time
 plurals mtrl_badge_content_description
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -3841,6 +3945,7 @@ string abc_searchview_description_voice
 string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
+string action_settings
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -3863,6 +3968,7 @@ string hello_blank_fragment
 string hide_bottom_view_on_scroll_behavior
 string icon_content_description
 string item_view_role_description
+string large_text
 string m3_ref_typeface_brand_medium
 string m3_ref_typeface_brand_regular
 string m3_ref_typeface_plain_medium
@@ -3975,6 +4081,7 @@ string side_sheet_accessibility_pane_title
 string side_sheet_behavior
 string status_bar_notification_info_overflow
 string title_activity_event_create
+string title_activity_participants_info
 string title_dashboard
 string title_home
 string title_notifications
@@ -4264,7 +4371,9 @@ style Base_Widget_MaterialComponents_TextView
 style CardView
 style CardView_Dark
 style CardView_Light
+style DangerButton
 style EditText
+style HeadingTextField
 style MaterialAlertDialog_Material3
 style MaterialAlertDialog_Material3_Animation
 style MaterialAlertDialog_Material3_Body_Text
@@ -4528,6 +4637,10 @@ style Theme_Design_Light_BottomSheetDialog
 style Theme_Design_Light_NoActionBar
 style Theme_Design_NoActionBar
 style Theme_Gathernow
+style Theme_Gathernow_AppBarOverlay
+style Theme_Gathernow_Custom
+style Theme_Gathernow_NoActionBar
+style Theme_Gathernow_PopupOverlay
 style Theme_Material3_Dark
 style Theme_Material3_Dark_BottomSheetDialog
 style Theme_Material3_Dark_Dialog
@@ -4713,6 +4826,7 @@ style ThemeOverlay_MaterialComponents_TimePicker_Display_TextInputEditText
 style ThemeOverlay_MaterialComponents_Toolbar_Popup_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Primary
 style ThemeOverlay_MaterialComponents_Toolbar_Surface
+style TitleField
 style Widget_AppCompat_ActionBar
 style Widget_AppCompat_ActionBar_Solid
 style Widget_AppCompat_ActionBar_TabBar
@@ -5136,6 +5250,7 @@ styleable CoordinatorLayout_Layout android_layout_gravity layout_anchor layout_a
 styleable CustomAttribute attributeName customBoolean customColorDrawableValue customColorValue customDimension customFloatValue customIntegerValue customPixelDimension customReference customStringValue methodName
 styleable DrawerArrowToggle arrowHeadLength arrowShaftLength barLength color drawableSize gapBetweenBars spinBars thickness
 styleable DrawerLayout elevation
+styleable EventCardView event_capacity event_datetime event_language event_location event_name event_photo
 styleable ExtendedFloatingActionButton collapsedSize elevation extendMotionSpec extendStrategy hideMotionSpec showMotionSpec shrinkMotionSpec
 styleable ExtendedFloatingActionButton_Behavior_Layout behavior_autoHide behavior_autoShrink
 styleable FloatingActionButton android_enabled backgroundTint backgroundTintMode borderWidth elevation ensureMinTouchTargetSize fabCustomSize fabSize hideMotionSpec hoveredFocusedTranslationZ maxImageSize pressedTranslationZ rippleColor shapeAppearance shapeAppearanceOverlay showMotionSpec useCompatPadding

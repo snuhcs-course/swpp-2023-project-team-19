@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EventInfo">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/horizontalGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <ScrollView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintHeight_percent="0.8"
+        app:layout_constraintTop_toTopOf="@id/horizontalGuideline">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/verticalGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/verticalRightGuideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <ImageView
+                android:id="@+id/event_img"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.55"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <!--Event name -->
+            <TextView
+                android:id="@+id/event_title"
+                style="@style/TitleField"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:text="NA"
+                app:layout_constraintLeft_toLeftOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/event_img" />
+
+            <!--            User host-->
+            <ImageButton
+                android:id="@+id/profile_img"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/circle_shape"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/event_title"
+                android:scaleType="centerCrop"
+                android:clipToOutline="true" />
+
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="Host"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/profile_img"
+                app:layout_constraintTop_toBottomOf="@id/event_title"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <!--Description -->
+            <TextView
+                android:id="@+id/event_description"
+                style="@style/TextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="@id/verticalGuideline"
+                app:layout_constraintRight_toRightOf="@id/verticalRightGuideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_img"
+                app:layout_constraintWidth_percent="0.9" />
+
+            <!--            Language-->
+            <TextView
+                android:id="@+id/language_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:text="Languages:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/event_description"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/languages"
+                style="@style/TextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:text="Language"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/language_title"
+                app:layout_constraintTop_toBottomOf="@id/event_description"
+                app:layout_constraintWidth_percent="0.65" />
+
+            <!--            Participants -->
+            <TextView
+                android:id="@+id/num_participants_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Participants:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/language_title"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/num_reg_participants"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/num_participants_title"
+                app:layout_constraintTop_toBottomOf="@id/language_title" />
+
+            <TextView
+                android:id="@+id/participants_dash"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="/"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/num_reg_participants"
+                app:layout_constraintTop_toBottomOf="@id/language_title" />
+
+            <TextView
+                android:id="@+id/num_max_participants"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/participants_dash"
+                app:layout_constraintTop_toBottomOf="@id/language_title" />
+
+            <!--            Event time-->
+            <TextView
+                android:id="@+id/event_time_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Time:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/num_participants_title"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/event_date"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="November 4, 2023"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/event_time_title"
+                app:layout_constraintTop_toBottomOf="@id/num_participants_title" />
+
+            <TextView
+                android:id="@+id/event_time"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:text="13:00"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/event_date"
+                app:layout_constraintTop_toBottomOf="@id/num_participants_title" />
+
+            <!--            Event duration-->
+            <TextView
+                android:id="@+id/event_duration_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="Duration:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintTop_toBottomOf="@id/event_time_title"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/event_duration"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/event_duration_title"
+                app:layout_constraintTop_toBottomOf="@id/event_time_title" />
+
+            <!--    Price-->
+            <TextView
+                android:id="@+id/price_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Price:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintRight_toLeftOf="@id/event_price"
+                app:layout_constraintTop_toBottomOf="@id/event_duration"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/event_price"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/location_title"
+                app:layout_constraintTop_toBottomOf="@id/event_duration" />
+
+            <!--    Location-->
+            <TextView
+                android:id="@+id/location_title"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Location:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintRight_toLeftOf="@id/event_location"
+                app:layout_constraintTop_toBottomOf="@id/event_price"
+                app:layout_constraintWidth_percent="0.25" />
+
+            <TextView
+                android:id="@+id/event_location"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Location"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/location_title"
+                app:layout_constraintTop_toBottomOf="@id/event_price" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/register_button"
+        android:onClick="onRegisterEvent"
+        style="@style/PositiveButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintWidth_percent="0.75" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/result_awaiting_button"
+        style="@style/PositiveButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Pending"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintRight_toLeftOf="@id/cancel_button"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/result_accepted_button"
+        style="@style/PositiveButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Accepted"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintRight_toLeftOf="@id/cancel_button"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/cancel_button"
+        style="@style/DangerButton"
+        android:onClick="onDeleteApplication"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Withdraw"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toRightOf="@id/result_awaiting_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintWidth_percent="0.4"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:onClick="onViewApplicants"
+        android:id="@+id/view_applicants_button"
+        style="@style/NegativeButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="View applicants"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/delete_button"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintWidth_percent="0.4"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:onClick="onDeleteEvent"
+        android:id="@+id/delete_button"
+        style="@style/DangerButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Delete event"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toRightOf="@id/view_applicants_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintWidth_percent="0.4"
+        />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
