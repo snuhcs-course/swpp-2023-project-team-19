@@ -241,7 +241,7 @@ public class ProfileHome extends Fragment {
                                         @Override
                                         public void onClick(View v) {
                                             // Handle the click event here
-                                            Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+                                            // Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
                                             // Send the user id to the EventInfo activity
                                             Intent intent = new Intent(v.getContext(), EventInfo.class);
                                             intent.putExtra("userId", getUserId(v.getContext()));

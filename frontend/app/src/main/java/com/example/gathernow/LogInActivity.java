@@ -45,7 +45,7 @@ public class LogInActivity extends AppCompatActivity {
 
         // if user hasn't filled anything but still clicked Log In
         if (email.isEmpty() || password.isEmpty()) {
-            alert.setText("Please fill in all required fields!");
+            alert.setText("Please fill in all required fields");
         }
 
         // check email input format
@@ -72,6 +72,7 @@ public class LogInActivity extends AppCompatActivity {
                                 // Link to the login page
                                 Intent intent = new Intent(LogInActivity.this, FragHome.class);
                                 startActivity(intent);
+                                finish();
                             }
                         }
                         else {
@@ -84,6 +85,7 @@ public class LogInActivity extends AppCompatActivity {
                             alert.setOnClickListener(view1 -> {
                                 Intent intent = new Intent(LogInActivity.this, SignUpActivity.class);
                                 startActivity(intent);
+                                finish();
                             });
                         }
                         else if(response.code() == HttpURLConnection.HTTP_UNAUTHORIZED){

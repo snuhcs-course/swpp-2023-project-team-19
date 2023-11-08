@@ -22,7 +22,16 @@ public class DeleteSuccessful extends AppCompatActivity {
 
                 Intent intent = new Intent(v.getContext(), FragHome.class);
                 startActivity(intent);
+                finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, FragHome.class);
+        startActivity(intent);
+        finish(); // Finish the current activity when the back button is pressed
     }
 }

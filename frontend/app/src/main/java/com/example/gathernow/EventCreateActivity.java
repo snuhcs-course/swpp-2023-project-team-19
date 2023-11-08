@@ -15,6 +15,8 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -490,6 +492,10 @@ public class EventCreateActivity extends Fragment {
                                     // Link to the createSuccessful page
                                     Intent intent = new Intent(v.getContext(), CreateSuccessful.class);
                                     startActivity(intent);
+                                    FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+                                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+                                    transaction.remove(EventCreateActivity.this);
+                                    transaction.commit();
                                 }
                             } else {
                                 // Handle the case where the response body is null or empty

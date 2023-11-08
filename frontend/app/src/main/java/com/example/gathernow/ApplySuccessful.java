@@ -21,9 +21,17 @@ public class ApplySuccessful extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), FragHome.class);
                 startActivity(intent);
+                finish();  // kill this activity
             }
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(this, FragHome.class);
+        startActivity(intent);
+        finish(); // Finish the current activity when the back button is pressed
+    }
 
 }

@@ -284,6 +284,7 @@ public class EventInfo extends AppCompatActivity {
                     //startActivity(intent);
                     Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
                     startActivity(intent);
+                    finish();
 
                 })
                 .setNegativeButton("No", (dialog, which) -> {
@@ -307,6 +308,7 @@ public class EventInfo extends AppCompatActivity {
         intent.putExtra("hostAvatar", userAvatar);
 
         startActivity(intent);
+        finish();
 
     }
 
@@ -334,6 +336,7 @@ public class EventInfo extends AppCompatActivity {
         //startActivity(intent);
         Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
         startActivity(intent);
+        finish();
 
     }
 
