@@ -51,8 +51,6 @@ public class EventHome extends Fragment {
 
     private ServiceApi service;
 
-    private ServiceApi service2;
-
     private List<EventData> eventDataList = new ArrayList<EventData>();
 
 
@@ -184,7 +182,7 @@ public class EventHome extends Fragment {
                                             }
                                             else if(status == 1){
                                                 confirmed_event_list.add(appliedEvent);
-                                                findEventByEventId2(appliedEvent.event_id, eventCardContainer, service, new EventCallback() {
+                                                findEventByEventId_and_callback(appliedEvent.event_id, eventCardContainer, service, new EventCallback() {
                                                     @Override
                                                     public void onEventFound(boolean hasValidEvent) {
 
@@ -216,8 +214,6 @@ public class EventHome extends Fragment {
 
                                             }
                                         }
-
-
 
                                     }
 
@@ -338,10 +334,10 @@ public class EventHome extends Fragment {
     }
 
 
+    // FIne event based on event_id and return callback state when done (used for reading last event and displaying events)
+    public void findEventByEventId_and_callback(int eventId, LinearLayout eventCardContainer, ServiceApi service, EventCallback callback){
 
-    public void findEventByEventId2(int eventId, LinearLayout eventCardContainer, ServiceApi service2, EventCallback callback){
-
-        service2.getEventByEventId(eventId).enqueue(new Callback<List<EventData>>() {
+        service.getEventByEventId(eventId).enqueue(new Callback<List<EventData>>() {
             @Override
             public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response) {
                 if (response.isSuccessful()) {
@@ -408,9 +404,10 @@ public class EventHome extends Fragment {
 
     }
 
-    public void findEventByEventId(int eventId, LinearLayout eventCardContainer, ServiceApi service2){
+    // FIne event based on event_id
+    public void findEventByEventId(int eventId, LinearLayout eventCardContainer, ServiceApi service){
 
-        service2.getEventByEventId(eventId).enqueue(new Callback<List<EventData>>() {
+        service.getEventByEventId(eventId).enqueue(new Callback<List<EventData>>() {
             @Override
             public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response) {
                 if (response.isSuccessful()) {
@@ -474,9 +471,9 @@ public class EventHome extends Fragment {
 
 
     // check if event is in valid date and time (after current date and time)
-    public void checkEventStatus(int eventId, ServiceApi service2, EventCallback callback){
+    public void checkEventStatus(int eventId, ServiceApi service, EventCallback callback){
 
-        service2.getEventByEventId(eventId).enqueue(new Callback<List<EventData>>() {
+        service.getEventByEventId(eventId).enqueue(new Callback<List<EventData>>() {
             @Override
             public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response) {
                 if (response.isSuccessful()) {
@@ -493,7 +490,7 @@ public class EventHome extends Fragment {
                         long dateTimeMillis = eventDate.getTime() + eventTime.getTime();
                         Date eventDateTime = new Date(dateTimeMillis);
 
-                        //Only display events that happens after the current datetime
+                        //Event is true if it happens after the current datetime
                         if (eventDateTime.after(currentDate)){
 
                             boolean hasValidEvent = true;

@@ -120,15 +120,26 @@ public class EventInfo extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<UserData> call, Throwable t) {
                             Log.d("EventInfo Testing", "Failed to get host name");
+                            Intent intent = new Intent(EventInfo.this, EventNotFoundActivity.class);
+                            startActivity(intent);
 
                         }
                     });
+                }
+                else{
+                    //event not found
+                    Intent intent = new Intent(EventInfo.this, EventNotFoundActivity.class);
+                    startActivity(intent);
+
                 }
             }
 
             @Override
             public void onFailure(Call<List<EventData>> call, Throwable t) {
                 Log.d("EventInfo Testing", "Failed to get event info");
+                Intent intent = new Intent(EventInfo.this, EventNotFoundActivity.class);
+                startActivity(intent);
+
             }
         });
     }
