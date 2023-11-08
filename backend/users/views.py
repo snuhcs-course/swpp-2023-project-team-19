@@ -28,7 +28,7 @@ class UserSignup(APIView):
             user = serializer.save()
 
             # Check if an image was uploaded
-            avatar_image = request.data.get('avatar')
+            avatar_image = request.FILES.get('avatar')
             if avatar_image:
                 user.avatar = avatar_image
                 user.save()
