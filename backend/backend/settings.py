@@ -92,8 +92,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbgathernow',
-        'USER': 'database', # Please type own DB username here
-        'PASSWORD': 'iZ3LF9TS5mtu5DS', # Please type own DB password here
+        'USER': '', # Please type own DB username here
+        'PASSWORD': '', # Please type own DB password here
         'HOST': 'dbgathernow.mysql.database.azure.com',
         'PORT': '3306',
     }
