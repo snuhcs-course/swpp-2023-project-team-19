@@ -4,10 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -97,9 +99,11 @@ public class EventHome extends Fragment {
         LinearLayout layoutOne = rootView.findViewById(R.id.layout_one);
         LinearLayout layoutTwo = rootView.findViewById(R.id.layout_two);
         RelativeLayout loading_layout = rootView.findViewById(R.id.loading_layout);
+        RelativeLayout no_events_layout = rootView.findViewById(R.id.no_event_layout);
 
         layoutOne.setVisibility(View.GONE);
         layoutTwo.setVisibility(View.GONE);
+        no_events_layout.setVisibility(View.GONE);
         loading_layout.setVisibility(View.VISIBLE);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
@@ -120,17 +124,103 @@ public class EventHome extends Fragment {
                     if (response.body() != null && !events_list.isEmpty()){
 
                         Log.e("UserAppliedEventDisplay", "Event list is null.");
+                        no_events_layout.setVisibility(View.GONE);
 
                         LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
+                        LinearLayout layoutTwoSub = layoutTwo.findViewById(R.id.layout_two_sub);
+                        TextView confirmed_event = (TextView) layoutTwoSub.findViewById(R.id.confirmed_text);
+                        TextView pending_event = (TextView) layoutTwoSub.findViewById(R.id.pending_text);
+                        TextView no_events_text = (TextView) no_events_layout.findViewById(R.id.no_events_text);
+
+                        List<ApplicationData> confirmed_event_list = new ArrayList<>();
+                        List<ApplicationData> pending_event_list = new ArrayList<>();
 
                         for(int i = 0; i < events_list.size(); i++){
                             ApplicationData appliedEvent = events_list.get(i);
-                            findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
+                            // check appliedEvent status here
+                            int status = appliedEvent.request_status;
+                            if(status == 0){ // pending events
+                                pending_event_list.add(appliedEvent);
+                            }else if(status == 1){ // confirmed events
+                                confirmed_event_list.add(appliedEvent);
+                            }
+                            //findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
                         }
 
-                        loading_layout.setVisibility(View.GONE);
-                        layoutOne.setVisibility(View.GONE);
-                        layoutTwo.setVisibility(View.VISIBLE);
+                        // by default, confirmed tab is displayed
+                        if(confirmed_event_list.isEmpty()){ // no confirmed event
+                            loading_layout.setVisibility(View.GONE);
+                            layoutOne.setVisibility(View.GONE);
+                            layoutTwo.setVisibility(View.VISIBLE);
+                            no_events_layout.setVisibility(View.VISIBLE);
+                            no_events_text.setText("No confirmed events :(");
+                        }else{
+                            loading_layout.setVisibility(View.GONE);
+                            layoutOne.setVisibility(View.GONE);
+                            layoutTwo.setVisibility(View.VISIBLE);
+                            no_events_layout.setVisibility(View.GONE);
+                            for(int i = 0; i < confirmed_event_list.size(); i++) {
+                                ApplicationData appliedEvent = confirmed_event_list.get(i);
+                                findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
+                            }
+                        }
+                        confirmed_event.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                confirmed_event.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                                pending_event.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+
+                                if(confirmed_event_list.isEmpty()){ // no confirmed event
+                                    loading_layout.setVisibility(View.GONE);
+                                    layoutOne.setVisibility(View.GONE);
+                                    layoutTwo.setVisibility(View.VISIBLE);
+                                    no_events_layout.setVisibility(View.VISIBLE);
+                                    eventCardContainer.removeAllViews();
+                                    no_events_text.setText("No confirmed events :(");
+                                }else{
+                                    loading_layout.setVisibility(View.GONE);
+                                    layoutOne.setVisibility(View.GONE);
+                                    layoutTwo.setVisibility(View.VISIBLE);
+                                    no_events_layout.setVisibility(View.GONE);
+                                    eventCardContainer.removeAllViews();
+                                    for(int i = 0; i < confirmed_event_list.size(); i++) {
+                                        ApplicationData appliedEvent = confirmed_event_list.get(i);
+                                        findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
+                                    }
+                                }
+                            }
+                        });
+
+                        pending_event.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                pending_event.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+                                confirmed_event.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+
+                                if(pending_event_list.isEmpty()){ // no pending event
+                                    loading_layout.setVisibility(View.GONE);
+                                    layoutOne.setVisibility(View.GONE);
+                                    layoutTwo.setVisibility(View.VISIBLE);
+                                    no_events_layout.setVisibility(View.VISIBLE);
+                                    eventCardContainer.removeAllViews();
+                                    no_events_text.setText("No pending events :(");
+                                }else{
+                                    loading_layout.setVisibility(View.GONE);
+                                    layoutOne.setVisibility(View.GONE);
+                                    layoutTwo.setVisibility(View.VISIBLE);
+                                    no_events_layout.setVisibility(View.GONE);
+                                    eventCardContainer.removeAllViews();
+                                    for(int i = 0; i < pending_event_list.size(); i++) {
+                                        ApplicationData appliedEvent = pending_event_list.get(i);
+                                        findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
+                                    }
+                                }
+                            }
+                        });
+
+                        //loading_layout.setVisibility(View.GONE);
+                        //layoutOne.setVisibility(View.GONE);
+                        //layoutTwo.setVisibility(View.VISIBLE);
 
                     }
                     else{
@@ -139,7 +229,7 @@ public class EventHome extends Fragment {
                         loading_layout.setVisibility(View.GONE);
                         layoutOne.setVisibility(View.VISIBLE);
                         layoutTwo.setVisibility(View.GONE);
-
+                        no_events_layout.setVisibility(View.GONE);
 
                         TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
                         discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -180,10 +270,6 @@ public class EventHome extends Fragment {
         });
 
 
-
-
-
-
         return rootView;
     }
 
@@ -202,7 +288,7 @@ public class EventHome extends Fragment {
 
                     EventCardView newEventCard = new EventCardView(getContext(), null);
                     newEventCard.setEventName(currentEvent.event_title);
-                    newEventCard.setEventPhoto(currentEvent.event_type);
+                    newEventCard.setEventPhoto(currentEvent.event_type, currentEvent.event_images);
                     newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
                     newEventCard.setEventLocation(currentEvent.event_location);
                     newEventCard.setEventLanguage(currentEvent.event_language);
