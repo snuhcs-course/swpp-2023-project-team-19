@@ -87,16 +87,18 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 import pymysql
 pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'dbgathernow',
         'USER': 'database', # Please type own DB username here
-        'PASSWORD': 'jf9eSCmFY75Pj3s', # Please type own DB password here
+        'PASSWORD': 'iZ3LF9TS5mtu5DS', # Please type own DB password here
         'HOST': 'dbgathernow.mysql.database.azure.com',
         'PORT': '3306',
     }
 }
+
 
 
 # Password validation

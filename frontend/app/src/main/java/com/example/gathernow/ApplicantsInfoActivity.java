@@ -89,7 +89,7 @@ public class ApplicantsInfoActivity extends AppCompatActivity {
 
 
                             // TODO: add info to applicant card
-                            ApplicantCardView newApplicantCard = new ApplicantCardView(ApplicantsInfoActivity.this, null, current_application.request_status);
+                            ApplicantCardView newApplicantCard = new ApplicantCardView(ApplicantsInfoActivity.this, null, current_application.request_status, eventId);
                             newApplicantCard.setApplicationId(current_application.application_id );
                             newApplicantCard.setApplicantName(current_application.applicant_name);
                             newApplicantCard.setApplicantContact(current_application.applicant_contact);

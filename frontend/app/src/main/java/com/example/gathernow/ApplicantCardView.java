@@ -30,7 +30,7 @@ public class ApplicantCardView extends LinearLayout {
     private Integer applicationId;
     private int requestStatus;
 
-    public ApplicantCardView(Context context, AttributeSet attrs, int status) {
+    public ApplicantCardView(Context context, AttributeSet attrs, int status, int eventId) {
 
 
         super(context, attrs);
@@ -57,16 +57,11 @@ public class ApplicantCardView extends LinearLayout {
         rejectButton.setVisibility(INVISIBLE);
         acceptedButton.setVisibility(INVISIBLE);
 
-
-
-
-
         if(requestStatus == 1){
             // Applicants already been accepted
             approveButton.setVisibility(INVISIBLE);
             rejectButton.setVisibility(INVISIBLE);
             acceptedButton.setVisibility(VISIBLE);
-
 
         }
         else{
@@ -75,8 +70,6 @@ public class ApplicantCardView extends LinearLayout {
             acceptedButton.setVisibility(INVISIBLE);
 
             Log.e("ApplicationFeature", "Application accepted, status: "+ Integer.toString(requestStatus));
-
-
 
             service = RetrofitClient.getClient().create(ServiceApi.class);
 
@@ -102,6 +95,25 @@ public class ApplicantCardView extends LinearLayout {
                             Log.e("ApplicationFeature", "Application table retrieve error occurred", t);
                         }
                     });
+
+
+                    service.increaseNumJoined(eventId).enqueue(new Callback<ApplicationData>(){
+                        @Override
+                        public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response){
+                            if (response.isSuccessful()) {
+                                Log.e("ApplicationFeature", "Increase num of people joined"+ Integer.toString(response.code()));
+                            }
+                            else{
+                                Log.e("ApplicationFeature", "Found no application to accept error occurred"+ Integer.toString(response.code()));
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ApplicationData> call, Throwable t) {
+                            Log.e("ApplicationFeature", "Error in increasing participants number", t);
+                        }
+                    });
+
                     approveButton.setVisibility(INVISIBLE);
                     rejectButton.setVisibility(INVISIBLE);
                     acceptedButton.setVisibility(VISIBLE);
@@ -120,6 +132,7 @@ public class ApplicantCardView extends LinearLayout {
                     parent.removeView(ApplicantCardView.this);
 
                     // Optionally, perform any additional cleanup if needed
+
                     service.delete_application(applicationId).enqueue(new Callback<ApplicationData>(){
                         @Override
                         public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response){
@@ -137,6 +150,8 @@ public class ApplicantCardView extends LinearLayout {
                             Log.e("ApplicationFeature", "Application table retrieve error occurred", t);
                         }
                     });
+
+
 
 
                     // Invalidate the layout to reflect the removal of the card

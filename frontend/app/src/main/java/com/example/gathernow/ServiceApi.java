@@ -79,7 +79,7 @@ public interface ServiceApi {
     @POST("/api/application/")
     Call<CodeMessageResponse> apply_event(@Body ApplicationData data);
 
-    // Check if user has applied ot the event
+    // Check if user has applied for the event
     @GET("/api/application/check/{user_id}/{event_id}/")
     Call<ApplicationData> check_if_applied( @Path("user_id") int user_id, @Path("event_id") int event_id);
 
@@ -93,6 +93,7 @@ public interface ServiceApi {
     @GET("/api/application/by_event/{event_id}/")
     Call<List<ApplicationData>> getEventApplications(@Path("event_id") int event_id);
 
+    // Delete application of an event using event_id
     @DELETE("/api/application/by_event/{event_id}/")
     Call<List<ApplicationData>> deleteEventApplications(@Path("event_id") int event_id);
 
@@ -103,5 +104,13 @@ public interface ServiceApi {
     // get list of events that a user applied for
     @GET("api/application/by_user/{user_id}/")
     Call<List<ApplicationData>> getUserAppliedEvents(@Path("user_id") int user_id);
+
+    // Increase number of user joined for an event by 1
+    @PUT("/api/events/num_joined/add/{event_id}/")
+    Call<ApplicationData> increaseNumJoined(@Path("event_id") int event_id);
+
+    // Decrease number of user joined for an event by 1
+    @PUT("/api/events/num_joined/delete/{event_id}/")
+    Call<ApplicationData> decreaseNumJoined(@Path("event_id") int event_id);
 
 }

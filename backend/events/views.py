@@ -67,3 +67,30 @@ def events_by_id(request, event_id):
         events.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+# Update request status in application
+@api_view(['PUT'])
+def increase_num_joined(request, event_id):
+    try:
+        event = Event.objects.get(event_id=event_id)
+    except Event.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        event.event_num_joined += 1
+        event.save()
+        serializer = EventSerializer(event)
+        return Response(serializer.data)
+    
+@api_view(['PUT'])
+def decrease_num_joined(request, event_id):
+    try:
+        event = Event.objects.get(event_id=event_id)
+    except Event.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'PUT':
+        event.event_num_joined -= 1
+        event.save()
+        serializer = EventSerializer(event)
+        return Response(serializer.data)

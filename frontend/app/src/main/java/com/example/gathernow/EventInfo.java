@@ -34,7 +34,9 @@ public class EventInfo extends AppCompatActivity {
 
     public int hostId;
 
-    private Integer applicationId;
+    private Integer applicationId, eventQuota, eventNumJoined;
+
+    private int status;
 
 
     @Override
@@ -94,6 +96,9 @@ public class EventInfo extends AppCompatActivity {
 
                     eventName = eventData.event_title;
                     hostId = eventData.host_id;
+
+                    eventQuota = eventData.event_num_participants;
+                    eventNumJoined = eventData.event_num_joined;
 
                     // TODO: Update host's profile name
                     service.getUserInfo(eventData.host_id).enqueue(new Callback<UserData>() {
@@ -216,7 +221,7 @@ public class EventInfo extends AppCompatActivity {
                         // User has applied for this event, check user application status (pending or accepted)
                         ApplicationData current_application = response.body();
                         //int status = -1;
-                        int status = current_application.request_status;
+                        status = current_application.request_status;
 
                         applicationId = current_application.application_id;
 
@@ -225,6 +230,7 @@ public class EventInfo extends AppCompatActivity {
                             //Application is pending, show waiting button
                             waitingResultButton.setVisibility(View.VISIBLE);
                             cancelRegButton.setVisibility(View.VISIBLE);
+
                         }
                         else if (status == 1){
                             acceptedResultButton.setVisibility(View.VISIBLE);
@@ -237,13 +243,14 @@ public class EventInfo extends AppCompatActivity {
                     } else if (response.code() == 404) {
                         // User has not applied for this event, show register button
                         registerButton.setVisibility(View.VISIBLE);
+
+                        if(eventQuota == eventNumJoined){
+                            //registerButton.setClickable(false);
+                            registerButton.setEnabled(false);
+                        }
                     }
 
-
-
                     else{
-
-
                         Log.e("EventInfoDisplay", "Check application error occurred"+ Integer.toString(response.code()));
                     }
                 }
@@ -255,12 +262,8 @@ public class EventInfo extends AppCompatActivity {
 
             });
 
-
         }
 
-        // TODO: else if user attendance has not applied, show register button
-        // TODO: else if user attendance has not approved, show waiting button
-        // TODO: else if user attendance has approved, show cancel button
     }
 
     public void onDeleteEvent(View view) {
@@ -293,7 +296,7 @@ public class EventInfo extends AppCompatActivity {
                     service.deleteEventApplications(eventId).enqueue(new Callback<List<ApplicationData>>() {
                         @Override
                         public void onResponse(Call<List<ApplicationData>> call, Response<List<ApplicationData>> response) {
-                            Log.d("EventInfo Testing", "Event deleted");
+                            Log.d("EventInfo Testing", "Number of participants decreased by 1");
                             if (response.isSuccessful()) {
 
                                 List<ApplicationData> application_data = response.body();
@@ -339,6 +342,29 @@ public class EventInfo extends AppCompatActivity {
     }
 
     public void onDeleteApplication(View view){
+
+        // if application status is confirmed (status==1), decrease the number of participants of the event
+        if(status == 1){
+            service.decreaseNumJoined(eventId).enqueue(new Callback<ApplicationData>(){
+                @Override
+                public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response){
+                    if (response.isSuccessful()) {
+                        Log.e("ApplicationFeature", "Decrease num of people joined"+ Integer.toString(response.code()));
+                    }
+                    else{
+                        Log.e("ApplicationFeature", "Found no event to delete error occurred"+ Integer.toString(response.code()));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ApplicationData> call, Throwable t) {
+                    Log.e("ApplicationFeature", "Error in decreasing participants number", t);
+                }
+            });
+
+        }
+
+        //delete the application in database
         service.delete_application(applicationId).enqueue(new Callback<ApplicationData>() {
             @Override
             public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response) {

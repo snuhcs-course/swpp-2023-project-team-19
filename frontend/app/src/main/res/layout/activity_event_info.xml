@@ -278,6 +278,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/register_button"
         style="@style/PositiveButton"
+        android:background="@drawable/button_disabled_background"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:onClick="onRegisterEvent"
