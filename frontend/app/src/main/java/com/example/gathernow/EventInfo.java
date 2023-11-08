@@ -279,6 +279,23 @@ public class EventInfo extends AppCompatActivity {
                         }
                     });
 
+                    service.deleteEventApplications(eventId).enqueue(new Callback<List<ApplicationData>>() {
+                        @Override
+                        public void onResponse(Call<List<ApplicationData>> call, Response<List<ApplicationData>> response) {
+                            Log.d("EventInfo Testing", "Event deleted");
+                            if (response.isSuccessful()) {
+
+                                List<ApplicationData> application_data = response.body();
+
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<ApplicationData>> call, Throwable t) {
+                            Log.d("EventInfo Testing", "Failed to delete event");
+                        }
+                    });
+
                     // Direct to Delete Successful class
                     //Intent intent = new Intent(view.getContext(), FragHome.class);
                     //startActivity(intent);

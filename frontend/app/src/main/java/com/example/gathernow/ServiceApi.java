@@ -93,6 +93,9 @@ public interface ServiceApi {
     @GET("/api/application/by_event/{event_id}/")
     Call<List<ApplicationData>> getEventApplications(@Path("event_id") int event_id);
 
+    @DELETE("/api/application/by_event/{event_id}/")
+    Call<List<ApplicationData>> deleteEventApplications(@Path("event_id") int event_id);
+
     // Update request_status to 1 when application is accepted
     @PUT("/api/application/accept/{application_id}/")
     Call<ApplicationData> acceptStatus(@Path("application_id") int application_id);

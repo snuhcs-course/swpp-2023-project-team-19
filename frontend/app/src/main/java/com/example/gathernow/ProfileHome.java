@@ -199,10 +199,7 @@ public class ProfileHome extends Fragment {
                         if(events_list.size() >0){
 
                             isEventLoaded = true;
-                            loading_layout.setVisibility(View.GONE);
-                            user_info.setVisibility(View.VISIBLE);
-                            layoutOne.setVisibility(View.GONE);
-                            layoutTwo.setVisibility(View.VISIBLE);
+
 
                             LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
 
@@ -251,6 +248,11 @@ public class ProfileHome extends Fragment {
                                     });
                                 }
                             }
+
+                            loading_layout.setVisibility(View.GONE);
+                            user_info.setVisibility(View.VISIBLE);
+                            layoutOne.setVisibility(View.GONE);
+                            layoutTwo.setVisibility(View.VISIBLE);
 
                         }
                         else{
