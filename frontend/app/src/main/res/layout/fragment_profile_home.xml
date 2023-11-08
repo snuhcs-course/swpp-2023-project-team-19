@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -31,14 +32,25 @@
             android:text="\@User, welcome back!"
             android:textSize="20sp" />
 
+        <ImageButton
+            android:id="@+id/logout_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:paddingBottom="30dp"
+            android:background="@drawable/ic_logout_button" />
+
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_profile_foreground"
             android:scaleType="centerCrop"
+            android:layout_below="@id/logout_button"
             android:clipToOutline="true"
+            android:layout_marginTop="16dp"
             android:background="@drawable/circle_shape" />
 
         <TextView

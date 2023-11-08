@@ -49,6 +49,7 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_location_background
 drawable ic_location_foreground
+drawable ic_logout_button
 drawable ic_profile_background
 drawable ic_profile_foreground
 drawable ic_return_background
@@ -138,6 +139,7 @@ id location_title
 id login
 id loginButton
 id loginText
+id logout_button
 id menu_create
 id menu_events
 id menu_profile
@@ -177,6 +179,7 @@ id signupButton
 id signupText
 id subtitle_text
 id title_text
+id upload_profile_pic
 id user_info
 id user_name
 id verticalGuideline

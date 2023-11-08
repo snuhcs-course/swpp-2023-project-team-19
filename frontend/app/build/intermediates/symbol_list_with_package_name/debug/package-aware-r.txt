@@ -2965,6 +2965,7 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_location_background
 drawable ic_location_foreground
+drawable ic_logout_button
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -3370,6 +3371,7 @@ id location_title
 id login
 id loginButton
 id loginText
+id logout_button
 id m3_side_sheet
 id marquee
 id masked
@@ -3644,6 +3646,7 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id upload_profile_pic
 id useLogo
 id user_info
 id user_name
