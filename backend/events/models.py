@@ -24,3 +24,4 @@ class Event(models.Model):
     event_num_joined = models.IntegerField(default=0)
     event_register_date = models.DateField(null=True, blank=True)
     event_register_time = models.TimeField(null=True, blank=True)
+    event_images = models.ImageField(upload_to='event_image/', blank=True, null=True)

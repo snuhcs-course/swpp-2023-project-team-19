@@ -95,10 +95,6 @@ public class EventSearch extends Fragment {
             public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response) {
                 if (response.isSuccessful()) {
                     List<EventData> events_list = response.body();
-
-                    //GetEventData current_event = events_list.get(0);
-                    //System.out.println(current_event.event_title);
-
                     LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
 
                     Collections.reverse(events_list);
@@ -122,7 +118,7 @@ public class EventSearch extends Fragment {
                             EventCardView newEventCard = new EventCardView(getContext(), null);
 
                             newEventCard.setEventName(currentEvent.event_title);
-                            newEventCard.setEventPhoto(currentEvent.event_type);
+                            newEventCard.setEventPhoto(currentEvent.event_type, currentEvent.event_images);
                             newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
                             newEventCard.setEventLocation(currentEvent.event_location);
                             newEventCard.setEventLanguage(currentEvent.event_language);

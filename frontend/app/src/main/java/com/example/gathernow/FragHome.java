@@ -23,7 +23,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
         }
         EventHome eventHome = new EventHome();
         EventSearch eventSearch = new EventSearch();
-        EventCreate eventCreate = new EventCreate();
+        EventCreateActivity eventCreateActivity = new EventCreateActivity();
         ProfileHome profileHome = new ProfileHome();
         @Override
         public boolean onNavigationItemSelected (@NonNull MenuItem item){
@@ -36,7 +36,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
             } else if (item.getItemId() == R.id.menu_create) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.flFragment, eventCreate)
+                        .replace(R.id.flFragment, eventCreateActivity)
                         .commit();
                 return true;
             } else if (item.getItemId() == R.id.menu_events) {
