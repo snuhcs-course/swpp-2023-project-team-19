@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -98,6 +99,8 @@ public class ProfileHome extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
+
 
 
     @Override
@@ -238,7 +241,7 @@ public class ProfileHome extends Fragment {
                                         @Override
                                         public void onClick(View v) {
                                             // Handle the click event here
-                                            Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+                                            // Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
                                             // Send the user id to the EventInfo activity
                                             Intent intent = new Intent(v.getContext(), EventInfo.class);
                                             intent.putExtra("userId", getUserId(v.getContext()));
@@ -318,11 +321,19 @@ public class ProfileHome extends Fragment {
 
         });
 
-
+        ImageButton logoutButton = (ImageButton) rootView.findViewById(R.id.logout_button);
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Link to the searchHomepage
+                Intent intent = new Intent(v.getContext(), MainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         return rootView;
-
-
     }
+
+
 }

@@ -133,6 +133,7 @@ public class ApplicationForm extends AppCompatActivity {
                             // Link to the createSuccessful page
                             Intent intent = new Intent(v.getContext(), ApplySuccessful.class);
                             startActivity(intent);
+                            finish(); // kill this activity
                         }
                     } else {
                         // Handle the case where the response body is null or empty

@@ -49,6 +49,7 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_location_background
 drawable ic_location_foreground
+drawable ic_logout_button
 drawable ic_profile_background
 drawable ic_profile_foreground
 drawable ic_return_background
@@ -75,6 +76,7 @@ id approve_button
 id bottomNavigationView
 id cancel_button
 id close
+id confirmed_text
 id constraint1
 id constraint2
 id contact_hint
@@ -84,6 +86,7 @@ id content
 id create_successful
 id delete_button
 id discover_new
+id divider_text
 id email
 id emailText
 id eventCardContainer
@@ -97,6 +100,8 @@ id event_description_hint
 id event_duration
 id event_duration_hint
 id event_duration_title
+id event_image
+id event_image_upload
 id event_img
 id event_language
 id event_language_hint
@@ -121,23 +126,18 @@ id flFragment
 id home_text
 id horizontalGuideline
 id ic_success
-id image1_leisure
-id image2_sports
-id image3_workshops
-id image4_parties
-id image5_cultural_activities
-id image6_others
-id imageRadioGroup
 id language_title
 id languages
 id layout_one
 id layout_two
+id layout_two_sub
 id linear
 id loading_layout
 id location_title
 id login
 id loginButton
 id loginText
+id logout_button
 id menu_create
 id menu_events
 id menu_profile
@@ -146,7 +146,9 @@ id message_hint
 id name
 id nameText
 id no_applicant
+id no_event_layout
 id no_event_text
+id no_events_text
 id num_max_participants
 id num_participants_title
 id num_reg_participants
@@ -155,6 +157,7 @@ id participants_dash
 id password
 id passwordText
 id password_confirm
+id pending_text
 id post
 id price_title
 id profile_image
@@ -170,6 +173,7 @@ id result_accepted_button
 id result_awaiting_button
 id returnBtn
 id sad_frog
+id sad_frog1
 id search_button
 id send_application_button
 id signup
@@ -177,6 +181,7 @@ id signupButton
 id signupText
 id subtitle_text
 id title_text
+id upload_profile_pic
 id user_info
 id user_name
 id verticalGuideline

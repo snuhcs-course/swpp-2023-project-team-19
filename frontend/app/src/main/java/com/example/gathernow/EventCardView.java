@@ -92,7 +92,7 @@ public class EventCardView extends LinearLayout {
 
     public void setEventLanguage(String eventLanguage) {
         // set limitation for display if too many languages
-        if (eventLanguage.length() <= 25) {
+        if (eventLanguage.length() <= 22) {
             event_language.setText(eventLanguage);
         } else {
             String truncatedText = eventLanguage.substring(0, 22) + "...";

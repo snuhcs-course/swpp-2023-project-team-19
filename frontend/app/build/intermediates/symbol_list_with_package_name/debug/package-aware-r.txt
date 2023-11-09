@@ -2965,6 +2965,7 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_location_background
 drawable ic_location_foreground
+drawable ic_logout_button
 drawable ic_m3_chip_check
 drawable ic_m3_chip_checked_circle
 drawable ic_m3_chip_close
@@ -3195,6 +3196,7 @@ id closest
 id collapseActionView
 id compress
 id confirm_button
+id confirmed_text
 id constraint
 id constraint1
 id constraint2
@@ -3236,6 +3238,7 @@ id disablePostScroll
 id disableScroll
 id discover_new
 id disjoint
+id divider_text
 id dragAnticlockwise
 id dragClockwise
 id dragDown
@@ -3270,6 +3273,8 @@ id event_description_hint
 id event_duration
 id event_duration_hint
 id event_duration_title
+id event_image
+id event_image_upload
 id event_img
 id event_language
 id event_language_hint
@@ -3334,13 +3339,6 @@ id ifRoom
 id ignore
 id ignoreRequest
 id image
-id image1_leisure
-id image2_sports
-id image3_workshops
-id image4_parties
-id image5_cultural_activities
-id image6_others
-id imageRadioGroup
 id immediateStop
 id included
 id indeterminate
@@ -3357,6 +3355,7 @@ id languages
 id layout
 id layout_one
 id layout_two
+id layout_two_sub
 id left
 id leftToRight
 id legacy
@@ -3370,6 +3369,7 @@ id location_title
 id login
 id loginButton
 id loginText
+id logout_button
 id m3_side_sheet
 id marquee
 id masked
@@ -3450,7 +3450,9 @@ id neverCompleteToStart
 id noScroll
 id noState
 id no_applicant
+id no_event_layout
 id no_event_text
+id no_events_text
 id none
 id normal
 id north
@@ -3481,6 +3483,7 @@ id password_toggle
 id path
 id pathRelative
 id peekHeight
+id pending_text
 id percent
 id pin
 id position
@@ -3513,6 +3516,7 @@ id right_side
 id rounded
 id row_index_key
 id sad_frog
+id sad_frog1
 id save_non_transition_alpha
 id save_overlay_view
 id sawtooth
@@ -3644,6 +3648,7 @@ id unchecked
 id uniform
 id unlabeled
 id up
+id upload_profile_pic
 id useLogo
 id user_info
 id user_name
