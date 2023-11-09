@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="10dp"
-        app:layout_constraintHeight_percent="0.8"
-        app:layout_constraintTop_toTopOf="@id/horizontalGuideline">
+        app:layout_constraintHeight_percent="0.9"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -113,7 +113,7 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
                 app:layout_constraintTop_toBottomOf="@id/event_description"
-                app:layout_constraintWidth_percent="0.25" />
+                app:layout_constraintWidth_percent="0.35" />
 
             <TextView
                 android:id="@+id/languages"
@@ -125,7 +125,7 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/language_title"
                 app:layout_constraintTop_toBottomOf="@id/event_description"
-                app:layout_constraintWidth_percent="0.65" />
+                app:layout_constraintWidth_percent="0.55" />
 
             <!--            Participants -->
             <TextView
@@ -137,7 +137,7 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
                 app:layout_constraintTop_toBottomOf="@id/languages"
-                app:layout_constraintWidth_percent="0.25" />
+                app:layout_constraintWidth_percent="0.35" />
 
             <TextView
                 android:id="@+id/num_reg_participants"
@@ -179,7 +179,7 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
                 app:layout_constraintTop_toBottomOf="@id/num_participants_title"
-                app:layout_constraintWidth_percent="0.25" />
+                app:layout_constraintWidth_percent="0.35" />
 
             <TextView
                 android:id="@+id/event_date"
@@ -212,7 +212,7 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
                 app:layout_constraintTop_toBottomOf="@id/event_time_title"
-                app:layout_constraintWidth_percent="0.25" />
+                app:layout_constraintWidth_percent="0.35" />
 
             <TextView
                 android:id="@+id/event_duration"
@@ -235,7 +235,7 @@
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
                 app:layout_constraintRight_toLeftOf="@id/event_price"
                 app:layout_constraintTop_toBottomOf="@id/event_duration"
-                app:layout_constraintWidth_percent="0.25" />
+                app:layout_constraintWidth_percent="0.35" />
 
             <TextView
                 android:id="@+id/event_price"
@@ -258,7 +258,7 @@
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
                 app:layout_constraintRight_toLeftOf="@id/event_location"
                 app:layout_constraintTop_toBottomOf="@id/event_price"
-                app:layout_constraintWidth_percent="0.25" />
+                app:layout_constraintWidth_percent="0.35" />
 
             <TextView
                 android:id="@+id/event_location"
@@ -269,6 +269,40 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/location_title"
                 app:layout_constraintTop_toBottomOf="@id/event_price" />
+
+            <!--    Registration Deadline -->
+            <TextView
+                android:id="@+id/registration_text"
+                style="@style/HeadingTextField"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Register until:"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
+                app:layout_constraintRight_toLeftOf="@id/event_location"
+                app:layout_constraintTop_toBottomOf="@id/event_location"
+                app:layout_constraintWidth_percent="0.35" />
+
+            <TextView
+                android:id="@+id/registration_date"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="November 9, 2023"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toRightOf="@id/registration_text"
+                app:layout_constraintTop_toBottomOf="@id/event_location" />
+
+            <TextView
+                android:id="@+id/registration_time"
+                style="@style/TextField"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="0:00"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                android:layout_marginStart="5dp"
+                app:layout_constraintLeft_toRightOf="@id/registration_date"
+                app:layout_constraintTop_toBottomOf="@id/event_location" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -287,6 +321,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="20dp"
         app:layout_constraintWidth_percent="0.75" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -300,6 +336,8 @@
         app:layout_constraintRight_toLeftOf="@id/cancel_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="20dp"
         app:layout_constraintWidth_percent="0.4" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -313,6 +351,8 @@
         app:layout_constraintRight_toLeftOf="@id/cancel_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="20dp"
         app:layout_constraintWidth_percent="0.4" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -327,6 +367,8 @@
         app:layout_constraintLeft_toRightOf="@id/result_awaiting_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="20dp"
         app:layout_constraintWidth_percent="0.4" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -342,6 +384,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/delete_button"
         app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="20dp"
         app:layout_constraintWidth_percent="0.4" />
 
     <androidx.appcompat.widget.AppCompatButton
@@ -357,6 +401,8 @@
         app:layout_constraintLeft_toRightOf="@id/view_applicants_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="20dp"
         app:layout_constraintWidth_percent="0.4" />
 
 

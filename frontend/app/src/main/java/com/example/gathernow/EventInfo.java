@@ -16,6 +16,8 @@ import android.widget.Toolbar;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -71,6 +73,8 @@ public class EventInfo extends AppCompatActivity {
         TextView eventDuration = findViewById(R.id.event_duration);
         TextView eventLocation = findViewById(R.id.event_location);
         TextView eventPrice = findViewById(R.id.event_price);
+        TextView registerEndDate = findViewById(R.id.registration_date);
+        TextView registerEndTime = findViewById(R.id.registration_time);
 
         service.getEventByEventId(eventId).enqueue(new Callback<List<EventData>>() {
             @Override
@@ -92,7 +96,9 @@ public class EventInfo extends AppCompatActivity {
                     eventDuration.setText(eventData.event_duration);
                     eventLocation.setText(eventData.event_location);
                     eventPrice.setText(eventData.event_price.toString());
-                    setButtonVisibility(eventData.host_id);
+                    registerEndDate.setText(eventData.event_register_date);
+                    registerEndTime.setText(eventData.event_register_time);
+                    setButtonVisibility(eventData.host_id, eventData.event_register_date, eventData.event_register_time);
 
                     eventName = eventData.event_title;
                     hostId = eventData.host_id;
@@ -199,7 +205,7 @@ public class EventInfo extends AppCompatActivity {
         }
     }
 
-    private void setButtonVisibility(int hostId) {
+    private void setButtonVisibility(int hostId, String event_register_date, String event_register_time) {
         // Get the buttons from the layout
         Button registerButton = findViewById(R.id.register_button);
         Button waitingResultButton = findViewById(R.id.result_awaiting_button);
@@ -222,7 +228,6 @@ public class EventInfo extends AppCompatActivity {
                         ApplicationData current_application = response.body();
                         //int status = -1;
                         status = current_application.request_status;
-
                         applicationId = current_application.application_id;
 
 
@@ -230,11 +235,20 @@ public class EventInfo extends AppCompatActivity {
                             //Application is pending, show waiting button
                             waitingResultButton.setVisibility(View.VISIBLE);
                             cancelRegButton.setVisibility(View.VISIBLE);
+                            if (deadlinePassed(event_register_date, event_register_time)){
+                                //waitingResultButton.setClickable(false);
+                                cancelRegButton.setEnabled(false);
+                                waitingResultButton.setEnabled(false);
+                            }
 
                         }
                         else if (status == 1){
                             acceptedResultButton.setVisibility(View.VISIBLE);
                             cancelRegButton.setVisibility(View.VISIBLE);
+                            if (deadlinePassed(event_register_date, event_register_time)){
+                                cancelRegButton.setEnabled(false);
+                                cancelRegButton.setClickable(false);
+                            }
                         }
                         else{
                             Log.e("EventInfoDisplay", "Application status not found occurred");
@@ -244,8 +258,8 @@ public class EventInfo extends AppCompatActivity {
                         // User has not applied for this event, show register button
                         registerButton.setVisibility(View.VISIBLE);
 
-                        if(eventQuota == eventNumJoined){
-                            //registerButton.setClickable(false);
+                        if(Objects.equals(eventQuota, eventNumJoined) | deadlinePassed(event_register_date, event_register_time)){
+                            registerButton.setClickable(false);
                             registerButton.setEnabled(false);
                         }
                     }
@@ -263,6 +277,30 @@ public class EventInfo extends AppCompatActivity {
             });
 
         }
+
+    }
+
+    private boolean deadlinePassed(String event_register_date, String event_register_time) {
+        // Get current date and time
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        java.util.Date currentDate = calendar.getTime();
+        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm:ss", Locale.US);
+        String currentDateString = dateFormat.format(currentDate);
+        String currentTimeString = timeFormat.format(currentDate);
+        Log.d("EventInfo Testing", "Current date: " + currentDateString);
+        Log.d("EventInfo Testing", "Current time: " + currentTimeString);
+        Log.d("EventInfo Testing", "Event register date: " + event_register_date);
+        Log.d("EventInfo Testing", "Event register time: " + event_register_time);
+
+        // Compare current date and time with event registration deadline
+        if (currentDateString.compareTo(event_register_date) > 0) {
+            return true;
+        }
+        else if (currentDateString.compareTo(event_register_date) == 0) {
+            return currentTimeString.compareTo(event_register_time) > 0;
+        }
+        return false;
 
     }
 
