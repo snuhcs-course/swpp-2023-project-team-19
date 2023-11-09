@@ -50,7 +50,7 @@
             android:scaleType="centerCrop"
             android:layout_below="@id/logout_button"
             android:clipToOutline="true"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/circle_shape" />
 
         <TextView
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:text="Your events:"
             android:textSize="18dp"
-            android:paddingVertical="10dp"
+            android:paddingVertical="20dp"
             android:layout_below="@+id/subtitle_text"/>
 
 
