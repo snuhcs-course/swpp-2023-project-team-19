@@ -114,8 +114,6 @@ public class EventHome extends Fragment {
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
-
-
         // TODO: check condition here, whether the user has any registered event
 
         Integer userId = Integer.valueOf(getUserId(getActivity()));
@@ -147,82 +145,64 @@ public class EventHome extends Fragment {
                         for(int i = 0; i < events_list.size(); i++){
                             ApplicationData appliedEvent = events_list.get(i);
 
-                            int finalI = i;
-                            checkEventStatus(appliedEvent.event_id, service, new EventCallback() {
-                                @Override
-                                public void onEventFound(boolean hasValidEvent) {
-                                    // You now have the result here
+                            // check appliedEvent status here
+                            int status = appliedEvent.request_status;
+                            if(i ==  events_list.size() - 1 ){
+                                if(status == 0){ // pending events
+                                    // check if event is valid
+                                    pending_event_list.add(appliedEvent);
 
+                                    if(!stat[0]){
+                                        //no confirmed events
+                                        loading_layout.setVisibility(View.GONE);
+                                        layoutOne.setVisibility(View.GONE);
+                                        layoutTwo.setVisibility(View.VISIBLE);
+                                        no_events_layout.setVisibility(View.VISIBLE);
+                                        no_events_text.setText("No confirmed events :(");
 
-                                    if(hasValidEvent) {
-                                        // Handle the case where there is a valid event
-                                        // check appliedEvent status here
-                                        int status = appliedEvent.request_status;
-                                        if(finalI ==  events_list.size() - 1 ){
-                                            if(status == 0){ // pending events
-                                                // check if event is valid
-                                                pending_event_list.add(appliedEvent);
-
-                                                if(!stat[0]){
-                                                    //no confirmed events
-                                                    loading_layout.setVisibility(View.GONE);
-                                                    layoutOne.setVisibility(View.GONE);
-                                                    layoutTwo.setVisibility(View.VISIBLE);
-                                                    no_events_layout.setVisibility(View.VISIBLE);
-                                                    no_events_text.setText("No confirmed events :(");
-
-                                                }
-                                                else{
-                                                    loading_layout.setVisibility(View.GONE);
-                                                    layoutOne.setVisibility(View.GONE);
-                                                    layoutTwo.setVisibility(View.VISIBLE);
-                                                    no_events_layout.setVisibility(View.GONE);
-                                                }
-
-                                            }
-                                            else if(status == 1){
-                                                confirmed_event_list.add(appliedEvent);
-                                                findEventByEventId_and_callback(appliedEvent.event_id, eventCardContainer, service, new EventCallback() {
-                                                    @Override
-                                                    public void onEventFound(boolean hasValidEvent) {
-
-                                                        loading_layout.setVisibility(View.GONE);
-                                                        layoutOne.setVisibility(View.GONE);
-                                                        layoutTwo.setVisibility(View.VISIBLE);
-                                                        no_events_layout.setVisibility(View.GONE);
-
-                                                    }
-                                                });
-                                                stat[0] = true;
-
-                                            }
-
-
-
-
-                                        }
-                                        else{
-                                            if(status == 0){ // pending events
-                                                // check if event is valid
-                                                pending_event_list.add(appliedEvent);
-
-                                            }
-                                            else if(status == 1){
-                                                confirmed_event_list.add(appliedEvent);
-                                                findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
-                                                stat[0] = true;
-
-                                            }
-                                        }
-
+                                    }
+                                    else{
+                                        loading_layout.setVisibility(View.GONE);
+                                        layoutOne.setVisibility(View.GONE);
+                                        layoutTwo.setVisibility(View.VISIBLE);
+                                        no_events_layout.setVisibility(View.GONE);
                                     }
 
                                 }
-                            });
+                                else if(status == 1){
+                                    confirmed_event_list.add(appliedEvent);
+                                    findEventByEventId_and_callback(appliedEvent.event_id, eventCardContainer, service, new EventCallback() {
+                                        @Override
+                                        public void onEventFound(boolean hasValidEvent) {
 
+                                            loading_layout.setVisibility(View.GONE);
+                                            layoutOne.setVisibility(View.GONE);
+                                            layoutTwo.setVisibility(View.VISIBLE);
+                                            no_events_layout.setVisibility(View.GONE);
+
+                                        }
+                                    });
+                                    stat[0] = true;
+
+                                }
+
+                            }
+                            else{
+                                if(status == 0){ // pending events
+                                    // check if event is valid
+                                    pending_event_list.add(appliedEvent);
+
+                                }
+                                else if(status == 1){
+                                    confirmed_event_list.add(appliedEvent);
+                                    findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
+                                    stat[0] = true;
+
+                                }
+                            }
 
                         }
-                        // when last event is read and has no confirmed events, display sad frog in confirmed page
+
 
 
 
@@ -324,7 +304,7 @@ public class EventHome extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<ApplicationData>>  call, Throwable t) {
+            public void onFailure(Call<List<ApplicationData>> call, Throwable t) {
                 Log.e("UserAppliedEventDisplay", "Error occurred", t);
             }
 
