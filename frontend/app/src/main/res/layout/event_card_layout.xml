@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/color1"
-    android:padding="16dp">
+    android:padding="12dp">
 
     <!-- ImageView (Left Side) -->
     <ImageView
+        android:scaleType="centerCrop"
         android:id="@+id/event_photo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:src="@mipmap/ic_image6_others_foreground"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"/>
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintHeight_percent="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"/>
 
     <!-- Event Title (Top Right) -->
     <TextView
@@ -23,18 +30,20 @@
         android:text="Default Event"
         android:textStyle="bold"
         android:textSize="18sp"
-        android:layout_toRightOf="@id/event_photo"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="8dp"/>
+        app:layout_constraintStart_toEndOf="@id/event_photo"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="12dp"/>
 
     <!-- Event Details (Below Title) -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/event_name"
-        android:layout_marginStart="8dp"
-        android:layout_toRightOf="@id/event_photo"
-        android:orientation="vertical">
+        app:layout_constraintStart_toEndOf="@id/event_photo"
+        app:layout_constraintTop_toBottomOf="@+id/event_name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
+        android:layout_marginStart="12dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -45,35 +54,37 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_capacity_foreground"
-                android:paddingEnd="3dp"/>
+                android:paddingEnd="3dp"
+                android:src="@drawable/ic_capacity_foreground" />
 
             <TextView
                 android:id="@+id/event_capacity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="4/10"
-                android:textSize="14sp"
-                android:layout_marginStart="4dp" />
+                android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/indent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="          "
-                android:textSize="14sp"
-                android:layout_marginStart="4dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="3dp">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_language_foreground"
-                android:paddingEnd="3dp"/>
+                android:paddingEnd="3dp"
+                android:src="@drawable/ic_language_foreground" />
 
             <TextView
                 android:id="@+id/event_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="English"
                 android:textSize="14sp" />
 
@@ -88,13 +99,14 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_time_foreground"
-                android:paddingEnd="3dp"/>
+                android:paddingEnd="3dp"
+                android:src="@drawable/ic_time_foreground" />
 
             <TextView
                 android:id="@+id/event_datetime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="15/10/2023 3:00 PM"
                 android:textSize="14sp" />
 
@@ -109,13 +121,14 @@
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_location_foreground"
-                android:paddingEnd="3dp"/>
+                android:paddingEnd="3dp"
+                android:src="@drawable/ic_location_foreground" />
 
             <TextView
                 android:id="@+id/event_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:text="Gwanak-san Park, Gwanak-gu"
                 android:textSize="14sp" />
 
@@ -123,5 +136,5 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 

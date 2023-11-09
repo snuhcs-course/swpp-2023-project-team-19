@@ -24,8 +24,19 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/xt/jxrhclx12vs3nfjmcpmh1w3r0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\Chee_Yee\AppData\Local\Temp\baseline_logout_24.xml" />
                                                 <entry key="opacityPercent" value="60" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="clipartAsset">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/logout/baseline_logout_24.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -55,6 +66,11 @@
                                       </entry>
                                     </map>
                                   </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="outputName" value="ic_logout_button" />
+                                    </map>
+                                  </option>
                                 </PersistentState>
                               </value>
                             </entry>
@@ -69,18 +85,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="404040" />
-                                                <entry key="imagePath" value="/private/var/folders/xt/jxrhclx12vs3nfjmcpmh1w3r0000gn/T/baseline_location_on_24.xml" />
-                                              </map>
-                                            </option>
-                                          </PersistentState>
-                                        </value>
-                                      </entry>
-                                      <entry key="foregroundClipartAsset">
-                                        <value>
-                                          <PersistentState>
-                                            <option name="values">
-                                              <map>
-                                                <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/location_on/baseline_location_on_24.xml" />
+                                                <entry key="imagePath" value="\" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -92,7 +97,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="$USER_HOME$/Desktop/sad_frog.png" />
+                                                <entry key="imagePath" value="C:\Users\Chee_Yee\Desktop" />
                                                 <entry key="scalingPercent" value="75" />
                                               </map>
                                             </option>
@@ -126,10 +131,6 @@
                                   <option name="values">
                                     <map>
                                       <entry key="foregroundAssetType" value="CLIP_ART" />
-                                      <entry key="generateLegacyIcon" value="false" />
-                                      <entry key="generatePlayStoreIcon" value="false" />
-                                      <entry key="generateRoundIcon" value="false" />
-                                      <entry key="generateWebpIcons" value="false" />
                                       <entry key="outputName" value="ic_location" />
                                     </map>
                                   </option>
@@ -147,7 +148,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/xt/jxrhclx12vs3nfjmcpmh1w3r0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\Chee_Yee\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -191,7 +192,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="/private/var/folders/xt/jxrhclx12vs3nfjmcpmh1w3r0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\Chee_Yee\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -255,7 +256,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="imagePath" value="/private/var/folders/xt/jxrhclx12vs3nfjmcpmh1w3r0000gn/T/ic_android_black_24dp.xml" />
+                                                <entry key="imagePath" value="C:\Users\Chee_Yee\AppData\Local\Temp\ic_android_black_24dp.xml" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -299,6 +300,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

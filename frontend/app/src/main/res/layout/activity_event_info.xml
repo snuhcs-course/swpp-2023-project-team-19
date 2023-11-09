@@ -13,7 +13,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.1" />
 
-
     <ScrollView
         android:id="@+id/content"
         android:layout_width="match_parent"
@@ -44,6 +43,7 @@
                 android:id="@+id/event_img"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:scaleType="centerCrop"
                 app:layout_constraintHeight_percent="0.55"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -67,11 +67,11 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/circle_shape"
+                android:clipToOutline="true"
+                android:scaleType="centerCrop"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
-                app:layout_constraintTop_toBottomOf="@id/event_title"
-                android:scaleType="centerCrop"
-                android:clipToOutline="true" />
+                app:layout_constraintTop_toBottomOf="@id/event_title" />
 
             <TextView
                 android:id="@+id/profile_name"
@@ -85,6 +85,7 @@
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/profile_img"
                 app:layout_constraintTop_toBottomOf="@id/event_title"
+                app:layout_constraintTop_toTopOf="@id/profile_img"
                 app:layout_constraintWidth_percent="0.65" />
 
             <!--Description -->
@@ -136,7 +137,7 @@
                 android:text="Participants:"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
-                app:layout_constraintTop_toBottomOf="@id/language_title"
+                app:layout_constraintTop_toBottomOf="@id/languages"
                 app:layout_constraintWidth_percent="0.25" />
 
             <TextView
@@ -147,7 +148,7 @@
                 android:text="0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/num_participants_title"
-                app:layout_constraintTop_toBottomOf="@id/language_title" />
+                app:layout_constraintTop_toBottomOf="@id/languages" />
 
             <TextView
                 android:id="@+id/participants_dash"
@@ -157,7 +158,7 @@
                 android:text="/"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/num_reg_participants"
-                app:layout_constraintTop_toBottomOf="@id/language_title" />
+                app:layout_constraintTop_toBottomOf="@id/languages" />
 
             <TextView
                 android:id="@+id/num_max_participants"
@@ -167,7 +168,7 @@
                 android:text="0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/participants_dash"
-                app:layout_constraintTop_toBottomOf="@id/language_title" />
+                app:layout_constraintTop_toBottomOf="@id/languages" />
 
             <!--            Event time-->
             <TextView
@@ -280,7 +281,9 @@
         style="@style/PositiveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onRegisterEvent"
         android:text="Register"
+        android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -292,55 +295,73 @@
         style="@style/PositiveButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Waiting for result"
+        android:text="Pending"
+        android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/cancel_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
-        app:layout_constraintWidth_percent="0.75" />
+        app:layout_constraintWidth_percent="0.4" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/result_accepted_button"
+        style="@style/PositiveButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Accepted"
+        android:textSize="16sp"
+        android:visibility="invisible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/cancel_button"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintWidth_percent="0.4" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/cancel_button"
         style="@style/DangerButton"
+        android:onClick="onDeleteApplication"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Cancel registration"
+        android:text="Withdraw"
+        android:textSize="16sp"
         android:visibility="invisible"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintLeft_toRightOf="@id/result_awaiting_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
-        app:layout_constraintWidth_percent="0.75" />
+        app:layout_constraintWidth_percent="0.4" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/view_applicants_button"
         style="@style/NegativeButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onViewApplicants"
         android:text="View participants"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/delete_button"
         app:layout_constraintTop_toBottomOf="@id/content"
-        app:layout_constraintWidth_percent="0.4"
-        />
+        app:layout_constraintWidth_percent="0.4" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:onClick="onDeleteEvent"
         android:id="@+id/delete_button"
         style="@style/DangerButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:onClick="onDeleteEvent"
         android:text="Delete event"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:visibility="invisible"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintLeft_toRightOf="@id/view_applicants_button"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/content"
-        app:layout_constraintWidth_percent="0.4"
-        />
+        app:layout_constraintWidth_percent="0.4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

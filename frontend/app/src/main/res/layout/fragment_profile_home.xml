@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,7 +10,8 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/user_info">
 
         <TextView
             android:id="@+id/profile_text"
@@ -26,32 +28,44 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/profile_text"
             android:layout_marginEnd="0dp"
-            android:layout_toStartOf="@+id/profile_image"
             android:paddingVertical="10dp"
             android:text="\@User, welcome back!"
             android:textSize="20sp" />
 
+        <ImageButton
+            android:id="@+id/logout_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:padding="10dp"
+            android:paddingBottom="30dp"
+            android:background="@drawable/ic_logout_button" />
+
         <ImageView
             android:id="@+id/profile_image"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_profile_foreground"
             android:scaleType="centerCrop"
+            android:layout_below="@id/logout_button"
             android:clipToOutline="true"
+            android:layout_marginTop="30dp"
             android:background="@drawable/circle_shape" />
+
+        <TextView
+            android:id="@+id/your_event_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your events:"
+            android:textSize="18dp"
+            android:paddingVertical="20dp"
+            android:layout_below="@+id/subtitle_text"/>
 
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/your_event_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Your events:"
-        android:textSize="18dp"
-        android:paddingVertical="10dp"
-        android:layout_below="@+id/subtitle_text"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -102,6 +116,7 @@
                 android:layout_marginRight="-16dp"
                 android:layout_marginBottom="16dp"/>
 
+
         </RelativeLayout>
 
     </LinearLayout>
@@ -125,6 +140,22 @@
 
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/loading_layout">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
 
 </LinearLayout>

@@ -7,11 +7,26 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class FragHome extends AppCompatActivity implements BottomNavigationView
                    .OnNavigationItemSelectedListener {
         BottomNavigationView bottomNavigationView;
+    // prevent user from going back to previous screens
+        private boolean isBackPressed = false;
 
+        @Override
+        public void onBackPressed() {
+            if (isBackPressed) {
+                finishAffinity();
+                System.exit(0);
+            }
+            this.isBackPressed = true;
+            Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+            // reset back pressed after 2 seconds
+            new android.os.Handler().postDelayed(
+                    () -> isBackPressed = false, 2000);
+        }
         @Override
         protected void onCreate (Bundle savedInstanceState){
             super.onCreate(savedInstanceState);
@@ -23,7 +38,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
         }
         EventHome eventHome = new EventHome();
         EventSearch eventSearch = new EventSearch();
-        EventCreate eventCreate = new EventCreate();
+        EventCreateActivity eventCreateActivity = new EventCreateActivity();
         ProfileHome profileHome = new ProfileHome();
         @Override
         public boolean onNavigationItemSelected (@NonNull MenuItem item){
@@ -36,7 +51,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
             } else if (item.getItemId() == R.id.menu_create) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.flFragment, eventCreate)
+                        .replace(R.id.flFragment, eventCreateActivity)
                         .commit();
                 return true;
             } else if (item.getItemId() == R.id.menu_events) {

@@ -23,8 +23,19 @@ import retrofit2.Response;
 
 public class EventInfo extends AppCompatActivity {
     private ServiceApi service;
-    private int userId;
-    private int eventId;
+    public int userId;
+    public int eventId;
+
+    public String eventName;
+
+    public String userAvatar;
+
+    public String hostname;
+
+    public int hostId;
+
+    private Integer applicationId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +78,7 @@ public class EventInfo extends AppCompatActivity {
                     EventData eventData = events_list.get(0); // Get the first event as the list only contains one event
 
                     // Update the UI with the event info
-                    setEventPhoto(eventData.event_type);
+                    setEventPhoto(eventData.event_type, eventData.event_images);
                     eventTitle.setText(eventData.event_title);
                     setHostName(eventData.host_id);
                     eventDescription.setText(eventData.event_description);
@@ -81,25 +92,33 @@ public class EventInfo extends AppCompatActivity {
                     eventPrice.setText(eventData.event_price.toString());
                     setButtonVisibility(eventData.host_id);
 
+                    eventName = eventData.event_title;
+                    hostId = eventData.host_id;
+
                     // TODO: Update host's profile name
-                    service.getUserInfo(eventData.host_id).enqueue(new Callback<UserData1>() {
+                    service.getUserInfo(eventData.host_id).enqueue(new Callback<UserData>() {
                         @Override
-                        public void onResponse(Call<UserData1> call, Response<UserData1> response) {
+                        public void onResponse(Call<UserData> call, Response<UserData> response) {
                             if (response.isSuccessful()) {
-                                UserData1 userData = response.body();
+                                UserData userData = response.body();
                                 TextView profileName = findViewById(R.id.profile_name);
                                 profileName.setText(userData.name);
 
-                                UserData1 currentHostAvatar = response.body();
+                                UserData currentHostAvatar = response.body();
                                 String host_avatar = currentHostAvatar.avatar;
                                 host_avatar = "http://20.2.88.70:8000" + host_avatar;
                                 ImageView profile_img = findViewById(R.id.profile_img);
                                 Picasso.get().load(host_avatar).into(profile_img);
+
+                                userAvatar = host_avatar;
+                                hostname = userData.name;
+
                             }
                         }
 
+
                         @Override
-                        public void onFailure(Call<UserData1> call, Throwable t) {
+                        public void onFailure(Call<UserData> call, Throwable t) {
                             Log.d("EventInfo Testing", "Failed to get host name");
 
                         }
@@ -115,26 +134,33 @@ public class EventInfo extends AppCompatActivity {
     }
 
     private void setHostName(int hostId) {
-        service.getUserInfo(hostId).enqueue(new Callback<UserData1>() {
+        service.getUserInfo(hostId).enqueue(new Callback<UserData>() {
             @Override
-            public void onResponse(Call<UserData1> call, Response<UserData1> response) {
+            public void onResponse(Call<UserData> call, Response<UserData> response) {
                 if (response.isSuccessful()) {
-                    UserData1 userData = response.body();
+                    UserData userData = response.body();
                     TextView profileName = findViewById(R.id.profile_name);
                     profileName.setText(userData.name);
                 }
             }
 
             @Override
-            public void onFailure(Call<UserData1> call, Throwable t) {
+            public void onFailure(Call<UserData> call, Throwable t) {
                 Log.d("EventInfo Testing", "Failed to get host name");
 
             }
         });
     }
 
-    private void setEventPhoto(String event_type) {
+    private void setEventPhoto(String event_type, String event_images) {
+        Log.d("EventInfo Testing", "Event thumbnail: " + event_images);
         ImageView eventImage = findViewById(R.id.event_img);
+        // if user uploaded image
+        if (event_images != null) {
+            String eventThumbnail = "http://20.2.88.70:8000" + event_images;
+            Picasso.get().load(eventThumbnail).into(eventImage);
+            return;
+        }
         switch (event_type) {
             case "Leisure":
                 eventImage.setImageResource(R.mipmap.ic_image1_leisure);
@@ -161,6 +187,7 @@ public class EventInfo extends AppCompatActivity {
         // Get the buttons from the layout
         Button registerButton = findViewById(R.id.register_button);
         Button waitingResultButton = findViewById(R.id.result_awaiting_button);
+        Button acceptedResultButton = findViewById(R.id.result_accepted_button);
         Button cancelRegButton = findViewById(R.id.cancel_button);
         Button viewApplicantsButton = findViewById(R.id.view_applicants_button);
         Button deleteEventButton = findViewById(R.id.delete_button);
@@ -170,8 +197,57 @@ public class EventInfo extends AppCompatActivity {
             viewApplicantsButton.setVisibility(View.VISIBLE);
             deleteEventButton.setVisibility(View.VISIBLE);
         }
+        else{
+            service.check_if_applied(userId, eventId).enqueue(new Callback<ApplicationData>(){
+                @Override
+                public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response){
+                    if (response.isSuccessful()) {
+                        // User has applied for this event, check user application status (pending or accepted)
+                        ApplicationData current_application = response.body();
+                        //int status = -1;
+                        int status = current_application.request_status;
 
-        // TODO: else if user attendance has not approved, show register button
+                        applicationId = current_application.application_id;
+
+
+                        if(status == 0){
+                            //Application is pending, show waiting button
+                            waitingResultButton.setVisibility(View.VISIBLE);
+                            cancelRegButton.setVisibility(View.VISIBLE);
+                        }
+                        else if (status == 1){
+                            acceptedResultButton.setVisibility(View.VISIBLE);
+                            cancelRegButton.setVisibility(View.VISIBLE);
+                        }
+                        else{
+                            Log.e("EventInfoDisplay", "Application status not found occurred");
+                        }
+
+                    } else if (response.code() == 404) {
+                        // User has not applied for this event, show register button
+                        registerButton.setVisibility(View.VISIBLE);
+                    }
+
+
+
+                    else{
+
+
+                        Log.e("EventInfoDisplay", "Check application error occurred"+ Integer.toString(response.code()));
+                    }
+                }
+                @Override
+                public void onFailure(Call<ApplicationData>  call, Throwable t) {
+                    Toast.makeText(EventInfo.this, "Check Event Status Error", Toast.LENGTH_SHORT).show();
+                    Log.e("EventInfoDisplay", "Error occurred", t);
+                }
+
+            });
+
+
+        }
+
+        // TODO: else if user attendance has not applied, show register button
         // TODO: else if user attendance has not approved, show waiting button
         // TODO: else if user attendance has approved, show cancel button
     }
@@ -190,9 +266,10 @@ public class EventInfo extends AppCompatActivity {
                         public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
                             Log.d("EventInfo Testing", "Event deleted");
                             if (response.isSuccessful()) {
-                                Log.d("EventInfo Testing", response.body().toString());
+                                // !!! Commented lines here will cause crash!
+                                //Log.d("EventInfo Testing", response.body().toString());
                                 CodeMessageResponse codeMessageResponse = response.body();
-                                Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -202,9 +279,13 @@ public class EventInfo extends AppCompatActivity {
                         }
                     });
 
-                    // Direct to Home screen
-                    Intent intent = new Intent(view.getContext(), FragHome.class);
+                    // Direct to Delete Successful class
+                    //Intent intent = new Intent(view.getContext(), FragHome.class);
+                    //startActivity(intent);
+                    Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
                     startActivity(intent);
+                    finish();
+
                 })
                 .setNegativeButton("No", (dialog, which) -> {
                     // Do nothing
@@ -212,5 +293,63 @@ public class EventInfo extends AppCompatActivity {
                 });
         deleteAlertBuilder.show();
 
+    }
+
+    public void onRegisterEvent(View v){
+
+        Intent intent = new Intent(v.getContext(), ApplicationForm.class);
+
+        // Send the user id to the EventInfo activity
+        intent.putExtra("userId", userId);
+        intent.putExtra("eventId", eventId);
+        intent.putExtra("hostId", hostId);
+        intent.putExtra("eventName", eventName);
+        intent.putExtra("hostName", hostname);
+        intent.putExtra("hostAvatar", userAvatar);
+
+        startActivity(intent);
+        finish();
+
+    }
+
+    public void onDeleteApplication(View view){
+        service.delete_application(applicationId).enqueue(new Callback<ApplicationData>() {
+            @Override
+            public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response) {
+                Log.d("EventInfo Testing", "Event deleted");
+                if (response.isSuccessful()) {
+                    // !!! Commented lines here will cause crash!
+                    //Log.d("EventInfo Testing", response.body().toString());
+                    ApplicationData application_to_delete = response.body();
+                    //Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationData> call, Throwable t) {
+                Log.d("ApplicationDelete Testing", "Failed to delete application");
+            }
+        });
+
+        // Direct to Application Delete Successful class
+        //Intent intent = new Intent(view.getContext(), FragHome.class);
+        //startActivity(intent);
+        Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
+        startActivity(intent);
+        finish();
+
+    }
+
+    public void onViewApplicants(View v) {
+        Intent intent = new Intent(v.getContext(), ApplicantsInfoActivity.class);
+
+        // Send the user id to the EventInfo activity
+        intent.putExtra("userId", userId);
+        intent.putExtra("eventId", eventId);
+        intent.putExtra("hostId", hostId);
+        intent.putExtra("eventName", eventName);
+        intent.putExtra("hostName", hostname);
+        intent.putExtra("hostAvatar", userAvatar);
+        startActivity(intent);
     }
 }
