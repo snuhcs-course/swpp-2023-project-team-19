@@ -340,7 +340,7 @@
         android:layout_height="wrap_content"
         android:onClick="onViewApplicants"
         android:text="View participants"
-        android:textSize="16sp"
+        android:textSize="15sp"
         android:visibility="invisible"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintLeft_toLeftOf="parent"

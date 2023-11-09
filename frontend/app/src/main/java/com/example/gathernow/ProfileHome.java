@@ -134,7 +134,7 @@ public class ProfileHome extends Fragment {
                 if (response.isSuccessful()) {
                     UserData current_userinfo = response.body();
                     String user_name = current_userinfo.name;
-                    profile_text.setText(user_name + ", welcome back!");
+                    profile_text.setText(user_name + ",\nwelcome back!");
 
                     // TODO: Call profile picture
                     // Get the source of image on the server by calling API http://20.2.88.70:8000/api/useravatar/{user_id}/
