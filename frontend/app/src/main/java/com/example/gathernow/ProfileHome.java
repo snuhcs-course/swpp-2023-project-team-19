@@ -33,6 +33,7 @@ import retrofit2.Response;
 
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
+import com.example.gathernow.ui.MainActivity;
 import com.squareup.picasso.Picasso;
 
 /**

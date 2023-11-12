@@ -35,16 +35,16 @@
             android:name=".ApplySuccessful"
             android:exported="false" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".log_in.LogInActivity"
             android:exported="false" />
         <activity
             android:name=".FragHome"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".log_in.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

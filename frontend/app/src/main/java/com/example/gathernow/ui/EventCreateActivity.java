@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.ui;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -31,6 +31,9 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.gathernow.CreateSuccessful;
+import com.example.gathernow.FragHome;
+import com.example.gathernow.R;
 import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;

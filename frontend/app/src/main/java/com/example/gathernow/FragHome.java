@@ -2,6 +2,8 @@ package com.example.gathernow;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.gathernow.ui.EventCreateActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 

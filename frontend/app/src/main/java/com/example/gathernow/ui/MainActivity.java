@@ -1,10 +1,14 @@
-package com.example.gathernow;
+package com.example.gathernow.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.gathernow.R;
+import com.example.gathernow.log_in.LogInActivity;
+import com.example.gathernow.log_in.SignUpActivity;
 
 public class MainActivity extends AppCompatActivity {
 
