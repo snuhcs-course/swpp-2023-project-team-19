@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gathernow.api.CodeMessageResponse;
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
+
 import java.net.HttpURLConnection;
 
 import retrofit2.Call;

@@ -2,22 +2,19 @@ package com.example.gathernow;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
 import com.squareup.picasso.Picasso;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.List;
 import java.util.Objects;
 

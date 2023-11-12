@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.api;
 
 public class TokenResponse {
     private String message;

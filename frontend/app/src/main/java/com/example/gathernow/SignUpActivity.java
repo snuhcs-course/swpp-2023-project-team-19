@@ -16,6 +16,10 @@ import androidx.activity.result.PickVisualMediaRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gathernow.api.CodeMessageResponse;
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

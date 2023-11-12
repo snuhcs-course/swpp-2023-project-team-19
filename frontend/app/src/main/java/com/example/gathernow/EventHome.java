@@ -9,18 +9,16 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
 import com.squareup.picasso.Picasso;
 
 import java.sql.Date;

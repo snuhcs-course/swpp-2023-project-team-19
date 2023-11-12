@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.api;
 import com.google.gson.annotations.SerializedName;
 public class CodeMessageResponse {
     @SerializedName("code")

@@ -31,6 +31,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.gathernow.api.CodeMessageResponse;
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;

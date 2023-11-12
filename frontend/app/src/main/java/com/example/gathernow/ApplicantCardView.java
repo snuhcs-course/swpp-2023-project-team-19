@@ -1,7 +1,6 @@
 package com.example.gathernow;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,11 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

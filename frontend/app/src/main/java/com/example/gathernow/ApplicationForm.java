@@ -10,9 +10,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gathernow.api.CodeMessageResponse;
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
 import com.squareup.picasso.Picasso;
-
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;

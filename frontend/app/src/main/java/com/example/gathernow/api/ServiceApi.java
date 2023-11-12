@@ -1,6 +1,9 @@
-package com.example.gathernow;
+package com.example.gathernow.api;
 
-import java.io.File;
+import com.example.gathernow.ApplicationData;
+import com.example.gathernow.EventData;
+import com.example.gathernow.UserData;
+
 import java.util.List;
 
 import okhttp3.MultipartBody;
@@ -14,7 +17,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Part;
-import retrofit2.http.Query;
 
 public interface ServiceApi {
 

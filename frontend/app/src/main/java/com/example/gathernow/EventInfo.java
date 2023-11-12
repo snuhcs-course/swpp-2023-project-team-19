@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
+import com.example.gathernow.api.CodeMessageResponse;
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

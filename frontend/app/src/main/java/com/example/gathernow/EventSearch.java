@@ -14,12 +14,14 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
+
 import java.io.IOException;
 import java.sql.Date;
 import java.sql.Time;
 
 
-import java.net.HttpURLConnection;
 import java.util.Collections;
 import java.util.List;
 

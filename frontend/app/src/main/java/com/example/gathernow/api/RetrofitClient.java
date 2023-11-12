@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.api;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
