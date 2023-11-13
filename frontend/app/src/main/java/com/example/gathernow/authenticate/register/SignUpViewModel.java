@@ -36,28 +36,31 @@ public class SignUpViewModel extends ViewModel {
     }
 
     public void handleImageSelection(Uri uri) {
-        if (uri != null) {
-            // Load picture from uri
-            InputStream inputStream;
-            File outputFile = new File(context.getFilesDir(), "profile_img.jpg");
-            try {
-                inputStream = context.getContentResolver().openInputStream(uri);
-                FileOutputStream outputStream = new FileOutputStream(outputFile);
-                Bitmap selectedImgBitmap = ImageHelper.getCorrectlyRotatedImg(inputStream);
-
-                if (selectedImgBitmap != null) {
-                    // Compress bitmap
-                    selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
-                    outputStream.close();
-                    avatarFilePath.postValue(outputFile.getPath());
-                    Log.d("SignUpActivity Testing", "Profile picture saved to: " + outputFile.getPath());
-                }
-
-            } catch (IOException e) {
-                Log.e("SignUpActivity Testing", "Error");
-                e.printStackTrace();
-            }
+        String avatarFilePath = ImageHelper.handleImagePicker(context, uri);
+        if (avatarFilePath != null) {
+            this.avatarFilePath.postValue(avatarFilePath);
         }
+//        if (uri != null) {
+//            // Load picture from uri
+//            InputStream inputStream;
+//            File outputFile = new File(context.getFilesDir(), "profile_img.jpg");
+//            try {
+//                inputStream = context.getContentResolver().openInputStream(uri);
+//                FileOutputStream outputStream = new FileOutputStream(outputFile);
+//                Bitmap selectedImgBitmap = ImageHelper.getCorrectlyRotatedImg(inputStream);
+//
+//                if (selectedImgBitmap != null) {
+//                    // Compress bitmap
+//                    selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
+//                    outputStream.close();
+//                    avatarFilePath.postValue(outputFile.getPath());
+//                }
+//
+//            } catch (IOException e) {
+//                Log.e("SignUpActivity Testing", "Error");
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     public void signUp(String name, String email, String password, String pwConfirmation, String avatarFilePath) {

@@ -8,7 +8,7 @@ import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.authenticate.AuthCallback;
-import com.example.gathernow.authenticate.UserDataSource;
+import com.example.gathernow.authenticate.UserLocalDataSource;
 
 import java.net.HttpURLConnection;
 
@@ -37,8 +37,8 @@ public class LogInDataSource {
                         if ("Login successful.".equals(message)) {
                             // save user_id to share preference
                             String userId = String.valueOf(result.getUserId());
-                            UserDataSource userDataSource = new UserDataSource(context);
-                            userDataSource.storeUserId(userId);
+                            UserLocalDataSource userLocalDataSource = new UserLocalDataSource(context);
+                            userLocalDataSource.storeUserId(userId);
                             callback.onSuccess();
                         }
                     }

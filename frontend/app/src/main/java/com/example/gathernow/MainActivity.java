@@ -1,4 +1,4 @@
-package com.example.gathernow.ui;
+package com.example.gathernow;
 
 import android.content.Intent;
 import android.os.Bundle;

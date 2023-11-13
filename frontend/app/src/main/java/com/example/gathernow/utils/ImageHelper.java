@@ -1,13 +1,17 @@
 package com.example.gathernow.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.net.Uri;
 import android.util.Log;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -56,5 +60,31 @@ public class ImageHelper {
 
         }
         return BitmapFactory.decodeStream(inputStream);
+    }
+
+    public static String handleImagePicker(Context context, Uri uri) {
+        if (uri != null) {
+            // Load picture from uri
+            InputStream inputStream;
+            File outputFile = new File(context.getFilesDir(), "profile_img.jpg");
+            try {
+                inputStream = context.getContentResolver().openInputStream(uri);
+                FileOutputStream outputStream = new FileOutputStream(outputFile);
+                Bitmap selectedImgBitmap = ImageHelper.getCorrectlyRotatedImg(inputStream);
+
+                if (selectedImgBitmap != null) {
+                    // Compress bitmap
+                    selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
+                    outputStream.close();
+                    return outputFile.getPath();
+//                    avatarFilePath.postValue(outputFile.getPath());
+                }
+
+            } catch (IOException e) {
+                Log.e("ImageHelper Testing", "Error");
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 }

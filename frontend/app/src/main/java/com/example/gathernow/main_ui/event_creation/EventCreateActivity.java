@@ -1,4 +1,4 @@
-package com.example.gathernow.ui;
+package com.example.gathernow.main_ui.event_creation;
 
 import android.app.TimePickerDialog;
 import android.content.Context;
