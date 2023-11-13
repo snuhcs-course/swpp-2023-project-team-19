@@ -7,8 +7,8 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gathernow.R;
-import com.example.gathernow.log_in.LogInActivity;
-import com.example.gathernow.log_in.SignUpActivity;
+import com.example.gathernow.authenticate.login.LogInActivity;
+import com.example.gathernow.authenticate.register.SignUpActivity;
 
 public class MainActivity extends AppCompatActivity {
 

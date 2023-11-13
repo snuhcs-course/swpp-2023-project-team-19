@@ -1,4 +1,4 @@
-package com.example.gathernow.log_in;
+package com.example.gathernow.authenticate.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,13 +11,12 @@ import android.widget.TextView;
 
 import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
+import com.example.gathernow.authenticate.register.SignUpActivity;
 
 public class LogInActivity extends AppCompatActivity {
     private TextView emailInput;
     private TextView passwordInput;
     private TextView alert;
-    private AuthorizationRepository authorizationRepository;
-    private LogInDataSource logInDataSource;
     private LogInViewModel logInViewModel;
 
     @Override
@@ -29,13 +28,13 @@ public class LogInActivity extends AppCompatActivity {
         alert = findViewById(R.id.alert);
 
         // Data source
-        logInDataSource = new LogInDataSource(LogInActivity.this);
+        LogInDataSource logInDataSource = new LogInDataSource(LogInActivity.this);
 
         // Repository
-        authorizationRepository = new AuthorizationRepository(logInDataSource);
+        LoginRepository loginRepository = new LoginRepository(logInDataSource);
 
         // View Model
-        logInViewModel = new ViewModelProvider(this, new LogInViewModelFactory(authorizationRepository)).get(LogInViewModel.class);
+        logInViewModel = new ViewModelProvider(this, new LogInViewModelFactory(loginRepository)).get(LogInViewModel.class);
         logInViewModel.getAlertMessage().observe(this, message -> {
             if (message.equals("User not found")) {
                 message = "User not found. Do you want to sign up?";

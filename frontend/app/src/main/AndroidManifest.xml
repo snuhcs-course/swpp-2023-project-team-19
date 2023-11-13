@@ -35,13 +35,13 @@
             android:name=".ApplySuccessful"
             android:exported="false" />
         <activity
-            android:name=".log_in.LogInActivity"
+            android:name=".authenticate.login.LogInActivity"
             android:exported="false" />
         <activity
             android:name=".FragHome"
             android:exported="false" />
         <activity
-            android:name=".log_in.SignUpActivity"
+            android:name=".authenticate.register.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"

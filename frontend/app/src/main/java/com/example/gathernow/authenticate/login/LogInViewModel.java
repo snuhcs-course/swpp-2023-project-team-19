@@ -1,15 +1,17 @@
-package com.example.gathernow.log_in;
+package com.example.gathernow.authenticate.login;
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.gathernow.authenticate.AuthCallback;
+
 public class LogInViewModel extends ViewModel {
     private MutableLiveData<String> alertMessage = new MutableLiveData<>();
-    private AuthorizationRepository logInRepository;
+    private LoginRepository logInRepository;
 
-    public LogInViewModel(AuthorizationRepository logInRepository) {
+    public LogInViewModel(LoginRepository logInRepository) {
         this.logInRepository = logInRepository;
     }
 
@@ -21,7 +23,7 @@ public class LogInViewModel extends ViewModel {
         if (!isValidInput(email, password)) {
             return;
         }
-        logInRepository.login(email, password, new LogInCallback() {
+        logInRepository.login(email, password, new AuthCallback() {
             @Override
             public void onSuccess() {
                 alertMessage.postValue("Login successful");

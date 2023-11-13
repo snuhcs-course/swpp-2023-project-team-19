@@ -11,7 +11,7 @@ import retrofit2.Call;
 import static org.mockito.Mockito.when;
 
 import com.example.gathernow.api.CodeMessageResponse;
-import com.example.gathernow.LogInActivity;
+import com.example.gathernow.authenticate.login.LogInActivity;
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.UserData;
 

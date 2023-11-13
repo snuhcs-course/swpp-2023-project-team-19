@@ -1,15 +1,14 @@
-package com.example.gathernow.log_in;
-import static android.content.Context.MODE_PRIVATE;
+package com.example.gathernow.authenticate.login;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.example.gathernow.UserData;
 import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
-import com.example.gathernow.log_in.LogInCallback;
+import com.example.gathernow.authenticate.AuthCallback;
+import com.example.gathernow.authenticate.UserDataSource;
 
 import java.net.HttpURLConnection;
 
@@ -19,23 +18,12 @@ import retrofit2.Response;
 
 public class LogInDataSource {
     private ServiceApi service;
-    private final SharedPreferences sharedPref;
-    private final SharedPreferences.Editor editor;
+    private Context context;
     public LogInDataSource(Context context) {
-        sharedPref = context.getSharedPreferences("UserId", MODE_PRIVATE);
-        editor = sharedPref.edit();
+        this.context = context;
     }
 
-    public void storeUserId(String userId) {
-        editor.putString("user_id", userId);
-        editor.apply();
-    }
-
-    public String getUserId() {
-        return sharedPref.getString("user_id", null);
-    }
-
-    public void logIn(String email, String password, LogInCallback callback) {
+    public void logIn(String email, String password, AuthCallback callback) {
         service = RetrofitClient.getClient().create(ServiceApi.class);
         UserData requestData = new UserData(email, password);
         service.userLogIn(requestData).enqueue(new Callback<CodeMessageResponse>() {
@@ -49,7 +37,8 @@ public class LogInDataSource {
                         if ("Login successful.".equals(message)) {
                             // save user_id to share preference
                             String userId = String.valueOf(result.getUserId());
-                            storeUserId(userId);
+                            UserDataSource userDataSource = new UserDataSource(context);
+                            userDataSource.storeUserId(userId);
                             callback.onSuccess();
                         }
                     }

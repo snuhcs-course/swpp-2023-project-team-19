@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="30dp"
-    tools:context=".log_in.LogInActivity">
+    tools:context=".authenticate.login.LogInActivity">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/verticalGuideline"
