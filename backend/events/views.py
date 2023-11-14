@@ -1,8 +1,15 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
+
 from .models import Event
 from .serializers import EventSerializer
+
+from datetime import datetime
+from django.db.models import ExpressionWrapper, F, DateTimeField, Func, Value, CharField
+from django.db.models.functions import Concat
+from django.utils.timezone import make_aware
 
 @api_view(['GET', 'POST'])
 def event_list(request):
@@ -46,14 +53,36 @@ def event_detail(request, pk):
         event.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 @api_view(['GET'])
-#@permission_classes([IsAuthenticated])  # Optional: If you want to protect the endpoint
+#@permission_classes([IsAuthenticated])  # Optional
 def events_by_user(request, user_id):
     if request.method == 'GET':
-        events = Event.objects.filter(host_id=user_id)
-        serializer = EventSerializer(events, many=True)
+        # Get current datetime in an aware format (considering timezone)
+        now = make_aware(datetime.now())
+
+        # Annotate queryset with a combined datetime field
+        events = Event.objects.filter(host_id=user_id).annotate(
+            full_event_datetime=ExpressionWrapper(
+                Func(
+                    Concat(
+                        F('event_date'), 
+                        Value(' '),  # Space to separate date and time
+                        F('event_time')
+                    ),
+                    function='CAST',
+                    template='%(function)s(%(expressions)s as datetime)',
+                ),
+                output_field=DateTimeField()
+            )
+        )
+
+        # Filter events happening after the current datetime
+        future_events = events.filter(full_event_datetime__gt=now)
+
+        # Serialize and return the filtered events
+        serializer = EventSerializer(future_events, many=True)
         return Response(serializer.data)
+
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 # Get & delete events by id
