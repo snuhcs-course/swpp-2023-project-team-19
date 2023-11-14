@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:padding="30dp"
-        tools:context=".ui.EventCreateActivity">
+        tools:context=".main_ui.event_creation.EventCreateActivity">
 
         <ImageButton
             android:id="@+id/returnBtn"

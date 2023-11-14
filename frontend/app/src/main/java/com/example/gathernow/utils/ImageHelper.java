@@ -62,11 +62,12 @@ public class ImageHelper {
         return BitmapFactory.decodeStream(inputStream);
     }
 
-    public static String handleImagePicker(Context context, Uri uri) {
+    // Return the path of the saved image
+    public static String handleImagePicker(Context context, Uri uri, String feature) {
         if (uri != null) {
             // Load picture from uri
             InputStream inputStream;
-            File outputFile = new File(context.getFilesDir(), "profile_img.jpg");
+            File outputFile = new File(context.getFilesDir(), feature + ".jpg");
             try {
                 inputStream = context.getContentResolver().openInputStream(uri);
                 FileOutputStream outputStream = new FileOutputStream(outputFile);
@@ -76,6 +77,7 @@ public class ImageHelper {
                     // Compress bitmap
                     selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
                     outputStream.close();
+                    Log.d("ImageHelper Testing", "Profile picture saved to: " + outputFile.getPath());
                     return outputFile.getPath();
 //                    avatarFilePath.postValue(outputFile.getPath());
                 }

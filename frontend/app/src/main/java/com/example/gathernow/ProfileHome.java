@@ -33,7 +33,6 @@ import retrofit2.Response;
 
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
-import com.example.gathernow.ui.MainActivity;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -64,7 +63,7 @@ public class ProfileHome extends Fragment {
 
     // Function to get user id
     private String getUserId(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = context.getSharedPreferences("UserId", Context.MODE_PRIVATE);
         return sharedPreferences.getString("user_id", null); // Return null if the user_id doesn't exist
     }
 

@@ -1,29 +1,16 @@
 package com.example.gathernow.main_ui.event_creation;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.media.ExifInterface;
 import android.os.Bundle;
-
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.PickVisualMediaRequest;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -31,31 +18,24 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.PickVisualMediaRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+
 import com.example.gathernow.CreateSuccessful;
 import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
-import com.example.gathernow.api.CodeMessageResponse;
-import com.example.gathernow.api.RetrofitClient;
-import com.example.gathernow.api.ServiceApi;
+import com.example.gathernow.authenticate.UserLocalDataSource;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicReference;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -73,10 +53,19 @@ public class EventCreateActivity extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private ServiceApi service;
     private boolean imageUploaded = false;
     private String eventThumbnailFilePath = null;
+    private ImageView eventThumbnailImageView;
     private File eventThumbnailFile;
+    private EventCreateViewModel eventCreateViewModel;
+    private EventRepository eventRepository;
+    private EventDataSource eventDataSource;
+    private Button uploadImgButton;
+    private String selectedEventType = null;
+    private Button eventDateButton;
+    private Button eventTimeButton;
+    private Button eventLastRegisterDateButton;
+    private Button eventLastRegisterTimeButton;
 
     public EventCreateActivity() {
         // Required empty public constructor
@@ -107,6 +96,12 @@ public class EventCreateActivity extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        // Data source
+        eventDataSource = new EventDataSource();
+        // Repository
+        eventRepository = new EventRepository(eventDataSource);
+        eventCreateViewModel = new EventCreateViewModel(getContext(), eventRepository);
+
     }
 
     private TextView eventNameText;
@@ -116,95 +111,52 @@ public class EventCreateActivity extends Fragment {
     private TextView eventLocationText;
     private TextView eventNumParticipantsText;
     private ActivityResultLauncher<PickVisualMediaRequest> pickProfilePic;
-
-    private String getUserId(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("user_id", null); // Return null if the user_id doesn't exist
-    }
+    private TextView eventTypeView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_create, container, false);
         ImageView eventImage = rootView.findViewById(R.id.event_image);
+        eventCreateViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> {
+            Log.d("EventCreateActivity Testing", "Alert Message: " + message);
+            if (message.equals("Event created successfully")) {
+                Intent intent = new Intent(getContext(), CreateSuccessful.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        });
 
         // TODO: upload image
-        Button uploadImgButton = rootView.findViewById(R.id.event_image_upload);
+        uploadImgButton = rootView.findViewById(R.id.event_image_upload);
         pickProfilePic = registerForActivityResult(new ActivityResultContracts.PickVisualMedia(), uri -> {
             if (uri != null) {
-                Log.d("EventCreateActivity Testing", "Profile picture selected");
                 eventImage.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 eventImage.setImageURI(uri);
-                // Load picture from uri
-                InputStream inputStream;
-                Context context = rootView.getContext();
-                File outputFile = new File(context.getFilesDir(), "event_thumb.jpg");
-                try {
-                    inputStream = context.getContentResolver().openInputStream(uri);
-                    FileOutputStream outputStream = new FileOutputStream(outputFile);
-                    Bitmap selectedImgBitmap = getRotatedImage(inputStream);
-
-                    if (selectedImgBitmap != null) {
-                        // Compress bitmap
-                        selectedImgBitmap.compress(Bitmap.CompressFormat.JPEG, 30, outputStream);
-                        outputStream.close();
-                        eventThumbnailFilePath = outputFile.getPath();
-                        Log.d("EventCreateActivity Testing", "Thumbnail saved to: " + eventThumbnailFilePath);
-                    }
-                    imageUploaded = true;
-                    uploadImgButton.setText("Delete");
-                } catch (IOException e) {
-                    Log.e("EventCreateActivity Testing", "Error when uploading image");
-                    e.printStackTrace();
-                }
+                eventCreateViewModel.handleEventThumbnailUpload(uri);
             }
         });
         uploadImgButton.setOnClickListener(v -> {
+            onEventThumbnailUpload();
+        });
+        eventCreateViewModel.getEventFileThumbnail().observe(getViewLifecycleOwner(), filePath -> {
             if (!imageUploaded) {
-                Log.d("EventCreateActivity Testing", "Upload image button clicked");
-                pickProfilePic.launch(new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
+                eventThumbnailFilePath = filePath;
+                imageUploaded = true;
+                uploadImgButton.setText("Delete");
             } else {
-                Log.d("EventCreateActivity Testing", "Delete img");
-                // TODO: Delete selected image
-                eventImage.setImageResource(R.mipmap.ic_sad_frog_foreground);
-                eventImage.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
                 eventThumbnailFilePath = null;
-                uploadImgButton.setText("Upload");
                 imageUploaded = false;
+                uploadImgButton.setText("Upload");
             }
+
         });
 
         // TODO: event type
-        TextView eventType = rootView.findViewById(R.id.event_type);
+        eventTypeView = rootView.findViewById(R.id.event_type);
         AtomicReference<String> eventTypeIn = new AtomicReference<>("");
-        final int[] eventTypeInputIdx = {0};
-        String[] typeChoices = {"Leisure", "Sports", "Workshops", "Parties", "Cultural activities", "Others"};
-        eventType.setOnClickListener(v -> {
-            AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
-            builder.setTitle("Select Event Type")
-                    .setCancelable(false)
-                    .setSingleChoiceItems(typeChoices, -1, (dialogInterface, i) -> {
-                        eventType.setText(typeChoices[i]);
-                        eventTypeInputIdx[0] = i + 1;
-                    }).setPositiveButton("Select", (dialogInterface, i) -> {
-                        i = eventTypeInputIdx[0];
-                        if (i == 1) {
-                            eventTypeIn.set("Leisure");
-                        } else if (i == 2) {
-                            eventTypeIn.set("Sports");
-                        } else if (i == 3) {
-                            eventTypeIn.set("Workshops");
-                        } else if (i == 4) {
-                            eventTypeIn.set("Parties");
-                        } else if (i == 5) {
-                            eventTypeIn.set("Cultural activities");
-                        } else if (i == 6) {
-                            eventTypeIn.set("Others");
-                        }
-                        Log.d("EventCreateActivity Testing", "Event type: " + eventTypeIn.get());
-                    }).setNegativeButton("Cancel", (dialogInterface, i) -> {
-                        dialogInterface.dismiss();
-                    });
-            builder.show();
+        eventTypeView.setOnClickListener(v -> {
+            showEventTypeDialog();
         });
 
 
@@ -231,36 +183,20 @@ public class EventCreateActivity extends Fragment {
         final int[] event_reg_hour_input = {0};
         final int[] event_reg_min_input = {0};
 
-        Button event_date = rootView.findViewById(R.id.event_date);
-        Button event_time = rootView.findViewById(R.id.event_time);
-        Button event_reg_date = rootView.findViewById(R.id.event_register_date);
-        Button event_reg_time = rootView.findViewById(R.id.event_register_time);
+        eventDateButton = rootView.findViewById(R.id.event_date);
+        eventTimeButton = rootView.findViewById(R.id.event_time);
+        eventLastRegisterDateButton = rootView.findViewById(R.id.event_register_date);
+        eventLastRegisterTimeButton = rootView.findViewById(R.id.event_register_time);
 
         // event date
-        event_date.setOnClickListener(v -> {
-            final Calendar c = Calendar.getInstance();
-
-            int year = c.get(Calendar.YEAR);
-            int month = c.get(Calendar.MONTH);
-            int day = c.get(Calendar.DAY_OF_MONTH);
-
-            DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                    // TODO: date
-                    event_year_input[0] = year;
-                    event_month_input[0] = monthOfYear;
-                    event_date_input[0] = dayOfMonth;
-                    event_date.setText("Date: " + String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear + 1) + "/" + String.valueOf(year));
-                }
-            }, year, month, day);
-            // set the minimum date to today
-            datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
-            datePickerDialog.show();
+        eventDateButton.setOnClickListener(v -> {
+            showDatePickerDialog();
         });
+        // Observe the event date changes and update UI
+        eventCreateViewModel.getEventDate().observe(getViewLifecycleOwner(), calendar -> updateEventDateUI(calendar, eventDateButton));
 
         // event time
-        event_time.setOnClickListener(v -> {
+        eventTimeButton.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
 
             int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -272,14 +208,14 @@ public class EventCreateActivity extends Fragment {
                 event_min_input[0] = mins;
                 String formattedHour = String.format("%02d", hour1);
                 String formattedMins = String.format("%02d", mins);
-                event_time.setText("Time: " + formattedHour + ":" + formattedMins);
-                //event_time.setText("Time: " + String.valueOf(hour) + ":" + String.valueOf(mins));
+                eventTimeButton.setText("Time: " + formattedHour + ":" + formattedMins);
+                //eventTimeButton.setText("Time: " + String.valueOf(hour) + ":" + String.valueOf(mins));
             }, hour, minutes, false);
             timePickerDialog.show();
         });
 
         // event registration date
-        event_reg_date.setOnClickListener(v -> {
+        eventLastRegisterDateButton.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
 
             int year = c.get(Calendar.YEAR);
@@ -291,7 +227,7 @@ public class EventCreateActivity extends Fragment {
                 event_reg_year_input[0] = year1;
                 event_reg_month_input[0] = monthOfYear;
                 event_reg_date_input[0] = dayOfMonth;
-                event_reg_date.setText("Date: " + String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear + 1) + "/" + String.valueOf(year1));
+                eventLastRegisterDateButton.setText("Date: " + String.valueOf(dayOfMonth) + "/" + String.valueOf(monthOfYear + 1) + "/" + String.valueOf(year1));
             }, year, month, day);
             // set the minimum date to today
             datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
@@ -299,7 +235,7 @@ public class EventCreateActivity extends Fragment {
         });
 
         // event registration time
-        event_reg_time.setOnClickListener(v -> {
+        eventLastRegisterTimeButton.setOnClickListener(v -> {
             final Calendar c = Calendar.getInstance();
 
             int hour = c.get(Calendar.HOUR_OF_DAY);
@@ -313,7 +249,7 @@ public class EventCreateActivity extends Fragment {
                     event_reg_min_input[0] = mins;
                     String formattedHour = String.format("%02d", hour);
                     String formattedMins = String.format("%02d", mins);
-                    event_reg_time.setText("Time: " + formattedHour + ":" + formattedMins);
+                    eventLastRegisterTimeButton.setText("Time: " + formattedHour + ":" + formattedMins);
                 }
             }, hour, minutes, false);
             timePickerDialog.show();
@@ -333,8 +269,7 @@ public class EventCreateActivity extends Fragment {
         selectedLanguage = new boolean[langArray.length];
         final String[] selected_language = {""};
 
-        languageTextView.setOnClickListener(view ->
-        {
+        languageTextView.setOnClickListener(view -> {
 
             // Initialize alert dialog
             AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
@@ -459,68 +394,34 @@ public class EventCreateActivity extends Fragment {
                 alert.setText(alert_msg);
             } else {
                 // send info to host
-                Integer host_id = Integer.valueOf(getUserId(getActivity()));
+                UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getContext());
+                String hostId = userLocalDataSource.getUserId();
+                Log.d("EventCreateActivity Testing", "hostId: " + hostId);
+                Log.d("EventCreateActivity Testing", "Thumbnail Filepath:" + eventThumbnailFilePath);
+                eventCreateViewModel.createEvent(eventThumbnailFilePath, hostId, eventTypeIn.get(), event_name, event_description, event_date1, event_time1, event_duration, event_location, event_language, event_num_participants_str, event_price_str, event_reg_date1, event_reg_time1);
+//
+//                    @Override
+//                    public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
+//                        if (response.isSuccessful()) {
+//                            CodeMessageResponse result = response.body();
+//                            if (result != null) {
+//                                if (response.code() == 201) {
+//
+//                                    //Toast.makeText(EventCreate.this, "Event created successfully.", Toast.LENGTH_SHORT).show();
+//                                    // Link to the createSuccessful page
+//                                    Intent intent = new Intent(v.getContext(), CreateSuccessful.class);
+//                                    startActivity(intent);
+//                                    FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
+//                                    FragmentTransaction transaction = fragmentManager.beginTransaction();
+//                                    transaction.remove(EventCreateActivity.this);
+//                                    transaction.commit();
+//                                }
+//                            } else {
+//                                // Handle the case where the response body is null or empty
+//                                Toast.makeText(getActivity(), "Bad Request.", Toast.LENGTH_SHORT).show();
+//
+//
 
-                // Thumbnail
-                MultipartBody.Part thumbnailPart = null;
-                if (eventThumbnailFilePath != null) {
-                    eventThumbnailFile = new File(eventThumbnailFilePath);
-                    RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), eventThumbnailFile);
-                    thumbnailPart = MultipartBody.Part.createFormData("event_images", eventThumbnailFile.getName(), requestFile);
-                }
-
-                RequestBody eventTypeBody = RequestBody.create(MediaType.parse("text/plain"), eventTypeIn.get());
-                RequestBody eventNameBody = RequestBody.create(MediaType.parse("text/plain"), event_name);
-                RequestBody eventNumParticipantsBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(event_num_participants));
-                RequestBody eventDateBody = RequestBody.create(MediaType.parse("text/plain"), event_date1);
-                RequestBody eventTimeBody = RequestBody.create(MediaType.parse("text/plain"), event_time1);
-                RequestBody eventDurationBody = RequestBody.create(MediaType.parse("text/plain"), event_duration);
-                RequestBody eventLanguageBody = RequestBody.create(MediaType.parse("text/plain"), event_language);
-                RequestBody eventPriceBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(event_price));
-                RequestBody eventLocationBody = RequestBody.create(MediaType.parse("text/plain"), event_location);
-                RequestBody eventDescriptionBody = RequestBody.create(MediaType.parse("text/plain"), event_description);
-                RequestBody eventNumJoinedBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(event_num_joined));
-                RequestBody hostIdBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(host_id));
-                RequestBody eventRegDateBody = RequestBody.create(MediaType.parse("text/plain"), event_reg_date1);
-                RequestBody eventRegTimeBody = RequestBody.create(MediaType.parse("text/plain"), event_reg_time1);
-
-                service = RetrofitClient.getClient().create(ServiceApi.class);
-//                EventData requestData = new EventData(eventTypeIn.get(), event_name, event_num_participants, event_date1, event_time1, event_duration, event_language, event_price, event_location, event_description, event_num_joined, host_id, event_reg_date1, event_reg_time1);
-                Call<CodeMessageResponse> call = service.eventlist(thumbnailPart, hostIdBody, eventTypeBody, eventNameBody, eventNumParticipantsBody, eventDateBody, eventTimeBody, eventDurationBody, eventLanguageBody, eventPriceBody, eventLocationBody, eventDescriptionBody, eventNumJoinedBody, eventRegDateBody, eventRegTimeBody);
-                call.enqueue(new Callback<CodeMessageResponse>() {
-                    @Override
-                    public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
-                        if (response.isSuccessful()) {
-                            CodeMessageResponse result = response.body();
-                            if (result != null) {
-                                if (response.code() == 201) {
-
-                                    //Toast.makeText(EventCreate.this, "Event created successfully.", Toast.LENGTH_SHORT).show();
-                                    // Link to the createSuccessful page
-                                    Intent intent = new Intent(v.getContext(), CreateSuccessful.class);
-                                    startActivity(intent);
-                                    FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
-                                    FragmentTransaction transaction = fragmentManager.beginTransaction();
-                                    transaction.remove(EventCreateActivity.this);
-                                    transaction.commit();
-                                }
-                            } else {
-                                // Handle the case where the response body is null or empty
-                                Toast.makeText(getActivity(), "Bad Request.", Toast.LENGTH_SHORT).show();
-
-
-                            }
-                        } else {
-                            // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
-                            Toast.makeText(getActivity(), "Event creation failed.", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
-                        Toast.makeText(getActivity(), "Event creation Error", Toast.LENGTH_SHORT).show();
-                    }
-                });
             }
 
         });
@@ -537,51 +438,63 @@ public class EventCreateActivity extends Fragment {
         return rootView;
     }
 
-    private Bitmap getRotatedImage(InputStream inputStream) {
-        // Clone the input stream because inputStream can only be read once
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        InputStream inputStreamClone;
-        InputStream inputStreamClone2;
-        try {
-            inputStream.transferTo(baos);
-            inputStreamClone = new ByteArrayInputStream(baos.toByteArray());
-            inputStreamClone2 = new ByteArrayInputStream(baos.toByteArray());
-
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("SignUpActivity Testing", "IO Exception when cloning the input stream");
-            return null;
+    private void updateEventDateUI(Calendar date, Button eventDateButton) {
+        if (date != null) {
+            int dayOfMonth = date.get(Calendar.DAY_OF_MONTH);
+            int monthOfYear = date.get(Calendar.MONTH);
+            int year = date.get(Calendar.YEAR);
+            eventDateButton.setText("Date: " + dayOfMonth + "/" + String.valueOf(monthOfYear + 1) + "/" + year);
         }
-
-        ExifInterface exifInterface = null;
-        try {
-            exifInterface = new ExifInterface(inputStreamClone);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.d("SignUpActivity Testing", "IO Exception when reading exif");
-        }
-        if (exifInterface != null) {
-            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
-            int degrees = 0;
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    degrees = 90;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    degrees = 180;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    degrees = 270;
-                    break;
-            }
-            Matrix matrix = new Matrix();
-            matrix.postRotate(degrees);
-            Bitmap selectedImgBitmap = BitmapFactory.decodeStream(inputStreamClone2);
-            return Bitmap.createBitmap(selectedImgBitmap, 0, 0, selectedImgBitmap.getWidth(), selectedImgBitmap.getHeight(), matrix, true);
-
-        }
-        return BitmapFactory.decodeStream(inputStream);
     }
 
+    private void onEventThumbnailUpload() {
+        if (!imageUploaded) {
+            Log.d("EventCreateActivity Testing", "Upload image button clicked");
+            pickProfilePic.launch(new PickVisualMediaRequest.Builder().setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly.INSTANCE).build());
+        } else {
+            Log.d("EventCreateActivity Testing", "Delete img");
+            // TODO: Delete selected image
+            eventThumbnailImageView.setImageResource(R.mipmap.ic_sad_frog_foreground);
+            eventThumbnailImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            eventThumbnailFilePath = null;
+            uploadImgButton.setText("Upload");
+            imageUploaded = false;
+        }
 
+    }
+
+    private void showEventTypeDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setTitle("Select Event Type").setCancelable(false).setSingleChoiceItems(eventCreateViewModel.getTypeChoices(), eventCreateViewModel.getEventTypeInputIdx(), (dialogInterface, i) -> {
+            eventCreateViewModel.setEventTypeInputIdx(i);
+            eventTypeView.setText(eventCreateViewModel.getTypeChoices()[i]);
+//                    eventTypeInputIdx[0] = i + 1;
+        }).setPositiveButton("Select", (dialogInterface, i) -> {
+            int selectedId = eventCreateViewModel.getEventTypeInputIdx();
+            selectedEventType = eventCreateViewModel.getTypeChoices()[selectedId];
+            Log.d("EventCreateActivity Testing", "Event type: " + selectedEventType);
+        }).setNegativeButton("Cancel", (dialogInterface, i) -> {
+            dialogInterface.dismiss();
+        });
+        builder.show();
+    }
+
+    private void showDatePickerDialog() {
+        Calendar currentDate = eventCreateViewModel.getEventDate().getValue();
+        if (currentDate == null) {
+            currentDate = Calendar.getInstance();
+        }
+        int year = currentDate.get(Calendar.YEAR);
+        int month = currentDate.get(Calendar.MONTH);
+        int day = currentDate.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), (datePicker1, year1, monthOfYear, dayOfMonth) -> {
+            Calendar selectedDate = Calendar.getInstance();
+            selectedDate.set(year1, monthOfYear, dayOfMonth);
+            eventCreateViewModel.setEventDate(selectedDate);
+        }, year, month, day);
+        // set the minimum date to today
+        datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+        datePickerDialog.show();
+    }
 }

@@ -3,7 +3,7 @@ package com.example.gathernow;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.gathernow.ui.EventCreateActivity;
+import com.example.gathernow.main_ui.event_creation.EventCreateActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -14,7 +14,7 @@ import android.widget.Toast;
 public class FragHome extends AppCompatActivity implements BottomNavigationView
                    .OnNavigationItemSelectedListener {
         BottomNavigationView bottomNavigationView;
-    // prevent user from going back to previous screens
+        // prevent user from going back to previous screens
         private boolean isBackPressed = false;
 
         @Override
