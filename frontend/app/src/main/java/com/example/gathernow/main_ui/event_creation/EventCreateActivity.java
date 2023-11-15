@@ -32,12 +32,7 @@ import com.example.gathernow.R;
 import com.example.gathernow.authenticate.UserLocalDataSource;
 import com.example.gathernow.utils.DateTimeHelper;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collections;
-import java.util.Locale;
-import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Consumer;
 
 
