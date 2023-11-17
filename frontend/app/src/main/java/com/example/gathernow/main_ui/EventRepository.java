@@ -26,4 +26,8 @@ public class EventRepository {
     public void deleteApplication(int applicationId, CallbackInterface applicationCallback) {
         eventDataSource.deleteApplication(applicationId, applicationCallback);
     }
+
+    public void getUserEvents(int userId, CallbackInterface eventCallback) {
+        eventDataSource.getUserEvents(userId, eventCallback);
+    }
 }

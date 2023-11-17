@@ -158,5 +158,28 @@ public class EventDataSource {
             }
         });
     }
+
+    public void getUserEvents(int userId, CallbackInterface callback) {
+        service.getEventsByUser(userId).enqueue(new Callback<List<EventDataModel>>() {
+            @Override
+            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response) {
+                if (response.isSuccessful()) {
+                    List<EventDataModel> result = response.body();
+                    if (result != null) {
+                        callback.onSuccess(result);
+                    } else {
+                        callback.onError("Empty response from the server");
+                    }
+                } else {
+                    callback.onError("Failed to get user events");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+    }
 }
 

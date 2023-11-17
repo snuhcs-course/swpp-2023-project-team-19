@@ -55,7 +55,7 @@ public class EventInfoActivity extends AppCompatActivity {
 
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
-        userId = Integer.parseInt(intent.getStringExtra("userId"));
+        userId = intent.getIntExtra("userId", -1);
         eventId = intent.getIntExtra("eventId", -1);
         if (eventId == -1) {
             Toast.makeText(EventInfoActivity.this, "Event ID not found", Toast.LENGTH_SHORT).show();

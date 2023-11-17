@@ -52,4 +52,8 @@ public class UserDataModel {
     public String getAvatar() {
         return avatar;
     }
+
+    public Integer getUserId() {
+        return user_id;
+    }
 }

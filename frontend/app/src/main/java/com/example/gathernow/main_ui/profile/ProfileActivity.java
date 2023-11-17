@@ -1,5 +1,6 @@
 package com.example.gathernow.main_ui.profile;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,6 +42,8 @@ import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.authenticate.UserLocalDataSource;
 import com.example.gathernow.main_ui.event_info.EventInfoActivity;
+import com.example.gathernow.utils.EventCardHelper;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,19 +63,13 @@ public class ProfileActivity extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private ServiceApi service;
-    private ServiceApi service2;
-
-    private boolean isEventLoaded = false;
-    private boolean isUserLoaded = false;
-
-    //private ProgressBar progressBar;
-
-    // Function to get user id
-    private String getUserId(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("UserId", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("user_id", null); // Return null if the user_id doesn't exist
-    }
+    // View elements
+    private TextView profileText;
+    private ImageView profileImg;
+    private LinearLayout layoutOne, layoutTwo;
+    private RelativeLayout userInfo, loadingLayout;
+    private int userId;
+    private ProfileViewModel profileViewModel;
 
     public ProfileActivity() {
         // Required empty public constructor
@@ -102,6 +100,7 @@ public class ProfileActivity extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        profileViewModel = new ProfileViewModel(getContext());
     }
 
 
@@ -114,229 +113,81 @@ public class ProfileActivity extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_profile_home, container, false);
 
-        LinearLayout layoutOne = rootView.findViewById(R.id.layout_one);
-        LinearLayout layoutTwo = rootView.findViewById(R.id.layout_two);
-        RelativeLayout user_info = rootView.findViewById(R.id.user_info);
-
-        layoutOne.setVisibility(View.GONE);
-        layoutTwo.setVisibility(View.GONE);
-        user_info.setVisibility(View.GONE);
-        RelativeLayout loading_layout = rootView.findViewById(R.id.loading_layout);
-        loading_layout.setVisibility(View.VISIBLE);
-
-        TextView profile_text = rootView.findViewById(R.id.subtitle_text);
-        //ImageView profile_img = rootView.findViewById(R.id.profile_image);
-
-        UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
-        Integer userId = Integer.valueOf(userLocalDataSource.getUserId());
-
-        service = RetrofitClient.getClient().create(ServiceApi.class);
-
-        service.getUserInfo(userId).enqueue(new Callback<UserDataModel>(){
-            @Override
-            public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
-                if (response.isSuccessful()) {
-                    UserDataModel current_userinfo = response.body();
-                    String user_name = "Minh";
-                    profile_text.setText(user_name + ",\nwelcome back!");
-
-                    // TODO: Call profile picture
-                    // Get the source of image on the server by calling API http://20.2.88.70:8000/api/useravatar/{user_id}/
-                    // Set the image source to the image view
-                    service2 = RetrofitClient.getClient().create(ServiceApi.class);
-//                    service2.getUserInfo(userId).enqueue(new Callback<UserDataModel>() {
-//                        @Override
-//                        public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
-//                            // Log response to console
-//                            Log.d("UserAvatar", "Response: " + response.toString());
-//                            if (response.isSuccessful()) {
-//                                UserDataModel current_useravatar = response.body();
-//                                String user_avatar = current_useravatar.avatar;
-//                                user_avatar = "http://20.2.88.70:8000" + user_avatar;
-//                                ImageView profile_img = rootView.findViewById(R.id.profile_image);
-//                                Picasso.get().load(user_avatar).into(profile_img);
-//
-//                                isUserLoaded = true;
-//                            }
-//                        }
-//
-//
-//
-//                        public void onFailure(Call<UserDataModel> call, Throwable t) {
-//                            Toast.makeText(getActivity(), "Get User Avatar Error", Toast.LENGTH_SHORT).show();
-//                            Log.e("UserAvatar", "Error occurred", t);
-//                        }
-//                    });
-
-                } else {
-                    // Handle API error
-                    // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
-                    Toast.makeText(getActivity(), "Event display failed.", Toast.LENGTH_SHORT).show();
-
-                    // Logging the error
-                    if (response.errorBody() != null) {
-                        try {
-                            String errorBody = response.errorBody().string();
-                            Log.e("UserEventDisplay", "Failed with response: " + errorBody);
-                        } catch (IOException e) {
-                            Log.e("UserEventDisplay", "Error while reading errorBody", e);
-                        }
-                    } else {
-                        Log.e("UserEventDisplay", "Response not successful and error body is null");
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<UserDataModel>  call, Throwable t) {
-                Toast.makeText(getActivity(), "Get Event Error", Toast.LENGTH_SHORT).show();
-                Log.e("UserEventDisplay", "Error occurred", t);
-            }
-        });
-
-
-        service.getEventsByUser(userId).enqueue(new Callback<List<EventDataModel>>(){
-            @Override
-            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response){
-                if (response.isSuccessful()) {
-                    List<EventDataModel>  events_list = response.body();
-                    if (response.body() != null){
-                        if(events_list.size() >0){
-
-                            isEventLoaded = true;
-                            loading_layout.setVisibility(View.GONE);
-                            user_info.setVisibility(View.VISIBLE);
-                            layoutOne.setVisibility(View.GONE);
-                            layoutTwo.setVisibility(View.VISIBLE);
-
-                            LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-
-                            Collections.reverse(events_list);
-
-                            // Get the current date and time
-                            Date currentDate = new Date(System.currentTimeMillis());
-
-                            for (int i = 0; i < events_list.size(); i++){
-
-                                EventDataModel currentEvent = events_list.get(i);
-                                // Create Date and Time object from currentEvent.event_date
-                                Date eventDate = Date.valueOf(currentEvent.getEventDate());
-                                Time eventTime = Time.valueOf(currentEvent.getEventTime());
-
-                                // Combine the Date and Time into a single Date object
-                                long dateTimeMillis = eventDate.getTime() + eventTime.getTime();
-                                Date eventDateTime = new Date(dateTimeMillis);
-
-                                //Only display events that happens after the current datetime
-                                if (eventDateTime.after(currentDate)){
-                                    EventCardView newEventCard = new EventCardView(getContext(), null);
-                                    newEventCard.setEventName(currentEvent.getEventTitle());
-                                    newEventCard.setEventPhoto(currentEvent.getEventType(), currentEvent.getEventImages());
-                                    newEventCard.setEventCapacity(currentEvent.getEventNumJoined(), currentEvent.getEventNumParticipants());
-                                    newEventCard.setEventLocation(currentEvent.getEventLocation());
-                                    newEventCard.setEventLanguage(currentEvent.getEventLanguage());
-                                    newEventCard.setEventDateTime(Date.valueOf(currentEvent.getEventDate()), Time.valueOf(currentEvent.getEventTime()));
-
-                                    // Add vertical padding to the newEventCard
-                                    int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
-                                    newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
-                                    eventCardContainer.addView(newEventCard);
-
-                                    newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            // Handle the click event here
-                                            // Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
-                                            // Send the user id to the EventInfo activity
-                                            Intent intent = new Intent(v.getContext(), EventInfoActivity.class);
-                                            intent.putExtra("userId", getUserId(v.getContext()));
-                                            intent.putExtra("eventId", currentEvent.getEventId());
-                                            startActivity(intent);
-                                        }
-                                    });
-                                }
-                            }
-
-                        }
-                        else{
-                            //status = 0;
-                            loading_layout.setVisibility(View.GONE);
-                            user_info.setVisibility(View.VISIBLE);
-                            layoutOne.setVisibility(View.VISIBLE);
-                            layoutTwo.setVisibility(View.GONE);
-
-                            TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
-                            discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-                            discover_new.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(v.getContext(), FragHome.class);
-                                    startActivity(intent);
-                                }
-                            });
-
-                        }
-
-
-
-                    }
-                    else{
-                        //status = 0;
-                        loading_layout.setVisibility(View.GONE);
-                        user_info.setVisibility(View.VISIBLE);
-                        layoutOne.setVisibility(View.VISIBLE);
-                        layoutTwo.setVisibility(View.GONE);
-
-                        TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
-                        discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-                        discover_new.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(v.getContext(), FragHome.class);
-                                startActivity(intent);
-                            }
-                        });
-                    }
-
-
-                }
-                else {
-                    // Handle API error
-                    // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
-                    Toast.makeText(getActivity(), "Event display failed.", Toast.LENGTH_SHORT).show();
-
-                    // Logging the error
-                    if (response.errorBody() != null) {
-                        try {
-                            String errorBody = response.errorBody().string();
-                            Log.e("UserEventDisplay", "Failed with response: " + errorBody);
-                        } catch (IOException e) {
-                            Log.e("UserEventDisplay", "Error while reading errorBody", e);
-                        }
-                    } else {
-                        Log.e("UserEventDisplay", "Response not successful and error body is null");
-                    }
-                }
-            }
-            @Override
-            public void onFailure(Call<List<EventDataModel>>  call, Throwable t) {
-                Toast.makeText(getActivity(), "Get Event Error", Toast.LENGTH_SHORT).show();
-                Log.e("UserEventDisplay", "Error occurred", t);
-            }
-
-        });
-
-        ImageButton logoutButton = (ImageButton) rootView.findViewById(R.id.logout_button);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Link to the searchHomepage
-                Intent intent = new Intent(v.getContext(), MainActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        initializeUI(rootView);
+        profileViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show());
+        profileViewModel.getUserData().observe(getViewLifecycleOwner(), this::updateProfileUI);
+        profileViewModel.getUserEvents().observe(getViewLifecycleOwner(), eventDataModels -> updateUserEventsUI(eventDataModels, rootView));
+        profileViewModel.fetchUserProfile();
+//        profileViewModel.fetchUserEvents(userId);
 
         return rootView;
+    }
+
+    private void updateUserEventsUI(List<EventDataModel> eventDataList, View rootView) {
+        if (eventDataList == null || eventDataList.isEmpty()) {
+            Log.d("ProfileActivity", "User event data is null or empty");
+            updateBlankUI();
+        } else {
+            Log.d("ProfileActivity", "Loaded user events");
+            LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
+            EventCardHelper.createEventCardList(getContext(), eventDataList, eventCardContainer, userId);
+            loadingLayout.setVisibility(View.GONE);
+            userInfo.setVisibility(View.VISIBLE);
+            layoutOne.setVisibility(View.GONE);
+            layoutTwo.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void updateBlankUI() {
+        loadingLayout.setVisibility(View.GONE);
+        userInfo.setVisibility(View.VISIBLE);
+        layoutOne.setVisibility(View.VISIBLE);
+        layoutTwo.setVisibility(View.GONE);
+
+        TextView discoverNew = layoutOne.findViewById(R.id.discover_new);
+        discoverNew.setPaintFlags(discoverNew.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        discoverNew.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), FragHome.class);
+            startActivity(intent);
+        });
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void updateProfileUI(UserDataModel userDataModel) {
+        if (userDataModel != null) {
+            userId = userDataModel.getUserId();
+            String userName = userDataModel.getName();
+            profileText.setText(userName + ",\nwelcome back!");
+
+            // Update avatar
+            String avatarUrl = userDataModel.getAvatar();
+            String userAvatarUrl = "http://20.2.88.70:8000" + avatarUrl;
+            Picasso.get().load(userAvatarUrl).into(profileImg);
+
+            userInfo.setVisibility(View.VISIBLE);
+            loadingLayout.setVisibility(View.GONE);
+        }
+    }
+
+    private void initializeUI(View rootView) {
+        profileText = rootView.findViewById(R.id.subtitle_text);
+        profileImg = rootView.findViewById(R.id.profile_image);
+        layoutOne = rootView.findViewById(R.id.layout_one);
+        layoutTwo = rootView.findViewById(R.id.layout_two);
+        userInfo = rootView.findViewById(R.id.user_info);
+        loadingLayout = rootView.findViewById(R.id.loading_layout);
+        ImageButton logoutButton = rootView.findViewById(R.id.logout_button);
+
+        loadingLayout.setVisibility(View.VISIBLE);
+        userInfo.setVisibility(View.GONE);
+        layoutOne.setVisibility(View.GONE);
+        layoutTwo.setVisibility(View.GONE);
+
+        logoutButton.setOnClickListener(v -> {
+            // Handle logout
+            Intent intent = new Intent(v.getContext(), MainActivity.class);
+            startActivity(intent);
+        });
     }
 
 

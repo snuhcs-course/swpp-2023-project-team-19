@@ -15,6 +15,7 @@ import java.lang.ref.Reference;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import com.squareup.picasso.Picasso;
 
@@ -101,8 +102,8 @@ public class EventCardView extends LinearLayout {
     }
 
     public void setEventDateTime(Date event_date, Time event_time) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a");  // "a" will display AM or PM
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+        SimpleDateFormat timeFormat = new SimpleDateFormat("hh:mm a", Locale.ENGLISH);  // "a" will display AM or PM
 
         String formattedDate = dateFormat.format(event_date);
         String formattedTime = timeFormat.format(event_time);
