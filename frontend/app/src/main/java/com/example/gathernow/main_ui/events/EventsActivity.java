@@ -93,7 +93,7 @@ public class EventsActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_event_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
 
         LinearLayout layoutOne = rootView.findViewById(R.id.layout_one);
         LinearLayout layoutTwo = rootView.findViewById(R.id.layout_two);

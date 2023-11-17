@@ -27,6 +27,7 @@ import com.example.gathernow.MainActivity;
 import com.example.gathernow.R;
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.api.models.UserDataModel;
+import com.example.gathernow.authenticate.UserLocalDataSource;
 import com.example.gathernow.utils.EventCardHelper;
 import com.squareup.picasso.Picasso;
 
@@ -96,7 +97,7 @@ public class ProfileActivity extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_profile_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
         initializeUI(rootView);
         profileViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show());
@@ -170,6 +171,8 @@ public class ProfileActivity extends Fragment {
 
         logoutButton.setOnClickListener(v -> {
             // Handle logout
+            UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
+            userLocalDataSource.clear();
             Intent intent = new Intent(v.getContext(), MainActivity.class);
             startActivity(intent);
         });

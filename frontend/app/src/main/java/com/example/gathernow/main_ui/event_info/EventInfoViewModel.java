@@ -129,7 +129,7 @@ public class EventInfoViewModel extends ViewModel {
                     if (status == 0) {
                         // application is pending
                         showResultButton.setValue(true);
-                        applicationStatus.setValue("Pending");
+                        applicationStatus.setValue("PENDING");
                         showCancelRegButton.setValue(true);
                         // When the deadline is passed, no cancellation is allowed
                         if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
@@ -138,7 +138,7 @@ public class EventInfoViewModel extends ViewModel {
                     } else if (status == 1) {
                         // application is accepted
                         showResultButton.setValue(true);
-                        applicationStatus.setValue("Accepted");
+                        applicationStatus.setValue("ACCEPTED");
                         showCancelRegButton.setValue(true);
                         // When the deadline is passed, no cancellation is allowed
                         if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
