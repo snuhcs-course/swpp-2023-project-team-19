@@ -11,6 +11,8 @@ import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.MediaType;
@@ -179,6 +181,46 @@ public class EventDataSource {
             public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
                 callback.onError("Network error");
             }
+        });
+    }
+
+    public void getAllEvents(CallbackInterface callback){
+        service.getALlEvents().enqueue(new Callback<List<EventDataModel>>() {
+            @Override
+            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null && !response.body().isEmpty()){
+                        callback.onSuccess(response.body());
+                        Log.e("UserEventDisplay", "Event is available");
+                    }
+                    else{
+                        //no events case
+                        //callback.onSuccess(null);
+                        callback.onSuccess(new ArrayList<>());
+                        Log.e("UserEventDisplay", "Empty Event list");
+                    }
+                }
+                else {
+                    // Handle API error
+                    // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
+                    if (response.errorBody() != null) {
+                        try {
+                            String errorBody = response.errorBody().string();
+                            Log.e("EventDisplay", "Failed with response: " + errorBody);
+                        } catch (IOException e) {
+                            Log.e("EventDisplay", "Error while reading errorBody", e);
+                        }
+                    } else {
+                        Log.e("EventDisplay", "Response not successful and error body is null");
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
+                Log.e("EventDisplay", "Error occurred", t);
+            }
+
         });
     }
 }

@@ -30,4 +30,7 @@ public class EventRepository {
     public void getUserEvents(int userId, CallbackInterface eventCallback) {
         eventDataSource.getUserEvents(userId, eventCallback);
     }
+    public void getAllEvents(CallbackInterface eventCallback) {
+        eventDataSource.getAllEvents(eventCallback);
+    }
 }
