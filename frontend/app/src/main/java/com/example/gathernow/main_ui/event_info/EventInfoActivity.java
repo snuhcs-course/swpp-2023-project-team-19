@@ -69,22 +69,23 @@ public class EventInfoActivity extends AppCompatActivity {
                 registerButton.setVisibility(View.GONE);
             }
         });
-        eventInfoViewModel.getShowWaitingButton().observe(this, showWaitingButton -> {
-            Button waitingButton = findViewById(R.id.result_awaiting_button);
+        Button resultButton = findViewById(R.id.result_button);
+        eventInfoViewModel.getShowResultButton().observe(this, showWaitingButton -> {
             if (showWaitingButton) {
-                waitingButton.setVisibility(View.VISIBLE);
+                resultButton.setVisibility(View.VISIBLE);
             } else {
-                waitingButton.setVisibility(View.GONE);
+                resultButton.setVisibility(View.GONE);
             }
         });
-        eventInfoViewModel.getShowAcceptedButton().observe(this, showAcceptedButton -> {
-            Button acceptedButton = findViewById(R.id.result_accepted_button);
-            if (showAcceptedButton) {
-                acceptedButton.setVisibility(View.VISIBLE);
-            } else {
-                acceptedButton.setVisibility(View.GONE);
-            }
-        });
+        eventInfoViewModel.getApplicationStatus().observe(this, resultButton::setText);
+//        eventInfoViewModel.getShowAcceptedButton().observe(this, showAcceptedButton -> {
+//            Button acceptedButton = findViewById(R.id.result_accepted_button);
+//            if (showAcceptedButton) {
+//                acceptedButton.setVisibility(View.VISIBLE);
+//            } else {
+//                acceptedButton.setVisibility(View.GONE);
+//            }
+//        });
         eventInfoViewModel.getShowCancelRegButton().observe(this, showCancelRegButton -> {
             Button cancelRegButton = findViewById(R.id.cancel_button);
             if (showCancelRegButton) {

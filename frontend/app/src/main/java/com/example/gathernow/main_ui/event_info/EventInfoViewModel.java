@@ -24,8 +24,9 @@ public class EventInfoViewModel extends ViewModel {
     private final MutableLiveData<UserDataModel> hostData = new MutableLiveData<>();
     private final MutableLiveData<String> alertMessage = new MutableLiveData<>();
     private final MutableLiveData<Boolean> showRegisterButton = new MutableLiveData<>(false);
-    private final MutableLiveData<Boolean> showWaitingButton = new MutableLiveData<>(false);
-    private final MutableLiveData<Boolean> showAcceptedButton = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> showResultButton = new MutableLiveData<>(false);
+    private final MutableLiveData<String> applicationStatus = new MutableLiveData<>();
+//    private final MutableLiveData<Boolean> showAcceptedButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showCancelRegButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showViewApplicantsButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showDeleteEventButton = new MutableLiveData<>(false);
@@ -48,6 +49,10 @@ public class EventInfoViewModel extends ViewModel {
     public MutableLiveData<Boolean> getClickableRegisterButton() {
         return clickableRegisterButton;
     }
+    public MutableLiveData<String> getApplicationStatus() {
+        Log.d("EventInfo Testing", "Application status: " + applicationStatus.getValue());
+        return applicationStatus;
+    }
 
     public MutableLiveData<EventDataModel> getEventData() {
         return eventData;
@@ -65,13 +70,13 @@ public class EventInfoViewModel extends ViewModel {
         return showRegisterButton;
     }
 
-    public MutableLiveData<Boolean> getShowWaitingButton() {
-        return showWaitingButton;
+    public MutableLiveData<Boolean> getShowResultButton() {
+        return showResultButton;
     }
 
-    public MutableLiveData<Boolean> getShowAcceptedButton() {
-        return showAcceptedButton;
-    }
+//    public MutableLiveData<Boolean> getShowAcceptedButton() {
+//        return showAcceptedButton;
+//    }
 
     public MutableLiveData<Boolean> getShowCancelRegButton() {
         return showCancelRegButton;
@@ -123,7 +128,8 @@ public class EventInfoViewModel extends ViewModel {
                     int status = res.getRequestStatus();
                     if (status == 0) {
                         // application is pending
-                        showWaitingButton.setValue(true);
+                        showResultButton.setValue(true);
+                        applicationStatus.setValue("Pending");
                         showCancelRegButton.setValue(true);
                         // When the deadline is passed, no cancellation is allowed
                         if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
@@ -131,7 +137,8 @@ public class EventInfoViewModel extends ViewModel {
                         }
                     } else if (status == 1) {
                         // application is accepted
-                        showAcceptedButton.setValue(true);
+                        showResultButton.setValue(true);
+                        applicationStatus.setValue("Accepted");
                         showCancelRegButton.setValue(true);
                         // When the deadline is passed, no cancellation is allowed
                         if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
