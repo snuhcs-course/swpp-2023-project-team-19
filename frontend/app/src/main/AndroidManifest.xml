@@ -21,7 +21,7 @@
             android:name=".main_ui.event_applicant_info.ApplicantsInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".ApplicationForm"
+            android:name=".main_ui.event_application_form.ApplicationFormActivity"
             android:exported="false" />
         <activity
             android:name=".DeleteSuccessful"

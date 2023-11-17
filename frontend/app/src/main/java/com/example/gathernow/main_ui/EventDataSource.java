@@ -248,5 +248,31 @@ public class EventDataSource {
 
         });
     }
+
+    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+        service.apply_event(applicationDataModel).enqueue(new Callback<CodeMessageResponse>() {
+            @Override
+            public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
+                if (response.isSuccessful()) {
+                    CodeMessageResponse result = response.body();
+                    if (result != null) {
+                        if (response.code() == 201) {
+                            callbackInterface.onSuccess("Application sent successfully");
+                        }
+                    } else {
+                        callbackInterface.onError("Empty response from the server");
+                    }
+                }
+                else {
+                    callbackInterface.onError("Application failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
+                callbackInterface.onError("Network error");
+            }
+        });
+    }
 }
 

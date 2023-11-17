@@ -1,5 +1,7 @@
 package com.example.gathernow.main_ui;
 
+import com.example.gathernow.api.models.ApplicationDataModel;
+
 public class EventRepository {
     private final EventDataSource eventDataSource;
 
@@ -37,5 +39,10 @@ public class EventRepository {
     
     public void getAllEvents(CallbackInterface eventCallback) {
         eventDataSource.getAllEvents(eventCallback);
+    }
+
+
+    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+        eventDataSource.applyEvent(applicationDataModel, callbackInterface);
     }
 }

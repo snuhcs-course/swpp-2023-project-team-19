@@ -13,13 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gathernow.main_ui.event_applicant_info.ApplicantsInfoActivity;
-import com.example.gathernow.ApplicationForm;
+import com.example.gathernow.main_ui.event_application_form.ApplicationFormActivity;
 import com.example.gathernow.DeleteSuccessful;
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.R;
 import com.example.gathernow.api.models.UserDataModel;
-import com.example.gathernow.api.RetrofitClient;
-import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.main_ui.EventDataSource;
 import com.example.gathernow.main_ui.EventRepository;
 import com.squareup.picasso.Picasso;
@@ -27,15 +25,14 @@ import com.squareup.picasso.Picasso;
 import java.util.Locale;
 
 public class EventInfoActivity extends AppCompatActivity {
-    private ServiceApi service;
     public int userId;
     public int eventId;
 
     public String eventName;
 
-    public String userAvatar;
+    public String hostAvatar;
 
-    public String hostname;
+    public String hostName;
 
     public int hostId;
     private EventInfoViewModel eventInfoViewModel;
@@ -45,8 +42,6 @@ public class EventInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
-
-        service = RetrofitClient.getClient().create(ServiceApi.class);
 
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
@@ -149,13 +144,14 @@ public class EventInfoActivity extends AppCompatActivity {
             Log.d("EventInfo Testing", "User data model is null");
             return;
         }
-        TextView profileName = findViewById(R.id.profile_name);
-        profileName.setText(userDataModel.getName());
 
-        String host_avatar = userDataModel.getAvatar();
-        host_avatar = "http://20.2.88.70:8000" + host_avatar;
+        hostName = userDataModel.getName();
+        TextView profileName = findViewById(R.id.profile_name);
+        profileName.setText(hostName);
+
+        hostAvatar = "http://20.2.88.70:8000" + userDataModel.getAvatar();
         ImageView profile_img = findViewById(R.id.profile_img);
-        Picasso.get().load(host_avatar).into(profile_img);
+        Picasso.get().load(hostAvatar).into(profile_img);
     }
 
     private void updateEventInfoUI(EventDataModel eventDataModel) {
@@ -257,15 +253,15 @@ public class EventInfoActivity extends AppCompatActivity {
 
     public void onRegisterEvent(View v) {
 
-        Intent intent = new Intent(v.getContext(), ApplicationForm.class);
+        Intent intent = new Intent(v.getContext(), ApplicationFormActivity.class);
 
         // Send the user id to the EventInfo activity
         intent.putExtra("userId", userId);
         intent.putExtra("eventId", eventId);
         intent.putExtra("hostId", hostId);
         intent.putExtra("eventName", eventName);
-        intent.putExtra("hostName", hostname);
-        intent.putExtra("hostAvatar", userAvatar);
+        intent.putExtra("hostName", hostName);
+        intent.putExtra("hostAvatar", hostAvatar);
 
         startActivity(intent);
         finish();
@@ -284,8 +280,8 @@ public class EventInfoActivity extends AppCompatActivity {
         intent.putExtra("eventId", eventId);
         intent.putExtra("hostId", hostId);
         intent.putExtra("eventName", eventName);
-        intent.putExtra("hostName", hostname);
-        intent.putExtra("hostAvatar", userAvatar);
+        intent.putExtra("hostName", hostName);
+        intent.putExtra("hostAvatar", hostAvatar);
         startActivity(intent);
     }
 }

@@ -147,7 +147,7 @@ public class EventInfoViewModel extends ViewModel {
                     if (message.equals("No application found")) {
                         showRegisterButton.setValue(true);
                         // When the deadline passed or the event is full, no registration is allowed
-                        Log.d("EventInfo Testing", eventData != null ? Objects.requireNonNull(eventData.getValue()).getEventRegisterDate() : "null");
+                        Log.d("EventInfo Testing", Objects.requireNonNull(eventData.getValue()).getEventRegisterDate());
                         if (Objects.equals(Objects.requireNonNull(eventData.getValue()).getEventNumJoined(), eventData.getValue().getEventNumParticipants()) || deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
                             clickableRegisterButton.setValue(false);
                         }

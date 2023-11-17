@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="30dp"
-    tools:context=".ApplicationForm"
+    tools:context=".main_ui.event_application_form.ApplicationFormActivity"
     android:orientation="vertical"
     android:id="@+id/container">
 
