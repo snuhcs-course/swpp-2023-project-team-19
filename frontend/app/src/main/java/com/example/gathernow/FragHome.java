@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gathernow.main_ui.event_creation.EventCreateActivity;
+import com.example.gathernow.main_ui.profile.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
@@ -41,7 +42,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
         EventHome eventHome = new EventHome();
         EventSearch eventSearch = new EventSearch();
         EventCreateActivity eventCreateActivity = new EventCreateActivity();
-        ProfileHome profileHome = new ProfileHome();
+        ProfileActivity profileActivity = new ProfileActivity();
         @Override
         public boolean onNavigationItemSelected (@NonNull MenuItem item){
             if (item.getItemId() == R.id.menu_search) {
@@ -65,7 +66,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
             } else if (item.getItemId() == R.id.menu_profile) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.flFragment, profileHome)
+                        .replace(R.id.flFragment, profileActivity)
                         .commit();
                 return true;
             }

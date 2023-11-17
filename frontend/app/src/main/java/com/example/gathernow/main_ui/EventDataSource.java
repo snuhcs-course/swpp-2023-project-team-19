@@ -1,5 +1,7 @@
 package com.example.gathernow.main_ui;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.example.gathernow.api.models.ApplicationDataModel;
@@ -110,6 +112,43 @@ public class EventDataSource {
                     callback.onError("No application found");
                 } else {
                     callback.onError("Check application status failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+    }
+
+    public void deleteEvent(int eventId, CallbackInterface callback) {
+        service.deleteEventByEventId(eventId).enqueue(new Callback<CodeMessageResponse>() {
+            @Override
+            public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
+                Log.d("EventInfo Testing", "Event deleted");
+                if (response.isSuccessful()) {
+                    callback.onSuccess("Event deleted successfully");
+                } else {
+                    callback.onError("Failed to delete event");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+    }
+
+    public void deleteApplication(int applicationId, CallbackInterface callback) {
+        service.delete_application(applicationId).enqueue(new Callback<ApplicationDataModel>() {
+            @Override
+            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess("Application deleted successfully");
+                } else {
+                    callback.onError("Failed to delete application");
                 }
             }
 

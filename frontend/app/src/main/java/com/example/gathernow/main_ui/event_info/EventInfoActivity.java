@@ -19,7 +19,6 @@ import com.example.gathernow.DeleteSuccessful;
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.R;
 import com.example.gathernow.api.models.UserDataModel;
-import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.main_ui.EventDataSource;
@@ -44,8 +43,6 @@ public class EventInfoActivity extends AppCompatActivity {
     public String hostname;
 
     public int hostId;
-
-    private Integer applicationId;
     private EventInfoViewModel eventInfoViewModel;
 
 
@@ -122,6 +119,20 @@ public class EventInfoActivity extends AppCompatActivity {
                 deleteEventButton.setVisibility(View.GONE);
             }
         });
+        eventInfoViewModel.getShowDeleteEventSuccess().observe(this, showDeleteSuccess -> {
+            if (showDeleteSuccess) {
+                Intent intent1 = new Intent(this, DeleteSuccessful.class);
+                startActivity(intent1);
+                finish();
+            }
+        });
+        eventInfoViewModel.getShowDeleteApplicationSuccess().observe(this, showDeleteSuccess -> {
+            if (showDeleteSuccess) {
+                Intent intent1 = new Intent(this, DeleteSuccessful.class);
+                startActivity(intent1);
+                finish();
+            }
+        });
         // query event info from database
         eventInfoViewModel.loadEventInfo(eventId, userId);
 
@@ -183,8 +194,8 @@ public class EventInfoActivity extends AppCompatActivity {
         eventPrice.setText(priceFormat);
 //        setButtonVisibility(eventDataModel.getHostId());
 //
-//        eventName = eventDataModel.event_title;
-//        hostId = eventDataModel.host_id;
+        eventName = eventDataModel.getEventTime();
+        hostId = eventDataModel.getHostId();
     }
 
     private void setEventPhoto(String event_type, String event_images) {
@@ -227,30 +238,7 @@ public class EventInfoActivity extends AppCompatActivity {
                 .setMessage("Are you sure you want to delete this event?")
                 .setPositiveButton("Yes", (dialog, which) -> {
                     // TODO: Delete the event
-                    service.deleteEventByEventId(eventId).enqueue(new Callback<CodeMessageResponse>() {
-                        @Override
-                        public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
-                            Log.d("EventInfo Testing", "Event deleted");
-                            if (response.isSuccessful()) {
-                                // !!! Commented lines here will cause crash!
-                                //Log.d("EventInfo Testing", response.body().toString());
-                                CodeMessageResponse codeMessageResponse = response.body();
-                                //Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
-                            Log.d("EventInfo Testing", "Failed to delete event");
-                        }
-                    });
-
-                    // Direct to Delete Successful class
-                    //Intent intent = new Intent(view.getContext(), FragHome.class);
-                    //startActivity(intent);
-                    Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
-                    startActivity(intent);
-                    finish();
+                    eventInfoViewModel.deleteEvent(eventId);
 
                 })
                 .setNegativeButton("No", (dialog, which) -> {
@@ -279,31 +267,7 @@ public class EventInfoActivity extends AppCompatActivity {
     }
 
     public void onDeleteApplication(View view) {
-        service.delete_application(applicationId).enqueue(new Callback<ApplicationDataModel>() {
-            @Override
-            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
-                Log.d("EventInfo Testing", "Event deleted");
-                if (response.isSuccessful()) {
-                    // !!! Commented lines here will cause crash!
-                    //Log.d("EventInfo Testing", response.body().toString());
-                    ApplicationDataModel application_to_delete = response.body();
-                    //Toast.makeText(EventInfo.this, codeMessageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
-                Log.d("ApplicationDelete Testing", "Failed to delete application");
-            }
-        });
-
-        // Direct to Application Delete Successful class
-        //Intent intent = new Intent(view.getContext(), FragHome.class);
-        //startActivity(intent);
-        Intent intent = new Intent(view.getContext(), DeleteSuccessful.class);
-        startActivity(intent);
-        finish();
-
+        eventInfoViewModel.deleteApplication();
     }
 
     public void onViewApplicants(View v) {

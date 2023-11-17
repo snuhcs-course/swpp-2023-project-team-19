@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="30dp"
-    tools:context=".ProfileHome"
+    tools:context=".main_ui.profile.ProfileActivity"
     android:orientation="vertical"
     android:id="@+id/container">
 

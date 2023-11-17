@@ -18,4 +18,12 @@ public class EventRepository {
     public void checkUserAppliedEvent(int eventId, int userId, CallbackInterface eventCallback) {
         eventDataSource.checkUserAppliedEvent(eventId, userId, eventCallback);
     }
+
+    public void deleteEvent(int eventId, CallbackInterface eventCallback) {
+        eventDataSource.deleteEvent(eventId, eventCallback);
+    }
+
+    public void deleteApplication(int applicationId, CallbackInterface applicationCallback) {
+        eventDataSource.deleteApplication(applicationId, applicationCallback);
+    }
 }

@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.main_ui.profile;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -31,16 +30,23 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import com.example.gathernow.EventCardView;
+import com.example.gathernow.FragHome;
+import com.example.gathernow.MainActivity;
+import com.example.gathernow.R;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
-import com.squareup.picasso.Picasso;
+import com.example.gathernow.api.models.EventDataModel;
+import com.example.gathernow.api.models.UserDataModel;
+import com.example.gathernow.authenticate.UserLocalDataSource;
+import com.example.gathernow.main_ui.event_info.EventInfoActivity;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link ProfileHome#newInstance} factory method to
+ * Use the {@link ProfileActivity#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ProfileHome extends Fragment {
+public class ProfileActivity extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -67,7 +73,7 @@ public class ProfileHome extends Fragment {
         return sharedPreferences.getString("user_id", null); // Return null if the user_id doesn't exist
     }
 
-    public ProfileHome() {
+    public ProfileActivity() {
         // Required empty public constructor
     }
 
@@ -80,8 +86,8 @@ public class ProfileHome extends Fragment {
      * @return A new instance of fragment profileHome.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileHome newInstance(String param1, String param2) {
-        ProfileHome fragment = new ProfileHome();
+    public static ProfileActivity newInstance(String param1, String param2) {
+        ProfileActivity fragment = new ProfileActivity();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -121,46 +127,46 @@ public class ProfileHome extends Fragment {
         TextView profile_text = rootView.findViewById(R.id.subtitle_text);
         //ImageView profile_img = rootView.findViewById(R.id.profile_image);
 
-
-        Integer userId = Integer.valueOf(getUserId(getActivity()));
+        UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
+        Integer userId = Integer.valueOf(userLocalDataSource.getUserId());
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
 
-        service.getUserInfo(userId).enqueue(new Callback<UserData>(){
+        service.getUserInfo(userId).enqueue(new Callback<UserDataModel>(){
             @Override
-            public void onResponse(Call<UserData> call, Response<UserData> response) {
+            public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
                 if (response.isSuccessful()) {
-                    UserData current_userinfo = response.body();
-                    String user_name = current_userinfo.name;
+                    UserDataModel current_userinfo = response.body();
+                    String user_name = "Minh";
                     profile_text.setText(user_name + ",\nwelcome back!");
 
                     // TODO: Call profile picture
                     // Get the source of image on the server by calling API http://20.2.88.70:8000/api/useravatar/{user_id}/
                     // Set the image source to the image view
                     service2 = RetrofitClient.getClient().create(ServiceApi.class);
-                    service2.getUserInfo(userId).enqueue(new Callback<UserData>() {
-                        @Override
-                        public void onResponse(Call<UserData> call, Response<UserData> response) {
-                            // Log response to console
-                            Log.d("UserAvatar", "Response: " + response.toString());
-                            if (response.isSuccessful()) {
-                                UserData current_useravatar = response.body();
-                                String user_avatar = current_useravatar.avatar;
-                                user_avatar = "http://20.2.88.70:8000" + user_avatar;
-                                ImageView profile_img = rootView.findViewById(R.id.profile_image);
-                                Picasso.get().load(user_avatar).into(profile_img);
-
-                                isUserLoaded = true;
-                            }
-                        }
-
-
-
-                        public void onFailure(Call<UserData> call, Throwable t) {
-                            Toast.makeText(getActivity(), "Get User Avatar Error", Toast.LENGTH_SHORT).show();
-                            Log.e("UserAvatar", "Error occurred", t);
-                        }
-                    });
+//                    service2.getUserInfo(userId).enqueue(new Callback<UserDataModel>() {
+//                        @Override
+//                        public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
+//                            // Log response to console
+//                            Log.d("UserAvatar", "Response: " + response.toString());
+//                            if (response.isSuccessful()) {
+//                                UserDataModel current_useravatar = response.body();
+//                                String user_avatar = current_useravatar.avatar;
+//                                user_avatar = "http://20.2.88.70:8000" + user_avatar;
+//                                ImageView profile_img = rootView.findViewById(R.id.profile_image);
+//                                Picasso.get().load(user_avatar).into(profile_img);
+//
+//                                isUserLoaded = true;
+//                            }
+//                        }
+//
+//
+//
+//                        public void onFailure(Call<UserDataModel> call, Throwable t) {
+//                            Toast.makeText(getActivity(), "Get User Avatar Error", Toast.LENGTH_SHORT).show();
+//                            Log.e("UserAvatar", "Error occurred", t);
+//                        }
+//                    });
 
                 } else {
                     // Handle API error
@@ -181,18 +187,18 @@ public class ProfileHome extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<UserData>  call, Throwable t) {
+            public void onFailure(Call<UserDataModel>  call, Throwable t) {
                 Toast.makeText(getActivity(), "Get Event Error", Toast.LENGTH_SHORT).show();
                 Log.e("UserEventDisplay", "Error occurred", t);
             }
         });
 
 
-        service.getEventsByUser(userId).enqueue(new Callback<List<EventData>>(){
+        service.getEventsByUser(userId).enqueue(new Callback<List<EventDataModel>>(){
             @Override
-            public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response){
+            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response){
                 if (response.isSuccessful()) {
-                    List<EventData>  events_list = response.body();
+                    List<EventDataModel>  events_list = response.body();
                     if (response.body() != null){
                         if(events_list.size() >0){
 
@@ -211,10 +217,10 @@ public class ProfileHome extends Fragment {
 
                             for (int i = 0; i < events_list.size(); i++){
 
-                                EventData currentEvent = events_list.get(i);
+                                EventDataModel currentEvent = events_list.get(i);
                                 // Create Date and Time object from currentEvent.event_date
-                                Date eventDate = Date.valueOf(currentEvent.event_date);
-                                Time eventTime = Time.valueOf(currentEvent.event_time);
+                                Date eventDate = Date.valueOf(currentEvent.getEventDate());
+                                Time eventTime = Time.valueOf(currentEvent.getEventTime());
 
                                 // Combine the Date and Time into a single Date object
                                 long dateTimeMillis = eventDate.getTime() + eventTime.getTime();
@@ -223,12 +229,12 @@ public class ProfileHome extends Fragment {
                                 //Only display events that happens after the current datetime
                                 if (eventDateTime.after(currentDate)){
                                     EventCardView newEventCard = new EventCardView(getContext(), null);
-                                    newEventCard.setEventName(currentEvent.event_title);
-                                    newEventCard.setEventPhoto(currentEvent.event_type, currentEvent.event_images);
-                                    newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
-                                    newEventCard.setEventLocation(currentEvent.event_location);
-                                    newEventCard.setEventLanguage(currentEvent.event_language);
-                                    newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
+                                    newEventCard.setEventName(currentEvent.getEventTitle());
+                                    newEventCard.setEventPhoto(currentEvent.getEventType(), currentEvent.getEventImages());
+                                    newEventCard.setEventCapacity(currentEvent.getEventNumJoined(), currentEvent.getEventNumParticipants());
+                                    newEventCard.setEventLocation(currentEvent.getEventLocation());
+                                    newEventCard.setEventLanguage(currentEvent.getEventLanguage());
+                                    newEventCard.setEventDateTime(Date.valueOf(currentEvent.getEventDate()), Time.valueOf(currentEvent.getEventTime()));
 
                                     // Add vertical padding to the newEventCard
                                     int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
@@ -241,9 +247,9 @@ public class ProfileHome extends Fragment {
                                             // Handle the click event here
                                             // Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
                                             // Send the user id to the EventInfo activity
-                                            Intent intent = new Intent(v.getContext(), EventInfo.class);
+                                            Intent intent = new Intent(v.getContext(), EventInfoActivity.class);
                                             intent.putExtra("userId", getUserId(v.getContext()));
-                                            intent.putExtra("eventId", currentEvent.event_id);
+                                            intent.putExtra("eventId", currentEvent.getEventId());
                                             startActivity(intent);
                                         }
                                     });
@@ -312,7 +318,7 @@ public class ProfileHome extends Fragment {
                 }
             }
             @Override
-            public void onFailure(Call<List<EventData>>  call, Throwable t) {
+            public void onFailure(Call<List<EventDataModel>>  call, Throwable t) {
                 Toast.makeText(getActivity(), "Get Event Error", Toast.LENGTH_SHORT).show();
                 Log.e("UserEventDisplay", "Error occurred", t);
             }

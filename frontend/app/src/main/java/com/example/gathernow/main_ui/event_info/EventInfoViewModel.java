@@ -17,6 +17,7 @@ public class EventInfoViewModel extends ViewModel {
     private final EventRepository eventInfoRepository;
     private final UserRemoteRepository userRemoteRepository;
     private final MutableLiveData<EventDataModel> eventData = new MutableLiveData<>();
+    private final MutableLiveData<ApplicationDataModel> applicationData = new MutableLiveData<>();
     private final MutableLiveData<UserDataModel> hostData = new MutableLiveData<>();
     private final MutableLiveData<String> alertMessage = new MutableLiveData<>();
     private final MutableLiveData<Boolean> showRegisterButton = new MutableLiveData<>(false);
@@ -25,6 +26,8 @@ public class EventInfoViewModel extends ViewModel {
     private final MutableLiveData<Boolean> showCancelRegButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showViewApplicantsButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showDeleteEventButton = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> showDeleteEventSuccess = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> showDeleteApplicationSuccess = new MutableLiveData<>(false);
 
 
     public EventInfoViewModel(EventRepository eventInfoRepository) {
@@ -68,6 +71,12 @@ public class EventInfoViewModel extends ViewModel {
     public MutableLiveData<Boolean> getShowDeleteEventButton() {
         return showDeleteEventButton;
     }
+    public MutableLiveData<Boolean> getShowDeleteEventSuccess() {
+        return showDeleteEventSuccess;
+    }
+    public MutableLiveData<Boolean> getShowDeleteApplicationSuccess() {
+        return showDeleteApplicationSuccess;
+    }
 
     public void loadEventInfo(int eventId, int userId) {
         eventInfoRepository.getEventInfo(eventId, new CallbackInterface() {
@@ -96,7 +105,9 @@ public class EventInfoViewModel extends ViewModel {
                 @Override
                 public <T> void onSuccess(T result) {
                     Log.d("EventInfoViewModel", "Check user applied event successfully");
-                    int status = ((ApplicationDataModel) result).getRequestStatus();
+                    ApplicationDataModel res = (ApplicationDataModel) result;
+                    applicationData.postValue(res);
+                    int status = res.getRequestStatus();
                     if (status == 0) {
                         // application is pending
                         showWaitingButton.setValue(true);
@@ -138,6 +149,40 @@ public class EventInfoViewModel extends ViewModel {
         });
     }
 
+    public void deleteEvent(int eventId) {
+        eventInfoRepository.deleteEvent(eventId, new CallbackInterface() {
+            @Override
+            public <T> void onSuccess(T result) {
+                Log.d("EventInfoViewModel", (String) result);
+                showDeleteEventSuccess.postValue(true);
+            }
 
+            @Override
+            public void onError(String message) {
+                alertMessage.postValue(message);
+            }
+        });
+    }
+
+    public void deleteApplication() {
+        if (applicationData == null) {
+            alertMessage.postValue("Application data not found");
+            return;
+        }
+        int applicationId = applicationData.getValue().getApplicationId();
+        eventInfoRepository.deleteApplication(applicationId, new CallbackInterface() {
+            @Override
+            public <T> void onSuccess(T result) {
+                Log.d("EventInfoViewModel", (String) result);
+                showDeleteApplicationSuccess.postValue(true);
+//                alertMessage.postValue((String) result);
+            }
+
+            @Override
+            public void onError(String message) {
+                alertMessage.postValue(message);
+            }
+        });
+    }
 
 }
