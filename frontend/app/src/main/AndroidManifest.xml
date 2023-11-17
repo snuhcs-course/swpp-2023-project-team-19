@@ -18,7 +18,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ApplicantsInfoActivity"
+            android:name=".main_ui.event_applicant_info.ApplicantsInfoActivity"
             android:exported="false" />
         <activity
             android:name=".ApplicationForm"

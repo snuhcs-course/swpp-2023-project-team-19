@@ -181,5 +181,30 @@ public class EventDataSource {
             }
         });
     }
+
+    public void getEventApplication(int eventId, CallbackInterface eventCallback) {
+        service.getEventApplications(eventId).enqueue(new Callback<List<ApplicationDataModel>>() {
+            @Override
+            public void onResponse(Call<List<ApplicationDataModel>> call, Response<List<ApplicationDataModel>> response) {
+                if (response.isSuccessful()) {
+                    List<ApplicationDataModel> result = response.body();
+                    if (result != null) {
+                        eventCallback.onSuccess(result);
+                    } else {
+                        eventCallback.onError("Empty response from the server");
+                    }
+                } else if (response.code() == 404) {
+                    eventCallback.onError("No applications found");
+                } else {
+                    eventCallback.onError("Failed to get event applications");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ApplicationDataModel>> call, Throwable t) {
+                eventCallback.onError("Network error");
+            }
+        });
+    }
 }
 

@@ -12,8 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.gathernow.ApplicantsInfoActivity;
-import com.example.gathernow.api.models.ApplicationDataModel;
+import com.example.gathernow.main_ui.event_applicant_info.ApplicantsInfoActivity;
 import com.example.gathernow.ApplicationForm;
 import com.example.gathernow.DeleteSuccessful;
 import com.example.gathernow.api.models.EventDataModel;
@@ -26,10 +25,6 @@ import com.example.gathernow.main_ui.EventRepository;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class EventInfoActivity extends AppCompatActivity {
     private ServiceApi service;
@@ -194,7 +189,7 @@ public class EventInfoActivity extends AppCompatActivity {
         eventPrice.setText(priceFormat);
 //        setButtonVisibility(eventDataModel.getHostId());
 //
-        eventName = eventDataModel.getEventTime();
+        eventName = eventDataModel.getEventTitle();
         hostId = eventDataModel.getHostId();
     }
 
