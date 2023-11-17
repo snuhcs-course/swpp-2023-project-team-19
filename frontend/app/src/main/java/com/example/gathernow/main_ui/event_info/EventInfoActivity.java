@@ -128,6 +128,17 @@ public class EventInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+        eventInfoViewModel.getClickableCancelButton().observe(this, clickableCancelButton -> {
+            Button cancelButton = findViewById(R.id.cancel_button);
+            Log.d("EventInfo Testing", "Cancel button clickable: " + clickableCancelButton);
+            cancelButton.setClickable(clickableCancelButton);
+            cancelButton.setEnabled(clickableCancelButton);
+        });
+        eventInfoViewModel.getClickableRegisterButton().observe(this, clickableRegisterButton -> {
+            Button registerButton = findViewById(R.id.register_button);
+            registerButton.setClickable(clickableRegisterButton);
+            registerButton.setEnabled(clickableRegisterButton);
+        });
         // query event info from database
         eventInfoViewModel.loadEventInfo(eventId, userId);
 

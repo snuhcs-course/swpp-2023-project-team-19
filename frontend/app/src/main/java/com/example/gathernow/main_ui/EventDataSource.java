@@ -110,7 +110,7 @@ public class EventDataSource {
                     ApplicationDataModel result = response.body();
                     // return the application status
                     callback.onSuccess(result);
-                } else if (response.code() == 404) {
+                } else if (response != null && response.code() == 404) {
                     callback.onError("No application found");
                 } else {
                     callback.onError("Check application status failed");
