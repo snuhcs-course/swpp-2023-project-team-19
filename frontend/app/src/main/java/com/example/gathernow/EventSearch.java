@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
+import com.example.gathernow.api.models.EventDataModel;
+import com.example.gathernow.main_ui.event_info.EventInfoActivity;
 
 import java.io.IOException;
 import java.sql.Date;
@@ -92,92 +94,92 @@ public class EventSearch extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_event_search, container, false);
 
         service = RetrofitClient.getClient().create(ServiceApi.class);
-        service.getALlEvents().enqueue(new Callback<List<EventData>>() {
-            @Override
-            public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response) {
-                if (response.isSuccessful()) {
-                    List<EventData> events_list = response.body();
-                    LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-
-                    Collections.reverse(events_list);
-
-                    // Get the current date and time
-                    Date currentDate = new Date(System.currentTimeMillis());
-
-                    for (int i = 0; i < events_list.size(); i++) {
-
-                        EventData currentEvent = events_list.get(i);
-                        // Create Date and Time object from currentEvent.event_date
-                        Date eventDate = Date.valueOf(currentEvent.event_date);
-                        Time eventTime = Time.valueOf(currentEvent.event_time);
-
-                        // Combine the Date and Time into a single Date object
-                        long dateTimeMillis = eventDate.getTime() + eventTime.getTime();
-                        Date eventDateTime = new Date(dateTimeMillis);
-
-                        //Only display events that happens after the current datetime
-                        if (eventDateTime.after(currentDate)){
-                            EventCardView newEventCard = new EventCardView(getContext(), null);
-
-                            newEventCard.setEventName(currentEvent.event_title);
-                            newEventCard.setEventPhoto(currentEvent.event_type, currentEvent.event_images);
-                            newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
-                            newEventCard.setEventLocation(currentEvent.event_location);
-                            newEventCard.setEventLanguage(currentEvent.event_language);
-                            newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
-
-//                        Log.d("EventInfo Testing", "Clicked event id: " + events_list.get(i).event_id.toString());
-
-                            // Add vertical padding to the newEventCard
-                            int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
-                            newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
-                            eventCardContainer.addView(newEventCard);
-
-                            newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    // Handle the click event here
-                                    //Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
-
-                                    // Send the user id to the EventInfo activity
-                                    Intent intent = new Intent(v.getContext(), EventInfo.class);
-                                    intent.putExtra("userId", getUserId(v.getContext()));
-                                    intent.putExtra("eventId", currentEvent.event_id);
-
-                                    startActivity(intent);
-                                }
-                            });
-                        }
-
-                    }
-
-
-                } else {
-                    // Handle API error
-                    // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
-                    Toast.makeText(getActivity(), "Event display failed.", Toast.LENGTH_SHORT).show();
-
-                    // Logging the error
-                    if (response.errorBody() != null) {
-                        try {
-                            String errorBody = response.errorBody().string();
-                            Log.e("EventDisplay", "Failed with response: " + errorBody);
-                        } catch (IOException e) {
-                            Log.e("EventDisplay", "Error while reading errorBody", e);
-                        }
-                    } else {
-                        Log.e("EventDisplay", "Response not successful and error body is null");
-                    }
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<EventData>> call, Throwable t) {
-                Toast.makeText(getActivity(), "Get Event Error", Toast.LENGTH_SHORT).show();
-                Log.e("EventDisplay", "Error occurred", t);
-            }
-
-        });
+//        service.getALlEvents().enqueue(new Callback<List<EventDataModel>>() {
+//            @Override
+//            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response) {
+//                if (response.isSuccessful()) {
+//                    List<EventDataModel> events_list = response.body();
+//                    LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
+//
+//                    Collections.reverse(events_list);
+//
+//                    // Get the current date and time
+//                    Date currentDate = new Date(System.currentTimeMillis());
+//
+//                    for (int i = 0; i < events_list.size(); i++) {
+//
+//                        EventDataModel currentEvent = events_list.get(i);
+//                        // Create Date and Time object from currentEvent.event_date
+//                        Date eventDate = Date.valueOf(currentEvent.event_date);
+//                        Time eventTime = Time.valueOf(currentEvent.event_time);
+//
+//                        // Combine the Date and Time into a single Date object
+//                        long dateTimeMillis = eventDate.getTime() + eventTime.getTime();
+//                        Date eventDateTime = new Date(dateTimeMillis);
+//
+//                        //Only display events that happens after the current datetime
+//                        if (eventDateTime.after(currentDate)){
+//                            EventCardView newEventCard = new EventCardView(getContext(), null);
+//
+//                            newEventCard.setEventName(currentEvent.event_title);
+//                            newEventCard.setEventPhoto(currentEvent.event_type, currentEvent.event_images);
+//                            newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
+//                            newEventCard.setEventLocation(currentEvent.event_location);
+//                            newEventCard.setEventLanguage(currentEvent.event_language);
+//                            newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
+//
+////                        Log.d("EventInfo Testing", "Clicked event id: " + events_list.get(i).event_id.toString());
+//
+//                            // Add vertical padding to the newEventCard
+//                            int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
+//                            newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
+//                            eventCardContainer.addView(newEventCard);
+//
+//                            newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
+//                                @Override
+//                                public void onClick(View v) {
+//                                    // Handle the click event here
+//                                    //Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+//
+//                                    // Send the user id to the EventInfo activity
+//                                    Intent intent = new Intent(v.getContext(), EventInfoActivity.class);
+//                                    intent.putExtra("userId", getUserId(v.getContext()));
+//                                    intent.putExtra("eventId", currentEvent.event_id);
+//
+//                                    startActivity(intent);
+//                                }
+//                            });
+//                        }
+//
+//                    }
+//
+//
+//                } else {
+//                    // Handle API error
+//                    // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
+//                    Toast.makeText(getActivity(), "Event display failed.", Toast.LENGTH_SHORT).show();
+//
+//                    // Logging the error
+//                    if (response.errorBody() != null) {
+//                        try {
+//                            String errorBody = response.errorBody().string();
+//                            Log.e("EventDisplay", "Failed with response: " + errorBody);
+//                        } catch (IOException e) {
+//                            Log.e("EventDisplay", "Error while reading errorBody", e);
+//                        }
+//                    } else {
+//                        Log.e("EventDisplay", "Response not successful and error body is null");
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
+//                Toast.makeText(getActivity(), "Get Event Error", Toast.LENGTH_SHORT).show();
+//                Log.e("EventDisplay", "Error occurred", t);
+//            }
+//
+//        });
 
         return rootView;
 

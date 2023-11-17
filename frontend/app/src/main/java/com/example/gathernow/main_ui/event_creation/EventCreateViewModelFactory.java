@@ -4,6 +4,8 @@ import android.content.Context;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.gathernow.main_ui.EventRepository;
+
 public class EventCreateViewModelFactory implements ViewModelProvider.Factory {
     private final EventRepository eventRepository;
     private final Context context;

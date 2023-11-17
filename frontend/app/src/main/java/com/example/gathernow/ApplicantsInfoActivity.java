@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
-import com.squareup.picasso.Picasso;
+import com.example.gathernow.api.models.ApplicationDataModel;
 
 import java.util.List;
 import java.util.Objects;
@@ -72,26 +72,26 @@ public class ApplicantsInfoActivity extends AppCompatActivity {
 
         LinearLayout applicantCardContainer = findViewById(R.id.container);
         RelativeLayout noApplicant = findViewById(R.id.no_applicant);
-        service.getEventApplications(eventId).enqueue(new Callback<List<ApplicationData>>(){
+        service.getEventApplications(eventId).enqueue(new Callback<List<ApplicationDataModel>>(){
             @Override
-            public void onResponse(Call<List<ApplicationData>> call, Response<List<ApplicationData>> response) {
+            public void onResponse(Call<List<ApplicationDataModel>> call, Response<List<ApplicationDataModel>> response) {
                 if (response.isSuccessful()) {
-                    List<ApplicationData> application_list = response.body();
+                    List<ApplicationDataModel> application_list = response.body();
                     if (response.body() != null  && !Objects.requireNonNull(application_list).isEmpty()){
                         noApplicant.setVisibility(View.GONE);
 
                         for (int i = 0; i < application_list.size(); i++){
-                            ApplicationData current_application = application_list.get(i);
+                            ApplicationDataModel current_application = application_list.get(i);
 
 
 
                             // TODO: add info to applicant card
-                            ApplicantCardView newApplicantCard = new ApplicantCardView(ApplicantsInfoActivity.this, null, current_application.request_status);
-                            newApplicantCard.setApplicationId(current_application.application_id );
-                            newApplicantCard.setApplicantName(current_application.applicant_name);
-                            newApplicantCard.setApplicantContact(current_application.applicant_contact);
-                            newApplicantCard.setApplicantMessage(current_application.message);
-                            newApplicantCard.setApplicantImg(current_application.applicant_avatar);
+                            ApplicantCardView newApplicantCard = new ApplicantCardView(ApplicantsInfoActivity.this, null, current_application.getRequestStatus());
+                            newApplicantCard.setApplicationId(current_application.getApplicationId() );
+                            newApplicantCard.setApplicantName(current_application.getApplicantName());
+                            newApplicantCard.setApplicantContact(current_application.getApplicantContact());
+                            newApplicantCard.setApplicantMessage(current_application.getMessage());
+                            newApplicantCard.setApplicantImg(current_application.getApplicantAvatar());
 
                             //newApplicantCard.setApplicantContact(Integer.toString(current_application.request_status));
 
@@ -123,7 +123,7 @@ public class ApplicantsInfoActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<ApplicationData>>  call, Throwable t) {
+            public void onFailure(Call<List<ApplicationDataModel>>  call, Throwable t) {
 
                 //Toast.makeText(ApplicantsInfoActivity.this, "Get Applications Error", Toast.LENGTH_SHORT).show();
                 Log.e("ApplicationInfoDisplay", "Error occurred", t);

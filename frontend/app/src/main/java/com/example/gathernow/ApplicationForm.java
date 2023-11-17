@@ -13,6 +13,8 @@ import android.widget.Toast;
 import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
+import com.example.gathernow.api.models.ApplicationDataModel;
+import com.example.gathernow.api.models.UserDataModel;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -84,21 +86,21 @@ public class ApplicationForm extends AppCompatActivity {
     }
 
     private void findUserName(int userId) {
-        service.getUserInfo(userId).enqueue(new Callback<UserData>() {
+        service.getUserInfo(userId).enqueue(new Callback<UserDataModel>() {
             @Override
-            public void onResponse(Call<UserData> call, Response<UserData> response) {
+            public void onResponse(Call<UserDataModel> call, Response<UserDataModel> response) {
                 if (response.isSuccessful()) {
-                    UserData userData = response.body();
-
-                    username = userData.name;
-                    String avatar = userData.avatar;
-                    userAvatar = "http://20.2.88.70:8000" + avatar;
+//                    UserDataModel userDataModel = response.body();
+//
+//                    username = userDataModel.name;
+//                    String avatar = userDataModel.avatar;
+//                    userAvatar = "http://20.2.88.70:8000" + avatar;
 
                 }
             }
 
             @Override
-            public void onFailure(Call<UserData> call, Throwable t) {
+            public void onFailure(Call<UserDataModel> call, Throwable t) {
                 Log.d("ApplicationForm Testing", "Failed to get user(applicant) name");
 
             }
@@ -120,7 +122,7 @@ public class ApplicationForm extends AppCompatActivity {
 
         int request_status= 0;
 
-        ApplicationData new_application = new ApplicationData(applicant_contact, applicant_message, applicant_id, event_id, host_id, applicant_name, userAvatar);
+        ApplicationDataModel new_application = new ApplicationDataModel(applicant_contact, applicant_message, applicant_id, event_id, host_id, applicant_name, userAvatar);
 
         service.apply_event(new_application).enqueue(new Callback<CodeMessageResponse>() {
             @Override

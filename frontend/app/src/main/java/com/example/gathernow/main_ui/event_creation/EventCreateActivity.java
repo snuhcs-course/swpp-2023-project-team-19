@@ -30,6 +30,8 @@ import com.example.gathernow.CreateSuccessful;
 import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
 import com.example.gathernow.authenticate.UserLocalDataSource;
+import com.example.gathernow.main_ui.EventDataSource;
+import com.example.gathernow.main_ui.EventRepository;
 import com.example.gathernow.utils.DateTimeHelper;
 
 import java.util.Calendar;

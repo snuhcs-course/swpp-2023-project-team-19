@@ -1,11 +1,15 @@
-package com.example.gathernow.main_ui.event_creation;
+package com.example.gathernow.main_ui;
 
+import androidx.annotation.NonNull;
+
+import com.example.gathernow.api.models.ApplicationDataModel;
+import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
-import com.example.gathernow.main_ui.EventCallback;
 
 import java.io.File;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -15,12 +19,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class EventDataSource {
-    private ServiceApi service;
+    private final ServiceApi service;
 
     public EventDataSource() {
+        service = RetrofitClient.getClient().create(ServiceApi.class);
     }
 
-    public void createEvent(String thumbnailFilePath, String creator, String type, String name, String description, String date, String time, String duration, String location, String languages, String maxParticipants, String price, String lastRegisterDate, String lastRegisterTime, EventCallback callback) {
+    public void createEvent(String thumbnailFilePath, String creator, String type, String name, String description, String date, String time, String duration, String location, String languages, String maxParticipants, String price, String lastRegisterDate, String lastRegisterTime, CallbackInterface callback) {
         // Thumbnail
         MultipartBody.Part thumbnailPart = null;
 
@@ -45,7 +50,6 @@ public class EventDataSource {
         RequestBody eventRegDateBody = RequestBody.create(MediaType.parse("text/plain"), lastRegisterDate);
         RequestBody eventRegTimeBody = RequestBody.create(MediaType.parse("text/plain"), lastRegisterTime);
 
-        service = RetrofitClient.getClient().create(ServiceApi.class);
         Call<CodeMessageResponse> call = service.eventlist(thumbnailPart, hostIdBody, eventTypeBody, eventNameBody, eventNumParticipantsBody, eventDateBody, eventTimeBody, eventDurationBody, eventLanguageBody, eventPriceBody, eventLocationBody, eventDescriptionBody, eventNumJoinedBody, eventRegDateBody, eventRegTimeBody);
         call.enqueue(new Callback<CodeMessageResponse>() {
             @Override
@@ -54,7 +58,7 @@ public class EventDataSource {
                     CodeMessageResponse result = response.body();
                     if (result != null) {
                         if (response.code() == 201) {
-                            callback.onSuccess();
+                            callback.onSuccess("Event created successfully");
                         }
                     } else {
                         callback.onError("Empty response from the server");
@@ -71,6 +75,49 @@ public class EventDataSource {
         });
     }
 
+    public void getEventInfo(int eventId, CallbackInterface callback) {
+        service.getEventByEventId(eventId).enqueue(new Callback<List<EventDataModel>>() {
+            @Override
+            public void onResponse(@NonNull Call<List<EventDataModel>> call, @NonNull Response<List<EventDataModel>> response) {
+                if (response.isSuccessful()) {
+                    List<EventDataModel> result = response.body();
+                    if (result != null) {
+                        callback.onSuccess(result.get(0));
+                    } else {
+                        callback.onError("Empty response from the server");
+                    }
+                } else {
+                    callback.onError("Event creation failed.");
+                }
+            }
 
+            @Override
+            public void onFailure(@NonNull Call<List<EventDataModel>> call, @NonNull Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+    }
+
+    public void checkUserAppliedEvent(int userId, int eventId, CallbackInterface callback) {
+        service.check_if_applied(userId, eventId).enqueue(new Callback<ApplicationDataModel>() {
+            @Override
+            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                if (response.isSuccessful()) {
+                    ApplicationDataModel result = response.body();
+                    // return the application status
+                    callback.onSuccess(result);
+                } else if (response.code() == 404) {
+                    callback.onError("No application found");
+                } else {
+                    callback.onError("Check application status failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+    }
 }
 

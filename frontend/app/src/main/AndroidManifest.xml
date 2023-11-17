@@ -30,7 +30,7 @@
             android:name=".DeleteSuccessful"
             android:exported="false" />
         <activity
-            android:name=".EventInfo"
+            android:name=".main_ui.event_info.EventInfoActivity"
             android:exported="false" />
         <activity
             android:name=".CreateSuccessful"
