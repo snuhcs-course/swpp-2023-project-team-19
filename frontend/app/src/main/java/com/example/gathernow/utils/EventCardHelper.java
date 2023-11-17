@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.LinearLayout;
 
-import com.example.gathernow.EventCardView;
+import com.example.gathernow.main_ui.cards.EventCardView;
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.main_ui.event_info.EventInfoActivity;
 

@@ -1,43 +1,26 @@
-package com.example.gathernow;
+package com.example.gathernow.main_ui.home;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.Toast;
 
+import com.example.gathernow.R;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
-import com.example.gathernow.api.models.EventDataModel;
-import com.example.gathernow.main_ui.event_info.EventInfoActivity;
-
-import java.io.IOException;
-import java.sql.Date;
-import java.sql.Time;
-
-
-import java.util.Collections;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EventSearch#newInstance} factory method to
+ * Use the {@link HomeActivity#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventSearch extends Fragment {
+public class HomeActivity extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,7 +33,7 @@ public class EventSearch extends Fragment {
 
     private ServiceApi service;
 
-    public EventSearch() {
+    public HomeActivity() {
         // Required empty public constructor
     }
 
@@ -63,8 +46,8 @@ public class EventSearch extends Fragment {
      * @return A new instance of fragment eventSearch.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventSearch newInstance(String param1, String param2) {
-        EventSearch fragment = new EventSearch();
+    public static HomeActivity newInstance(String param1, String param2) {
+        HomeActivity fragment = new HomeActivity();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);

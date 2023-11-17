@@ -1,9 +1,7 @@
 package com.example.gathernow.main_ui.profile;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Paint;
 
 import android.os.Bundle;
@@ -21,27 +19,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.sql.Date;
-import java.sql.Time;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
-import com.example.gathernow.EventCardView;
 import com.example.gathernow.FragHome;
 import com.example.gathernow.MainActivity;
 import com.example.gathernow.R;
-import com.example.gathernow.api.RetrofitClient;
-import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.api.models.UserDataModel;
-import com.example.gathernow.authenticate.UserLocalDataSource;
-import com.example.gathernow.main_ui.event_info.EventInfoActivity;
 import com.example.gathernow.utils.EventCardHelper;
 import com.squareup.picasso.Picasso;
 

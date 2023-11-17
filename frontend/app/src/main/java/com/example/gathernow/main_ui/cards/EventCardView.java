@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.main_ui.cards;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,6 +17,7 @@ import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import com.example.gathernow.R;
 import com.squareup.picasso.Picasso;
 
 public class EventCardView extends LinearLayout {

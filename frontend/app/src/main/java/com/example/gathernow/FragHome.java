@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gathernow.main_ui.event_creation.EventCreateActivity;
+import com.example.gathernow.main_ui.events.EventsActivity;
+import com.example.gathernow.main_ui.home.HomeActivity;
 import com.example.gathernow.main_ui.profile.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -39,8 +41,8 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
             bottomNavigationView.setOnItemSelectedListener(this);
             bottomNavigationView.setSelectedItemId(R.id.menu_search);
         }
-        EventHome eventHome = new EventHome();
-        EventSearch eventSearch = new EventSearch();
+        EventsActivity eventsActivity = new EventsActivity();
+        HomeActivity homeActivity = new HomeActivity();
         EventCreateActivity eventCreateActivity = new EventCreateActivity();
         ProfileActivity profileActivity = new ProfileActivity();
         @Override
@@ -48,7 +50,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
             if (item.getItemId() == R.id.menu_search) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.flFragment, eventSearch)
+                        .replace(R.id.flFragment, homeActivity)
                         .commit();
                 return true;
             } else if (item.getItemId() == R.id.menu_create) {
@@ -60,7 +62,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
             } else if (item.getItemId() == R.id.menu_events) {
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.flFragment, eventHome)
+                        .replace(R.id.flFragment, eventsActivity)
                         .commit();
                 return true;
             } else if (item.getItemId() == R.id.menu_profile) {

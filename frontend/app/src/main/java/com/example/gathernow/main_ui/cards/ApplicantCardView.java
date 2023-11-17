@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.main_ui.cards;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.gathernow.R;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;

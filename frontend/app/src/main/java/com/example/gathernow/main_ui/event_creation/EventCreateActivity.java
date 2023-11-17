@@ -26,7 +26,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.gathernow.CreateSuccessful;
 import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
 import com.example.gathernow.authenticate.UserLocalDataSource;
@@ -131,7 +130,7 @@ public class EventCreateActivity extends Fragment {
         eventCreateViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> {
             Log.d("EventCreateActivity Testing", "Alert Message: " + message);
             if (message.equals("Event created successfully")) {
-                Intent intent = new Intent(getContext(), CreateSuccessful.class);
+                Intent intent = new Intent(getContext(), CreateSuccessfulActivity.class);
                 startActivity(intent);
                 getActivity().finish();
             }

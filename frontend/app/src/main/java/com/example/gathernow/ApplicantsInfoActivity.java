@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;
+import com.example.gathernow.main_ui.cards.ApplicantCardView;
 
 import java.util.List;
 import java.util.Objects;
