@@ -17,6 +17,12 @@
         android:theme="@style/Theme.Gathernow"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.naver.maps.map.gb5ymxyg6a"
+            android:value="" />
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_TYPE"
+            android:value="gov" />
         <activity
             android:name=".main_ui.event_location.LocationSearchActivity"
             android:exported="false" />

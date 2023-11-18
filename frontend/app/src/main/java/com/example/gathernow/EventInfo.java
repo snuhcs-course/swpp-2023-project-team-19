@@ -2,6 +2,7 @@ package com.example.gathernow;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
+import com.naver.maps.map.MapFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -37,7 +39,6 @@ public class EventInfo extends AppCompatActivity {
     public int hostId;
 
     private Integer applicationId;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

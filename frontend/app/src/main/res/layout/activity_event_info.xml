@@ -271,6 +271,12 @@
                 app:layout_constraintLeft_toRightOf="@id/location_title"
                 app:layout_constraintTop_toBottomOf="@id/event_price" />
 
+            <androidx.fragment.app.FragmentContainerView android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/map"
+                android:name="com.naver.maps.map.MapFragment"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintTop_toBottomOf="@id/event_location"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
