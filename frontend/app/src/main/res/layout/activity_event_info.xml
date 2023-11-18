@@ -42,7 +42,8 @@
             <ImageView
                 android:id="@+id/event_img"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintHeight_percent="0.3"
                 android:scaleType="centerCrop"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -301,17 +302,19 @@
             <TextView
                 android:id="@+id/event_location"
                 style="@style/TextField"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/location_title"
-                app:layout_constraintTop_toBottomOf="@id/event_register_date_title" />
+                app:layout_constraintTop_toBottomOf="@id/event_register_date_title"
+                app:layout_constraintWidth_percent="0.5"
+                />
 
             <androidx.fragment.app.FragmentContainerView
                 android:padding="16dp"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                app:layout_constraintHeight_percent="0.45"
+                app:layout_constraintHeight_percent="0.35"
                 android:id="@+id/map_fragment"
                 android:name="com.naver.maps.map.MapFragment"
                 app:navermap_locationButtonEnabled="true"
