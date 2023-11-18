@@ -15,8 +15,29 @@ from django.utils.timezone import make_aware
 def event_list(request):
     # List all events or create a new one
     if request.method == 'GET':
-        events = Event.objects.all()
-        serializer = EventSerializer(events, many=True)
+        # Get current datetime in an aware format (considering timezone)
+        now = make_aware(datetime.now())
+
+        # Annotate queryset with a combined datetime field
+        events = Event.objects.all().annotate(
+            full_event_datetime=ExpressionWrapper(
+                Func(
+                    Concat(
+                        F('event_date'), 
+                        Value(' '),  # Space to separate date and time
+                        F('event_time')
+                    ),
+                    function='CAST',
+                    template='%(function)s(%(expressions)s as datetime)',
+                ),
+                output_field=DateTimeField()
+            )
+        )
+        # Filter events happening after the current datetime
+        future_events = events.filter(full_event_datetime__gt=now)
+
+        # Serialize and return the filtered events
+        serializer = EventSerializer(future_events, many=True)
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = EventSerializer(data=request.data)
@@ -90,7 +111,34 @@ def events_by_user(request, user_id):
 def events_by_id(request, event_id):
     events = Event.objects.filter(event_id=event_id)
     if request.method == 'GET':
-        serializer = EventSerializer(events, many=True)
+        now = make_aware(datetime.now())
+
+        # Annotate queryset with a combined datetime field
+        events = Event.objects.filter(event_id = event_id).annotate(
+            full_event_datetime=ExpressionWrapper(
+                Func(
+                    Concat(
+                        F('event_date'), 
+                        Value(' '),  # Space to separate date and time
+                        F('event_time')
+                    ),
+                    function='CAST',
+                    template='%(function)s(%(expressions)s as datetime)',
+                ),
+                output_field=DateTimeField()
+            )
+        )
+
+        # Filter events happening after the current datetime
+        future_events = events.filter(full_event_datetime__gt=now)
+
+        if not future_events.exists():
+            # If there are no future events, return 204 No Content
+            return Response(status=status.HTTP_204_NO_CONTENT)
+
+        # Serialize and return the filtered events
+        serializer = EventSerializer(future_events, many=True)
+
         return Response(serializer.data)
     elif request.method == 'DELETE':
         events.delete()
