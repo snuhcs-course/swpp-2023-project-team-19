@@ -1,17 +1,26 @@
 package com.example.gathernow.main_ui.event_creation;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.gathernow.R;
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.Marker;
 
 public class MapActivity extends AppCompatActivity {
 
     private MapView mapView;
     private NaverMap naverMap;
+    private Marker selectedMarker;
+    private LatLng selectedLocation;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,12 +34,52 @@ public class MapActivity extends AppCompatActivity {
             mapView.getMapAsync(new OnMapReadyCallback() {
                 @Override
                 public void onMapReady(NaverMap naverMap) {
-                    // This method is called when the map is ready
                     MapActivity.this.naverMap = naverMap;
 
-                    // You can customize the map settings or perform other actions here
+                    // ... (Previous code)
+
+                    naverMap.setOnMapClickListener((point, coord) -> {
+                        if (selectedMarker != null) {
+                            selectedMarker.setMap(null);
+                        }
+
+                        // Update the selected location
+                        selectedLocation = coord;
+
+                        // Add a marker at the clicked location
+                        selectedMarker = new Marker();
+                        selectedMarker.setPosition(coord);
+                        selectedMarker.setMap(naverMap);
+
+                        // You can now use 'selectedLocation' as the selected location (LatLng)
+                        // ...
+
+                        // For example, you can return the selected location to the calling activity
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra("selectedLocation", selectedLocation);
+                        setResult(Activity.RESULT_OK, resultIntent);
+                    });
                 }
             });
+        }
+    }
+
+    public void onConfirmClick(View view) {
+        // Check if the NaverMap instance is available
+        if (naverMap != null) {
+            // Get the current camera position (selected location)
+            CameraPosition cameraPosition = naverMap.getCameraPosition();
+            LatLng selectedLocation = cameraPosition.target;
+
+            // Create an intent to pass the selected location back to EventCreateActivity
+            Intent resultIntent = new Intent();
+            resultIntent.putExtra("selectedLocation", selectedLocation);
+
+            // Set the result to be sent back
+            setResult(Activity.RESULT_OK, resultIntent);
+
+            // Finish MapActivity
+            finish();
         }
     }
 

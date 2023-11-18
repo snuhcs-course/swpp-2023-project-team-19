@@ -1,11 +1,14 @@
 package com.example.gathernow.main_ui.event_creation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +35,7 @@ import com.example.gathernow.authenticate.UserLocalDataSource;
 import com.example.gathernow.main_ui.EventDataSource;
 import com.example.gathernow.main_ui.EventRepository;
 import com.example.gathernow.utils.DateTimeHelper;
+import com.naver.maps.geometry.LatLng;
 
 import java.util.Calendar;
 import java.util.function.Consumer;
@@ -503,13 +507,55 @@ public class EventCreateActivity extends Fragment {
 
     // Add this method inside EventCreateActivity class
     private void onSearchLocationClick(View view) {
-        // TODO: Implement map interaction logic here
-        // For now, let's show a toast message as a placeholder
-        Toast.makeText(requireContext(), "Search Location Clicked", Toast.LENGTH_SHORT).show();
+        // Get the location input from the TextView
+        String locationInput = eventLocationText.getText().toString();
 
-        // TODO: Pass the event location to the MapActivity
-        Intent intent = new Intent(requireContext(), MapActivity.class);
-        intent.putExtra("eventLocation", eventLocation);
-        startActivity(intent);
+        // Check if the location input is not empty
+        if (!TextUtils.isEmpty(locationInput)) {
+            // Create an intent to start MapActivity
+            Intent mapIntent = new Intent(requireContext(), MapActivity.class);
+
+            // Convert the location input to LatLng using geocoding (replace this with your actual geocoding logic)
+            LatLng initialCoordinates = getLatLngFromLocationInput(locationInput);
+
+            // Pass the initial coordinates to MapActivity
+            mapIntent.putExtra("initialCoordinates", initialCoordinates);
+
+            // Start MapActivity for result
+            startActivityForResult(mapIntent, MAP_ACTIVITY_REQUEST_CODE);
+        } else {
+            Toast.makeText(requireContext(), "Please enter a location", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    // Handle the result from MapActivity
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MAP_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            // Retrieve the selected location from MapActivity
+            LatLng selectedLocation = data.getParcelableExtra("selectedLocation");
+
+            // Now you can use the selectedLocation as needed
+            // For example, update UI or perform any other actions
+            // ...
+
+            // Update the eventLocationText with the selected location (optional)
+            eventLocationText.setText(selectedLocation.toString());
+        }
+    }
+
+    // Define a constant for the request code
+    private static final int MAP_ACTIVITY_REQUEST_CODE = 123;
+
+    // Replace this method with your actual geocoding logic
+    private LatLng getLatLngFromLocationInput(String locationInput) {
+        // Implement your geocoding logic to convert locationInput to LatLng
+        // For example, you can use the NaverGeocoderApi here
+        // ...
+
+        // Placeholder coordinates (Seoul, South Korea) - Replace with actual logic
+        return new LatLng(37.5665, 126.9780);
     }
 }
