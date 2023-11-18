@@ -107,4 +107,7 @@ public interface ServiceApi {
 
     @GET
     Call<List<EventDataModel>> getFilteredEvents(@Url String url);
+
+    @GET
+    Call<List<EventDataModel>> getSearchedEvents(@Url String url);
 }

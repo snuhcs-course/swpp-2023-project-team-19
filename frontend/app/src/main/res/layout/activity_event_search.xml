@@ -24,22 +24,12 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageButton
-        android:id="@+id/filter_button"
-        android:layout_below="@+id/textInputLayout"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="10dp"
-        android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@mipmap/ic_filter_foreground"
-        android:visibility="gone"/>
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/no_event_layout"
         android:visibility="visible"
-        android:layout_below="@+id/filter_button"
+        android:layout_below="@+id/textInputLayout"
         android:orientation="vertical">
 
         <ImageView
@@ -81,6 +71,19 @@
             android:textSize="15sp"/>
 
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textInputLayout">
+
+        <LinearLayout
+            android:id="@+id/eventCardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+    </ScrollView>
 
 
 </RelativeLayout>
