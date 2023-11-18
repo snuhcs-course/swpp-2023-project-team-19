@@ -27,29 +27,16 @@ import retrofit2.Response;
 
 public class ApplicantsInfoActivity extends AppCompatActivity {
 
-    private ServiceApi service;
-    private int userId;
-    private int eventId;
-    private int hostId;
-
-    private String username;
-    private String eventName;
-    private String hostName;
-    private String hostAvatar;
-    private ApplicantsInfoViewModel applicantsInfoViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicants_info);
 
-        service = RetrofitClient.getClient().create(ServiceApi.class);
-
         Intent intent = getIntent();
 
 //        hostId = intent.getIntExtra("hostId", 0);
 //        userId = intent.getIntExtra("userId", 0);
-        eventId = intent.getIntExtra("eventId", -1);
+        int eventId = intent.getIntExtra("eventId", -1);
 
         if (eventId == -1) {
             Toast.makeText(ApplicantsInfoActivity.this, "Event ID not found", Toast.LENGTH_SHORT).show();
@@ -58,12 +45,12 @@ public class ApplicantsInfoActivity extends AppCompatActivity {
 
 
         // set event name
-        eventName = intent.getStringExtra("eventName");
+        String eventName = intent.getStringExtra("eventName");
         TextView eventNameView = findViewById(R.id.event_name);
         eventNameView.setText(eventName);
 
         // View model
-        applicantsInfoViewModel = new ApplicantsInfoViewModel();
+        ApplicantsInfoViewModel applicantsInfoViewModel = new ApplicantsInfoViewModel();
 
         // Observe value changes
         applicantsInfoViewModel.getAlertMessage().observe(this, message -> Toast.makeText(ApplicantsInfoActivity.this, message, Toast.LENGTH_SHORT).show());
@@ -81,7 +68,10 @@ public class ApplicantsInfoActivity extends AppCompatActivity {
         if (applicationDataModels == null || applicationDataModels.isEmpty()) {
             Log.d("ApplicantsInfoActivity", "No application found");
             noApplicant.setVisibility(View.VISIBLE);
+//            applicantCardContainer.setVisibility(View.GONE);
         } else {
+            applicantCardContainer.setVisibility(View.VISIBLE);
+            noApplicant.setVisibility(View.GONE);
             Log.d("ApplicantsInfoActivity", "Loaded event application successfully");
             EventCardHelper.createApplicantList(applicationDataModels, applicantCardContainer);
         }

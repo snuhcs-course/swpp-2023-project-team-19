@@ -274,5 +274,41 @@ public class EventDataSource {
             }
         });
     }
+
+    public void acceptEventApplication(int applicationId, CallbackInterface callbackInterface) {
+        service.acceptStatus(applicationId).enqueue(new Callback<ApplicationDataModel>() {
+            @Override
+            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                if (response.isSuccessful()) {
+                    callbackInterface.onSuccess("Application accepted successfully");
+                } else {
+                    callbackInterface.onError("Failed to accept application");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                callbackInterface.onError("Network error");
+            }
+        });
+    }
+
+    public void rejectEventApplication(int applicationId, CallbackInterface callbackInterface) {
+        service.delete_application(applicationId).enqueue(new Callback<ApplicationDataModel>() {
+            @Override
+            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                if (response.isSuccessful()) {
+                    callbackInterface.onSuccess("Application rejected successfully");
+                } else {
+                    callbackInterface.onError("Failed to reject application");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                callbackInterface.onError("Network error");
+            }
+        });
+    }
 }
 

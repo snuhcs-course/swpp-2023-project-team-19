@@ -41,8 +41,15 @@ public class EventRepository {
         eventDataSource.getAllEvents(eventCallback);
     }
 
-
     public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
         eventDataSource.applyEvent(applicationDataModel, callbackInterface);
+    }
+
+    public void acceptEventApplication(int applicationId, CallbackInterface callbackInterface) {
+        eventDataSource.acceptEventApplication(applicationId, callbackInterface);
+    }
+
+    public void rejectEventApplication(int applicationId, CallbackInterface callbackInterface) {
+        eventDataSource.rejectEventApplication(applicationId, callbackInterface);
     }
 }
