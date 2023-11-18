@@ -214,8 +214,11 @@ def events_filter(request):
 
         # Applying language filter
         if languages:
-            for language in languages:
-                queryset = queryset.filter(event_language__icontains=language)
+                language_query = Q()
+                for language in languages:
+                    language_query |= Q(event_language__icontains=language)
+
+                queryset = queryset.filter(language_query)
 
         # Applying event type filter
         if event_types:
