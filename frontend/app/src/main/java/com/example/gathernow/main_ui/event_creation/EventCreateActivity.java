@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -276,8 +275,8 @@ public class EventCreateActivity extends Fragment {
         });
 
         // Search Location Button
-        Button searchLocationButton = rootView.findViewById(R.id.search_location_button);
-        searchLocationButton.setOnClickListener(this::onSearchLocationClick);
+        Button pickLocationButton = rootView.findViewById(R.id.pick_location_button);
+        pickLocationButton.setOnClickListener(this::onPickLocationClick);
 
         // Number of participants
         eventNumParticipantsText = rootView.findViewById(R.id.event_num_participants);
@@ -506,7 +505,7 @@ public class EventCreateActivity extends Fragment {
     }
 
     // Add this method inside EventCreateActivity class
-    private void onSearchLocationClick(View view) {
+    private void onPickLocationClick(View view) {
         // Get the location input from the TextView
         String locationInput = eventLocationText.getText().toString();
 

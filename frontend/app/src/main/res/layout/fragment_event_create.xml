@@ -194,10 +194,10 @@
             android:inputType="textMultiLine" />
 
         <Button
-            android:id="@+id/search_location_button"
+            android:id="@+id/pick_location_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search Location" />
+            android:text="Pick Location" />
 
         <TextView
             android:id="@+id/event_registration_hint"
