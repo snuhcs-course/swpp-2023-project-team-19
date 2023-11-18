@@ -40,6 +40,9 @@ public class ApplicationDataModel {
         this.host_id = host_id;
         this.applicant_avatar = applicant_avatar;
     }
+    public ApplicationDataModel() {
+
+    }
 
     public int getRequestStatus() {
         return request_status;
@@ -69,4 +72,42 @@ public class ApplicationDataModel {
     public Integer getEventId() {
         return event_id;
     }
+
+    // set variables
+    public void setApplicantName(String applicant_name) {
+        this.applicant_name = applicant_name;
+    }
+
+    public void setApplicantAvatar(String applicant_avatar) {
+        this.applicant_avatar = applicant_avatar;
+    }
+
+    public void setApplicantContact(String applicant_contact) {
+        this.applicant_contact = applicant_contact;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public void setEventId(Integer event_id) {
+        this.event_id = event_id;
+    }
+
+    public void setHostId(Integer host_id) {
+        this.host_id = host_id;
+    }
+
+    public void setApplicantId(Integer applicant_id) {
+        this.applicant_id = applicant_id;
+    }
+
+    public void setRequestStatus(Integer request_status) {
+        this.request_status = request_status;
+    }
+
+    public void setApplicationId(Integer application_id) {
+        this.application_id = application_id;
+    }
+
 }
