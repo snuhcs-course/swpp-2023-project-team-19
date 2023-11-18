@@ -64,7 +64,7 @@ public class HomeActivity extends Fragment {
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_event_search, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
 
         homeViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show());
         homeViewModel.getAllEvents().observe(getViewLifecycleOwner(), eventDataModels -> fetchEventsUI(eventDataModels, rootView));
@@ -77,7 +77,7 @@ public class HomeActivity extends Fragment {
 
         //get current login user id
         UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
-        Integer userId = Integer.valueOf(userLocalDataSource.getUserId());
+        int userId = Integer.parseInt(userLocalDataSource.getUserId());
 
         if (eventDataList == null || eventDataList.isEmpty()){
             Log.d("HomeActivity", "Event data is null or empty");

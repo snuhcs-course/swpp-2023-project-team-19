@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.LinearLayout;
 
+import com.example.gathernow.api.models.ApplicationDataModel;
+import com.example.gathernow.main_ui.cards.ApplicantCardView;
 import com.example.gathernow.main_ui.cards.EventCardView;
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.main_ui.event_info.EventInfoActivity;
@@ -39,6 +41,26 @@ public class EventCardHelper {
                 context.startActivity(intent);
             });
 
+        }
+    }
+
+    public static void createApplicantList(List<ApplicationDataModel> applicantList, LinearLayout container) {
+        if (applicantList == null || applicantList.isEmpty()) {
+            return;
+        }
+        for (int i = 0; i < applicantList.size(); i++) {
+            ApplicationDataModel currentApplicant = applicantList.get(i);
+            ApplicantCardView newApplicantCard = new ApplicantCardView(container.getContext(), null, currentApplicant.getRequestStatus());
+            newApplicantCard.setApplicationId(currentApplicant.getApplicationId());
+            newApplicantCard.setApplicantName(currentApplicant.getApplicantName());
+            newApplicantCard.setApplicantContact(currentApplicant.getApplicantContact());
+            newApplicantCard.setApplicantMessage(currentApplicant.getMessage());
+            newApplicantCard.setApplicantImg(currentApplicant.getApplicantAvatar());
+
+            // Add vertical padding to the newEventCard
+            int verticalPadding = (int) (10 * container.getContext().getResources().getDisplayMetrics().density); // 16dp converted to pixels
+            newApplicantCard.setPadding(newApplicantCard.getPaddingLeft(), verticalPadding, newApplicantCard.getPaddingRight(), verticalPadding);
+            container.addView(newApplicantCard);
         }
     }
 }

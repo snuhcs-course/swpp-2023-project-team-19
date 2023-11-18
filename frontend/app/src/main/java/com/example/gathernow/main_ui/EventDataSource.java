@@ -112,7 +112,7 @@ public class EventDataSource {
                     ApplicationDataModel result = response.body();
                     // return the application status
                     callback.onSuccess(result);
-                } else if (response.code() == 404) {
+                } else if (response != null && response.code() == 404) {
                     callback.onError("No application found");
                 } else {
                     callback.onError("Check application status failed");
@@ -186,6 +186,31 @@ public class EventDataSource {
         });
     }
 
+    public void getEventApplication(int eventId, CallbackInterface eventCallback) {
+        service.getEventApplications(eventId).enqueue(new Callback<List<ApplicationDataModel>>() {
+            @Override
+            public void onResponse(Call<List<ApplicationDataModel>> call, Response<List<ApplicationDataModel>> response) {
+                if (response.isSuccessful()) {
+                    List<ApplicationDataModel> result = response.body();
+                    if (result != null) {
+                        eventCallback.onSuccess(result);
+                    } else {
+                        eventCallback.onError("Empty response from the server");
+                    }
+                } else if (response.code() == 404) {
+                    eventCallback.onError("No applications found");
+                } else {
+                    eventCallback.onError("Failed to get event applications");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ApplicationDataModel>> call, Throwable t) {
+                eventCallback.onError("Network error");
+            }
+        });
+    }
+
     public void getAllEvents(CallbackInterface callback){
         service.getALlEvents().enqueue(new Callback<List<EventDataModel>>() {
             @Override
@@ -245,6 +270,68 @@ public class EventDataSource {
             @Override
             public void onFailure(Call<List<ApplicationDataModel>> call, Throwable t) {
                 callback.onError("Network error");
+            }
+        });
+    }
+
+    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+        service.apply_event(applicationDataModel).enqueue(new Callback<CodeMessageResponse>() {
+            @Override
+            public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
+                if (response.isSuccessful()) {
+                    CodeMessageResponse result = response.body();
+                    if (result != null) {
+                        if (response.code() == 201) {
+                            callbackInterface.onSuccess("Application sent successfully");
+                        }
+                    } else {
+                        callbackInterface.onError("Empty response from the server");
+                    }
+                }
+                else {
+                    callbackInterface.onError("Application failed");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
+                callbackInterface.onError("Network error");
+            }
+        });
+    }
+
+    public void acceptEventApplication(int applicationId, CallbackInterface callbackInterface) {
+        service.acceptStatus(applicationId).enqueue(new Callback<ApplicationDataModel>() {
+            @Override
+            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                if (response.isSuccessful()) {
+                    callbackInterface.onSuccess("Application accepted successfully");
+                } else {
+                    callbackInterface.onError("Failed to accept application");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                callbackInterface.onError("Network error");
+            }
+        });
+    }
+
+    public void rejectEventApplication(int applicationId, CallbackInterface callbackInterface) {
+        service.delete_application(applicationId).enqueue(new Callback<ApplicationDataModel>() {
+            @Override
+            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                if (response.isSuccessful()) {
+                    callbackInterface.onSuccess("Application rejected successfully");
+                } else {
+                    callbackInterface.onError("Failed to reject application");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                callbackInterface.onError("Network error");
             }
         });
     }

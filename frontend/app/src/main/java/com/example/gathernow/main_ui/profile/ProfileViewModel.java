@@ -15,6 +15,7 @@ import com.example.gathernow.main_ui.EventRepository;
 import com.example.gathernow.main_ui.UserRemoteDataSource;
 import com.example.gathernow.main_ui.UserRemoteRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -74,6 +75,8 @@ public class ProfileViewModel extends ViewModel {
                         List<EventDataModel> events = (List<EventDataModel>) resultList;
                         Collections.reverse(events);
                         userEvents.setValue(events);
+                    } else {
+                        userEvents.setValue(new ArrayList<EventDataModel>());
                     }
                 }
             }
@@ -81,6 +84,7 @@ public class ProfileViewModel extends ViewModel {
             @Override
             public void onError(String message) {
                 alertMessage.setValue(message);
+                userEvents.setValue(new ArrayList<EventDataModel>());
             }
         });
     }

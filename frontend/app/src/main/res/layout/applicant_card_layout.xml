@@ -56,23 +56,21 @@
             android:id="@+id/constraint2">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:onClick="onApprove"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:id="@+id/approve_button"
                 style="@style/PositiveButton"
                 android:padding="2dp"
                 android:layout_marginTop="5dp"
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:text="Approve"
                 android:textSize="12sp"
+                android:text="Approve"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/reject_button"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:onClick="onReject"
-                android:visibility="visible"
+                android:visibility="invisible"
                 android:id="@+id/reject_button"
                 style="@style/DangerButton"
                 android:padding="2dp"
@@ -86,12 +84,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:visibility="invisible"
+                android:visibility="gone"
                 android:id="@+id/accepted"
                 style="@style/PositiveButton"
+                android:background="@drawable/button_disabled_bg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Accepted"
                 android:textSize="15sp"
                 android:layout_marginLeft="5dp"
                 app:layout_constraintRight_toRightOf="parent"

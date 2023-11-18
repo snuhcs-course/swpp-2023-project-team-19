@@ -13,6 +13,9 @@ import com.example.gathernow.main_ui.EventRepository;
 import com.example.gathernow.main_ui.UserRemoteDataSource;
 import com.example.gathernow.main_ui.UserRemoteRepository;
 
+import java.util.Locale;
+import java.util.Objects;
+
 public class EventInfoViewModel extends ViewModel {
     private final EventRepository eventInfoRepository;
     private final UserRemoteRepository userRemoteRepository;
@@ -21,19 +24,34 @@ public class EventInfoViewModel extends ViewModel {
     private final MutableLiveData<UserDataModel> hostData = new MutableLiveData<>();
     private final MutableLiveData<String> alertMessage = new MutableLiveData<>();
     private final MutableLiveData<Boolean> showRegisterButton = new MutableLiveData<>(false);
-    private final MutableLiveData<Boolean> showWaitingButton = new MutableLiveData<>(false);
-    private final MutableLiveData<Boolean> showAcceptedButton = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> showResultButton = new MutableLiveData<>(false);
+    private final MutableLiveData<String> applicationStatus = new MutableLiveData<>();
+//    private final MutableLiveData<Boolean> showAcceptedButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showCancelRegButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showViewApplicantsButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showDeleteEventButton = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showDeleteEventSuccess = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> showDeleteApplicationSuccess = new MutableLiveData<>(false);
+    private final MutableLiveData<Boolean> clickableCancelButton = new MutableLiveData<>(true);
+    private final MutableLiveData<Boolean> clickableRegisterButton = new MutableLiveData<>(true);
 
 
     public EventInfoViewModel(EventRepository eventInfoRepository) {
         this.eventInfoRepository = eventInfoRepository;
         this.userRemoteRepository = new UserRemoteRepository(new UserRemoteDataSource());
 
+    }
+
+    public MutableLiveData<Boolean> getClickableCancelButton() {
+        return clickableCancelButton;
+    }
+
+    public MutableLiveData<Boolean> getClickableRegisterButton() {
+        return clickableRegisterButton;
+    }
+    public MutableLiveData<String> getApplicationStatus() {
+        Log.d("EventInfo Testing", "Application status: " + applicationStatus.getValue());
+        return applicationStatus;
     }
 
     public MutableLiveData<EventDataModel> getEventData() {
@@ -52,13 +70,13 @@ public class EventInfoViewModel extends ViewModel {
         return showRegisterButton;
     }
 
-    public MutableLiveData<Boolean> getShowWaitingButton() {
-        return showWaitingButton;
+    public MutableLiveData<Boolean> getShowResultButton() {
+        return showResultButton;
     }
 
-    public MutableLiveData<Boolean> getShowAcceptedButton() {
-        return showAcceptedButton;
-    }
+//    public MutableLiveData<Boolean> getShowAcceptedButton() {
+//        return showAcceptedButton;
+//    }
 
     public MutableLiveData<Boolean> getShowCancelRegButton() {
         return showCancelRegButton;
@@ -110,12 +128,22 @@ public class EventInfoViewModel extends ViewModel {
                     int status = res.getRequestStatus();
                     if (status == 0) {
                         // application is pending
-                        showWaitingButton.setValue(true);
+                        showResultButton.setValue(true);
+                        applicationStatus.setValue("PENDING");
                         showCancelRegButton.setValue(true);
+                        // When the deadline is passed, no cancellation is allowed
+                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
+                            clickableCancelButton.setValue(false);
+                        }
                     } else if (status == 1) {
                         // application is accepted
-                        showAcceptedButton.setValue(true);
+                        showResultButton.setValue(true);
+                        applicationStatus.setValue("ACCEPTED");
                         showCancelRegButton.setValue(true);
+                        // When the deadline is passed, no cancellation is allowed
+                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
+                            clickableCancelButton.setValue(false);
+                        }
                     } else {
                         alertMessage.postValue("Application status not found");
                     }
@@ -125,12 +153,41 @@ public class EventInfoViewModel extends ViewModel {
                 public void onError(String message) {
                     if (message.equals("No application found")) {
                         showRegisterButton.setValue(true);
+                        // When the deadline passed or the event is full, no registration is allowed
+                        Log.d("EventInfo Testing", Objects.requireNonNull(eventData.getValue()).getEventRegisterDate());
+                        if (Objects.equals(Objects.requireNonNull(eventData.getValue()).getEventNumJoined(), eventData.getValue().getEventNumParticipants()) || deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
+                            clickableRegisterButton.setValue(false);
+                        }
                     } else {
                         alertMessage.postValue(message);
                     }
                 }
             });
         }
+
+    }
+
+    private boolean deadlinePassed(String event_register_date, String event_register_time) {
+        // Get current date and time
+        java.util.Calendar calendar = java.util.Calendar.getInstance();
+        java.util.Date currentDate = calendar.getTime();
+        java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy-MM-dd", Locale.US);
+        java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm:ss", Locale.US);
+        String currentDateString = dateFormat.format(currentDate);
+        String currentTimeString = timeFormat.format(currentDate);
+        Log.d("EventInfo Testing", "Current date: " + currentDateString);
+        Log.d("EventInfo Testing", "Current time: " + currentTimeString);
+        Log.d("EventInfo Testing", "Event register date: " + event_register_date);
+        Log.d("EventInfo Testing", "Event register time: " + event_register_time);
+
+        // Compare current date and time with event registration deadline
+        if (currentDateString.compareTo(event_register_date) > 0) {
+            return true;
+        }
+        else if (currentDateString.compareTo(event_register_date) == 0) {
+            return currentTimeString.compareTo(event_register_time) > 0;
+        }
+        return false;
 
     }
 

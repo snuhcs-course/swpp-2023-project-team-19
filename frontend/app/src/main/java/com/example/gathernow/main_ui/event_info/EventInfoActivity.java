@@ -12,35 +12,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.gathernow.ApplicantsInfoActivity;
-import com.example.gathernow.api.models.ApplicationDataModel;
-import com.example.gathernow.ApplicationForm;
+import com.example.gathernow.main_ui.event_applicant_info.ApplicantsInfoActivity;
+import com.example.gathernow.main_ui.event_application_form.ApplicationFormActivity;
 import com.example.gathernow.DeleteSuccessful;
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.R;
 import com.example.gathernow.api.models.UserDataModel;
-import com.example.gathernow.api.RetrofitClient;
-import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.main_ui.EventDataSource;
 import com.example.gathernow.main_ui.EventRepository;
 import com.squareup.picasso.Picasso;
 
 import java.util.Locale;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class EventInfoActivity extends AppCompatActivity {
-    private ServiceApi service;
     public int userId;
     public int eventId;
 
     public String eventName;
 
-    public String userAvatar;
+    public String hostAvatar;
 
-    public String hostname;
+    public String hostName;
 
     public int hostId;
     private EventInfoViewModel eventInfoViewModel;
@@ -50,8 +42,6 @@ public class EventInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
-
-        service = RetrofitClient.getClient().create(ServiceApi.class);
 
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
@@ -79,22 +69,23 @@ public class EventInfoActivity extends AppCompatActivity {
                 registerButton.setVisibility(View.GONE);
             }
         });
-        eventInfoViewModel.getShowWaitingButton().observe(this, showWaitingButton -> {
-            Button waitingButton = findViewById(R.id.result_awaiting_button);
+        Button resultButton = findViewById(R.id.result_button);
+        eventInfoViewModel.getShowResultButton().observe(this, showWaitingButton -> {
             if (showWaitingButton) {
-                waitingButton.setVisibility(View.VISIBLE);
+                resultButton.setVisibility(View.VISIBLE);
             } else {
-                waitingButton.setVisibility(View.GONE);
+                resultButton.setVisibility(View.GONE);
             }
         });
-        eventInfoViewModel.getShowAcceptedButton().observe(this, showAcceptedButton -> {
-            Button acceptedButton = findViewById(R.id.result_accepted_button);
-            if (showAcceptedButton) {
-                acceptedButton.setVisibility(View.VISIBLE);
-            } else {
-                acceptedButton.setVisibility(View.GONE);
-            }
-        });
+        eventInfoViewModel.getApplicationStatus().observe(this, resultButton::setText);
+//        eventInfoViewModel.getShowAcceptedButton().observe(this, showAcceptedButton -> {
+//            Button acceptedButton = findViewById(R.id.result_accepted_button);
+//            if (showAcceptedButton) {
+//                acceptedButton.setVisibility(View.VISIBLE);
+//            } else {
+//                acceptedButton.setVisibility(View.GONE);
+//            }
+//        });
         eventInfoViewModel.getShowCancelRegButton().observe(this, showCancelRegButton -> {
             Button cancelRegButton = findViewById(R.id.cancel_button);
             if (showCancelRegButton) {
@@ -133,6 +124,17 @@ public class EventInfoActivity extends AppCompatActivity {
                 finish();
             }
         });
+        eventInfoViewModel.getClickableCancelButton().observe(this, clickableCancelButton -> {
+            Button cancelButton = findViewById(R.id.cancel_button);
+            Log.d("EventInfo Testing", "Cancel button clickable: " + clickableCancelButton);
+            cancelButton.setClickable(clickableCancelButton);
+            cancelButton.setEnabled(clickableCancelButton);
+        });
+        eventInfoViewModel.getClickableRegisterButton().observe(this, clickableRegisterButton -> {
+            Button registerButton = findViewById(R.id.register_button);
+            registerButton.setClickable(clickableRegisterButton);
+            registerButton.setEnabled(clickableRegisterButton);
+        });
         // query event info from database
         eventInfoViewModel.loadEventInfo(eventId, userId);
 
@@ -143,13 +145,14 @@ public class EventInfoActivity extends AppCompatActivity {
             Log.d("EventInfo Testing", "User data model is null");
             return;
         }
-        TextView profileName = findViewById(R.id.profile_name);
-        profileName.setText(userDataModel.getName());
 
-        String host_avatar = userDataModel.getAvatar();
-        host_avatar = "http://20.2.88.70:8000" + host_avatar;
+        hostName = userDataModel.getName();
+        TextView profileName = findViewById(R.id.profile_name);
+        profileName.setText(hostName);
+
+        hostAvatar = "http://20.2.88.70:8000" + userDataModel.getAvatar();
         ImageView profile_img = findViewById(R.id.profile_img);
-        Picasso.get().load(host_avatar).into(profile_img);
+        Picasso.get().load(hostAvatar).into(profile_img);
     }
 
     private void updateEventInfoUI(EventDataModel eventDataModel) {
@@ -194,7 +197,7 @@ public class EventInfoActivity extends AppCompatActivity {
         eventPrice.setText(priceFormat);
 //        setButtonVisibility(eventDataModel.getHostId());
 //
-        eventName = eventDataModel.getEventTime();
+        eventName = eventDataModel.getEventTitle();
         hostId = eventDataModel.getHostId();
     }
 
@@ -251,15 +254,15 @@ public class EventInfoActivity extends AppCompatActivity {
 
     public void onRegisterEvent(View v) {
 
-        Intent intent = new Intent(v.getContext(), ApplicationForm.class);
+        Intent intent = new Intent(v.getContext(), ApplicationFormActivity.class);
 
         // Send the user id to the EventInfo activity
         intent.putExtra("userId", userId);
         intent.putExtra("eventId", eventId);
         intent.putExtra("hostId", hostId);
         intent.putExtra("eventName", eventName);
-        intent.putExtra("hostName", hostname);
-        intent.putExtra("hostAvatar", userAvatar);
+        intent.putExtra("hostName", hostName);
+        intent.putExtra("hostAvatar", hostAvatar);
 
         startActivity(intent);
         finish();
@@ -278,8 +281,8 @@ public class EventInfoActivity extends AppCompatActivity {
         intent.putExtra("eventId", eventId);
         intent.putExtra("hostId", hostId);
         intent.putExtra("eventName", eventName);
-        intent.putExtra("hostName", hostname);
-        intent.putExtra("hostAvatar", userAvatar);
+        intent.putExtra("hostName", hostName);
+        intent.putExtra("hostAvatar", hostAvatar);
         startActivity(intent);
     }
 }
