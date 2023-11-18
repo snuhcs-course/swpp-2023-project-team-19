@@ -190,6 +190,7 @@ def events_filter(request):
         times = request.GET.getlist('time')  # Returns a list of times
         is_free = request.GET.get('is_free')  # Returns 'true' or 'false' as a string
 
+
         now = make_aware(datetime.now())
 
         # Annotate queryset with a combined datetime field
@@ -247,10 +248,11 @@ def events_filter(request):
                     queryset = queryset.exclude(event_time__gte=time(12, 0, 0), event_time__lt=time(18, 59, 59))
 
         # Applying price filter (assuming 'price' field exists in your model)
-        if is_free:
-            queryset = queryset.filter(event_price=0)
-        else:
-            queryset = queryset.exclude(event_price=0)
+        if is_free is not None:
+            if is_free.lower() == 'true':
+                queryset = queryset.filter(event_price=0)
+            else:
+                queryset = queryset.exclude(event_price=0)
 
         # Serializing the data
         serializer = EventSerializer(queryset, many=True)
