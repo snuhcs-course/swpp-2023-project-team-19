@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".main_ui.event_filter.EventFilterActivity"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/home_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Filter result"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"/>
+
+    <ImageButton
+        android:id="@+id/filter_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentRight="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@mipmap/ic_filter_foreground"/>
+
+    <View
+        android:id="@+id/line"
+        android:layout_below="@+id/filter_button"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#7f7f7f"
+        android:layout_marginTop="10dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/no_event_layout"
+        android:visibility="visible"
+        android:layout_below="@+id/line"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/sad_frog1"
+            android:layout_width="173dp"
+            android:layout_height="156dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/ic_sad_frog_foreground" />
+
+        <TextView
+            android:id="@+id/no_events_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/sad_frog1"
+            android:text="No related events :(\n"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/try_other_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/no_events_text"
+            android:text="Try another filters or..."
+            android:textStyle="italic"
+            android:textSize="15sp"/>
+
+        <TextView
+            android:id="@+id/go_home_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/try_other_text"
+            android:layout_marginTop="10dp"
+            android:text="Back to home"
+            android:clickable="true"
+            android:textColor="@color/green1"
+            android:textSize="15sp"/>
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line">
+
+        <LinearLayout
+            android:id="@+id/eventCardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"/>
+
+    </ScrollView>
+
+
+</RelativeLayout>

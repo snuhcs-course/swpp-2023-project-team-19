@@ -8,28 +8,35 @@
     tools:context=".main_ui.home.HomeActivity"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/home_text"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Home"
             android:textSize="34sp"
             android:textStyle="bold"/>
 
         <ImageButton
-            android:id="@+id/search_button"
-            android:layout_width="wrap_content"
+            android:id="@+id/filter_button"
+            android:layout_width="48dp"
             android:layout_height="48dp"
-            android:layout_alignParentEnd="true"
             android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_search_foreground"
-            android:contentDescription="Search" />
+            android:src="@mipmap/ic_filter_foreground"/>
 
-    </RelativeLayout>
+        <ImageButton
+            android:id="@+id/search_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_search_foreground" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/question_text"
