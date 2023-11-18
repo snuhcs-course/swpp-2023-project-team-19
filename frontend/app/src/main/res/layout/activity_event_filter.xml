@@ -59,27 +59,6 @@
             android:text="No related events :(\n"
             android:textSize="15sp"/>
 
-        <TextView
-            android:id="@+id/try_other_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/no_events_text"
-            android:text="Try another filters or..."
-            android:textStyle="italic"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/go_home_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/try_other_text"
-            android:layout_marginTop="10dp"
-            android:text="Back to home"
-            android:clickable="true"
-            android:textColor="@color/green1"
-            android:textSize="15sp"/>
 
     </RelativeLayout>
 

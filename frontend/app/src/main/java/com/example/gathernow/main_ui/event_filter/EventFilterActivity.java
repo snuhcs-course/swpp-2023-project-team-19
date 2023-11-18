@@ -43,12 +43,13 @@ import retrofit2.Response;
 public class EventFilterActivity extends AppCompatActivity {
 
     private EventFilterViewModel eventFilterViewModel;
-    List<String> selectedLanguageChips;
-    List<String> selectedEventTypeChips;
-    List<String> selectedDateChips;
-    List<String> selectedTimeChips;
+    private List<String> selectedLanguageChips;
+    private List<String> selectedEventTypeChips;
+    private List<String> selectedDateChips;
+    private List<String> selectedTimeChips;
     boolean isFreeEvent;
-    String query;
+    private String query;
+    private RelativeLayout no_event_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class EventFilterActivity extends AppCompatActivity {
         View rootView = findViewById(android.R.id.content);
         eventFilterViewModel = new EventFilterViewModel(this);
 
-        RelativeLayout no_event_layout = findViewById(R.id.no_event_layout);
+        no_event_layout = findViewById(R.id.no_event_layout);
 
         setupFilterListener(rootView);
 
@@ -65,21 +66,17 @@ public class EventFilterActivity extends AppCompatActivity {
         Intent intent = getIntent();
         checkFilter(intent);
         query = getQueryString();
-        List<EventDataModel> filtered_event_list = new ArrayList<>();
 
+        eventFilterViewModel.getAlertMessage().observe(this, message -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
+        eventFilterViewModel.getFilteredEvents().observe(this, eventDataModels -> updateFilteredEventsUI(eventDataModels, rootView));
+        eventFilterViewModel.fetchFilteredEvents(query);
+    }
 
-        // TODO: return filter results (put in event card)
-        // filtered_event_list: fetch filtered event list
-        // query: filter lists, send to API
-
-        // if there exist events related with selected filters
-        if(!filtered_event_list.isEmpty()){
+    private void updateFilteredEventsUI(List<EventDataModel> eventDataList, View rootView){
+        if(!eventDataList.isEmpty()){
             no_event_layout.setVisibility(View.GONE);
-            fetchEventsUI(filtered_event_list, rootView);
+            fetchEventsUI(eventDataList, rootView);
             Log.d("FilterActivity", "Show events!");
-        } else { // if there is no related events
-            Log.d("FilterActivity", "No related events :(");
-            updateBlankUI(rootView);
         }
     }
 
@@ -120,23 +117,6 @@ public class EventFilterActivity extends AppCompatActivity {
         });
     }
 
-    // call sad frog
-    private void updateBlankUI(View rootView) {
-        RelativeLayout no_event_layout = rootView.findViewById(R.id.no_event_layout);
-        no_event_layout.setVisibility(View.VISIBLE);
-
-        TextView go_home_text = (TextView) no_event_layout.findViewById(R.id.go_home_text);
-        go_home_text.setPaintFlags(go_home_text.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        go_home_text.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), FragHome.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
     private String getQueryString(){
         StringBuilder query = new StringBuilder();
 
@@ -155,10 +135,6 @@ public class EventFilterActivity extends AppCompatActivity {
         appendParameterList(query, "date", selectedDateChips);
         appendParameterList(query, "time", selectedTimeChips);
 
-        // Remove the trailing "&" if the query is not empty
-        if (query.length() > 0) {
-            query.deleteCharAt(query.length() - 1);
-        }
         Log.d("FilterActivity", "Query: " + query.toString());
         return query.toString();
     }

@@ -18,7 +18,7 @@ public class EventFilterViewModel extends ViewModel {
     private EventRepository eventRepository;
     private Context context;
     private final MutableLiveData<String> alertMessage = new MutableLiveData<>();
-    private final MutableLiveData<List<EventDataModel>> allEvents = new MutableLiveData<>();
+    private final MutableLiveData<List<EventDataModel>> filteredEvents = new MutableLiveData<>();
 
     public EventFilterViewModel(Context context) {
         this.context = context;
@@ -29,31 +29,30 @@ public class EventFilterViewModel extends ViewModel {
         return alertMessage;
     }
 
-    public MutableLiveData<List<EventDataModel>> getAllEvents() {
-        return allEvents;
+    public MutableLiveData<List<EventDataModel>> getFilteredEvents() {
+        return filteredEvents;
     }
 
-    public void fetchAllEvents() {
-        eventRepository.getAllEvents(new CallbackInterface() {
+    public void fetchFilteredEvents(String query) {
+        eventRepository.getFilteredEvents(query, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
-                Log.d("EventFilterViewModel", "Loaded all events successfully");
                 if (result instanceof List<?>) {
                     List<?> resultList = (List<?>) result;
                     if (!resultList.isEmpty() && resultList.get(0) instanceof EventDataModel) {
                         List<EventDataModel> events = (List<EventDataModel>) resultList;
-                        Collections.reverse(events);
-                        allEvents.setValue(events);
+                        filteredEvents.setValue(events);
                     }
                 }
+                Log.d("EventFilterViewModel", "Filtered event found");
             }
 
             @Override
             public void onError(String message) {
                 alertMessage.setValue(message);
+                Log.d("EventFilterViewModel", "Filtered event not found");
             }
         });
     }
-
 
 }
