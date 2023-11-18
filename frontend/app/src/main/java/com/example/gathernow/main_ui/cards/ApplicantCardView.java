@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.main_ui.cards;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -12,8 +12,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.gathernow.R;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
+import com.example.gathernow.api.models.ApplicationDataModel;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -84,9 +86,9 @@ public class ApplicantCardView extends LinearLayout {
                 public void onClick(View view) {
                     // TODO: backend implementation for approving applicant
 
-                    service.acceptStatus(applicationId).enqueue(new Callback<ApplicationData>(){
+                    service.acceptStatus(applicationId).enqueue(new Callback<ApplicationDataModel>(){
                         @Override
-                        public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response){
+                        public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response){
                             if (response.isSuccessful()) {
                                 Log.e("ApplicationFeature", "Application accepted"+ Integer.toString(response.code()));
                             }
@@ -96,7 +98,7 @@ public class ApplicantCardView extends LinearLayout {
                         }
 
                         @Override
-                        public void onFailure(Call<ApplicationData> call, Throwable t) {
+                        public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
                             Log.e("ApplicationFeature", "Application table retrieve error occurred", t);
                         }
                     });
@@ -118,9 +120,9 @@ public class ApplicantCardView extends LinearLayout {
                     parent.removeView(ApplicantCardView.this);
 
                     // Optionally, perform any additional cleanup if needed
-                    service.delete_application(applicationId).enqueue(new Callback<ApplicationData>(){
+                    service.delete_application(applicationId).enqueue(new Callback<ApplicationDataModel>(){
                         @Override
-                        public void onResponse(Call<ApplicationData> call, Response<ApplicationData> response){
+                        public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response){
                             if (response.isSuccessful()) {
                                 Log.e("ApplicationFeature", "Application deleted"+ Integer.toString(response.code()));
                             }
@@ -131,7 +133,7 @@ public class ApplicantCardView extends LinearLayout {
                         }
 
                         @Override
-                        public void onFailure(Call<ApplicationData> call, Throwable t) {
+                        public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
                             Log.e("ApplicationFeature", "Application table retrieve error occurred", t);
                         }
                     });

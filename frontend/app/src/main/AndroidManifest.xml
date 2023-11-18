@@ -21,22 +21,19 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="gb5ymxyg6a" />
         <activity
-            android:name=".main_ui.event_location.LocationSearchActivity"
+            android:name=".main_ui.event_applicant_info.ApplicantsInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".ApplicantsInfoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ApplicationForm"
+            android:name=".main_ui.event_application_form.ApplicationFormActivity"
             android:exported="false" />
         <activity
             android:name=".DeleteSuccessful"
             android:exported="false" />
         <activity
-            android:name=".EventInfo"
+            android:name=".main_ui.event_info.EventInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateSuccessful"
+            android:name=".main_ui.event_creation.CreateSuccessfulActivity"
             android:exported="false" />
         <activity
             android:name=".ApplySuccessful"

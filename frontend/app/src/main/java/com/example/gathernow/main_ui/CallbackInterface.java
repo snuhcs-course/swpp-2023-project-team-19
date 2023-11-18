@@ -1,6 +1,8 @@
 package com.example.gathernow.main_ui;
 
-public interface EventCallback {
-    void onSuccess();
+public interface CallbackInterface {
+
+    <T> void onSuccess(T result);
+
     void onError(String message);
 }

@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.main_ui.event_creation;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class CreateSuccessful extends AppCompatActivity {
+import com.example.gathernow.FragHome;
+import com.example.gathernow.R;
+
+public class CreateSuccessfulActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

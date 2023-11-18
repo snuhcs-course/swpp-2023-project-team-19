@@ -1,8 +1,8 @@
 package com.example.gathernow.api;
 
-import com.example.gathernow.ApplicationData;
-import com.example.gathernow.EventData;
-import com.example.gathernow.UserData;
+import com.example.gathernow.api.models.ApplicationDataModel;
+import com.example.gathernow.api.models.EventDataModel;
+import com.example.gathernow.api.models.UserDataModel;
 
 import java.util.List;
 
@@ -34,7 +34,7 @@ public interface ServiceApi {
 
     // LogIn API
     @POST("/api/login/")
-    Call<CodeMessageResponse> userLogIn(@Body UserData data);
+    Call<CodeMessageResponse> userLogIn(@Body UserDataModel data);
 
     // Event API: add new events
     @Multipart
@@ -59,19 +59,19 @@ public interface ServiceApi {
 
     // Get all events in the database
     @GET("/api/events/")
-    Call<List<EventData>> getALlEvents();
+    Call<List<EventDataModel>> getALlEvents();
 
     // get user info based on user id
     @GET("/api/userinfo/{user_id}/")
-    Call<UserData> getUserInfo(@Path("user_id") int userId);
+    Call<UserDataModel> getUserInfo(@Path("user_id") int userId);
 
     // Get events hosted by user using user id
     @GET("/api/events/by_user/{user_id}/")
-    Call<List<EventData>> getEventsByUser(@Path("user_id") int userId);
+    Call<List<EventDataModel>> getEventsByUser(@Path("user_id") int userId);
 
     // Get events by Event ID API
     @GET("/api/events/by_id/{event_id}/")
-    Call<List<EventData>> getEventByEventId(@Path("event_id") int eventId);
+    Call<List<EventDataModel>> getEventByEventId(@Path("event_id") int eventId);
 
     // Delete event by event id API
     @DELETE("/api/events/by_id/{event_id}/")
@@ -79,28 +79,28 @@ public interface ServiceApi {
 
     // Post new event application to application
     @POST("/api/application/")
-    Call<CodeMessageResponse> apply_event(@Body ApplicationData data);
+    Call<CodeMessageResponse> apply_event(@Body ApplicationDataModel data);
 
     // Check if user has applied ot the event
     @GET("/api/application/check/{user_id}/{event_id}/")
-    Call<ApplicationData> check_if_applied( @Path("user_id") int user_id, @Path("event_id") int event_id);
+    Call<ApplicationDataModel> check_if_applied(@Path("user_id") int user_id, @Path("event_id") int event_id);
 
 
     // Delete application based on application id
     // Applicant is rejected by host and related application will be deleted
     @DELETE("/api/application/one/{application_id}/")
-    Call<ApplicationData> delete_application(@Path("application_id") int application_id);
+    Call<ApplicationDataModel> delete_application(@Path("application_id") int application_id);
 
     // Get applications for an event using event_id
     @GET("/api/application/by_event/{event_id}/")
-    Call<List<ApplicationData>> getEventApplications(@Path("event_id") int event_id);
+    Call<List<ApplicationDataModel>> getEventApplications(@Path("event_id") int event_id);
 
     // Update request_status to 1 when application is accepted
     @PUT("/api/application/accept/{application_id}/")
-    Call<ApplicationData> acceptStatus(@Path("application_id") int application_id);
+    Call<ApplicationDataModel> acceptStatus(@Path("application_id") int application_id);
 
     // get list of events that a user applied for
     @GET("api/application/by_user/{user_id}/")
-    Call<List<ApplicationData>> getUserAppliedEvents(@Path("user_id") int user_id);
+    Call<List<ApplicationDataModel>> getUserAppliedEvents(@Path("user_id") int user_id);
 
 }

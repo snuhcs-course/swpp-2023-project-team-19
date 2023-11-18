@@ -3,7 +3,7 @@ package com.example.gathernow.authenticate.login;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.gathernow.UserData;
+import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
@@ -25,7 +25,7 @@ public class LogInDataSource {
 
     public void logIn(String email, String password, AuthCallback callback) {
         service = RetrofitClient.getClient().create(ServiceApi.class);
-        UserData requestData = new UserData(email, password);
+        UserDataModel requestData = new UserDataModel(email, password);
         service.userLogIn(requestData).enqueue(new Callback<CodeMessageResponse>() {
             @Override
             public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {

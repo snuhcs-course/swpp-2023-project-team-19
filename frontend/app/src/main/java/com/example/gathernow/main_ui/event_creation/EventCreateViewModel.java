@@ -9,7 +9,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.gathernow.main_ui.EventCallback;
+import com.example.gathernow.main_ui.CallbackInterface;
+import com.example.gathernow.main_ui.EventRepository;
 import com.example.gathernow.utils.ImageHelper;
 
 import java.util.Arrays;
@@ -223,10 +224,10 @@ public class EventCreateViewModel extends ViewModel {
         if (!areEventCreationInputsValid(type, name, description, languages, date, time, duration, location, maxParticipants, price, lastRegisterDate, lastRegisterTime)) {
             return;
         }
-        eventRepository.createEvent(thumbnailFilePath, creator, type, name, description, date, time, duration, location, languages, maxParticipants, price, lastRegisterDate, lastRegisterTime, new EventCallback() {
+        eventRepository.createEvent(thumbnailFilePath, creator, type, name, description, date, time, duration, location, languages, maxParticipants, price, lastRegisterDate, lastRegisterTime, new CallbackInterface() {
             @Override
-            public void onSuccess() {
-                alertMessage.postValue("Event created successfully");
+            public void onSuccess(Object result) {
+                alertMessage.postValue(result.toString());
             }
 
             @Override

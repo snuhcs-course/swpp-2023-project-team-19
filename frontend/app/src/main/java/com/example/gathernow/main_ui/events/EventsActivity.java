@@ -1,4 +1,4 @@
-package com.example.gathernow;
+package com.example.gathernow.main_ui.events;
 
 import android.content.Context;
 import android.content.Intent;
@@ -17,12 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.gathernow.FragHome;
+import com.example.gathernow.R;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
-import com.squareup.picasso.Picasso;
+import com.example.gathernow.api.models.ApplicationDataModel;
+import com.example.gathernow.api.models.EventDataModel;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +33,10 @@ import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link EventHome#newInstance} factory method to
+ * Use the {@link EventsActivity#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class EventHome extends Fragment {
+public class EventsActivity extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -50,9 +51,9 @@ public class EventHome extends Fragment {
 
     private ServiceApi service2;
 
-    private List<EventData> eventDataList = new ArrayList<EventData>();
+    private List<EventDataModel> eventDataModelList = new ArrayList<EventDataModel>();
 
-    public EventHome() {
+    public EventsActivity() {
         // Required empty public constructor
     }
 
@@ -70,8 +71,8 @@ public class EventHome extends Fragment {
      * @return A new instance of fragment eventHome.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventHome newInstance(String param1, String param2) {
-        EventHome fragment = new EventHome();
+    public static EventsActivity newInstance(String param1, String param2) {
+        EventsActivity fragment = new EventsActivity();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -92,7 +93,7 @@ public class EventHome extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_event_home, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
 
         LinearLayout layoutOne = rootView.findViewById(R.id.layout_one);
         LinearLayout layoutTwo = rootView.findViewById(R.id.layout_two);
@@ -112,12 +113,12 @@ public class EventHome extends Fragment {
 
         Integer userId = Integer.valueOf(getUserId(getActivity()));
 
-        service.getUserAppliedEvents(userId).enqueue(new Callback<List<ApplicationData>>(){
+        service.getUserAppliedEvents(userId).enqueue(new Callback<List<ApplicationDataModel>>(){
             @Override
-            public void onResponse(Call<List<ApplicationData>> call, Response<List<ApplicationData>> response){
+            public void onResponse(Call<List<ApplicationDataModel>> call, Response<List<ApplicationDataModel>> response){
                 if (response.isSuccessful()) {
                     // User has applied events, show using Event Card
-                    List<ApplicationData> events_list = response.body();
+                    List<ApplicationDataModel> events_list = response.body();
 
                     if (response.body() != null && !events_list.isEmpty()){
 
@@ -130,13 +131,13 @@ public class EventHome extends Fragment {
                         TextView pending_event = (TextView) layoutTwoSub.findViewById(R.id.pending_text);
                         TextView no_events_text = (TextView) no_events_layout.findViewById(R.id.no_events_text);
 
-                        List<ApplicationData> confirmed_event_list = new ArrayList<>();
-                        List<ApplicationData> pending_event_list = new ArrayList<>();
+                        List<ApplicationDataModel> confirmed_event_list = new ArrayList<>();
+                        List<ApplicationDataModel> pending_event_list = new ArrayList<>();
 
                         for(int i = 0; i < events_list.size(); i++){
-                            ApplicationData appliedEvent = events_list.get(i);
+                            ApplicationDataModel appliedEvent = events_list.get(i);
                             // check appliedEvent status here
-                            int status = appliedEvent.request_status;
+                            int status = appliedEvent.getRequestStatus();
                             if(status == 0){ // pending events
                                 pending_event_list.add(appliedEvent);
                             }else if(status == 1){ // confirmed events
@@ -158,8 +159,8 @@ public class EventHome extends Fragment {
                             layoutTwo.setVisibility(View.VISIBLE);
                             no_events_layout.setVisibility(View.GONE);
                             for(int i = 0; i < confirmed_event_list.size(); i++) {
-                                ApplicationData appliedEvent = confirmed_event_list.get(i);
-                                findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
+                                ApplicationDataModel appliedEvent = confirmed_event_list.get(i);
+                                findEventByEventId(appliedEvent.getEventId(), eventCardContainer, service);
                             }
                         }
                         confirmed_event.setOnClickListener(new View.OnClickListener() {
@@ -182,8 +183,8 @@ public class EventHome extends Fragment {
                                     no_events_layout.setVisibility(View.GONE);
                                     eventCardContainer.removeAllViews();
                                     for(int i = 0; i < confirmed_event_list.size(); i++) {
-                                        ApplicationData appliedEvent = confirmed_event_list.get(i);
-                                        findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
+                                        ApplicationDataModel appliedEvent = confirmed_event_list.get(i);
+                                        findEventByEventId(appliedEvent.getEventId(), eventCardContainer, service);
                                     }
                                 }
                             }
@@ -209,8 +210,8 @@ public class EventHome extends Fragment {
                                     no_events_layout.setVisibility(View.GONE);
                                     eventCardContainer.removeAllViews();
                                     for(int i = 0; i < pending_event_list.size(); i++) {
-                                        ApplicationData appliedEvent = pending_event_list.get(i);
-                                        findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
+                                        ApplicationDataModel appliedEvent = pending_event_list.get(i);
+                                        findEventByEventId(appliedEvent.getEventId(), eventCardContainer, service);
                                     }
                                 }
                             }
@@ -261,7 +262,7 @@ public class EventHome extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<ApplicationData>>  call, Throwable t) {
+            public void onFailure(Call<List<ApplicationDataModel>>  call, Throwable t) {
                 Log.e("UserAppliedEventDisplay", "Error occurred", t);
             }
 
@@ -275,49 +276,49 @@ public class EventHome extends Fragment {
 
     public void findEventByEventId(int eventId, LinearLayout eventCardContainer, ServiceApi service2){
 
-
-        service2.getEventByEventId(eventId).enqueue(new Callback<List<EventData>>() {
-            @Override
-            public void onResponse(Call<List<EventData>> call, Response<List<EventData>> response) {
-                if (response.isSuccessful()) {
-                    List<EventData> events_list = response.body();
-                    EventData currentEvent = events_list.get(0); // Get the first event as the list only contains one event
-
-
-                    EventCardView newEventCard = new EventCardView(getContext(), null);
-                    newEventCard.setEventName(currentEvent.event_title);
-                    newEventCard.setEventPhoto(currentEvent.event_type, currentEvent.event_images);
-                    newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
-                    newEventCard.setEventLocation(currentEvent.event_location);
-                    newEventCard.setEventLanguage(currentEvent.event_language);
-                    newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
-
-                    // Add vertical padding to the newEventCard
-                    int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
-                    newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
-                    eventCardContainer.addView(newEventCard);
-
-                    newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            // Handle the click event here
-                            //Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
-                            // Send the user id to the EventInfo activity
-                            Intent intent = new Intent(v.getContext(), EventInfo.class);
-                            intent.putExtra("userId", getUserId(v.getContext()));
-                            intent.putExtra("eventId", currentEvent.event_id);
-                            startActivity(intent);
-                        }
-                    });
-
-
-                }
-            }
-            @Override
-            public void onFailure(Call<List<EventData>> call, Throwable t) {
-                Log.d("EventInfo Testing", "Failed to get event info");
-            }
-        });
+//
+//        service2.getEventByEventId(eventId).enqueue(new Callback<List<EventDataModel>>() {
+//            @Override
+//            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response) {
+//                if (response.isSuccessful()) {
+//                    List<EventDataModel> events_list = response.body();
+//                    EventDataModel currentEvent = events_list.get(0); // Get the first event as the list only contains one event
+//
+//
+//                    EventCardView newEventCard = new EventCardView(getContext(), null);
+//                    newEventCard.setEventName(currentEvent.event_title);
+//                    newEventCard.setEventPhoto(currentEvent.event_type, currentEvent.event_images);
+//                    newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
+//                    newEventCard.setEventLocation(currentEvent.event_location);
+//                    newEventCard.setEventLanguage(currentEvent.event_language);
+//                    newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
+//
+//                    // Add vertical padding to the newEventCard
+//                    int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
+//                    newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
+//                    eventCardContainer.addView(newEventCard);
+//
+//                    newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            // Handle the click event here
+//                            //Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
+//                            // Send the user id to the EventInfo activity
+//                            Intent intent = new Intent(v.getContext(), EventInfoActivity.class);
+//                            intent.putExtra("userId", getUserId(v.getContext()));
+//                            intent.putExtra("eventId", currentEvent.event_id);
+//                            startActivity(intent);
+//                        }
+//                    });
+//
+//
+//                }
+//            }
+//            @Override
+//            public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
+//                Log.d("EventInfo Testing", "Failed to get event info");
+//            }
+//        });
     }
 
 
