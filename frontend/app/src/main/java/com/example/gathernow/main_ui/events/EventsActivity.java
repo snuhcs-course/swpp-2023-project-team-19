@@ -13,9 +13,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
@@ -23,6 +26,9 @@ import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;
 import com.example.gathernow.api.models.EventDataModel;
+import com.example.gathernow.authenticate.UserLocalDataSource;
+import com.example.gathernow.main_ui.profile.ProfileViewModel;
+import com.example.gathernow.utils.EventCardHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +55,12 @@ public class EventsActivity extends Fragment {
 
     private ServiceApi service;
 
-    private ServiceApi service2;
+    private LinearLayout layoutOne, layoutTwo, layoutTwoSub, eventCardContainer;
+    private RelativeLayout loadingLayout, noEventsLayout;
+    private TextView confirmedEventsText, pendingEventsText, noEventsText;
+    private ImageView sadFrog;
+    private int userId;
+    private EventsViewModel eventsViewModel;
 
     private List<EventDataModel> eventDataModelList = new ArrayList<EventDataModel>();
 
@@ -57,10 +68,6 @@ public class EventsActivity extends Fragment {
         // Required empty public constructor
     }
 
-    private String getUserId(Context context) {
-        SharedPreferences sharedPreferences = context.getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
-        return sharedPreferences.getString("user_id", null); // Return null if the user_id doesn't exist
-    }
 
     /**
      * Use this factory method to create a new instance of
@@ -87,240 +94,199 @@ public class EventsActivity extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        eventsViewModel = new EventsViewModel(getContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_event_search, container, false);
+        //get current login user id
+        UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
+        userId = Integer.valueOf(userLocalDataSource.getUserId());
 
-        LinearLayout layoutOne = rootView.findViewById(R.id.layout_one);
-        LinearLayout layoutTwo = rootView.findViewById(R.id.layout_two);
-        RelativeLayout loading_layout = rootView.findViewById(R.id.loading_layout);
-        RelativeLayout no_events_layout = rootView.findViewById(R.id.no_event_layout);
+        initializeUI(rootView);
+        Log.e("EventsActivity", "Initialized UI");
 
-        layoutOne.setVisibility(View.GONE);
-        layoutTwo.setVisibility(View.GONE);
-        no_events_layout.setVisibility(View.GONE);
-        loading_layout.setVisibility(View.VISIBLE);
+        eventsViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show());
+        eventsViewModel.getAllEvents().observe(getViewLifecycleOwner(), applicationDataModels -> fetchAllEventsUI(applicationDataModels, rootView));
+        Log.e("EventsActivity", "getAllEvents() called");
 
-        service = RetrofitClient.getClient().create(ServiceApi.class);
+        eventsViewModel.getConfirmedEvents().observe(getViewLifecycleOwner(), eventDataModels -> fetchConfirmedEventsUI(eventDataModels, rootView));
+        Log.e("EventsActivity", "getConfirmedEvents() called");
 
+        eventsViewModel.getPendingEvents().observe(getViewLifecycleOwner(), eventDataModels -> fetchPendingEventsUI(eventDataModels, rootView));
+        Log.e("EventsActivity", "getPendingEvents() called");
 
+        eventsViewModel.fetchUserAppliedEvents();
+        Log.e("EventsActivity", "fetchUserAppliedEvents() called");
 
-        // TODO: check condition here, whether the user has any registered event
-
-        Integer userId = Integer.valueOf(getUserId(getActivity()));
-
-        service.getUserAppliedEvents(userId).enqueue(new Callback<List<ApplicationDataModel>>(){
-            @Override
-            public void onResponse(Call<List<ApplicationDataModel>> call, Response<List<ApplicationDataModel>> response){
-                if (response.isSuccessful()) {
-                    // User has applied events, show using Event Card
-                    List<ApplicationDataModel> events_list = response.body();
-
-                    if (response.body() != null && !events_list.isEmpty()){
-
-                        Log.e("UserAppliedEventDisplay", "Event list is null.");
-                        no_events_layout.setVisibility(View.GONE);
-
-                        LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-                        LinearLayout layoutTwoSub = layoutTwo.findViewById(R.id.layout_two_sub);
-                        TextView confirmed_event = (TextView) layoutTwoSub.findViewById(R.id.confirmed_text);
-                        TextView pending_event = (TextView) layoutTwoSub.findViewById(R.id.pending_text);
-                        TextView no_events_text = (TextView) no_events_layout.findViewById(R.id.no_events_text);
-
-                        List<ApplicationDataModel> confirmed_event_list = new ArrayList<>();
-                        List<ApplicationDataModel> pending_event_list = new ArrayList<>();
-
-                        for(int i = 0; i < events_list.size(); i++){
-                            ApplicationDataModel appliedEvent = events_list.get(i);
-                            // check appliedEvent status here
-                            int status = appliedEvent.getRequestStatus();
-                            if(status == 0){ // pending events
-                                pending_event_list.add(appliedEvent);
-                            }else if(status == 1){ // confirmed events
-                                confirmed_event_list.add(appliedEvent);
-                            }
-                            //findEventByEventId(appliedEvent.event_id, eventCardContainer, service);
-                        }
-
-                        // by default, confirmed tab is displayed
-                        if(confirmed_event_list.isEmpty()){ // no confirmed event
-                            loading_layout.setVisibility(View.GONE);
-                            layoutOne.setVisibility(View.GONE);
-                            layoutTwo.setVisibility(View.VISIBLE);
-                            no_events_layout.setVisibility(View.VISIBLE);
-                            no_events_text.setText("No confirmed events :(");
-                        }else{
-                            loading_layout.setVisibility(View.GONE);
-                            layoutOne.setVisibility(View.GONE);
-                            layoutTwo.setVisibility(View.VISIBLE);
-                            no_events_layout.setVisibility(View.GONE);
-                            for(int i = 0; i < confirmed_event_list.size(); i++) {
-                                ApplicationDataModel appliedEvent = confirmed_event_list.get(i);
-                                findEventByEventId(appliedEvent.getEventId(), eventCardContainer, service);
-                            }
-                        }
-                        confirmed_event.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                confirmed_event.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                                pending_event.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-
-                                if(confirmed_event_list.isEmpty()){ // no confirmed event
-                                    loading_layout.setVisibility(View.GONE);
-                                    layoutOne.setVisibility(View.GONE);
-                                    layoutTwo.setVisibility(View.VISIBLE);
-                                    no_events_layout.setVisibility(View.VISIBLE);
-                                    eventCardContainer.removeAllViews();
-                                    no_events_text.setText("No confirmed events :(");
-                                }else{
-                                    loading_layout.setVisibility(View.GONE);
-                                    layoutOne.setVisibility(View.GONE);
-                                    layoutTwo.setVisibility(View.VISIBLE);
-                                    no_events_layout.setVisibility(View.GONE);
-                                    eventCardContainer.removeAllViews();
-                                    for(int i = 0; i < confirmed_event_list.size(); i++) {
-                                        ApplicationDataModel appliedEvent = confirmed_event_list.get(i);
-                                        findEventByEventId(appliedEvent.getEventId(), eventCardContainer, service);
-                                    }
-                                }
-                            }
-                        });
-
-                        pending_event.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                pending_event.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-                                confirmed_event.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
-
-                                if(pending_event_list.isEmpty()){ // no pending event
-                                    loading_layout.setVisibility(View.GONE);
-                                    layoutOne.setVisibility(View.GONE);
-                                    layoutTwo.setVisibility(View.VISIBLE);
-                                    no_events_layout.setVisibility(View.VISIBLE);
-                                    eventCardContainer.removeAllViews();
-                                    no_events_text.setText("No pending events :(");
-                                }else{
-                                    loading_layout.setVisibility(View.GONE);
-                                    layoutOne.setVisibility(View.GONE);
-                                    layoutTwo.setVisibility(View.VISIBLE);
-                                    no_events_layout.setVisibility(View.GONE);
-                                    eventCardContainer.removeAllViews();
-                                    for(int i = 0; i < pending_event_list.size(); i++) {
-                                        ApplicationDataModel appliedEvent = pending_event_list.get(i);
-                                        findEventByEventId(appliedEvent.getEventId(), eventCardContainer, service);
-                                    }
-                                }
-                            }
-                        });
-
-                        //loading_layout.setVisibility(View.GONE);
-                        //layoutOne.setVisibility(View.GONE);
-                        //layoutTwo.setVisibility(View.VISIBLE);
-
-                    }
-                    else{
-                        // No events applied, display sad frog
-                        Log.e("UserAppliedEventDisplay", "Event list is null.");
-                        loading_layout.setVisibility(View.GONE);
-                        layoutOne.setVisibility(View.VISIBLE);
-                        layoutTwo.setVisibility(View.GONE);
-                        no_events_layout.setVisibility(View.GONE);
-
-                        TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
-                        discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-                        discover_new.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                Intent intent = new Intent(v.getContext(), FragHome.class);
-                                startActivity(intent);
-                            }
-                        });
-                    }
-                }
-                else{
-                    // No events applied, display sad frog
-
-                    Log.e("UserAppliedEventDisplay", "Response not successful.");
-                    loading_layout.setVisibility(View.GONE);
-                    layoutOne.setVisibility(View.VISIBLE);
-                    layoutTwo.setVisibility(View.GONE);
-
-                    TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
-                    discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-                    discover_new.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(v.getContext(), FragHome.class);
-                            startActivity(intent);
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<ApplicationDataModel>>  call, Throwable t) {
-                Log.e("UserAppliedEventDisplay", "Error occurred", t);
-            }
-
-        });
 
 
         return rootView;
     }
 
+    private void fetchAllEventsUI(List<ApplicationDataModel>applicationDataModels, View rootView) {
+        if (applicationDataModels == null || applicationDataModels.isEmpty()) {
+            Log.e("EventsActivity", "Event data is null or empty");
+        } else {
+            Log.e("EventsActivity", "Loaded all events");
 
-
-    public void findEventByEventId(int eventId, LinearLayout eventCardContainer, ServiceApi service2){
-
-//
-//        service2.getEventByEventId(eventId).enqueue(new Callback<List<EventDataModel>>() {
-//            @Override
-//            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response) {
-//                if (response.isSuccessful()) {
-//                    List<EventDataModel> events_list = response.body();
-//                    EventDataModel currentEvent = events_list.get(0); // Get the first event as the list only contains one event
-//
-//
-//                    EventCardView newEventCard = new EventCardView(getContext(), null);
-//                    newEventCard.setEventName(currentEvent.event_title);
-//                    newEventCard.setEventPhoto(currentEvent.event_type, currentEvent.event_images);
-//                    newEventCard.setEventCapacity(currentEvent.event_num_joined, currentEvent.event_num_participants);
-//                    newEventCard.setEventLocation(currentEvent.event_location);
-//                    newEventCard.setEventLanguage(currentEvent.event_language);
-//                    newEventCard.setEventDateTime(Date.valueOf(currentEvent.event_date), Time.valueOf(currentEvent.event_time));
-//
-//                    // Add vertical padding to the newEventCard
-//                    int verticalPadding = (int) (10 * getResources().getDisplayMetrics().density); // 16dp converted to pixels
-//                    newEventCard.setPadding(newEventCard.getPaddingLeft(), verticalPadding, newEventCard.getPaddingRight(), verticalPadding);
-//                    eventCardContainer.addView(newEventCard);
-//
-//                    newEventCard.setOnEventCardClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View v) {
-//                            // Handle the click event here
-//                            //Toast.makeText(v.getContext(), "Event card clicked!", Toast.LENGTH_SHORT).show();
-//                            // Send the user id to the EventInfo activity
-//                            Intent intent = new Intent(v.getContext(), EventInfoActivity.class);
-//                            intent.putExtra("userId", getUserId(v.getContext()));
-//                            intent.putExtra("eventId", currentEvent.event_id);
-//                            startActivity(intent);
-//                        }
-//                    });
-//
-//
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
-//                Log.d("EventInfo Testing", "Failed to get event info");
-//            }
-//        });
+        }
     }
 
+    // initialize UI
+    private void initializeUI(View rootView) {
+        layoutOne = rootView.findViewById(R.id.layout_one);
+        layoutTwo = rootView.findViewById(R.id.layout_two);
+        loadingLayout = rootView.findViewById(R.id.loading_layout);
+        noEventsLayout = rootView.findViewById(R.id.no_event_layout);
+        layoutTwoSub = layoutTwo.findViewById(R.id.layout_two_sub);
+        confirmedEventsText = layoutTwoSub.findViewById(R.id.confirmed_text);
+        pendingEventsText = layoutTwoSub.findViewById(R.id.pending_text);
+        noEventsText = noEventsLayout.findViewById(R.id.no_events_text);
+        sadFrog = noEventsLayout.findViewById(R.id.sad_frog1);
 
+        eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
 
+        layoutOne.setVisibility(View.GONE);
+        layoutTwo.setVisibility(View.GONE);
+
+        noEventsLayout.setVisibility(View.GONE);
+        loadingLayout.setVisibility(View.VISIBLE);
+    }
+
+    private void fetchPendingEventsUI(List<EventDataModel> eventDataList, View rootView) {
+
+        //empty constructor
+        Log.e("EventsActivity", "Events pending called");
+        checkIfListsAreEmpty(rootView);
+    }
+
+    public void fetchConfirmedEventsUI(List<EventDataModel> eventDataList, View rootView) {
+
+        Log.e("EventsActivity", "Events confirmed called");
+
+        checkIfListsAreEmpty(rootView);
+
+    }
+
+    public void checkIfListsAreEmpty(View rootView) {
+
+        List<EventDataModel> pendingEvents = eventsViewModel.getPendingEvents().getValue();
+        List<EventDataModel> confirmedEvents = eventsViewModel.getConfirmedEvents().getValue();
+
+        if ((pendingEvents == null || pendingEvents.isEmpty()) &&
+                (confirmedEvents == null || confirmedEvents.isEmpty())) {
+            Log.e("EventsActivity", "No events applied by user");
+            // Both lists are empty, not events applied by user
+            // Update sad frog blank UI
+            updateBlankUI();
+
+        } else {
+            // At least one list has events
+            // Update your UI to display the events
+            Log.e("EventsActivity", "Got pending or confirmed events applied by user");
+            eventCardContainer.removeAllViews();
+            updateConfirmedEventsUI(rootView, confirmedEvents, userId);
+            setupConfirmedEventListener(rootView, confirmedEvents, userId);
+            setupPendingEventListener(rootView, pendingEvents, userId);
+
+        }
+    }
+
+    private void updateBlankUI() {
+        loadingLayout.setVisibility(View.GONE);
+        layoutOne.setVisibility(View.VISIBLE);
+        layoutTwo.setVisibility(View.GONE);
+        noEventsLayout.setVisibility(View.GONE);
+
+        TextView discover_new = (TextView) layoutOne.findViewById(R.id.discover_new);
+        discover_new.setPaintFlags(discover_new.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        discover_new.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), FragHome.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void updateConfirmedEventsUI(View rootView, List<EventDataModel> confirmedEvents, int userId) {
+        loadingLayout.setVisibility(View.GONE);
+        layoutOne.setVisibility(View.GONE);
+
+        confirmedEventsText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        pendingEventsText.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+
+        eventCardContainer.removeAllViews();
+
+        if (confirmedEvents == null || confirmedEvents.isEmpty()) {
+            // no confirmed event
+            layoutTwo.setVisibility(View.VISIBLE);
+            noEventsLayout.setVisibility(View.VISIBLE);
+            noEventsText.setText("No confirmed events :(");
+            noEventsText.setVisibility(View.VISIBLE);
+            sadFrog.setVisibility(View.VISIBLE);
+        } else {
+            layoutTwo.setVisibility(View.VISIBLE);
+            noEventsLayout.setVisibility(View.GONE);
+            noEventsText.setVisibility(View.GONE);
+            sadFrog.setVisibility(View.GONE);
+
+            EventCardHelper.createEventCardList(getContext(), confirmedEvents, eventCardContainer, userId);
+            Log.e("EventsActivity", "Event card made in updateConfirmedEventsUI");
+        }
+    }
+
+    private void updatePendingEventsUI(View rootView, List<EventDataModel> pendingEvents, int userId) {
+        pendingEventsText.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        confirmedEventsText.setTypeface(Typeface.defaultFromStyle(Typeface.NORMAL));
+
+        eventCardContainer.removeAllViews();
+        layoutOne.setVisibility(View.GONE);
+        layoutTwo.setVisibility(View.VISIBLE);
+
+        if (pendingEvents == null || pendingEvents.isEmpty()) { // no pending event
+            loadingLayout.setVisibility(View.GONE);
+            noEventsLayout.setVisibility(View.VISIBLE);
+            noEventsText.setText("No pending events :(");
+            noEventsText.setVisibility(View.VISIBLE);
+            sadFrog.setVisibility(View.VISIBLE);
+        } else {
+            loadingLayout.setVisibility(View.GONE);
+            noEventsText.setVisibility(View.GONE);
+            sadFrog.setVisibility(View.GONE);
+            EventCardHelper.createEventCardList(getContext(), pendingEvents, eventCardContainer, userId);
+        }
+    }
+
+    private void setupConfirmedEventListener(View rootView, List<EventDataModel> confirmedEvents, int userId) {
+        confirmedEventsText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Your onClick logic here
+                updateConfirmedEventsUI(rootView, confirmedEvents, userId);
+
+            }
+        });
+    }
+
+    private void setupPendingEventListener(View rootView, List<EventDataModel> pendingEvents, int userId) {
+        pendingEventsText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Your onClick logic here
+                updatePendingEventsUI(rootView, pendingEvents, userId);
+
+            }
+        });
+    }
 }
+
+
+
+
+

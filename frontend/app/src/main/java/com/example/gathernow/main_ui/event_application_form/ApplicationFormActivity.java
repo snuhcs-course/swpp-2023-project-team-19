@@ -16,6 +16,7 @@ import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;
+import com.example.gathernow.api.models.ApplicationDataModelBuilder;
 import com.example.gathernow.api.models.UserDataModel;
 import com.squareup.picasso.Picasso;
 
@@ -24,8 +25,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ApplicationFormActivity extends AppCompatActivity {
-
-    private ServiceApi service;
     private int userId;
     private int eventId;
     private int hostId;
@@ -41,8 +40,6 @@ public class ApplicationFormActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_form);
-
-        service = RetrofitClient.getClient().create(ServiceApi.class);
 
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
@@ -78,7 +75,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         });
     }
 
-    private void getEventInfo(){
+    private void getEventInfo() {
         TextView eventTitle = findViewById(R.id.subtitle_text);
         eventTitle.setText(eventName);
 
@@ -91,10 +88,10 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
     }
 
-    public void onSendApplicationEvent(View v){
+    public void onSendApplicationEvent(View v) {
         Integer applicant_id = userId;
         Integer event_id = eventId;
-        Integer host_id =  hostId;
+        Integer host_id = hostId;
         String applicant_name = username;
 
         TextView applicant_contact_input = findViewById(R.id.applicant_contact);
@@ -103,41 +100,20 @@ public class ApplicationFormActivity extends AppCompatActivity {
         TextView applicant_message_input = findViewById(R.id.applicant_message);
         String applicant_message = applicant_message_input.getText().toString();
 
-        ApplicationDataModel newApplication = new ApplicationDataModel(applicant_contact, applicant_message, applicant_id, event_id, host_id, applicant_name, userAvatar);
+        ApplicationDataModelBuilder applicationBuilder = new ApplicationDataModelBuilder();
+        applicationBuilder.setApplicantContact(applicant_contact)
+                .setApplicantId(applicant_id)
+                .setMessage(applicant_message)
+                .setEventId(event_id)
+                .setHostId(host_id)
+                .setApplicantName(applicant_name)
+                .setApplicantAvatar(userAvatar);
+
+        ApplicationDataModel newApplication = applicationBuilder.build();
+//        ApplicationDataModel newApplication = new ApplicationDataModel(applicant_contact, applicant_message, applicant_id, event_id, host_id, applicant_name, userAvatar);
         applicationFormViewModel.applyEvent(newApplication);
-//        service.apply_event(new_application).enqueue(new Callback<CodeMessageResponse>() {
-//            @Override
-//            public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
-//                if (response.isSuccessful()) {
-//                    CodeMessageResponse result = response.body();
-//                    if (result != null) {
-//                        if (response.code() == 201) {
-//
-//                            //Toast.makeText(EventCreate.this, "Event created successfully.", Toast.LENGTH_SHORT).show();
-//                            // Link to the createSuccessful page
-//                            Intent intent = new Intent(v.getContext(), ApplySuccessful.class);
-//                            startActivity(intent);
-//                            finish(); // kill this activity
-//                        }
-//                    } else {
-//                        // Handle the case where the response body is null or empty
-//                        Toast.makeText(ApplicationFormActivity.this, "Bad Request.", Toast.LENGTH_SHORT).show();
-//
-//
-//                    }
-//                } else {
-//                    // Handle the case where the response is not successful (e.g., non-2xx HTTP status)
-//                    Toast.makeText(ApplicationFormActivity.this, "Application failed.", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<CodeMessageResponse> call, Throwable t) {
-//                Toast.makeText(ApplicationFormActivity.this, "Application Error", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
     }
-
 
 
 }
