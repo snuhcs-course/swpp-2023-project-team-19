@@ -2,9 +2,11 @@ package com.example.gathernow.main_ui.event_info;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -20,7 +22,15 @@ import com.example.gathernow.R;
 import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.main_ui.EventDataSource;
 import com.example.gathernow.main_ui.EventRepository;
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.overlay.Marker;
 import com.squareup.picasso.Picasso;
+
+import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.MapFragment;
+import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.OnMapReadyCallback;
 
 import java.util.Locale;
 
@@ -37,12 +47,12 @@ public class EventInfoActivity extends AppCompatActivity {
     public int hostId;
     private EventInfoViewModel eventInfoViewModel;
 
+    private NaverMap naverMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
-
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
         userId = intent.getIntExtra("userId", -1);
@@ -138,8 +148,31 @@ public class EventInfoActivity extends AppCompatActivity {
         // query event info from database
         eventInfoViewModel.loadEventInfo(eventId, userId);
 
+        // Naver Map
+        FragmentManager fm = getSupportFragmentManager();
+        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
+        if (mapFragment == null) {
+            mapFragment = MapFragment.newInstance();
+            fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
+        }
+        // Initialize NaverMap
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull NaverMap naverMap) {
+                // For example, set the camera position
+                // Testing with specifed location. Will generalize it latter.
+                CameraPosition cameraPosition = new CameraPosition(
+                        new LatLng(37.4602, 126.9519), // Seoul National University coordinates
+                        15.0 // Zoom level (adjust as needed)
+                );
+                naverMap.setCameraPosition(cameraPosition);
+                Marker marker = new Marker();
+                marker.setPosition(new LatLng(37.4602, 126.9519));
+                marker.setMap(naverMap);
+                marker.setCaptionText("Event location");
+            }
+        });
     }
-
     private void updateHostInfoUI(UserDataModel userDataModel) {
         if (userDataModel == null) {
             Log.d("EventInfo Testing", "User data model is null");
