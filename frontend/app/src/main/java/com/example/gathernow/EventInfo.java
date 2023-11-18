@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,6 +18,7 @@ import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 import com.naver.maps.map.MapFragment;
+import com.naver.maps.map.NaverMapSdk;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -355,4 +357,6 @@ public class EventInfo extends AppCompatActivity {
         intent.putExtra("hostAvatar", userAvatar);
         startActivity(intent);
     }
+
+
 }
