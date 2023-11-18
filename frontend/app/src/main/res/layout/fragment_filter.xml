@@ -309,7 +309,7 @@
                     style="@style/CustomWidget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="~ 12pm"
+                    android:text="Morning"
                     tools:checked="true" />
 
                 <com.google.android.material.chip.Chip
@@ -317,7 +317,7 @@
                     style="@style/CustomWidget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="12pm - 6pm"
+                    android:text="Afternoon"
                     tools:checked="true" />
 
                 <com.google.android.material.chip.Chip
@@ -325,7 +325,7 @@
                     style="@style/CustomWidget.Material3.Chip.Filter"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6pm ~"
+                    android:text="Night"
                     tools:checked="true" />
 
             </com.google.android.material.chip.ChipGroup>

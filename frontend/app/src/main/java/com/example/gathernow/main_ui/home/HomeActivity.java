@@ -94,7 +94,6 @@ public class HomeActivity extends Fragment {
             LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
             EventCardHelper.createEventCardList(getContext(), eventDataList, eventCardContainer, userId);
         }
-
     }
 
     private void setupSearchListener(View rootView) {
