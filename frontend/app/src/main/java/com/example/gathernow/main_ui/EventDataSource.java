@@ -88,10 +88,12 @@ public class EventDataSource {
                     if (result != null) {
                         callback.onSuccess(result.get(0));
                     } else {
-                        callback.onError("Empty response from the server");
+                        callback.onSuccess(null);
+                        //callback.onError("Empty response from the server");
                     }
                 } else {
-                    callback.onError("Event creation failed.");
+                    callback.onSuccess(null);
+                    //callback.onError("Event creation failed.");
                 }
             }
 
@@ -221,6 +223,29 @@ public class EventDataSource {
                 Log.e("EventDisplay", "Error occurred", t);
             }
 
+        });
+    }
+
+    public void getUserAppliedEvents(int userId, CallbackInterface callback) {
+        service.getUserAppliedEvents(userId).enqueue(new Callback<List<ApplicationDataModel>>() {
+            @Override
+            public void onResponse(Call<List<ApplicationDataModel>> call, Response<List<ApplicationDataModel>> response) {
+                if (response.isSuccessful()) {
+                    List<ApplicationDataModel> result = response.body();
+                    if (result != null && !result.isEmpty()) {
+                        callback.onSuccess(result);
+                    } else {
+                        callback.onSuccess(new ArrayList<>());
+                    }
+                } else {
+                    callback.onError("Failed to get user events");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ApplicationDataModel>> call, Throwable t) {
+                callback.onError("Network error");
+            }
         });
     }
 }

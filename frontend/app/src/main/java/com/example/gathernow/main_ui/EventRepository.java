@@ -33,4 +33,8 @@ public class EventRepository {
     public void getAllEvents(CallbackInterface eventCallback) {
         eventDataSource.getAllEvents(eventCallback);
     }
+
+    public void getUserAppliedEvents(int userId, CallbackInterface eventCallback) {
+        eventDataSource.getUserAppliedEvents(userId, eventCallback);
+    }
 }
