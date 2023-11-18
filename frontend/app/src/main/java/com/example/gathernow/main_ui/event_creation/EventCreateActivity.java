@@ -510,8 +510,7 @@ public class EventCreateActivity extends Fragment {
         // Get the location input from the TextView
         String locationInput = eventLocationText.getText().toString();
 
-        // Check if the location input is not empty
-        if (!TextUtils.isEmpty(locationInput)) {
+
             // Create an intent to start MapActivity
             Intent mapIntent = new Intent(requireContext(), MapActivity.class);
 
@@ -523,9 +522,7 @@ public class EventCreateActivity extends Fragment {
 
             // Start MapActivity for result
             startActivityForResult(mapIntent, MAP_ACTIVITY_REQUEST_CODE);
-        } else {
-            Toast.makeText(requireContext(), "Please enter a location", Toast.LENGTH_SHORT).show();
-        }
+
     }
 
     // Handle the result from MapActivity
@@ -534,27 +531,24 @@ public class EventCreateActivity extends Fragment {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == MAP_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
-            // Retrieve the selected location from MapActivity
+            // Retrieve the selected location and locationName from MapActivity
             LatLng selectedLocation = data.getParcelableExtra("selectedLocation");
+            String locationName = data.getStringExtra("locationName");
 
-            // Now you can use the selectedLocation as needed
+            // Now you can use the selectedLocation and locationName as needed
             // For example, update UI or perform any other actions
             // ...
-
-            // Update the eventLocationText with the selected location (optional)
-            eventLocationText.setText(selectedLocation.toString());
+            // Log.d selectedLocation
+            Log.d("EventCreateActivity", "selectedLocation: " + selectedLocation);
+            // Update the eventLocationText with the selected location and locationName (optional)
+            eventLocationText.setText(locationName);
         }
     }
-
     // Define a constant for the request code
     private static final int MAP_ACTIVITY_REQUEST_CODE = 123;
 
     // Replace this method with your actual geocoding logic
     private LatLng getLatLngFromLocationInput(String locationInput) {
-        // Implement your geocoding logic to convert locationInput to LatLng
-        // For example, you can use the NaverGeocoderApi here
-        // ...
-
         // Placeholder coordinates (Seoul, South Korea) - Replace with actual logic
         return new LatLng(37.5665, 126.9780);
     }

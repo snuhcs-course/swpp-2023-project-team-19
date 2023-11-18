@@ -162,12 +162,12 @@ public class EventInfoActivity extends AppCompatActivity {
                 // For example, set the camera position
                 // Testing with specifed location. Will generalize it latter.
                 CameraPosition cameraPosition = new CameraPosition(
-                        new LatLng(37.5665, 126.978),
+                        new LatLng(37.56016357117634, 126.97499430138839),
                         15.0 // Zoom level (adjust as needed)
                 );
                 naverMap.setCameraPosition(cameraPosition);
                 Marker marker = new Marker();
-                marker.setPosition(new LatLng(37.5665, 126.978));
+                marker.setPosition(new LatLng(37.56016357117634, 126.97499430138839));
                 marker.setMap(naverMap);
                 marker.setCaptionText("Event location");
             }
