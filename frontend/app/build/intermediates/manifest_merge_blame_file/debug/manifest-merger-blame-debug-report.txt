@@ -1,0 +1,227 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.gathernow"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="24"
+9        android:targetSdkVersion="33" />
+10
+11    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+11-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:5:5-80
+11-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:5:22-77
+12    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+12-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:6:5-81
+12-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:6:22-78
+13    <uses-permission android:name="android.permission.INTERNET" />
+13-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:7:5-67
+13-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:7:22-64
+14    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+14-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:8:5-79
+14-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:8:22-76
+15
+16    <uses-feature
+16-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:7:5-9:35
+17        android:glEsVersion="0x00020000"
+17-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:8:9-41
+18        android:required="true" />
+18-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:9:9-32
+19    <uses-feature
+19-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:10:5-12:36
+20        android:name="android.hardware.wifi"
+20-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:11:9-45
+21        android:required="false" />
+21-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:12:9-33
+22
+23    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+23-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:15:5-79
+23-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:15:22-76
+24    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+24-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:16:5-76
+24-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:16:22-73
+25
+26    <permission
+26-->[androidx.core:core:1.9.0] /Users/hoduchieu01/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/AndroidManifest.xml:22:5-24:47
+27        android:name="com.example.gathernow.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+27-->[androidx.core:core:1.9.0] /Users/hoduchieu01/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/AndroidManifest.xml:23:9-81
+28        android:protectionLevel="signature" />
+28-->[androidx.core:core:1.9.0] /Users/hoduchieu01/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/AndroidManifest.xml:24:9-44
+29
+30    <uses-permission android:name="com.example.gathernow.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+30-->[androidx.core:core:1.9.0] /Users/hoduchieu01/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/AndroidManifest.xml:26:5-97
+30-->[androidx.core:core:1.9.0] /Users/hoduchieu01/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/AndroidManifest.xml:26:22-94
+31
+32    <application
+32-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:10:5-64:19
+33        android:allowBackup="true"
+33-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:11:9-35
+34        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+34-->[androidx.core:core:1.9.0] /Users/hoduchieu01/.gradle/caches/transforms-3/28a7af075d5af218c19b63a2f54b1523/transformed/core-1.9.0/AndroidManifest.xml:28:18-86
+35        android:dataExtractionRules="@xml/data_extraction_rules"
+35-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:12:9-65
+36        android:debuggable="true"
+37        android:extractNativeLibs="false"
+38        android:fullBackupContent="@xml/backup_rules"
+38-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:13:9-54
+39        android:icon="@mipmap/ic_launcher"
+39-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:14:9-43
+40        android:label="@string/app_name"
+40-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:15:9-41
+41        android:roundIcon="@mipmap/ic_launcher_round"
+41-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:16:9-54
+42        android:supportsRtl="true"
+42-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:17:9-35
+43        android:testOnly="true"
+44        android:theme="@style/Theme.Gathernow"
+44-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:18:9-47
+45        android:usesCleartextTraffic="true" >
+45-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:19:9-44
+46        <meta-data
+46-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:21:9-23:42
+47            android:name="com.naver.maps.map.CLIENT_ID"
+47-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:22:13-56
+48            android:value="gb5ymxyg6a" />
+48-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:23:13-39
+49
+50        <activity
+50-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:24:9-26:40
+51            android:name="com.example.gathernow.main_ui.event_applicant_info.ApplicantsInfoActivity"
+51-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:25:13-80
+52            android:exported="false" />
+52-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:26:13-37
+53        <activity
+53-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:27:9-29:40
+54            android:name="com.example.gathernow.main_ui.event_application_form.ApplicationFormActivity"
+54-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:28:13-83
+55            android:exported="false" />
+55-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:29:13-37
+56        <activity
+56-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:30:9-32:40
+57            android:name="com.example.gathernow.DeleteSuccessful"
+57-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:31:13-45
+58            android:exported="false" />
+58-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:32:13-37
+59        <activity
+59-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:33:9-35:40
+60            android:name="com.example.gathernow.main_ui.event_info.EventInfoActivity"
+60-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:34:13-65
+61            android:exported="false" />
+61-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:35:13-37
+62        <activity
+62-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:36:9-38:40
+63            android:name="com.example.gathernow.main_ui.event_creation.CreateSuccessfulActivity"
+63-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:37:13-76
+64            android:exported="false" />
+64-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:38:13-37
+65        <activity
+65-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:39:9-41:40
+66            android:name="com.example.gathernow.ApplySuccessful"
+66-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:40:13-44
+67            android:exported="false" />
+67-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:41:13-37
+68        <activity
+68-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:42:9-44:40
+69            android:name="com.example.gathernow.authenticate.login.LogInActivity"
+69-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:43:13-61
+70            android:exported="false" />
+70-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:44:13-37
+71        <activity
+71-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:45:9-47:40
+72            android:name="com.example.gathernow.FragHome"
+72-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:46:13-37
+73            android:exported="false" />
+73-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:47:13-37
+74        <activity
+74-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:48:9-50:40
+75            android:name="com.example.gathernow.authenticate.register.SignUpActivity"
+75-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:49:13-65
+76            android:exported="false" />
+76-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:50:13-37
+77        <activity
+77-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:51:9-59:20
+78            android:name="com.example.gathernow.MainActivity"
+78-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:52:13-41
+79            android:exported="true" >
+79-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:53:13-36
+80            <intent-filter>
+80-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:54:13-58:29
+81                <action android:name="android.intent.action.MAIN" />
+81-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:55:17-69
+81-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:55:25-66
+82
+83                <category android:name="android.intent.category.LAUNCHER" />
+83-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:57:17-77
+83-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:57:27-74
+84            </intent-filter>
+85        </activity>
+86        <activity
+86-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:60:9-63:20
+87            android:name="com.example.gathernow.main_ui.event_creation.MapActivity"
+87-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:61:13-63
+88            android:exported="false" >
+88-->/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app/src/main/AndroidManifest.xml:62:13-37
+89        </activity>
+90        <activity
+90-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:19:9-23:51
+91            android:name="com.naver.maps.map.app.LegendActivity"
+91-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:20:13-65
+92            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+92-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:21:13-91
+93            android:label="@string/navermap_legend"
+93-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:22:13-52
+94            android:theme="@style/navermap_app" />
+94-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:23:13-48
+95        <activity
+95-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:24:9-28:51
+96            android:name="com.naver.maps.map.app.LegalNoticeActivity"
+96-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:25:13-70
+97            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+97-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:26:13-91
+98            android:label="@string/navermap_legal_notice"
+98-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:27:13-58
+99            android:theme="@style/navermap_app" />
+99-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:28:13-48
+100        <activity
+100-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:29:9-33:51
+101            android:name="com.naver.maps.map.app.OpenSourceLicenseActivity"
+101-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:30:13-76
+102            android:configChanges="screenSize|smallestScreenSize|screenLayout|orientation"
+102-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:31:13-91
+103            android:label="@string/navermap_open_source_license"
+103-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:32:13-65
+104            android:theme="@style/navermap_app" />
+104-->[com.naver.maps:map-sdk:3.17.0] /Users/hoduchieu01/.gradle/caches/transforms-3/1dfc8c12859edc9a1e1887ba3e123767/transformed/map-sdk-3.17.0/AndroidManifest.xml:33:13-48
+105
+106        <provider
+106-->[com.squareup.picasso:picasso:2.71828] /Users/hoduchieu01/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:8:9-11:40
+107            android:name="com.squareup.picasso.PicassoProvider"
+107-->[com.squareup.picasso:picasso:2.71828] /Users/hoduchieu01/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:9:13-64
+108            android:authorities="com.example.gathernow.com.squareup.picasso"
+108-->[com.squareup.picasso:picasso:2.71828] /Users/hoduchieu01/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:10:13-72
+109            android:exported="false" />
+109-->[com.squareup.picasso:picasso:2.71828] /Users/hoduchieu01/.gradle/caches/transforms-3/a57c75994ad63c5648e46f3550b955ab/transformed/picasso-2.71828/AndroidManifest.xml:11:13-37
+110        <provider
+110-->[androidx.emoji2:emoji2:1.2.0] /Users/hoduchieu01/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:24:9-32:20
+111            android:name="androidx.startup.InitializationProvider"
+111-->[androidx.emoji2:emoji2:1.2.0] /Users/hoduchieu01/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:25:13-67
+112            android:authorities="com.example.gathernow.androidx-startup"
+112-->[androidx.emoji2:emoji2:1.2.0] /Users/hoduchieu01/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:26:13-68
+113            android:exported="false" >
+113-->[androidx.emoji2:emoji2:1.2.0] /Users/hoduchieu01/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:27:13-37
+114            <meta-data
+114-->[androidx.emoji2:emoji2:1.2.0] /Users/hoduchieu01/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:29:13-31:52
+115                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+115-->[androidx.emoji2:emoji2:1.2.0] /Users/hoduchieu01/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:30:17-75
+116                android:value="androidx.startup" />
+116-->[androidx.emoji2:emoji2:1.2.0] /Users/hoduchieu01/.gradle/caches/transforms-3/9ec162b5cb5dad7a953e18733a42dbca/transformed/emoji2-1.2.0/AndroidManifest.xml:31:17-49
+117            <meta-data
+117-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/hoduchieu01/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:31:13-33:52
+118                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+118-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/hoduchieu01/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:32:17-78
+119                android:value="androidx.startup" />
+119-->[androidx.lifecycle:lifecycle-process:2.4.1] /Users/hoduchieu01/.gradle/caches/transforms-3/4eb4b953398cff91e70e367f7f0f5a04/transformed/lifecycle-process-2.4.1/AndroidManifest.xml:33:17-49
+120        </provider>
+121    </application>
+122
+123</manifest>

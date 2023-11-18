@@ -271,6 +271,10 @@ public class EventCreateActivity extends Fragment {
             eventLocation = location;
         });
 
+        // Search Location Button
+        Button searchLocationButton = rootView.findViewById(R.id.search_location_button);
+        searchLocationButton.setOnClickListener(this::onSearchLocationClick);
+
         // Number of participants
         eventNumParticipantsText = rootView.findViewById(R.id.event_num_participants);
         eventNumParticipantsText.addTextChangedListener(new TextWatcher() {
@@ -495,5 +499,17 @@ public class EventCreateActivity extends Fragment {
             eventLastRegisterTime = time;
             eventLastRegisterTimeButton.setText("Time: " + time);
         }
+    }
+
+    // Add this method inside EventCreateActivity class
+    private void onSearchLocationClick(View view) {
+        // TODO: Implement map interaction logic here
+        // For now, let's show a toast message as a placeholder
+        Toast.makeText(requireContext(), "Search Location Clicked", Toast.LENGTH_SHORT).show();
+
+        // TODO: Pass the event location to the MapActivity
+        Intent intent = new Intent(requireContext(), MapActivity.class);
+        intent.putExtra("eventLocation", eventLocation);
+        startActivity(intent);
     }
 }
