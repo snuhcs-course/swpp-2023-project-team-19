@@ -102,7 +102,7 @@ public class EventsActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_event_search, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         //get current login user id
         UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
         userId = Integer.valueOf(userLocalDataSource.getUserId());

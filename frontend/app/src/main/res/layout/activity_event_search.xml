@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:hint="Search..."
+            android:hint="Search by event title..."
             android:inputType="text"
             android:imeOptions="actionDone" />
 
@@ -64,7 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/no_events_text"
-            android:text="Try another keywords / filters or..."
+            android:text="Try another keyword or..."
             android:textStyle="italic"
             android:textSize="15sp"/>
 

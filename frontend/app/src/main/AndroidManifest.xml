@@ -22,6 +22,12 @@
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="gb5ymxyg6a" />
         <activity
+            android:name=".main_ui.event_filter.EventFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main_ui.event_search.EventSearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".main_ui.event_applicant_info.ApplicantsInfoActivity"
             android:exported="false" />
         <activity

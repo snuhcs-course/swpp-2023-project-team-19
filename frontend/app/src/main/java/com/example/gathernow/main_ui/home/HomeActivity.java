@@ -1,19 +1,24 @@
 package com.example.gathernow.main_ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.util.Log;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.gathernow.FilterFragment;
 import com.example.gathernow.R;
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.authenticate.UserLocalDataSource;
+import com.example.gathernow.main_ui.event_search.EventSearchActivity;
 import com.example.gathernow.utils.EventCardHelper;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.List;
 
@@ -70,6 +75,9 @@ public class HomeActivity extends Fragment {
         homeViewModel.getAllEvents().observe(getViewLifecycleOwner(), eventDataModels -> fetchEventsUI(eventDataModels, rootView));
         homeViewModel.fetchAllEvents();
 
+        setupSearchListener(rootView);
+        setupFilterListener(rootView);
+
         return rootView;
     }
 
@@ -89,6 +97,26 @@ public class HomeActivity extends Fragment {
 
     }
 
+    private void setupSearchListener(View rootView) {
+        ImageButton searchButton = rootView.findViewById(R.id.search_button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), EventSearchActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
 
+    private void setupFilterListener(View rootView) {
+        ImageButton filterButton = rootView.findViewById(R.id.filter_button);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BottomSheetDialogFragment bottomSheetDialogFragment = new FilterFragment();
+                bottomSheetDialogFragment.show(getChildFragmentManager(), bottomSheetDialogFragment.getTag());
+            }
+        });
+    }
 
 }
