@@ -1,3 +1,94 @@
 from django.test import TestCase
+import unittest
+import coverage
+
+from django.test import TestCase
+from django.urls import reverse
+from rest_framework import status
+from rest_framework.test import APIRequestFactory, APIClient
+
+from applications.models import Application
+from applications.serializers import ApplicationSerializer
+from applications.views import application, application_detail, user_application, events_application, check_application, accept_application
+from datetime import date
 
 # Create your tests here.
+class ApplicationModelTestCase(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Application.objects.create(event_id=1, host_id=1, applicant_id=1, applicant_name="test", applicant_contact="test_contact", message="test_message", request_status=0)
+    
+    def test_application_id(self):
+        application = Application.objects.get(application_id=1)
+        self.assertEqual(application.application_id, 1)
+        self.assertEqual(application.event_id, 1)
+        self.assertEqual(application.host_id, 1)
+        self.assertEqual(application.applicant_id, 1)
+        self.assertEqual(application.applicant_name, "test")
+        self.assertEqual(application.applicant_contact, "test_contact")
+        self.assertEqual(application.message, "test_message")
+        self.assertEqual(application.request_status, 0)
+
+class UserApplication(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Application.objects.create(event_id=1, host_id=1, applicant_id=1, applicant_name="test", applicant_contact="test_contact", message="test_message", request_status=0)
+
+    def test_user_application(self):
+        factory = APIRequestFactory()
+        request = factory.get('application/by_user/1/')
+        response = user_application(request, 1)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+    def test_user_application_wrong_method(self):
+        factory = APIRequestFactory()
+        request = factory.post('application/by_user/1/')
+        response = user_application(request, 1)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+class EventApplication(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Application.objects.create(event_id=1, host_id=1, applicant_id=1, applicant_name="test", applicant_contact="test_contact", message="test_message", request_status=0)
+
+    def test_event_application(self):
+        factory = APIRequestFactory()
+        request = factory.get('application/by_event/1/')
+        response = events_application(request, 1)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+    def test_event_application_delete(self):
+        factory = APIRequestFactory()
+        request = factory.delete('application/by_event/1/')
+        response = events_application(request, 1)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
+
+    def test_event_application_wrong_method(self):
+        factory = APIRequestFactory()
+        request = factory.post('application/by_event/1/')
+        response = events_application(request, 1)
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
+class CheckApplication(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        Application.objects.create(event_id=1, host_id=1, applicant_id=1, applicant_name="test", applicant_contact="test_contact", message="test_message", request_status=0)
+
+    def test_check_application(self):
+        factory = APIRequestFactory()
+        request = factory.get('application/check/1/1/')
+        response = check_application(request, 1, 1)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
+    def test_application_not_exist(self):
+        factory = APIRequestFactory()
+        request = factory.get('application/check/1/2/')
+        response = check_application(request, 1, 2)
+        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+        self.assertEqual(response.data, {"message": "User has not applied for this event."})
+    
+    def test_check_application_delete(self):
+        factory = APIRequestFactory()
+        request = factory.delete('application/check/1/1/')
+        response = check_application(request, 1, 1)
+        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
