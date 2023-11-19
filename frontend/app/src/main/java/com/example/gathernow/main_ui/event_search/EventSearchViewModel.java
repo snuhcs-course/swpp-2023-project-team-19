@@ -11,6 +11,7 @@ import com.example.gathernow.main_ui.CallbackInterface;
 import com.example.gathernow.main_ui.EventDataSource;
 import com.example.gathernow.main_ui.EventRepository;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,12 +40,15 @@ public class EventSearchViewModel extends ViewModel {
             public <T> void onSuccess(T result) {
                 if (result instanceof List<?>) {
                     List<?> resultList = (List<?>) result;
+                    Log.d("EventSearchedViewModel", result.toString());
                     if (!resultList.isEmpty() && resultList.get(0) instanceof EventDataModel) {
                         List<EventDataModel> events = (List<EventDataModel>) resultList;
                         searchedEvents.setValue(events);
+                    } else {
+                        searchedEvents.setValue(new ArrayList<>());
                     }
                 }
-                Log.d("EventSearchedViewModel", "Searched event found");
+
             }
 
             @Override

@@ -44,23 +44,20 @@ public class EventSearchActivity extends AppCompatActivity {
         eventCardContainer = findViewById(R.id.eventCardContainer);
 
         searchBar = findViewById(R.id.search_bar);
-        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE || (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                    // User pressed "Done" on the keyboard or clicked "Enter"
-                    query = searchBar.getText().toString();
-                    Log.d("EventSearch", "query: " + query);
-                    // Do something with the search text
-                    eventCardContainer.removeAllViews();
-                    eventSearchViewModel.getAlertMessage().observe(EventSearchActivity.this, message -> Toast.makeText(EventSearchActivity.this, message, Toast.LENGTH_SHORT).show());
-                    eventSearchViewModel.getSearchedEvents().observe(EventSearchActivity.this, eventDataModels -> updateSearchedEventsUI(eventDataModels, rootView));
-                    eventSearchViewModel.fetchSearchedEvents(query);
-                    hideKeyboard();
-                    return true; // Consume the event
-                }
-                return false; // Continue processing the event
+        searchBar.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_DONE || (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                // User pressed "Done" on the keyboard or clicked "Enter"
+                query = searchBar.getText().toString();
+                Log.d("EventSearch", "query: " + query);
+                // Do something with the search text
+                eventCardContainer.removeAllViews();
+                eventSearchViewModel.getAlertMessage().observe(EventSearchActivity.this, message -> Toast.makeText(EventSearchActivity.this, message, Toast.LENGTH_SHORT).show());
+                eventSearchViewModel.getSearchedEvents().observe(EventSearchActivity.this, eventDataModels -> updateSearchedEventsUI(eventDataModels, rootView));
+                eventSearchViewModel.fetchSearchedEvents(query);
+                hideKeyboard();
+                return true; // Consume the event
             }
+            return false; // Continue processing the event
         });
 
 
@@ -86,6 +83,10 @@ public class EventSearchActivity extends AppCompatActivity {
             no_event_layout.setVisibility(View.GONE);
             fetchEventsUI(eventDataList, rootView);
             Log.d("SearchedActivity", "fetch event UI done");
+        } else {
+            Log.d("SearchedActivity", "No events!");
+            no_event_layout.setVisibility(View.VISIBLE);
+            eventCardContainer.removeAllViews();
         }
     }
 

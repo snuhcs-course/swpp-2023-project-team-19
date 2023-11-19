@@ -49,6 +49,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#7f7f7f"
+        android:layout_marginTop="5dp"
         android:layout_marginStart="-16dp"
         android:layout_marginEnd="-16dp"/>
 
