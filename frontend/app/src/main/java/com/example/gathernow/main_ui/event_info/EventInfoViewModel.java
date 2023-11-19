@@ -105,6 +105,8 @@ public class EventInfoViewModel extends ViewModel {
                 eventData.postValue(res);
                 loadHostInfo(res.getHostId());
                 setButtonVisibility(userId, res.getHostId(), res.getEventId());
+                Log.d("EventInfoViewModel", "Event longitude: " + res.getEventLongitude() + " Event latitude: " + res.getEventLatitude());
+
             }
 
             @Override

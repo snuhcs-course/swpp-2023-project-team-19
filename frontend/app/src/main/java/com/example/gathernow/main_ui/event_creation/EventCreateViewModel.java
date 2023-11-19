@@ -219,12 +219,12 @@ public class EventCreateViewModel extends ViewModel {
     }
 
 
-    public void createEvent(String thumbnailFilePath, String creator, String type, String name, String description, String date, String time, String duration, String location, String languages, String maxParticipants, String price, String lastRegisterDate, String lastRegisterTime) {
-        Log.d("EventCreateViewModel Testing", "createEvent: " + thumbnailFilePath + " " + creator + " " + type + " " + name + " " + description + " " + date + " " + time + " " + duration + " " + location + " " + languages + " " + maxParticipants + " " + price + " " + lastRegisterDate + " " + lastRegisterTime);
+    public void createEvent(String thumbnailFilePath, String creator, String type, String name, String description, String date, String time, String duration, String location, Double event_longitude, Double event_latitude, String languages, String maxParticipants, String price, String lastRegisterDate, String lastRegisterTime) {
+        Log.d("EventCreateViewModel Testing", "createEvent: " + thumbnailFilePath + " " + creator + " " + type + " " + name + " " + description + " " + date + " " + time + " " + duration + " " + location + " " + event_longitude + " " + event_latitude + " " + languages + " " + maxParticipants + " " + price + " " + lastRegisterDate + " " + lastRegisterTime);
         if (!areEventCreationInputsValid(type, name, description, languages, date, time, duration, location, maxParticipants, price, lastRegisterDate, lastRegisterTime)) {
             return;
         }
-        eventRepository.createEvent(thumbnailFilePath, creator, type, name, description, date, time, duration, location, languages, maxParticipants, price, lastRegisterDate, lastRegisterTime, new CallbackInterface() {
+        eventRepository.createEvent(thumbnailFilePath, creator, type, name, description, date, time, duration, location, event_longitude, event_latitude, languages, maxParticipants, price, lastRegisterDate, lastRegisterTime, new CallbackInterface() {
             @Override
             public void onSuccess(Object result) {
                 alertMessage.postValue(result.toString());

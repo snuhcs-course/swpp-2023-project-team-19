@@ -30,6 +30,12 @@ public class EventDataModel {
     @SerializedName("event_location")
     String event_location;
 
+    @SerializedName("event_longitude")
+    Double event_longitude;
+
+    @SerializedName("event_latitude")
+    Double event_latitude;
+
     @SerializedName("event_description")
     String event_description;
 
@@ -52,7 +58,7 @@ public class EventDataModel {
     String event_images;
 
     // Create event
-    public EventDataModel(String event_type, String event_title, Integer event_num_participants, String event_date, String event_time, String event_duration, String event_language, Integer event_price, String event_location, String event_description, Integer event_num_joined, Integer host_id, String event_register_date, String event_register_time){
+    public EventDataModel(String event_type, String event_title, Integer event_num_participants, String event_date, String event_time, String event_duration, String event_language, Integer event_price, String event_location, Double event_longitude, Double event_latitude, String event_description, Integer event_num_joined, Integer host_id, String event_register_date, String event_register_time){
         this.event_type = event_type;
         this.event_title = event_title;
         this.event_num_participants = event_num_participants;
@@ -62,6 +68,8 @@ public class EventDataModel {
         this.event_language = event_language;
         this.event_price = event_price;
         this.event_location = event_location;
+        this.event_longitude = event_longitude;
+        this.event_latitude = event_latitude;
         this.event_description = event_description;
         this.event_num_joined = event_num_joined;
         this.host_id = host_id;
@@ -70,7 +78,7 @@ public class EventDataModel {
     }
 
     // Query event data
-    public EventDataModel(String event_type, String event_title, Integer event_num_participants, String event_date, String event_time, String event_duration, String event_language, Integer event_price, String event_location, String event_description, Integer event_num_joined, Integer host_id, Integer event_id, String event_register_date, String event_register_time, String event_images){
+    public EventDataModel(String event_type, String event_title, Integer event_num_participants, String event_date, String event_time, String event_duration, String event_language, Integer event_price, String event_location, Double event_longitude, Double event_latitude, String event_description, Integer event_num_joined, Integer host_id, Integer event_id, String event_register_date, String event_register_time, String event_images){
         this.event_id = event_id;
         this.event_type = event_type;
         this.event_title = event_title;
@@ -81,6 +89,7 @@ public class EventDataModel {
         this.event_language = event_language;
         this.event_price = event_price;
         this.event_location = event_location;
+        this.event_longitude = event_longitude;
         this.event_description = event_description;
         this.event_num_joined = event_num_joined;
         this.host_id = host_id;
@@ -153,5 +162,12 @@ public class EventDataModel {
         return event_images;
     }
 
+    public Double getEventLongitude() {
+        return event_longitude;
+    }
+
+    public Double getEventLatitude() {
+        return event_latitude;
+    }
 
 }

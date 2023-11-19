@@ -78,6 +78,10 @@ public class EventCreateActivity extends Fragment {
     private int eventPrice = -1;
     private int eventNumParticipants = -1;
 
+    private double eventLongitude;
+
+    private double eventLatitude;
+
     public EventCreateActivity() {
         // Required empty public constructor
     }
@@ -376,8 +380,8 @@ public class EventCreateActivity extends Fragment {
         String hostId = userLocalDataSource.getUserId();
         Log.d("EventCreateActivity Testing", "hostId: " + hostId);
 
-        eventCreateViewModel.createEvent(eventThumbnailFilePath, hostId, selectedEventType, eventName, eventDescription, eventDate, eventTime, eventDuration, eventLocation, eventLanguages, String.valueOf(eventNumParticipants), String.valueOf(eventPrice), eventLastRegisterDate, eventLastRegisterTime);
-
+        eventCreateViewModel.createEvent(eventThumbnailFilePath, hostId, selectedEventType, eventName, eventDescription, eventDate, eventTime, eventDuration, eventLocation, eventLongitude, eventLatitude, eventLanguages, String.valueOf(eventNumParticipants), String.valueOf(eventPrice), eventLastRegisterDate, eventLastRegisterTime);
+        Log.d("EventCreate", eventLongitude + " " + eventLatitude);
 
     }
 
@@ -539,8 +543,12 @@ public class EventCreateActivity extends Fragment {
             // ...
             // Log.d selectedLocation
             Log.d("EventCreateActivity", "selectedLocation: " + selectedLocation);
+            Log.d("EventLocation", selectedLocation.longitude + " " + selectedLocation.latitude);
             // Update the eventLocationText with the selected location and locationName (optional)
+            eventLongitude = selectedLocation.longitude;
+            eventLatitude = selectedLocation.latitude;
             eventLocationText.setText(locationName);
+            Log.d("Event Location", eventLongitude + " " + eventLatitude);
         }
     }
     // Define a constant for the request code

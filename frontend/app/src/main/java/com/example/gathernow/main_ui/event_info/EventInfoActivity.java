@@ -49,6 +49,9 @@ public class EventInfoActivity extends AppCompatActivity {
 
     private NaverMap naverMap;
 
+    private double eventLongitude;
+    private double eventLatitude;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,31 +150,8 @@ public class EventInfoActivity extends AppCompatActivity {
         });
         // query event info from database
         eventInfoViewModel.loadEventInfo(eventId, userId);
+        // NaverMap
 
-        // Naver Map
-        FragmentManager fm = getSupportFragmentManager();
-        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
-        if (mapFragment == null) {
-            mapFragment = MapFragment.newInstance();
-            fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
-        }
-        // Initialize NaverMap
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull NaverMap naverMap) {
-                // For example, set the camera position
-                // Testing with specifed location. Will generalize it latter.
-                CameraPosition cameraPosition = new CameraPosition(
-                        new LatLng(37.56016357117634, 126.97499430138839),
-                        15.0 // Zoom level (adjust as needed)
-                );
-                naverMap.setCameraPosition(cameraPosition);
-                Marker marker = new Marker();
-                marker.setPosition(new LatLng(37.56016357117634, 126.97499430138839));
-                marker.setMap(naverMap);
-                marker.setCaptionText("Event location");
-            }
-        });
     }
     private void updateHostInfoUI(UserDataModel userDataModel) {
         if (userDataModel == null) {
@@ -228,10 +208,36 @@ public class EventInfoActivity extends AppCompatActivity {
 
         String priceFormat = String.format(Locale.ENGLISH, "%,d", eventDataModel.getEventPrice());
         eventPrice.setText(priceFormat);
-//        setButtonVisibility(eventDataModel.getHostId());
+//      setButtonVisibility(eventDataModel.getHostId());
 //
         eventName = eventDataModel.getEventTitle();
         hostId = eventDataModel.getHostId();
+        // Display NaverMap UI based on eventLongitude and eventLatitude
+        eventLongitude = eventDataModel.getEventLongitude();
+        eventLatitude = eventDataModel.getEventLatitude();
+        FragmentManager fm = getSupportFragmentManager();
+        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
+        if (mapFragment == null) {
+            mapFragment = MapFragment.newInstance();
+            fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
+        }
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull NaverMap naverMap) {
+                // For example, set the camera position
+                // Testing with specifed location. Will generalize it latter.
+                CameraPosition cameraPosition = new CameraPosition(
+                        new LatLng(eventLatitude, eventLongitude),
+                        15.0 // Zoom level (adjust as needed)
+                );
+                Log.d("EventInfo Testing", "Event location: " + eventLatitude + ", " + eventLongitude);
+                naverMap.setCameraPosition(cameraPosition);
+                Marker marker = new Marker();
+                marker.setPosition(new LatLng(eventLatitude, eventLongitude));
+                marker.setMap(naverMap);
+                marker.setCaptionText("Event location");
+            }
+        });
     }
 
     private void setEventPhoto(String event_type, String event_images) {

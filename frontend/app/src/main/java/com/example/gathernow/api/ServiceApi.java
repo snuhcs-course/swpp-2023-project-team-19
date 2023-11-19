@@ -51,6 +51,8 @@ public interface ServiceApi {
             @Part("event_language") RequestBody event_language,
             @Part("event_price") RequestBody event_price,
             @Part("event_location") RequestBody event_location,
+            @Part("event_longitude") RequestBody event_longitude,
+            @Part("event_latitude") RequestBody event_latitude,
             @Part("event_description") RequestBody event_description,
             @Part("event_num_joined") RequestBody event_num_joined,
             @Part("event_register_date") RequestBody event_register_date,
