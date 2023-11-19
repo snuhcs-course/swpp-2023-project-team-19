@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -16,32 +18,41 @@
         android:theme="@style/Theme.Gathernow"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="gb5ymxyg6a" />
         <activity
-            android:name=".ApplicantsInfoActivity"
+            android:name=".main_ui.event_filter.EventFilterActivity"
             android:exported="false" />
         <activity
-            android:name=".ApplicationForm"
+            android:name=".main_ui.event_search.EventSearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main_ui.event_applicant_info.ApplicantsInfoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main_ui.event_application_form.ApplicationFormActivity"
             android:exported="false" />
         <activity
             android:name=".DeleteSuccessful"
             android:exported="false" />
         <activity
-            android:name=".EventInfo"
+            android:name=".main_ui.event_info.EventInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateSuccessful"
+            android:name=".main_ui.event_creation.CreateSuccessfulActivity"
             android:exported="false" />
         <activity
             android:name=".ApplySuccessful"
             android:exported="false" />
         <activity
-            android:name=".LogInActivity"
+            android:name=".authenticate.login.LogInActivity"
             android:exported="false" />
         <activity
             android:name=".FragHome"
             android:exported="false" />
         <activity
-            android:name=".SignUpActivity"
+            android:name=".authenticate.register.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -51,6 +62,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".main_ui.event_creation.MapActivity"
+            android:exported="false">
         </activity>
     </application>
 

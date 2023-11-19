@@ -87,6 +87,7 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 import pymysql
 pymysql.install_as_MySQLdb()
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -97,6 +98,7 @@ DATABASES = {
         'PORT': '3306',
     }
 }
+
 
 
 # Password validation

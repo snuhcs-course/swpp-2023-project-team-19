@@ -6,12 +6,26 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.gathernow.R;
+import com.example.gathernow.authenticate.UserLocalDataSource;
+import com.example.gathernow.authenticate.login.LogInActivity;
+import com.example.gathernow.authenticate.register.SignUpActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // check if user already logged in
+        UserLocalDataSource userLocalDataSource = new UserLocalDataSource(this);
+        String userId = userLocalDataSource.getUserId();
+        if (userId != null) {
+            Intent intent = new Intent(this, FragHome.class);
+            startActivity(intent);
+            finish();
+        }
 
         // sign up button
         Button signUpButton = (Button) findViewById(R.id.signupButton);
