@@ -34,9 +34,14 @@ Table Event {
   event_language varchar 
   event_price int [default: 0]
   event_location varchar 
+  event_longitude double 
+  event_latitude double 
   event_description text [null]
   created_at datetime [default: `auto_now_add=True`]
   event_num_joined int [default: 0]
+  event_register_date date [null]
+  event_register_time time [null]
+  event_images varchar
 }
 
 
