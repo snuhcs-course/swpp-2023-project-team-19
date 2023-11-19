@@ -63,6 +63,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".main_ui.event_creation.MapActivity"
+            android:exported="false">
+        </activity>
     </application>
 
 </manifest>

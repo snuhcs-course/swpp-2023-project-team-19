@@ -1,10 +1,12 @@
 package com.example.gathernow.main_ui.event_creation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -32,6 +34,7 @@ import com.example.gathernow.authenticate.UserLocalDataSource;
 import com.example.gathernow.main_ui.EventDataSource;
 import com.example.gathernow.main_ui.EventRepository;
 import com.example.gathernow.utils.DateTimeHelper;
+import com.naver.maps.geometry.LatLng;
 
 import java.util.Calendar;
 import java.util.function.Consumer;
@@ -74,6 +77,10 @@ public class EventCreateActivity extends Fragment {
     private String eventLastRegisterTime = "";
     private int eventPrice = -1;
     private int eventNumParticipants = -1;
+
+    private double eventLongitude;
+
+    private double eventLatitude;
 
     public EventCreateActivity() {
         // Required empty public constructor
@@ -271,6 +278,10 @@ public class EventCreateActivity extends Fragment {
             eventLocation = location;
         });
 
+        // Search Location Button
+        Button pickLocationButton = rootView.findViewById(R.id.pick_location_button);
+        pickLocationButton.setOnClickListener(this::onPickLocationClick);
+
         // Number of participants
         eventNumParticipantsText = rootView.findViewById(R.id.event_num_participants);
         eventNumParticipantsText.addTextChangedListener(new TextWatcher() {
@@ -362,8 +373,8 @@ public class EventCreateActivity extends Fragment {
         String hostId = userLocalDataSource.getUserId();
         Log.d("EventCreateActivity Testing", "hostId: " + hostId);
 
-        eventCreateViewModel.createEvent(eventThumbnailFilePath, hostId, selectedEventType, eventName, eventDescription, eventDate, eventTime, eventDuration, eventLocation, eventLanguages, String.valueOf(eventNumParticipants), String.valueOf(eventPrice), eventLastRegisterDate, eventLastRegisterTime);
-
+        eventCreateViewModel.createEvent(eventThumbnailFilePath, hostId, selectedEventType, eventName, eventDescription, eventDate, eventTime, eventDuration, eventLocation, eventLongitude, eventLatitude, eventLanguages, String.valueOf(eventNumParticipants), String.valueOf(eventPrice), eventLastRegisterDate, eventLastRegisterTime);
+        Log.d("EventCreate", eventLongitude + " " + eventLatitude);
 
     }
 
@@ -488,5 +499,57 @@ public class EventCreateActivity extends Fragment {
             eventLastRegisterTime = time;
             eventLastRegisterTimeButton.setText("Time: " + time);
         }
+    }
+
+    // Add this method inside EventCreateActivity class
+    private void onPickLocationClick(View view) {
+        // Get the location input from the TextView
+        String locationInput = eventLocationText.getText().toString();
+
+
+            // Create an intent to start MapActivity
+            Intent mapIntent = new Intent(requireContext(), MapActivity.class);
+
+            // Convert the location input to LatLng using geocoding (replace this with your actual geocoding logic)
+            LatLng initialCoordinates = getLatLngFromLocationInput(locationInput);
+
+            // Pass the initial coordinates to MapActivity
+            mapIntent.putExtra("initialCoordinates", initialCoordinates);
+
+            // Start MapActivity for result
+            startActivityForResult(mapIntent, MAP_ACTIVITY_REQUEST_CODE);
+
+    }
+
+    // Handle the result from MapActivity
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == MAP_ACTIVITY_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            // Retrieve the selected location and locationName from MapActivity
+            LatLng selectedLocation = data.getParcelableExtra("selectedLocation");
+            String locationName = data.getStringExtra("locationName");
+
+            // Now you can use the selectedLocation and locationName as needed
+            // For example, update UI or perform any other actions
+            // ...
+            // Log.d selectedLocation
+            Log.d("EventCreateActivity", "selectedLocation: " + selectedLocation);
+            Log.d("EventLocation", selectedLocation.longitude + " " + selectedLocation.latitude);
+            // Update the eventLocationText with the selected location and locationName (optional)
+            eventLongitude = selectedLocation.longitude;
+            eventLatitude = selectedLocation.latitude;
+            eventLocationText.setText(locationName);
+            Log.d("Event Location", eventLongitude + " " + eventLatitude);
+        }
+    }
+    // Define a constant for the request code
+    private static final int MAP_ACTIVITY_REQUEST_CODE = 123;
+
+    // Replace this method with your actual geocoding logic
+    private LatLng getLatLngFromLocationInput(String locationInput) {
+        // Placeholder coordinates (Seoul, South Korea) - Replace with actual logic
+        return new LatLng(37.5665, 126.9780);
     }
 }

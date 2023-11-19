@@ -17,6 +17,7 @@ import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -29,7 +30,7 @@ public class EventDataSource {
         service = RetrofitClient.getClient().create(ServiceApi.class);
     }
 
-    public void createEvent(String thumbnailFilePath, String creator, String type, String name, String description, String date, String time, String duration, String location, String languages, String maxParticipants, String price, String lastRegisterDate, String lastRegisterTime, CallbackInterface callback) {
+    public void createEvent(String thumbnailFilePath, String creator, String type, String name, String description, String date, String time, String duration, String location, Double eventLongitude, Double eventLatitude, String languages, String maxParticipants, String price, String lastRegisterDate, String lastRegisterTime, CallbackInterface callback) {
         // Thumbnail
         MultipartBody.Part thumbnailPart = null;
 
@@ -48,13 +49,15 @@ public class EventDataSource {
         RequestBody eventLanguageBody = RequestBody.create(MediaType.parse("text/plain"), languages);
         RequestBody eventPriceBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(price));
         RequestBody eventLocationBody = RequestBody.create(MediaType.parse("text/plain"), location);
+        RequestBody eventLongitudeBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(eventLongitude));
+        RequestBody eventLatitudeBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(eventLatitude));
         RequestBody eventDescriptionBody = RequestBody.create(MediaType.parse("text/plain"), description);
         RequestBody eventNumJoinedBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(0));
         RequestBody hostIdBody = RequestBody.create(MediaType.parse("text/plain"), String.valueOf(creator));
         RequestBody eventRegDateBody = RequestBody.create(MediaType.parse("text/plain"), lastRegisterDate);
         RequestBody eventRegTimeBody = RequestBody.create(MediaType.parse("text/plain"), lastRegisterTime);
 
-        Call<CodeMessageResponse> call = service.eventlist(thumbnailPart, hostIdBody, eventTypeBody, eventNameBody, eventNumParticipantsBody, eventDateBody, eventTimeBody, eventDurationBody, eventLanguageBody, eventPriceBody, eventLocationBody, eventDescriptionBody, eventNumJoinedBody, eventRegDateBody, eventRegTimeBody);
+        Call<CodeMessageResponse> call = service.eventlist(thumbnailPart, hostIdBody, eventTypeBody, eventNameBody, eventNumParticipantsBody, eventDateBody, eventTimeBody, eventDurationBody, eventLanguageBody, eventPriceBody, eventLocationBody, eventLongitudeBody, eventLatitudeBody, eventDescriptionBody, eventNumJoinedBody, eventRegDateBody, eventRegTimeBody);
         call.enqueue(new Callback<CodeMessageResponse>() {
             @Override
             public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {

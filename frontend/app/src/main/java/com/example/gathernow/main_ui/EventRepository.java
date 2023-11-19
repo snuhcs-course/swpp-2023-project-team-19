@@ -9,8 +9,8 @@ public class EventRepository {
         this.eventDataSource = eventDataSource;
 
     }
-    public void createEvent(String thumbnailFilePath, String creator, String type, String name, String description, String date, String time, String duration, String location, String languages, String maxParticipants, String price, String lastRegisterDate, String lastRegisterTime, CallbackInterface eventCallback) {
-        eventDataSource.createEvent(thumbnailFilePath, creator, type, name, description, date, time, duration, location, languages, maxParticipants, price, lastRegisterDate, lastRegisterTime, eventCallback);
+    public void createEvent(String thumbnailFilePath, String creator, String type, String name, String description, String date, String time, String duration, String location, Double event_longitude, Double event_latitude, String languages, String maxParticipants, String price, String lastRegisterDate, String lastRegisterTime, CallbackInterface eventCallback) {
+        eventDataSource.createEvent(thumbnailFilePath, creator, type, name, description, date, time, duration, location, event_longitude, event_latitude, languages, maxParticipants, price, lastRegisterDate, lastRegisterTime, eventCallback);
     }
 
     public void getEventInfo(int eventId, CallbackInterface eventCallback) {

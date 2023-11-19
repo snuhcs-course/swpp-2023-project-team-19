@@ -303,11 +303,13 @@
             <TextView
                 android:id="@+id/event_location"
                 style="@style/TextField"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/location_title"
-                app:layout_constraintTop_toBottomOf="@id/event_register_date_title" />
+                app:layout_constraintTop_toBottomOf="@id/event_register_date_title"
+                app:layout_constraintWidth_percent="0.5"
+                />
 
             <androidx.fragment.app.FragmentContainerView
                 android:padding="16dp"
