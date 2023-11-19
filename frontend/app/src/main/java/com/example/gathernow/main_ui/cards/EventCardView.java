@@ -22,8 +22,12 @@ import com.squareup.picasso.Picasso;
 
 public class EventCardView extends LinearLayout {
 
-    private ImageView event_photo;
-    private TextView event_name, event_capacity, event_language, event_datetime, event_location;
+    private final ImageView event_photo;
+    private final TextView event_name;
+    private final TextView event_capacity;
+    private final TextView event_language;
+    private final TextView event_datetime;
+    private final TextView event_location;
 
     public EventCardView(Context context, AttributeSet attrs) {
         super(context, attrs);

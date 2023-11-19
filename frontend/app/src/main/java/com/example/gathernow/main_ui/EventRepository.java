@@ -36,13 +36,32 @@ public class EventRepository {
     public void getEventApplication(int eventId, CallbackInterface eventCallback) {
         eventDataSource.getEventApplication(eventId, eventCallback);
     }
-    
+
     public void getAllEvents(CallbackInterface eventCallback) {
         eventDataSource.getAllEvents(eventCallback);
     }
 
+    public void getUserAppliedEvents(int userId, CallbackInterface eventCallback) {
+        eventDataSource.getUserAppliedEvents(userId, eventCallback);
+    }
 
     public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
         eventDataSource.applyEvent(applicationDataModel, callbackInterface);
+    }
+
+    public void acceptEventApplication(int applicationId, CallbackInterface callbackInterface) {
+        eventDataSource.acceptEventApplication(applicationId, callbackInterface);
+    }
+
+    public void rejectEventApplication(int applicationId, CallbackInterface callbackInterface) {
+        eventDataSource.rejectEventApplication(applicationId, callbackInterface);
+    }
+
+    public void getFilteredEvents(String query, CallbackInterface callbackInterface) {
+        eventDataSource.getFilteredEvents(query, callbackInterface);
+    }
+
+    public void getSearchedEvents(String query, CallbackInterface callbackInterface) {
+        eventDataSource.getSearchedEvents(query, callbackInterface);
     }
 }

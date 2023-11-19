@@ -12,13 +12,6 @@
         android:padding="30dp"
         tools:context=".main_ui.event_creation.EventCreateActivity">
 
-        <ImageButton
-            android:id="@+id/returnBtn"
-            android:layout_width="45dp"
-            android:layout_height="30dp"
-            android:background="@null"
-            android:src="@drawable/ic_return_foreground" />
-
         <ImageView
             android:id="@+id/event_image"
             android:layout_width="match_parent"
