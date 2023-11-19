@@ -56,4 +56,12 @@ public class EventRepository {
     public void rejectEventApplication(int applicationId, CallbackInterface callbackInterface) {
         eventDataSource.rejectEventApplication(applicationId, callbackInterface);
     }
+
+    public void getFilteredEvents(String query, CallbackInterface callbackInterface) {
+        eventDataSource.getFilteredEvents(query, callbackInterface);
+    }
+
+    public void getSearchedEvents(String query, CallbackInterface callbackInterface) {
+        eventDataSource.getSearchedEvents(query, callbackInterface);
+    }
 }

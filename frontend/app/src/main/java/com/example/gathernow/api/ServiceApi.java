@@ -17,6 +17,8 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
+import retrofit2.http.Url;
 
 public interface ServiceApi {
 
@@ -103,4 +105,9 @@ public interface ServiceApi {
     @GET("api/application/by_user/{user_id}/")
     Call<List<ApplicationDataModel>> getUserAppliedEvents(@Path("user_id") int user_id);
 
+    @GET
+    Call<List<EventDataModel>> getFilteredEvents(@Url String url);
+
+    @GET
+    Call<List<EventDataModel>> getSearchedEvents(@Url String url);
 }

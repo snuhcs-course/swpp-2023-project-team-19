@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -17,6 +18,15 @@
         android:theme="@style/Theme.Gathernow"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <meta-data
+            android:name="com.naver.maps.map.CLIENT_ID"
+            android:value="gb5ymxyg6a" />
+        <activity
+            android:name=".main_ui.event_filter.EventFilterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".main_ui.event_search.EventSearchActivity"
+            android:exported="false" />
         <activity
             android:name=".main_ui.event_applicant_info.ApplicantsInfoActivity"
             android:exported="false" />

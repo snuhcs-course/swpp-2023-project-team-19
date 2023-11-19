@@ -351,13 +351,6 @@ public class EventCreateActivity extends Fragment {
         });
 
 
-        // return button
-        ImageButton returnButton = rootView.findViewById(R.id.returnBtn);
-        returnButton.setOnClickListener(v -> {
-            // Link to the searchHomepage
-            Intent intent = new Intent(v.getContext(), FragHome.class);
-            startActivity(intent);
-        });
 
         return rootView;
     }

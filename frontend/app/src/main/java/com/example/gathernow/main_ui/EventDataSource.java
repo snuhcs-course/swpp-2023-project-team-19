@@ -335,5 +335,53 @@ public class EventDataSource {
             }
         });
     }
+
+    public void getFilteredEvents(String query, CallbackInterface callback) {
+        String fullUrl = "api/events/filter" + query;
+        service.getFilteredEvents(fullUrl).enqueue(new Callback<List<EventDataModel>>() {
+            @Override
+            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response) {
+                if (response.isSuccessful()) {
+                    List<EventDataModel> result = response.body();
+                    if (result != null && !result.isEmpty()) {
+                        callback.onSuccess(result);
+                    } else {
+                        callback.onSuccess(new ArrayList<>());
+                    }
+                } else {
+                    callback.onError("Failed to get user events");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+    }
+
+    public void getSearchedEvents(String query, CallbackInterface callback) {
+        String fullUrl = "api/events/search?search=" + query;
+        service.getSearchedEvents(fullUrl).enqueue(new Callback<List<EventDataModel>>() {
+            @Override
+            public void onResponse(Call<List<EventDataModel>> call, Response<List<EventDataModel>> response) {
+                if (response.isSuccessful()) {
+                    List<EventDataModel> result = response.body();
+                    if (result != null && !result.isEmpty()) {
+                        callback.onSuccess(result);
+                    } else {
+                        callback.onSuccess(new ArrayList<>());
+                    }
+                } else {
+                    callback.onError("Failed to get user events");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+    }
 }
 
