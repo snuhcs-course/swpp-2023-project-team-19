@@ -1,4 +1,4 @@
-### Resources for Updating Docs
+### Resources for the Wiki Docs
 
 #### DB Diagrams
 
