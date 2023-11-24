@@ -22,7 +22,7 @@ public class ApplicantCardViewModel extends ViewModel {
         return applicationStatus;
     }
 
-    public void acceptApplication(int applicationId) {
+    public void acceptApplication(int applicationId, int eventId) {
         eventRepository.acceptEventApplication(applicationId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
@@ -34,6 +34,19 @@ public class ApplicantCardViewModel extends ViewModel {
             public void onError(String message) {
                 alertMessage.setValue(message);
                 Log.d("ApplicantCardViewModel", "Application accept failed");
+            }
+        });
+
+        eventRepository.increaseNumJoined(eventId, new CallbackInterface() {
+            @Override
+            public <T> void onSuccess(T result) {
+                Log.d("ApplicantCardViewModel", "Num joined increased");
+            }
+
+            @Override
+            public void onError(String message) {
+                alertMessage.setValue(message);
+                Log.d("ApplicantCardViewModel", "Num joined increase failed");
             }
         });
     }
@@ -52,5 +65,6 @@ public class ApplicantCardViewModel extends ViewModel {
                 Log.d("ApplicantCardViewModel", "Application reject failed");
             }
         });
+
     }
 }

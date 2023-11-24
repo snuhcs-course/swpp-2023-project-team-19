@@ -157,7 +157,8 @@ public class EventInfoViewModel extends ViewModel {
                         showRegisterButton.setValue(true);
                         // When the deadline passed or the event is full, no registration is allowed
                         Log.d("EventInfo Testing", Objects.requireNonNull(eventData.getValue()).getEventRegisterDate());
-                        if (Objects.equals(Objects.requireNonNull(eventData.getValue()).getEventNumJoined(), eventData.getValue().getEventNumParticipants()) || deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
+                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime()) ||
+                                reachedMaxParticipants(eventData.getValue().getEventNumJoined(), eventData.getValue().getEventNumParticipants())){
                             clickableRegisterButton.setValue(false);
                         }
                     } else {
@@ -191,6 +192,11 @@ public class EventInfoViewModel extends ViewModel {
         }
         return false;
 
+    }
+
+    // Check if the event has reached the maximum number of participants
+    private boolean reachedMaxParticipants(int eventNumJoined, int eventNumParticipants) {
+        return eventNumJoined >= eventNumParticipants;
     }
 
     public void loadHostInfo(int hostId) {
@@ -229,6 +235,9 @@ public class EventInfoViewModel extends ViewModel {
             return;
         }
         int applicationId = applicationData.getValue().getApplicationId();
+        int eventId = applicationData.getValue().getEventId();
+        int status = applicationData.getValue().getRequestStatus();
+
         eventInfoRepository.deleteApplication(applicationId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
@@ -242,6 +251,22 @@ public class EventInfoViewModel extends ViewModel {
                 alertMessage.postValue(message);
             }
         });
+
+        if (status == 1){
+            // If a confirmed application is deleted, decrease number of user joined for the event by 1
+            eventInfoRepository.decreaseNumJoined(eventId, new CallbackInterface() {
+                @Override
+                public <T> void onSuccess(T result) {
+                    Log.d("EventInfoViewModel", (String) result);
+                }
+
+                @Override
+                public void onError(String message) {
+                    alertMessage.postValue(message);
+                }
+            });
+        }
+
     }
 
 }

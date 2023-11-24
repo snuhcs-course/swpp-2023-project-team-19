@@ -10,7 +10,9 @@ import com.example.gathernow.main_ui.profile.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -40,11 +42,40 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
             bottomNavigationView = findViewById(R.id.bottomNavigationView);
             bottomNavigationView.setOnItemSelectedListener(this);
             bottomNavigationView.setSelectedItemId(R.id.menu_search);
+
+            Intent intent = getIntent();
+            String targetFragment = intent.getStringExtra("targetFragment");
+
+            Log.e ("BackButton", "targetFragment: " + targetFragment);
+
+            if (targetFragment != null){
+                if (targetFragment.equals("event")) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.flFragment, new EventsActivity())
+                            .commit();
+                    bottomNavigationView.setSelectedItemId(R.id.menu_events);
+                } else if (targetFragment.equals("profile")) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.flFragment, new ProfileActivity())
+                            .commit();
+                    bottomNavigationView.setSelectedItemId(R.id.menu_profile);
+                }
+            } else {
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.flFragment, new HomeActivity())
+                        .commit();
+            }
+
+
         }
         EventsActivity eventsActivity = new EventsActivity();
         HomeActivity homeActivity = new HomeActivity();
         EventCreateActivity eventCreateActivity = new EventCreateActivity();
         ProfileActivity profileActivity = new ProfileActivity();
+
         @Override
         public boolean onNavigationItemSelected (@NonNull MenuItem item){
             if (item.getItemId() == R.id.menu_search) {
