@@ -26,7 +26,15 @@ public class EventRepository {
     }
 
     public void deleteApplication(int applicationId, CallbackInterface applicationCallback) {
-        eventDataSource.deleteApplication(applicationId, applicationCallback);
+        eventDataSource.deleteApplication(applicationId,  applicationCallback);
+    }
+
+    public void decreaseNumJoined(int eventId, CallbackInterface eventCallback) {
+        eventDataSource.decreaseNumJoined(eventId, eventCallback);
+    }
+
+    public void increaseNumJoined(int eventId, CallbackInterface eventCallback) {
+        eventDataSource.increaseNumJoined(eventId, eventCallback);
     }
 
     public void getUserEvents(int userId, CallbackInterface eventCallback) {

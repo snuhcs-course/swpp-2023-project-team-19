@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -50,33 +51,58 @@ public class EventFilterActivity extends AppCompatActivity {
     boolean isFreeEvent;
     private String query;
     private RelativeLayout no_event_layout;
+    public SharedPreferences preferences;
+    private View rootView;
+    private ImageView no_event_picture;
+    private TextView no_event_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.e("EventFilterActivity", "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_filter);
-        View rootView = findViewById(android.R.id.content);
+        rootView = findViewById(android.R.id.content);
         eventFilterViewModel = new EventFilterViewModel(this);
+    }
 
-        no_event_layout = findViewById(R.id.no_event_layout);
+    @Override
+    public void onResume() {
+        Log.e("EventFilterActivity", "onResume");
+        super.onResume();
+
+        setContentView(R.layout.activity_event_filter);
+        rootView = findViewById(android.R.id.content);
+        eventFilterViewModel = new EventFilterViewModel(this);
+        no_event_layout = rootView.findViewById(R.id.no_event_layout);
 
         setupFilterListener(rootView);
-
         // Retrieve filter data from the Intent
         Intent intent = getIntent();
         checkFilter(intent);
         query = getQueryString();
 
         eventFilterViewModel.getAlertMessage().observe(this, message -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
-        eventFilterViewModel.getFilteredEvents().observe(this, eventDataModels -> updateFilteredEventsUI(eventDataModels, rootView));
+        eventFilterViewModel.getFilteredEvents().observe(this, eventDataModels -> updateFilteredEventsUI(eventDataModels, findViewById(android.R.id.content)));
         eventFilterViewModel.fetchFilteredEvents(query);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(EventFilterActivity.this, FragHome.class);
+        startActivity(intent);
     }
 
     private void updateFilteredEventsUI(List<EventDataModel> eventDataList, View rootView){
         if(!eventDataList.isEmpty()){
+            Log.d("FilterActivity", "Event data is not empty");
             no_event_layout.setVisibility(View.GONE);
             fetchEventsUI(eventDataList, rootView);
             Log.d("FilterActivity", "Show events!");
+        }
+        else{
+            Log.d("FilterActivity", "Event data is empty");
+
         }
     }
 
@@ -87,6 +113,13 @@ public class EventFilterActivity extends AppCompatActivity {
             selectedEventTypeChips = intent.getStringArrayListExtra("selectedEventTypeChips");
             selectedDateChips = intent.getStringArrayListExtra("selectedDateChips");
             selectedTimeChips = intent.getStringArrayListExtra("selectedTimeChips");
+
+            // Save search information
+            preferences = getSharedPreferences("SearchPreferences", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putBoolean("isFreeEvent", isFreeEvent);
+            editor.putString("selectedLanguageChips", selectedLanguageChips.toString());
+            editor.apply();
         }
     }
 
@@ -101,7 +134,7 @@ public class EventFilterActivity extends AppCompatActivity {
         } else {
             Log.d("EventFilterActivity", "Loaded user events");
             LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-            EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId);
+            EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId, "filter");
         }
 
     }

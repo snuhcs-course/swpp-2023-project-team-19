@@ -236,7 +236,7 @@ public class EventsActivity extends Fragment {
             noEventsText.setVisibility(View.GONE);
             sadFrog.setVisibility(View.GONE);
 
-            EventCardHelper.createEventCardList(getContext(), confirmedEvents, eventCardContainer, userId);
+            EventCardHelper.createEventCardList(getContext(), confirmedEvents, eventCardContainer, userId, "events");
             Log.e("EventsActivity", "Event card made in updateConfirmedEventsUI");
         }
     }
@@ -259,7 +259,7 @@ public class EventsActivity extends Fragment {
             loadingLayout.setVisibility(View.GONE);
             noEventsText.setVisibility(View.GONE);
             sadFrog.setVisibility(View.GONE);
-            EventCardHelper.createEventCardList(getContext(), pendingEvents, eventCardContainer, userId);
+            EventCardHelper.createEventCardList(getContext(), pendingEvents, eventCardContainer, userId, "events");
         }
     }
 

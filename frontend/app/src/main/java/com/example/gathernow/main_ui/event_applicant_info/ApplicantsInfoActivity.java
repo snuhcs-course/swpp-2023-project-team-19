@@ -16,6 +16,7 @@ import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;
 import com.example.gathernow.main_ui.cards.ApplicantCardView;
+import com.example.gathernow.main_ui.event_info.EventInfoActivity;
 import com.example.gathernow.utils.EventCardHelper;
 
 import java.util.List;
@@ -27,6 +28,9 @@ import retrofit2.Response;
 
 public class ApplicantsInfoActivity extends AppCompatActivity {
 
+    private int userId, eventId;
+    private String sourceFrag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,9 @@ public class ApplicantsInfoActivity extends AppCompatActivity {
 
 //        hostId = intent.getIntExtra("hostId", 0);
 //        userId = intent.getIntExtra("userId", 0);
-        int eventId = intent.getIntExtra("eventId", -1);
+        userId = intent.getIntExtra("userId", -1);
+        eventId = intent.getIntExtra("eventId", -1);
+        sourceFrag = intent.getStringExtra("sourceFrag");
 
         if (eventId == -1) {
             Toast.makeText(ApplicantsInfoActivity.this, "Event ID not found", Toast.LENGTH_SHORT).show();
@@ -59,7 +65,32 @@ public class ApplicantsInfoActivity extends AppCompatActivity {
         // display applicant to this event
         applicantsInfoViewModel.fetchEventApplication(eventId);
 
+
     }
+
+    @Override
+    public void onBackPressed() {
+        // Reload data or perform other necessary actions
+        //recreate(); // This recreates the activity
+
+        // Create an Intent to go back to EventInfoActivity
+        Intent intent = new Intent(this, EventInfoActivity.class);
+
+        // Add any extra data if needed
+        intent.putExtra("userId", userId);
+        intent.putExtra("eventId", eventId);
+        intent.putExtra("sourceFrag", sourceFrag);
+
+        // Set the flag to clear the back stack
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        // Start the EventInfoActivity
+        startActivity(intent);
+
+        // Finish the current activity to remove it from the back stack
+        finish();
+    }
+
 
     private void updateApplicantList(List<ApplicationDataModel> applicationDataModels) {
         LinearLayout applicantCardContainer = findViewById(R.id.container);
