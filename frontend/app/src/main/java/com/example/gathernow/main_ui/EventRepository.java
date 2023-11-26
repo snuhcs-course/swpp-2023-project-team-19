@@ -57,8 +57,8 @@ public class EventRepository {
         eventDataSource.applyEvent(applicationDataModel, callbackInterface);
     }
 
-    public void acceptEventApplication(int applicationId, CallbackInterface callbackInterface) {
-        eventDataSource.acceptEventApplication(applicationId, callbackInterface);
+    public void acceptEventApplication(int applicationId, int status, CallbackInterface callbackInterface) {
+        eventDataSource.acceptEventApplication(applicationId, status, callbackInterface);
     }
 
     public void rejectEventApplication(int applicationId, CallbackInterface callbackInterface) {

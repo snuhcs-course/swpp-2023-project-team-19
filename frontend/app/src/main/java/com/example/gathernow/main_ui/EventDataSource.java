@@ -330,7 +330,7 @@ public class EventDataSource {
         });
     }
 
-    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+    public void applyForEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
         service.apply_event(applicationDataModel).enqueue(new Callback<CodeMessageResponse>() {
             @Override
             public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
@@ -354,10 +354,35 @@ public class EventDataSource {
                 callbackInterface.onError("Network error");
             }
         });
+
     }
 
-    public void acceptEventApplication(int applicationId, CallbackInterface callbackInterface) {
-        service.acceptStatus(applicationId).enqueue(new Callback<ApplicationDataModel>() {
+    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+        service.delete_if_applied(applicationDataModel.getApplicantId(), applicationDataModel.getEventId())
+                .enqueue(new Callback<ApplicationDataModel>() {
+                    @Override
+                    public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                        if (response.isSuccessful()) {
+                            callbackInterface.onSuccess("Reapplied for event");
+                            applyForEvent(applicationDataModel, callbackInterface);
+
+
+                        } else {
+                            callbackInterface.onError("New application done");
+                            applyForEvent(applicationDataModel, callbackInterface);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                        callbackInterface.onError("Network error");
+                    }
+                });
+    }
+
+
+    public void acceptEventApplication(int applicationId, int status, CallbackInterface callbackInterface) {
+        service.acceptStatus(applicationId, status).enqueue(new Callback<ApplicationDataModel>() {
             @Override
             public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
                 if (response.isSuccessful()) {
