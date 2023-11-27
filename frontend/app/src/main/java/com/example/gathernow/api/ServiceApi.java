@@ -89,6 +89,8 @@ public interface ServiceApi {
     @GET("/api/application/check/{user_id}/{event_id}/")
     Call<ApplicationDataModel> check_if_applied(@Path("user_id") int user_id, @Path("event_id") int event_id);
 
+    @DELETE("/api/application/check/{user_id}/{event_id}/")
+    Call<ApplicationDataModel> delete_if_applied(@Path("user_id") int user_id, @Path("event_id") int event_id);
 
     // Delete application based on application id
     // Applicant is rejected by host and related application will be deleted
@@ -100,8 +102,8 @@ public interface ServiceApi {
     Call<List<ApplicationDataModel>> getEventApplications(@Path("event_id") int event_id);
 
     // Update request_status to 1 when application is accepted
-    @PUT("/api/application/accept/{application_id}/")
-    Call<ApplicationDataModel> acceptStatus(@Path("application_id") int application_id);
+    @PUT("/api/application/accept/{application_id}/{status}/")
+    Call<ApplicationDataModel> acceptStatus(@Path("application_id") int application_id, @Path("status") int status );
 
     // get list of events that a user applied for
     @GET("api/application/by_user/{user_id}/")
