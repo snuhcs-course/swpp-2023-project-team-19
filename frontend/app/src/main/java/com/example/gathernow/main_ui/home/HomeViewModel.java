@@ -48,7 +48,7 @@ public class HomeViewModel extends ViewModel {
                     if (!resultList.isEmpty() && resultList.get(0) instanceof EventDataModel) {
                         List<EventDataModel> events = (List<EventDataModel>) resultList;
                         Collections.reverse(events);
-                        allEvents.setValue(events);
+                        allEvents.postValue(events);
                     }
                 }
             }
@@ -59,5 +59,11 @@ public class HomeViewModel extends ViewModel {
             }
         });
     }
+
+
+    public MutableLiveData<List<EventDataModel>> returnAllEvents() {
+        return allEvents;
+    }
+
 
 }
