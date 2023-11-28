@@ -78,6 +78,7 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
 
         @Override
         public boolean onNavigationItemSelected (@NonNull MenuItem item){
+            Bundle bundle = new Bundle();
             if (item.getItemId() == R.id.menu_search) {
                 getSupportFragmentManager()
                         .beginTransaction()
@@ -85,6 +86,8 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
                         .commit();
                 return true;
             } else if (item.getItemId() == R.id.menu_create) {
+                bundle.putBoolean("fromFragHome", true);
+                eventCreateActivity.setArguments(bundle);
                 getSupportFragmentManager()
                         .beginTransaction()
                         .replace(R.id.flFragment, eventCreateActivity)

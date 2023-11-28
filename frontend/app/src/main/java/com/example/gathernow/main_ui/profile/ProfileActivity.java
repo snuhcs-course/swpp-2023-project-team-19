@@ -56,6 +56,7 @@ public class ProfileActivity extends Fragment {
     private RelativeLayout userInfo, loadingLayout;
     private int userId;
     private ProfileViewModel profileViewModel;
+    private UserLocalDataSource userLocalDataSource;
 
     private boolean isFirstCreation = false;
     private View rootView;
@@ -90,6 +91,7 @@ public class ProfileActivity extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
         profileViewModel = new ProfileViewModel(getContext());
+        userLocalDataSource = new UserLocalDataSource(getContext());
     }
 
 
@@ -100,7 +102,6 @@ public class ProfileActivity extends Fragment {
                              Bundle savedInstanceState) {
 
         Log.d("ProfileActivity", "onCreate");
-
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
@@ -110,7 +111,7 @@ public class ProfileActivity extends Fragment {
         profileViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show());
         profileViewModel.getUserData().observe(getViewLifecycleOwner(), this::updateProfileUI);
         profileViewModel.getUserEvents().observe(getViewLifecycleOwner(), eventDataModels -> updateUserEventsUI(eventDataModels, rootView));
-        profileViewModel.fetchUserProfile();
+        profileViewModel.fetchUserProfile(userLocalDataSource);
 //        profileViewModel.fetchUserEvents(userId);
 
         return rootView;
@@ -185,6 +186,5 @@ public class ProfileActivity extends Fragment {
             startActivity(intent);
         });
     }
-
 
 }

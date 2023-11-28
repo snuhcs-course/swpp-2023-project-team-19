@@ -58,7 +58,8 @@ public class ApplicationDataModel {
     }
 
     public String getApplicantAvatar() {
-        return applicant_avatar;
+        String complete_url = "http://20.2.88.70:8000" + applicant_avatar;
+        return complete_url;
     }
 
     public String getApplicantContact() {
