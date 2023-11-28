@@ -52,4 +52,6 @@ dependencies {
     implementation("com.squareup.picasso:picasso:2.71828")
     // NAVER Map SDK
     implementation("com.naver.maps:map-sdk:3.17.0")
+
+    testImplementation("org.robolectric:robolectric:4.11.1")
 }

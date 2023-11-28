@@ -274,13 +274,13 @@ public class EventDataSource {
                 if (response.isSuccessful()) {
                     if (response.body() != null && !response.body().isEmpty()){
                         callback.onSuccess(response.body());
-                        Log.e("UserEventDisplay", "Event is available");
+                        //Log.e("UserEventDisplay", "Event is available");
                     }
                     else{
                         //no events case
                         //callback.onSuccess(null);
                         callback.onSuccess(new ArrayList<>());
-                        Log.e("UserEventDisplay", "Empty Event list");
+                        //Log.e("UserEventDisplay", "Empty Event list");
                     }
                 }
                 else {
@@ -289,19 +289,19 @@ public class EventDataSource {
                     if (response.errorBody() != null) {
                         try {
                             String errorBody = response.errorBody().string();
-                            Log.e("EventDisplay", "Failed with response: " + errorBody);
+                            //Log.e("EventDisplay", "Failed with response: " + errorBody);
                         } catch (IOException e) {
-                            Log.e("EventDisplay", "Error while reading errorBody", e);
+                            //Log.e("EventDisplay", "Error while reading errorBody", e);
                         }
                     } else {
-                        Log.e("EventDisplay", "Response not successful and error body is null");
+                        //Log.e("EventDisplay", "Response not successful and error body is null");
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
-                Log.e("EventDisplay", "Error occurred", t);
+                //Log.e("EventDisplay", "Error occurred", t);
             }
 
         });

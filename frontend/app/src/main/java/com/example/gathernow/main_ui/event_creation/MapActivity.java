@@ -40,7 +40,7 @@ public class MapActivity extends AppCompatActivity {
     private String locationName;
 
     private String apiKeyId = "gb5ymxyg6a"; // Replace with your Naver API client ID
-    private String apiKey = ""; // Replace with your Naver API client secret
+    private String apiKey = "EP5Z85B4CEaw7XknsqHklNCu6RePdI8SwTSnCwQa"; // Replace with your Naver API client secret
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
