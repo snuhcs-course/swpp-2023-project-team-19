@@ -2,8 +2,12 @@ package com.example.gathernow.main_ui.event_info;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import android.app.ActivityManager;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.gathernow.FragHome;
 import com.example.gathernow.main_ui.event_applicant_info.ApplicantsInfoActivity;
 import com.example.gathernow.main_ui.event_application_form.ApplicationFormActivity;
 import com.example.gathernow.DeleteSuccessful;
@@ -22,6 +27,10 @@ import com.example.gathernow.R;
 import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.main_ui.EventDataSource;
 import com.example.gathernow.main_ui.EventRepository;
+import com.example.gathernow.main_ui.event_filter.EventFilterActivity;
+import com.example.gathernow.main_ui.event_search.EventSearchActivity;
+import com.example.gathernow.main_ui.home.HomeActivity;
+import com.example.gathernow.main_ui.profile.ProfileActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.overlay.Marker;
 import com.squareup.picasso.Picasso;
@@ -32,13 +41,16 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.util.FusedLocationSource;
 import com.naver.maps.map.OnMapReadyCallback;
 
+import java.util.List;
 import java.util.Locale;
+
+import com.example.gathernow.main_ui.profile.ProfileActivity;
 
 public class EventInfoActivity extends AppCompatActivity {
     public int userId;
     public int eventId;
 
-    public String eventName;
+    public String eventName, sourceFrag;
 
     public String hostAvatar;
 
@@ -60,6 +72,13 @@ public class EventInfoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         userId = intent.getIntExtra("userId", -1);
         eventId = intent.getIntExtra("eventId", -1);
+        if(intent.getStringExtra("sourceFrag") != null){
+            sourceFrag = intent.getStringExtra("sourceFrag");
+        }
+        else{
+            sourceFrag = null;
+        }
+
         if (eventId == -1) {
             Toast.makeText(EventInfoActivity.this, "Event ID not found", Toast.LENGTH_SHORT).show();
         }
@@ -153,6 +172,57 @@ public class EventInfoActivity extends AppCompatActivity {
         // NaverMap
 
     }
+
+    @Override
+    public void onBackPressed() {
+        // Handle what happens when the back button is pressed
+        // -> go back to refreshed home or profile page
+        if("home".equals(sourceFrag)){
+            Log.e("BackButton", "Going back to Home in else case");
+            Intent intent = new Intent(this, FragHome.class);
+            startActivity(intent);
+            finish();
+        }
+        else if ("profile".equals(sourceFrag) || "applicantInfo".equals(sourceFrag)){
+            Log.e("BackButton", "Going back to Profile in else case");
+            Intent intent = new Intent(this, FragHome.class);
+            intent.putExtra("targetFragment", "profile");
+            startActivity(intent);
+            finish();
+        }
+        else if ("events".equals(sourceFrag)){
+            Log.e("BackButton", "Going back to Event in else case");
+            Intent intent = new Intent(this, FragHome.class);
+            intent.putExtra("targetFragment", "event");
+            startActivity(intent);
+            finish();
+        }
+
+        else if("search".equals(sourceFrag)){
+            Log.e("BackButton", "Going back to Search in else case");
+            Intent intent = new Intent(this, EventSearchActivity.class);
+            intent.putExtra("targetFragment", "search");
+            startActivity(intent);
+            finish();
+        }
+        /*
+        else if("filter".equals(sourceFrag)){
+            Log.e("BackButton", "Going back to Filter in else case");
+            Intent intent = new Intent(this, EventFilterActivity.class);
+            intent.putExtra("targetFragment", "filter");
+            startActivity(intent);
+            finish();
+        }*/
+        else{
+            Log.e("BackButton", "Going back to Home in else case");
+            //Intent intent = new Intent(this, FragHome.class);
+            //startActivity(intent);
+            //finish();
+            super.onBackPressed();
+        }
+
+    }
+
     private void updateHostInfoUI(UserDataModel userDataModel) {
         if (userDataModel == null) {
             Log.d("EventInfo Testing", "User data model is null");
@@ -322,6 +392,7 @@ public class EventInfoActivity extends AppCompatActivity {
         intent.putExtra("eventName", eventName);
         intent.putExtra("hostName", hostName);
         intent.putExtra("hostAvatar", hostAvatar);
+        intent.putExtra("sourceFrag", sourceFrag);
         startActivity(intent);
     }
 }

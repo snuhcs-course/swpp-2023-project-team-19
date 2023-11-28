@@ -72,7 +72,7 @@ def events_application(request, event_id):
         return Response(status=status.HTTP_204_NO_CONTENT)
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
-
+# check if user has applied for event
 @api_view(['GET', 'DELETE'])
 def check_application(request, user_id, event_id):
     try:
@@ -87,19 +87,20 @@ def check_application(request, user_id, event_id):
     elif request.method == 'DELETE':
         application.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+    
     return Response(status=status.HTTP_405_METHOD_NOT_ALLOWED)
 
 
-# Update request status in application
+# Update request status in application (status: 0 - pending, 1 - accepted, -1 - rejected)
 @api_view(['PUT'])
-def accept_application(request, application_id):
+def accept_application(request, application_id, status):
     try:
         application = Application.objects.get(application_id=application_id)
     except Application.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'PUT':
-        application.request_status = 1
+        application.request_status = status
         application.save()
         serializer = ApplicationSerializer(application)
         return Response(serializer.data)

@@ -32,6 +32,8 @@ public class HomeActivity extends Fragment {
 
     private HomeViewModel homeViewModel;
 
+    private String frag = "home";
+
     public HomeActivity() {
         // Required empty public constructor
     }
@@ -92,7 +94,7 @@ public class HomeActivity extends Fragment {
         } else {
             Log.d("HomeActivity", "Loaded user events");
             LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-            EventCardHelper.createEventCardList(getContext(), eventDataList, eventCardContainer, userId);
+            EventCardHelper.createEventCardList(getContext(), eventDataList, eventCardContainer, userId, frag);
         }
     }
 

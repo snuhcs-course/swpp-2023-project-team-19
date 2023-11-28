@@ -64,6 +64,9 @@ public class ApplicationDataModel {
     public String getApplicantContact() {
         return applicant_contact;
     }
+    public Integer getApplicantId() {
+        return applicant_id;
+    }
 
     public String getMessage() {
         return message;

@@ -146,6 +146,22 @@ public class EventDataSource {
                 callback.onError("Network error");
             }
         });
+
+        service.deleteEventApplications(eventId).enqueue(new Callback<List<ApplicationDataModel>>() {
+            @Override
+            public void onResponse(Call<List<ApplicationDataModel>> call, Response<List<ApplicationDataModel>> response) {
+                Log.d("EventInfo Testing", "Number of participants decreased by 1");
+                if (response.isSuccessful()) {
+                    List<ApplicationDataModel> application_data = response.body();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ApplicationDataModel>> call, Throwable t) {
+                Log.d("EventInfo Testing", "Failed to delete event");
+            }
+        });
+
     }
 
     public void deleteApplication(int applicationId, CallbackInterface callback) {
@@ -156,6 +172,43 @@ public class EventDataSource {
                     callback.onSuccess("Application deleted successfully");
                 } else {
                     callback.onError("Failed to delete application");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+
+    }
+
+    public void decreaseNumJoined(int eventId, CallbackInterface callback) {
+        service.decreaseNumJoined(eventId).enqueue(new Callback<ApplicationDataModel>() {
+            @Override
+            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess("Number of joined decreased successfully");
+                } else {
+                    callback.onError("Failed to decrease number of joined");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                callback.onError("Network error");
+            }
+        });
+    }
+
+    public void increaseNumJoined(int eventId, CallbackInterface callback) {
+        service.increaseNumJoined(eventId).enqueue(new Callback<ApplicationDataModel>() {
+            @Override
+            public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess("Number of joined increased successfully");
+                } else {
+                    callback.onError("Failed to increase number of joined");
                 }
             }
 
@@ -277,7 +330,7 @@ public class EventDataSource {
         });
     }
 
-    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+    public void applyForEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
         service.apply_event(applicationDataModel).enqueue(new Callback<CodeMessageResponse>() {
             @Override
             public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
@@ -301,10 +354,35 @@ public class EventDataSource {
                 callbackInterface.onError("Network error");
             }
         });
+
     }
 
-    public void acceptEventApplication(int applicationId, CallbackInterface callbackInterface) {
-        service.acceptStatus(applicationId).enqueue(new Callback<ApplicationDataModel>() {
+    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+        service.delete_if_applied(applicationDataModel.getApplicantId(), applicationDataModel.getEventId())
+                .enqueue(new Callback<ApplicationDataModel>() {
+                    @Override
+                    public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                        if (response.isSuccessful()) {
+                            callbackInterface.onSuccess("Reapplied for event");
+                            applyForEvent(applicationDataModel, callbackInterface);
+
+
+                        } else {
+                            callbackInterface.onError("New application done");
+                            applyForEvent(applicationDataModel, callbackInterface);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                        callbackInterface.onError("Network error");
+                    }
+                });
+    }
+
+
+    public void acceptEventApplication(int applicationId, int status, CallbackInterface callbackInterface) {
+        service.acceptStatus(applicationId, status).enqueue(new Callback<ApplicationDataModel>() {
             @Override
             public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
                 if (response.isSuccessful()) {
@@ -337,6 +415,8 @@ public class EventDataSource {
                 callbackInterface.onError("Network error");
             }
         });
+
+
     }
 
     public void getFilteredEvents(String query, CallbackInterface callback) {

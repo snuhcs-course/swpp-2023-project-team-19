@@ -2,6 +2,7 @@ package com.example.gathernow.main_ui.event_search;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,12 +34,15 @@ public class EventSearchActivity extends AppCompatActivity {
     private String query;
     private RelativeLayout no_event_layout;
     private  LinearLayout eventCardContainer;
+    private View rootView;
+    public SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d("EventSearchedActivity", "onCreate");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_search);
-        View rootView = findViewById(android.R.id.content);
+        rootView = findViewById(android.R.id.content);
         eventSearchViewModel = new EventSearchViewModel(this);
         no_event_layout = findViewById(R.id.no_event_layout);
         eventCardContainer = findViewById(R.id.eventCardContainer);
@@ -48,6 +52,14 @@ public class EventSearchActivity extends AppCompatActivity {
             if (actionId == EditorInfo.IME_ACTION_DONE || (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                 // User pressed "Done" on the keyboard or clicked "Enter"
                 query = searchBar.getText().toString();
+
+                // save search query for press back button case
+                preferences = getSharedPreferences("SearchPreferences", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("searchQuery", query);
+                editor.apply();
+
+
                 Log.d("EventSearch", "query: " + query);
                 // Do something with the search text
                 eventCardContainer.removeAllViews();
@@ -77,6 +89,41 @@ public class EventSearchActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onResume() {
+        Log.d("EventSearchedActivity", "onResume");
+        super.onResume();
+        // Restore search information
+        SharedPreferences preferences = getSharedPreferences("SearchPreferences", Context.MODE_PRIVATE);
+        String previousQuery = preferences.getString("searchQuery", "");
+
+        if (!previousQuery.equals("")) {
+            // Update the UI with the restored search information
+            // Do something with the search text
+            searchBar.setText(previousQuery);
+            eventCardContainer.removeAllViews();
+            eventSearchViewModel.getAlertMessage().observe(EventSearchActivity.this, message -> Toast.makeText(EventSearchActivity.this, message, Toast.LENGTH_SHORT).show());
+            eventSearchViewModel.getSearchedEvents().observe(EventSearchActivity.this, eventDataModels -> updateSearchedEventsUI(eventDataModels, rootView));
+            eventSearchViewModel.fetchSearchedEvents(previousQuery);
+            hideKeyboard();
+        }
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        preferences = getSharedPreferences("SearchPreferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("searchQuery");
+        editor.apply();
+
+        super.onBackPressed();
+        Intent intent = new Intent(this, FragHome.class);
+        finish();
+        startActivity(intent);
+
+    }
+
     private void updateSearchedEventsUI(List<EventDataModel> eventDataList, View rootView){
         if(!eventDataList.isEmpty()){
             Log.d("SearchedActivity", "Show events!");
@@ -102,7 +149,7 @@ public class EventSearchActivity extends AppCompatActivity {
             Log.d("EventSearchedActivity", "Loaded user events");
             //LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
             eventCardContainer.removeAllViews();
-            EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId);
+            EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId, "search");
         }
     }
 

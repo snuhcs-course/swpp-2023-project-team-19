@@ -57,6 +57,9 @@ public class ProfileActivity extends Fragment {
     private int userId;
     private ProfileViewModel profileViewModel;
 
+    private boolean isFirstCreation = false;
+    private View rootView;
+
     public ProfileActivity() {
         // Required empty public constructor
     }
@@ -96,8 +99,12 @@ public class ProfileActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        Log.d("ProfileActivity", "onCreate");
+
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+        rootView = inflater.inflate(R.layout.fragment_profile, container, false);
+
+        isFirstCreation = true;
 
         initializeUI(rootView);
         profileViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show());
@@ -109,6 +116,7 @@ public class ProfileActivity extends Fragment {
         return rootView;
     }
 
+
     private void updateUserEventsUI(List<EventDataModel> eventDataList, View rootView) {
         if (eventDataList == null || eventDataList.isEmpty()) {
             Log.d("ProfileActivity", "User event data is null or empty");
@@ -116,7 +124,7 @@ public class ProfileActivity extends Fragment {
         } else {
             Log.d("ProfileActivity", "Loaded user events");
             LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-            EventCardHelper.createEventCardList(getContext(), eventDataList, eventCardContainer, userId);
+            EventCardHelper.createEventCardList(getContext(), eventDataList, eventCardContainer, userId, "profile");
             loadingLayout.setVisibility(View.GONE);
             userInfo.setVisibility(View.VISIBLE);
             layoutOne.setVisibility(View.GONE);
