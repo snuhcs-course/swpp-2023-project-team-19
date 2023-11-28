@@ -67,8 +67,14 @@ public class HomeViewModelTest {
         //mockEventDataSource= Mockito.spy(new EventDataSource());
         //mockContext = Mockito.mock(Context.class);
         //mockEventRepository = Mockito.spy(new EventRepository(mockEventDataSource));
+        try (AutoCloseable mocks = MockitoAnnotations.openMocks(this)) {
+            // Other setup code...
+            viewModel = new HomeViewModel(homeActivity.getContext());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        viewModel = new HomeViewModel(homeActivity.getContext());
+
 
 
     }
@@ -98,27 +104,25 @@ public class HomeViewModelTest {
     @Test
     public void fetchEventsTestWithLiveData() {
         lenient().doAnswer(invocation -> {
-            System.out.println(("Here 1"));
+
             // Simulate a successful response
             CallbackInterface callback = (CallbackInterface) invocation.getArgument(0);
             callback.onSuccess(mockEventDataModels());
-            System.out.println(("Here 2"));
-            return invocation.callRealMethod();
+
+            return null;
         }).when(mockEventRepository).getAllEvents(any(CallbackInterface.class));
 
         // Observe the ViewModel
-        viewModel.returnAllEvents().observeForever(events -> {
+        viewModel.getAllEvents().observeForever(events -> {
             // Assert that the observed events match the expected ones
-            System.out.println(("Here 3"));
+
             assertNotNull(events);
             assertEquals(mockEventDataModels(), events);
             System.out.println("Mock event data models: ");
         });
-        System.out.println(("Here 4"));
+
         viewModel.fetchAllEvents();
-        System.out.println(("Here 5"));
-        viewModel.returnAllEvents().removeObservers(homeActivity);
-        System.out.println(("Here 6"));
+        viewModel.getAllEvents().removeObservers(homeActivity);
     }
 
     @Test

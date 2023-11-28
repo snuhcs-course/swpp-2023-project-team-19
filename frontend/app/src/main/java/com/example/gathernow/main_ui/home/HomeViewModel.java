@@ -61,9 +61,7 @@ public class HomeViewModel extends ViewModel {
     }
 
 
-    public MutableLiveData<List<EventDataModel>> returnAllEvents() {
-        return allEvents;
-    }
+
 
 
 }
