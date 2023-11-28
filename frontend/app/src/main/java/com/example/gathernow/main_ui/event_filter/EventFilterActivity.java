@@ -99,7 +99,7 @@ public class EventFilterActivity extends AppCompatActivity {
         } else {
             Log.d("EventFilterActivity", "Loaded user events");
             LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
-            EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId);
+            EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId, "filter");
         }
 
     }

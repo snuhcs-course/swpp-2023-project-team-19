@@ -102,7 +102,7 @@ public class EventSearchActivity extends AppCompatActivity {
             Log.d("EventSearchedActivity", "Loaded user events");
             //LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
             eventCardContainer.removeAllViews();
-            EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId);
+            EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId, "search");
         }
     }
 
