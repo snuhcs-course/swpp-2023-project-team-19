@@ -28,11 +28,11 @@ import java.util.List;
 
 public class EventSearchActivity extends AppCompatActivity {
 
-    private EventSearchViewModel eventSearchViewModel;
-    private TextInputEditText searchBar;
-    private String query;
-    private RelativeLayout no_event_layout;
-    private  LinearLayout eventCardContainer;
+    EventSearchViewModel eventSearchViewModel;
+    TextInputEditText searchBar;
+    String query;
+    RelativeLayout no_event_layout;
+    LinearLayout eventCardContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +52,7 @@ public class EventSearchActivity extends AppCompatActivity {
                 // Do something with the search text
                 eventCardContainer.removeAllViews();
                 eventSearchViewModel.getAlertMessage().observe(EventSearchActivity.this, message -> Toast.makeText(EventSearchActivity.this, message, Toast.LENGTH_SHORT).show());
-                eventSearchViewModel.getSearchedEvents().observe(EventSearchActivity.this, eventDataModels -> updateSearchedEventsUI(eventDataModels, rootView));
+                eventSearchViewModel.returnSearchedEvents().observe(EventSearchActivity.this, eventDataModels -> updateSearchedEventsUI(eventDataModels, rootView));
                 eventSearchViewModel.fetchSearchedEvents(query);
                 hideKeyboard();
                 return true; // Consume the event
@@ -77,7 +77,7 @@ public class EventSearchActivity extends AppCompatActivity {
 
     }
 
-    private void updateSearchedEventsUI(List<EventDataModel> eventDataList, View rootView){
+    void updateSearchedEventsUI(List<EventDataModel> eventDataList, View rootView){
         if(!eventDataList.isEmpty()){
             Log.d("SearchedActivity", "Show events!");
             no_event_layout.setVisibility(View.GONE);
@@ -91,7 +91,7 @@ public class EventSearchActivity extends AppCompatActivity {
     }
 
     // show event cards
-    private void fetchEventsUI(List<EventDataModel> eventDataList, View rootView) {
+    void fetchEventsUI(List<EventDataModel> eventDataList, View rootView) {
         //get current login user id
         UserLocalDataSource userLocalDataSource = new UserLocalDataSource(this);
         int userId = Integer.parseInt(userLocalDataSource.getUserId());
@@ -106,7 +106,7 @@ public class EventSearchActivity extends AppCompatActivity {
         }
     }
 
-    private void hideKeyboard() {
+    void hideKeyboard() {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(searchBar.getWindowToken(), 0);
     }

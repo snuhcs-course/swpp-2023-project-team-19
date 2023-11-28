@@ -30,7 +30,7 @@ public class EventSearchViewModel extends ViewModel {
         return alertMessage;
     }
 
-    public MutableLiveData<List<EventDataModel>> getSearchedEvents() {
+    public MutableLiveData<List<EventDataModel>> returnSearchedEvents() {
         return searchedEvents;
     }
 

@@ -15,9 +15,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//import com.example.gathernow.EventCardView;
-//import com.example.gathernow.EventData;
-//import com.example.gathernow.EventInfo;
 import com.example.gathernow.FilterFragment;
 import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
@@ -40,16 +37,17 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+
 public class EventFilterActivity extends AppCompatActivity {
 
-    private EventFilterViewModel eventFilterViewModel;
-    private List<String> selectedLanguageChips;
-    private List<String> selectedEventTypeChips;
-    private List<String> selectedDateChips;
-    private List<String> selectedTimeChips;
+    EventFilterViewModel eventFilterViewModel;
+    List<String> selectedLanguageChips = new ArrayList<>();
+    List<String> selectedEventTypeChips = new ArrayList<>();
+    List<String> selectedDateChips = new ArrayList<>();
+    List<String> selectedTimeChips = new ArrayList<>();
     boolean isFreeEvent;
     private String query;
-    private RelativeLayout no_event_layout;
+    RelativeLayout no_event_layout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +70,7 @@ public class EventFilterActivity extends AppCompatActivity {
         eventFilterViewModel.fetchFilteredEvents(query);
     }
 
-    private void updateFilteredEventsUI(List<EventDataModel> eventDataList, View rootView){
+    void updateFilteredEventsUI(List<EventDataModel> eventDataList, View rootView){
         if(!eventDataList.isEmpty()){
             no_event_layout.setVisibility(View.GONE);
             fetchEventsUI(eventDataList, rootView);
@@ -80,7 +78,7 @@ public class EventFilterActivity extends AppCompatActivity {
         }
     }
 
-    private void checkFilter(Intent intent) {
+    void checkFilter(Intent intent) {
         if (intent != null) {
             isFreeEvent = intent.getBooleanExtra("isFreeEvent", false);
             selectedLanguageChips = intent.getStringArrayListExtra("selectedLanguageChips");
@@ -91,7 +89,7 @@ public class EventFilterActivity extends AppCompatActivity {
     }
 
     // show event cards
-    private void fetchEventsUI(List<EventDataModel> eventDataList, View rootView) {
+    void fetchEventsUI(List<EventDataModel> eventDataList, View rootView) {
         //get current login user id
         UserLocalDataSource userLocalDataSource = new UserLocalDataSource(this);
         int userId = Integer.parseInt(userLocalDataSource.getUserId());
@@ -106,7 +104,7 @@ public class EventFilterActivity extends AppCompatActivity {
 
     }
 
-    private void setupFilterListener(View rootView) {
+    void setupFilterListener(View rootView) {
         ImageButton filterButton = rootView.findViewById(R.id.filter_button);
         filterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -117,15 +115,20 @@ public class EventFilterActivity extends AppCompatActivity {
         });
     }
 
-    private String getQueryString(){
+    String getQueryString(){
         StringBuilder query = new StringBuilder();
 
         // Add is_free parameter
-        query.append("?is_free=").append(isFreeEvent);
+        if(isFreeEvent){ // if is_free_only is true, add is_free=true to query
+            query.append("?is_free=true");
+        } else { // if is_free_only is false, by default it shows all events, so no need to add is_free to query
+            query.append("?");
+        }
+        //query.append("?is_free=").append(isFreeEvent);
 
         // Add "&" if there are additional parameters
-        if (!selectedLanguageChips.isEmpty() || !selectedEventTypeChips.isEmpty() ||
-                !selectedDateChips.isEmpty() || !selectedTimeChips.isEmpty()) {
+        if ((selectedLanguageChips != null && !selectedLanguageChips.isEmpty()) || (selectedEventTypeChips != null && !selectedEventTypeChips.isEmpty()) ||
+                (selectedDateChips != null && !selectedDateChips.isEmpty()) || (selectedTimeChips != null && !selectedTimeChips.isEmpty())) {
             query.append("&");
         }
 
@@ -140,42 +143,13 @@ public class EventFilterActivity extends AppCompatActivity {
     }
 
     private static void appendParameterList(StringBuilder query, String parameterName, List<String> values) {
-        for (String value : values) {
-            query.append(parameterName).append("=").append(value).append("&");
+        if (values != null) {
+            for (String value : values) {
+                query.append(parameterName).append("=").append(value).append("&");
+            }
+        } else {
+            query.append(parameterName).append("=").append("&");
         }
     }
 
-
-    /*
-    // use log to check
-            Log.d("FilterActivity", "Is Free Event: " + isFreeEvent);
-
-            if(!selectedLanguageChips.isEmpty()){
-                Log.d("FilterActivity", "Selected Language Chips:");
-                for (String chipId : selectedLanguageChips) {
-                    Log.d("FilterActivity", "Chip ID: " + chipId);
-                }
-            }
-
-            if(!selectedEventTypeChips.isEmpty()){ //selectedEventTypeChips != null
-                Log.d("FilterActivity", "Selected EventType Chips:");
-                for (String chipId : selectedEventTypeChips) {
-                    Log.d("FilterActivity", "Chip ID: " + chipId);
-                }
-            }
-
-            if(!selectedDateChips.isEmpty()){
-                Log.d("FilterActivity", "Selected Date Chips:");
-                for (String chipId : selectedDateChips) {
-                    Log.d("FilterActivity", "Chip ID: " + chipId);
-                }
-            }
-
-            if(!selectedTimeChips.isEmpty()){
-                Log.d("FilterActivity", "Selected Time Chips:");
-                for (String chipId : selectedTimeChips) {
-                    Log.d("FilterActivity", "Chip ID: " + chipId);
-                }
-            }
-     */
 }
