@@ -22,7 +22,7 @@ public class ApplicantCardView extends LinearLayout {
     private final Button approveButton, rejectButton, acceptedButton;
     private final ApplicantCardViewModel applicantCardViewModel;
 
-    public ApplicantCardView(Context context, AttributeSet attrs, int status) {
+    public ApplicantCardView(Context context, AttributeSet attrs, int status, int eventId) {
         super(context, attrs);
         setOrientation(LinearLayout.VERTICAL);
         setGravity(Gravity.CENTER_HORIZONTAL);
@@ -59,24 +59,33 @@ public class ApplicantCardView extends LinearLayout {
             }
         });
 
-        initializeButtons(status);
+        initializeButtons(status, eventId);
 
     }
 
-    private void initializeButtons(int status) {
+    private void initializeButtons(int status, int eventId) {
         if (status == 1) {
             // Applicants already been accepted
             approveButton.setVisibility(INVISIBLE);
             rejectButton.setVisibility(INVISIBLE);
             acceptedButton.setVisibility(VISIBLE);
             acceptedButton.setText("Accepted");
-        } else {
+        }
+        else if(status == 2){
+            // Applicants already been rejected
+            approveButton.setVisibility(INVISIBLE);
+            rejectButton.setVisibility(INVISIBLE);
+            acceptedButton.setVisibility(VISIBLE);
+            acceptedButton.setText("Rejected");
+            acceptedButton.setEnabled(false);
+        }
+        else {
             approveButton.setVisibility(VISIBLE);
             rejectButton.setVisibility(VISIBLE);
             acceptedButton.setVisibility(INVISIBLE);
 
-            approveButton.setOnClickListener(view -> applicantCardViewModel.acceptApplication(applicationId));
-            rejectButton.setOnClickListener(view -> applicantCardViewModel.rejectApplication(applicationId));
+            approveButton.setOnClickListener(view -> applicantCardViewModel.acceptApplication(applicationId, 1, eventId));
+            rejectButton.setOnClickListener(view -> applicantCardViewModel.acceptApplication(applicationId, 2, eventId));
         }
     }
 
@@ -103,9 +112,9 @@ public class ApplicantCardView extends LinearLayout {
 
     public void setApplicationId(Integer application_id) {
         this.applicationId = application_id;
-
-
     }
+
+
 
 
 }

@@ -22,12 +22,18 @@ public class ApplicantCardViewModel extends ViewModel {
         return applicationStatus;
     }
 
-    public void acceptApplication(int applicationId) {
-        eventRepository.acceptEventApplication(applicationId, new CallbackInterface() {
+    public void acceptApplication(int applicationId, int status, int eventId) {
+        eventRepository.acceptEventApplication(applicationId, status, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
-                applicationStatus.setValue("Accepted");
-                Log.d("ApplicantCardViewModel", "Application accepted");
+                if(status == 1){
+                    applicationStatus.setValue("Accepted");
+                    Log.d("ApplicantCardViewModel", "Application accepted");
+                }
+                else{
+                    applicationStatus.setValue("Rejected");
+                    Log.d("ApplicantCardViewModel", "Application rejected");
+                }
             }
 
             @Override
@@ -36,6 +42,23 @@ public class ApplicantCardViewModel extends ViewModel {
                 Log.d("ApplicantCardViewModel", "Application accept failed");
             }
         });
+
+         if (status == 1){
+             eventRepository.increaseNumJoined(eventId, new CallbackInterface() {
+                 @Override
+                 public <T> void onSuccess(T result) {
+                     Log.d("ApplicantCardViewModel", "Num joined increased");
+                 }
+
+                 @Override
+                 public void onError(String message) {
+                     alertMessage.setValue(message);
+                     Log.d("ApplicantCardViewModel", "Num joined increase failed");
+                 }
+             });
+         }
+
+
     }
 
     public void rejectApplication(int applicationId) {
@@ -52,5 +75,6 @@ public class ApplicantCardViewModel extends ViewModel {
                 Log.d("ApplicantCardViewModel", "Application reject failed");
             }
         });
+
     }
 }

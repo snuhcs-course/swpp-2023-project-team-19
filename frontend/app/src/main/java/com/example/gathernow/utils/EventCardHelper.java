@@ -15,7 +15,7 @@ import java.sql.Time;
 import java.util.List;
 
 public class EventCardHelper {
-    public static void createEventCardList(Context context, List<EventDataModel> eventDataList, LinearLayout eventCardContainer, int userId) {
+    public static void createEventCardList(Context context, List<EventDataModel> eventDataList, LinearLayout eventCardContainer, int userId, String frag) {
         if (eventDataList == null || eventDataList.isEmpty()) {
             return;
         }
@@ -38,6 +38,7 @@ public class EventCardHelper {
                 Intent intent = new Intent(v.getContext(), EventInfoActivity.class);
                 intent.putExtra("userId", userId);
                 intent.putExtra("eventId", currentEvent.getEventId());
+                intent.putExtra("sourceFrag", frag);
                 context.startActivity(intent);
             });
 
@@ -50,7 +51,7 @@ public class EventCardHelper {
         }
         for (int i = 0; i < applicantList.size(); i++) {
             ApplicationDataModel currentApplicant = applicantList.get(i);
-            ApplicantCardView newApplicantCard = new ApplicantCardView(container.getContext(), null, currentApplicant.getRequestStatus());
+            ApplicantCardView newApplicantCard = new ApplicantCardView(container.getContext(), null, currentApplicant.getRequestStatus(), currentApplicant.getEventId());
             newApplicantCard.setApplicationId(currentApplicant.getApplicationId());
             newApplicantCard.setApplicantName(currentApplicant.getApplicantName());
             newApplicantCard.setApplicantContact(currentApplicant.getApplicantContact());
