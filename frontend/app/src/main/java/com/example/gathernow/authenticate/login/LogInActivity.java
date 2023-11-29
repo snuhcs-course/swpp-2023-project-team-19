@@ -1,5 +1,7 @@
 package com.example.gathernow.authenticate.login;
 
+import static com.google.android.material.internal.ViewUtils.hideKeyboard;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -8,6 +10,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.view.MotionEvent;
+import android.view.inputmethod.InputMethodManager;
 
 import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
@@ -26,6 +30,18 @@ public class LogInActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.email);
         passwordInput = findViewById(R.id.password);
         alert = findViewById(R.id.alert);
+
+        View rootLayout = findViewById(R.id.loginRootLayout);
+
+        // Add a touch listener to hide the keyboard when tapping on a blank space
+        rootLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKB();
+                return false;
+            }
+        });
+
 
         // Data source
         LogInDataSource logInDataSource = new LogInDataSource(LogInActivity.this);
@@ -56,6 +72,15 @@ public class LogInActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void hideKB() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+    }
+
 
     public void loginButtonOnClick(View view) {
         // Check user's input
