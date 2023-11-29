@@ -14,9 +14,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,11 +70,15 @@ public class EventInfoActivity extends AppCompatActivity {
 
     private double eventLongitude;
     private double eventLatitude;
+    private MapFragment mapFragment;
+
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
+        scrollView = findViewById(R.id.content);
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
         userId = intent.getIntExtra("userId", -1);
@@ -283,22 +289,11 @@ public class EventInfoActivity extends AppCompatActivity {
         eventLongitude = eventDataModel.getEventLongitude();
         eventLatitude = eventDataModel.getEventLatitude();
         FragmentManager fm = getSupportFragmentManager();
-        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
+        mapFragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
         if (mapFragment == null) {
             mapFragment = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
         }
-
-        // After committing the transaction above, set up the map asynchronously
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull NaverMap naverMap) {
-                // Here, you have access to the NaverMap object
-                UiSettings uiSettings = naverMap.getUiSettings();
-                uiSettings.setLocationButtonEnabled(false); // This hides the GPS button
-                // Other map settings can be done here as well
-            }
-        });
 
         // location text is clickable and will open NaverMap
         eventLocation.setPaintFlags(eventLocation.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
@@ -321,6 +316,33 @@ public class EventInfoActivity extends AppCompatActivity {
                 marker.setPosition(new LatLng(eventLatitude, eventLongitude));
                 marker.setMap(naverMap);
                 marker.setCaptionText("Event location");
+
+                UiSettings uiSettings = naverMap.getUiSettings();
+                uiSettings.setLocationButtonEnabled(false); // This hides the GPS button
+                uiSettings.setZoomGesturesEnabled(true);
+                uiSettings.setScrollGesturesEnabled(true);
+                uiSettings.setZoomControlEnabled(true);
+
+                View mapView = mapFragment.getView();
+                if (mapView != null) {
+                    mapView.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            // When the map is touched, request the parent ScrollView to not intercept touch events
+                            switch (event.getAction()) {
+                                case MotionEvent.ACTION_DOWN:
+                                    scrollView.requestDisallowInterceptTouchEvent(true);
+                                    break;
+                                case MotionEvent.ACTION_UP:
+                                case MotionEvent.ACTION_CANCEL:
+                                    scrollView.requestDisallowInterceptTouchEvent(false);
+                                    break;
+                            }
+                            // Let the map handle the touch event
+                            return false;
+                        }
+                    });
+                }
             }
         });
     }
