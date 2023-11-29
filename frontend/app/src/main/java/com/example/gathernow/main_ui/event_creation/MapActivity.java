@@ -1,5 +1,7 @@
 package com.example.gathernow.main_ui.event_creation;
 
+import static com.example.gathernow.main_ui.event_creation.TranslateAPI.translate_address;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -14,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.gathernow.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.map.CameraPosition;
@@ -22,6 +23,7 @@ import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -39,8 +41,8 @@ public class MapActivity extends AppCompatActivity {
     private LatLng selectedLocation;
     private String locationName;
 
-    private String apiKeyId = "gb5ymxyg6a"; // Replace with your Naver API client ID
-    private String apiKey = "EP5Z85B4CEaw7XknsqHklNCu6RePdI8SwTSnCwQa"; // Replace with your Naver API client secret
+    private String apiKeyId = ""; // Replace with your Naver API client ID
+    private String apiKey = ""; // Replace with your Naver API client secret
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -101,7 +103,7 @@ public class MapActivity extends AppCompatActivity {
             // Set up the buttons
             builder.setPositiveButton("OK", (dialog, which) -> {
                 String additionalInfo = input.getText().toString();
-                resultIntent.putExtra("locationName", locationName + additionalInfo);
+                resultIntent.putExtra("locationName", additionalInfo + ", " + locationName);
                 // Set the result to be sent back
                 setResult(Activity.RESULT_OK, resultIntent);
                 // Finish MapActivity
@@ -166,12 +168,18 @@ public class MapActivity extends AppCompatActivity {
                         String area3 = extractNameFromRegion(region, "area3");
                         String area4 = extractNameFromRegion(region, "area4");
 
+                        String koreanAddress = area1 + area2 + area3 + area4;
+                        String englishAddress = translate_address(koreanAddress);
+                        Log.d("MapActivity", "Address: " + koreanAddress);
+                        Log.d("MapActivity", "Address: " + englishAddress);
+
                         // Concatenate the area names
-                        return area1 + area2 + area3 + area4;
+                        return englishAddress;
                     }
                 }
                 return null;
             }
+
 
             private String extractNameFromRegion(JsonObject region, String areaKey) {
                 if (region.has(areaKey)) {
@@ -240,4 +248,5 @@ public class MapActivity extends AppCompatActivity {
             mapView.onLowMemory();
         }
     }
+
 }
