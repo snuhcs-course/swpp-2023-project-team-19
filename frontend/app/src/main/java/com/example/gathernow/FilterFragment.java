@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 
 import androidx.appcompat.widget.SwitchCompat;
@@ -80,6 +81,7 @@ public class FilterFragment extends BottomSheetDialogFragment {
         ChipGroup eventTypeFilter = rootView.findViewById(R.id.event_type_filter);
         ChipGroup dateFilter = rootView.findViewById(R.id.date_filter);
         ChipGroup timeFilter = rootView.findViewById(R.id.time_filter);
+        EditText locationFilter = rootView.findViewById(R.id.location_filter);
 
         ImageButton resetButton = rootView.findViewById(R.id.reset_button);
         resetButton.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +118,9 @@ public class FilterFragment extends BottomSheetDialogFragment {
                 List<String> selectedEventTypeChips = getSelectedChipTexts(eventTypeFilter);
                 List<String> selectedDateChips = getSelectedChipTexts(dateFilter);
                 List<String> selectedTimeChips = getSelectedChipTexts(timeFilter);
+                String location = locationFilter.getText().toString().trim();
+                List<String> selectedEventLocation = new ArrayList<>();
+                selectedEventLocation.add(location);
 
                 Intent intent = new Intent(getActivity(), EventFilterActivity.class);
 
@@ -124,7 +129,7 @@ public class FilterFragment extends BottomSheetDialogFragment {
                 intent.putStringArrayListExtra("selectedEventTypeChips", new ArrayList<>(selectedEventTypeChips));
                 intent.putStringArrayListExtra("selectedDateChips", new ArrayList<>(selectedDateChips));
                 intent.putStringArrayListExtra("selectedTimeChips", new ArrayList<>(selectedTimeChips));
-
+                intent.putStringArrayListExtra("selectedEventLocation", new ArrayList<>(selectedEventLocation));
                 if (getActivity() instanceof EventFilterActivity) {
                     getActivity().finish();
                 }

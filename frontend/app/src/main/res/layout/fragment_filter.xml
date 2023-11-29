@@ -359,6 +359,14 @@
                 android:paddingVertical="10dp"
                 android:textStyle="bold"/>
 
+            <EditText
+                android:id="@+id/location_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter location"
+                android:inputType="text"
+                android:layout_marginBottom="16dp"/>
+
         </LinearLayout>
     </ScrollView>
 

@@ -45,8 +45,11 @@ public class EventFilterActivity extends AppCompatActivity {
     List<String> selectedEventTypeChips = new ArrayList<>();
     List<String> selectedDateChips = new ArrayList<>();
     List<String> selectedTimeChips = new ArrayList<>();
+    List<String> selectedEventLocation = new ArrayList<>();
+    private String eventLocation;
     boolean isFreeEvent;
     private String query;
+
     RelativeLayout no_event_layout;
 
     @Override
@@ -85,6 +88,8 @@ public class EventFilterActivity extends AppCompatActivity {
             selectedEventTypeChips = intent.getStringArrayListExtra("selectedEventTypeChips");
             selectedDateChips = intent.getStringArrayListExtra("selectedDateChips");
             selectedTimeChips = intent.getStringArrayListExtra("selectedTimeChips");
+            selectedEventLocation = intent.getStringArrayListExtra("selectedEventLocation");
+
         }
     }
 
@@ -128,7 +133,8 @@ public class EventFilterActivity extends AppCompatActivity {
 
         // Add "&" if there are additional parameters
         if ((selectedLanguageChips != null && !selectedLanguageChips.isEmpty()) || (selectedEventTypeChips != null && !selectedEventTypeChips.isEmpty()) ||
-                (selectedDateChips != null && !selectedDateChips.isEmpty()) || (selectedTimeChips != null && !selectedTimeChips.isEmpty())) {
+                (selectedDateChips != null && !selectedDateChips.isEmpty()) || (selectedTimeChips != null && !selectedTimeChips.isEmpty())
+                || (selectedEventLocation != null && !selectedEventLocation.isEmpty())) {
             query.append("&");
         }
 
@@ -137,7 +143,7 @@ public class EventFilterActivity extends AppCompatActivity {
         appendParameterList(query, "event_type", selectedEventTypeChips);
         appendParameterList(query, "date", selectedDateChips);
         appendParameterList(query, "time", selectedTimeChips);
-
+        appendParameterList(query, "location_address", selectedEventLocation);
         Log.d("FilterActivity", "Query: " + query.toString());
         return query.toString();
     }
