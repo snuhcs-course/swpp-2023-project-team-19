@@ -9,6 +9,8 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Paint;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
@@ -291,6 +293,13 @@ public class EventInfoActivity extends AppCompatActivity {
             mapFragment = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
         }
+
+        // location text is clickable and will open NaverMap
+        eventLocation.setPaintFlags(eventLocation.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        eventLocation.setOnClickListener(v -> {
+            openNaverMap(eventLongitude, eventLatitude);
+        });
+
         mapFragment.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull NaverMap naverMap) {
@@ -308,6 +317,28 @@ public class EventInfoActivity extends AppCompatActivity {
                 marker.setCaptionText("Event location");
             }
         });
+    }
+
+    private void openNaverMap(double eventLongitude, double eventLatitude) {
+        // Create a Uri with the specified latitude and longitude
+        //Uri gmmIntentUri = Uri.parse("geo:" + eventLongitude + "," + eventLatitude);
+        Uri gmmIntentUri = Uri.parse("geo:" + eventLatitude + "," + eventLongitude + "?q=" + eventLatitude + "," + eventLongitude);
+
+
+        // Create an Intent to launch the Naver app
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.nhn.android.nmap");
+
+        // Check if Naver app is installed
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
+        } else {
+            // If Naver app is not installed, you can open the map in a browser or
+            // suggest the user to install the Naver app from the Play Store
+            Uri playStoreUri = Uri.parse("market://details?id=com.nhn.android.nmap");
+            Intent playStoreIntent = new Intent(Intent.ACTION_VIEW, playStoreUri);
+            startActivity(playStoreIntent);
+        }
     }
 
     private void setEventPhoto(String event_type, String event_images) {
