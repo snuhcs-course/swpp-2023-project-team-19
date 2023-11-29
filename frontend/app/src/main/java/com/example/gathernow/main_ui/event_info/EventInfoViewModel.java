@@ -100,12 +100,12 @@ public class EventInfoViewModel extends ViewModel {
         eventInfoRepository.getEventInfo(eventId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
-                Log.d("EventInfoViewModel", "Load event info successfully");
+//                Log.d("EventInfoViewModel", "Load event info successfully");
                 EventDataModel res = (EventDataModel) result;
                 eventData.postValue(res);
                 loadHostInfo(res.getHostId());
                 setButtonVisibility(userId, res.getHostId(), res.getEventId());
-                Log.d("EventInfoViewModel", "Event longitude: " + res.getEventLongitude() + " Event latitude: " + res.getEventLatitude());
+//                Log.d("EventInfoViewModel", "Event longitude: " + res.getEventLongitude() + " Event latitude: " + res.getEventLatitude());
 
             }
 

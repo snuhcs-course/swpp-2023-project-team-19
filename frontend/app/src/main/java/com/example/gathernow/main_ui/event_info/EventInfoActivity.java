@@ -291,22 +291,19 @@ public class EventInfoActivity extends AppCompatActivity {
             mapFragment = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
         }
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull NaverMap naverMap) {
-                // For example, set the camera position
-                // Testing with specifed location. Will generalize it latter.
-                CameraPosition cameraPosition = new CameraPosition(
-                        new LatLng(eventLatitude, eventLongitude),
-                        15.0 // Zoom level (adjust as needed)
-                );
-                Log.d("EventInfo Testing", "Event location: " + eventLatitude + ", " + eventLongitude);
-                naverMap.setCameraPosition(cameraPosition);
-                Marker marker = new Marker();
-                marker.setPosition(new LatLng(eventLatitude, eventLongitude));
-                marker.setMap(naverMap);
-                marker.setCaptionText("Event location");
-            }
+        mapFragment.getMapAsync(naverMap -> {
+            // For example, set the camera position
+            // Testing with specifed location. Will generalize it latter.
+            CameraPosition cameraPosition = new CameraPosition(
+                    new LatLng(eventLatitude, eventLongitude),
+                    15.0 // Zoom level (adjust as needed)
+            );
+            Log.d("EventInfo Testing", "Event location: " + eventLatitude + ", " + eventLongitude);
+            naverMap.setCameraPosition(cameraPosition);
+            Marker marker = new Marker();
+            marker.setPosition(new LatLng(eventLatitude, eventLongitude));
+            marker.setMap(naverMap);
+            marker.setCaptionText("Event location");
         });
     }
 
