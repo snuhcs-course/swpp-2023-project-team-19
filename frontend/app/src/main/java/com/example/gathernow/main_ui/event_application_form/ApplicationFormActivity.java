@@ -20,6 +20,8 @@ import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;
 import com.example.gathernow.api.models.ApplicationDataModelBuilder;
 import com.example.gathernow.api.models.UserDataModel;
+import com.example.gathernow.utils.ImageLoader.ImageLoader;
+import com.example.gathernow.utils.ImageLoader.ProxyImageLoader;
 import com.squareup.picasso.Picasso;
 
 import retrofit2.Call;
@@ -105,7 +107,11 @@ public class ApplicationFormActivity extends AppCompatActivity {
         profileName.setText(displayUserText);
 
         ImageView profileImage = findViewById(R.id.profile_image);
-        Picasso.get().load(hostAvatar).into(profileImage);
+        //Picasso.get().load(hostAvatar).into(profileImage);
+
+        int resourceId = R.drawable.ic_user_no_profile;
+        ImageLoader imageLoader = new ProxyImageLoader(hostAvatar, resourceId);
+        imageLoader.displayImage(profileImage);
 
     }
 

@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
@@ -31,6 +33,9 @@ public class HomeActivity extends Fragment {
     private String mParam2;
 
     private HomeViewModel homeViewModel;
+
+    private RelativeLayout loadingLayout;
+    private ScrollView scroll;
 
     private String frag = "home";
 
@@ -72,13 +77,19 @@ public class HomeActivity extends Fragment {
 
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        loadingLayout = rootView.findViewById(R.id.loading_layout);
+        scroll = rootView.findViewById(R.id.scroll);
+        loadingLayout.setVisibility(View.VISIBLE);
+        scroll.setVisibility(View.GONE);
 
         homeViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show());
         homeViewModel.getAllEvents().observe(getViewLifecycleOwner(), eventDataModels -> fetchEventsUI(eventDataModels, rootView));
         homeViewModel.fetchAllEvents();
 
+
         setupSearchListener(rootView);
         setupFilterListener(rootView);
+
 
         return rootView;
     }
@@ -96,6 +107,8 @@ public class HomeActivity extends Fragment {
             LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
             EventCardHelper.createEventCardList(getContext(), eventDataList, eventCardContainer, userId, frag);
         }
+        loadingLayout.setVisibility(View.GONE);
+        scroll.setVisibility(View.VISIBLE);
     }
 
     private void setupSearchListener(View rootView) {

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +51,8 @@ public class EventFilterActivity extends AppCompatActivity {
     boolean isFreeEvent;
     private String query;
 
-    RelativeLayout no_event_layout;
+    RelativeLayout no_event_layout, loadingLayout;
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +62,11 @@ public class EventFilterActivity extends AppCompatActivity {
         eventFilterViewModel = new EventFilterViewModel(this);
 
         no_event_layout = findViewById(R.id.no_event_layout);
+        loadingLayout = findViewById(R.id.loading_layout);
+        scrollView = findViewById(R.id.scroll);
+        no_event_layout.setVisibility(View.GONE);
+        loadingLayout.setVisibility(View.VISIBLE);
+        scrollView.setVisibility(View.GONE);
 
         setupFilterListener(rootView);
 
@@ -101,11 +108,18 @@ public class EventFilterActivity extends AppCompatActivity {
 
         if (eventDataList == null || eventDataList.isEmpty()){
             Log.d("EventFilterActivity", "Event data is null or empty");
+            loadingLayout.setVisibility(View.GONE);
+            no_event_layout.setVisibility(View.VISIBLE);
         } else {
             Log.d("EventFilterActivity", "Loaded user events");
             LinearLayout eventCardContainer = rootView.findViewById(R.id.eventCardContainer);
             EventCardHelper.createEventCardList(this, eventDataList, eventCardContainer, userId, "filter");
+            loadingLayout.setVisibility(View.GONE);
+            scrollView.setVisibility(View.VISIBLE);
         }
+
+
+
 
     }
 

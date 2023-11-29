@@ -33,7 +33,10 @@ import com.example.gathernow.main_ui.event_filter.EventFilterActivity;
 import com.example.gathernow.main_ui.event_search.EventSearchActivity;
 import com.example.gathernow.main_ui.home.HomeActivity;
 import com.example.gathernow.main_ui.profile.ProfileActivity;
+import com.example.gathernow.utils.ImageLoader.ImageLoader;
+import com.example.gathernow.utils.ImageLoader.ProxyImageLoader;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.squareup.picasso.Picasso;
 
@@ -207,22 +210,10 @@ public class EventInfoActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        /*
-        else if("filter".equals(sourceFrag)){
-            Log.e("BackButton", "Going back to Filter in else case");
-            Intent intent = new Intent(this, EventFilterActivity.class);
-            intent.putExtra("targetFragment", "filter");
-            startActivity(intent);
-            finish();
-        }*/
         else{
             Log.e("BackButton", "Going back to Home in else case");
-            //Intent intent = new Intent(this, FragHome.class);
-            //startActivity(intent);
-            //finish();
             super.onBackPressed();
         }
-
     }
 
     private void updateHostInfoUI(UserDataModel userDataModel) {
@@ -235,9 +226,13 @@ public class EventInfoActivity extends AppCompatActivity {
         TextView profileName = findViewById(R.id.profile_name);
         profileName.setText(hostName);
 
-        hostAvatar = "http://20.2.88.70:8000" + userDataModel.getAvatar();
+        hostAvatar = userDataModel.getAvatar();
         ImageView profile_img = findViewById(R.id.profile_img);
-        Picasso.get().load(hostAvatar).into(profile_img);
+        //Picasso.get().load(hostAvatar).into(profile_img);
+
+        int resourceId = R.drawable.ic_user_no_profile;
+        ImageLoader imageLoader = new ProxyImageLoader(hostAvatar, resourceId);
+        imageLoader.displayImage(profile_img);
     }
 
     private void updateEventInfoUI(EventDataModel eventDataModel) {
@@ -293,6 +288,17 @@ public class EventInfoActivity extends AppCompatActivity {
             mapFragment = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
         }
+
+        // After committing the transaction above, set up the map asynchronously
+        mapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull NaverMap naverMap) {
+                // Here, you have access to the NaverMap object
+                UiSettings uiSettings = naverMap.getUiSettings();
+                uiSettings.setLocationButtonEnabled(false); // This hides the GPS button
+                // Other map settings can be done here as well
+            }
+        });
 
         // location text is clickable and will open NaverMap
         eventLocation.setPaintFlags(eventLocation.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
