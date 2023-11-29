@@ -173,7 +173,7 @@ public class ProfileViewModelTest {
         assertEquals(mockEvents, viewModel.getUserEvents().getValue());
     }
     @Test
-    public void getALertMessageTest() throws InterruptedException {
+    public void getAlertMessageTest() throws InterruptedException {
         // Mock data or use a spy to manipulate the real EventRepository if necessary
         // ...
 
