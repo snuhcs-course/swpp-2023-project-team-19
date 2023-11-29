@@ -72,11 +72,6 @@ public class EventDataModelBuilder {
         return this;
     }
 
-    public EventDataModelBuilder setEventNumJoined(Integer event_num_joined) {
-        eventDataModel.setEventNumJoined(event_num_joined);
-        return this;
-    }
-
     public EventDataModelBuilder setHostId(Integer host_id) {
         eventDataModel.setHostId(host_id);
         return this;
