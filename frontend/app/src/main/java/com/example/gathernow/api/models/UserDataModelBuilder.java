@@ -17,6 +17,26 @@ public class UserDataModelBuilder {
         return this;
     }
 
+    public UserDataModelBuilder setName(String name) {
+        userDataModel.setName(name);
+        return this;
+    }
+
+    public UserDataModelBuilder setAvatar(String avatar) {
+        userDataModel.setAvatar(avatar);
+        return this;
+    }
+
+    public UserDataModelBuilder setUserId(Integer user_id) {
+        userDataModel.setUserId(user_id);
+        return this;
+    }
+
+    public UserDataModelBuilder setCreatedAt(String created_at) {
+        userDataModel.setCreatedAt(created_at);
+        return this;
+    }
+
     public UserDataModel build() {
         return userDataModel;
     }
