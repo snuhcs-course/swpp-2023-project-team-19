@@ -24,7 +24,7 @@ public class ApplicationFormActivityTest {
 
     @Test
     public void testApplicationFormActivity() {
-        onView(withId(R.id.application_form_layout)).check(matches(isDisplayed()));
+        onView(withId(R.id.container)).check(matches(isDisplayed()));
     }
 
     @Test

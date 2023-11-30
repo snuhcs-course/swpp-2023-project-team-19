@@ -26,13 +26,13 @@ public class MainActivityTest {
     @Test
     public void testSignUpButton() {
         onView(withId(R.id.signupButton)).perform(click());
-        onView(withId(R.id.signup_layout)).check(matches(isDisplayed()));
+        onView(withId(R.id.signupRootLayout)).check(matches(isDisplayed()));
     }
 
     @Test
     public void testLoginButton() {
         onView(withId(R.id.loginButton)).perform(click());
-        onView(withId(R.id.login_layout)).check(matches(isDisplayed()));
+        onView(withId(R.id.loginRootLayout)).check(matches(isDisplayed()));
     }
 
 }

@@ -26,7 +26,7 @@ public class SignUpActivityTest {
 
     @Test
     public void testSignUpActivity() {
-        onView(withId(R.id.signup_layout)).check(matches(isDisplayed()));
+        onView(withId(R.id.signupRootLayout)).check(matches(isDisplayed()));
         onView(withId(R.id.name)).perform(typeText("test"));
         onView(withId(R.id.email)).perform(typeText("test@yahoo.com"));
         onView(withId(R.id.password)).perform(typeText("12345678"));

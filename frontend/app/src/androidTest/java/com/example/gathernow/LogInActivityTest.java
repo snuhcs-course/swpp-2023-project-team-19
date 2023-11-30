@@ -25,7 +25,7 @@ public class LogInActivityTest {
 
     @Test
     public void testLogInActivity() {
-        onView(withId(R.id.login_layout)).check(matches(isDisplayed()));
+        onView(withId(R.id.loginRootLayout)).check(matches(isDisplayed()));
         onView(withId(R.id.email)).perform(typeText("test@yahoo.com"));
         onView(withId(R.id.password)).perform(typeText("12345678"));
 
