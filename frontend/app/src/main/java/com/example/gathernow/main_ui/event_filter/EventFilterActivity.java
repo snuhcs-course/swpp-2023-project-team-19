@@ -158,7 +158,7 @@ public class EventFilterActivity extends AppCompatActivity {
         appendParameterList(query, "date", selectedDateChips);
         appendParameterList(query, "time", selectedTimeChips);
         appendParameterList(query, "location_address", selectedEventLocation);
-        Log.d("FilterActivity", "Query: " + query.toString());
+        //Log.d("FilterActivity", "Query: " + query.toString());
         return query.toString();
     }
 

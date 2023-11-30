@@ -448,7 +448,7 @@ public class EventCreateActivity extends Fragment {
             eventThumbnailImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             eventThumbnailImageView.setAdjustViewBounds(true);
             noPhotoText.setVisibility(View.VISIBLE);
-            noPhotoText.setText("Don't like the previous photo? Try uploding another one!");
+            noPhotoText.setText("Don't like the previous photo?\n Try uploding another one!");
             eventThumbnailFilePath = null;
             uploadImgButton.setText("Upload event photo");
             imageUploaded = false;

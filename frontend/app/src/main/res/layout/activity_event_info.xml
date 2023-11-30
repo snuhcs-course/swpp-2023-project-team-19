@@ -134,7 +134,7 @@
                 android:id="@+id/languages"
                 style="@style/TextField"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:layout_marginStart="10dp"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -153,7 +153,7 @@
                 android:layout_marginRight="10dp"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/verticalGuideline"
-                app:layout_constraintTop_toBottomOf="@id/language_title"
+                app:layout_constraintTop_toBottomOf="@id/languages"
                 app:layout_constraintWidth_percent="0.1" />
 
             <TextView
@@ -165,7 +165,7 @@
                 android:text="0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/num_participants_title"
-                app:layout_constraintTop_toBottomOf="@id/language_title" />
+                app:layout_constraintTop_toBottomOf="@id/languages" />
 
             <TextView
                 android:id="@+id/participants_dash"
@@ -175,7 +175,7 @@
                 android:text="/"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/num_reg_participants"
-                app:layout_constraintTop_toBottomOf="@id/language_title" />
+                app:layout_constraintTop_toBottomOf="@id/languages" />
 
             <TextView
                 android:id="@+id/num_max_participants"
@@ -185,7 +185,7 @@
                 android:text="0"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintLeft_toRightOf="@id/participants_dash"
-                app:layout_constraintTop_toBottomOf="@id/language_title" />
+                app:layout_constraintTop_toBottomOf="@id/languages" />
 
             <!--            Event time-->
             <ImageView

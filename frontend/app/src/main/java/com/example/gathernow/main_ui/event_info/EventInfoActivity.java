@@ -282,7 +282,7 @@ public class EventInfoActivity extends AppCompatActivity {
         eventLocation.setText(eventDataModel.getEventLocation());
 
         String priceFormat = String.format(Locale.ENGLISH, "%,d", eventDataModel.getEventPrice());
-        priceFormat = priceFormat + " ₩";
+        priceFormat = "₩ " + priceFormat;
         eventPrice.setText(priceFormat);
 //      setButtonVisibility(eventDataModel.getHostId());
 //
@@ -401,6 +401,7 @@ public class EventInfoActivity extends AppCompatActivity {
                 eventImage.setImageResource(R.mipmap.ic_image6_others_foreground);
                 break;
         }
+        eventImage.getLayoutParams().width = 1000;
     }
 
     public void onDeleteEvent(View view) {
