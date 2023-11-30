@@ -106,7 +106,7 @@
                 android:layout_centerHorizontal="true"
                 android:clickable="true"
                 android:paddingVertical="10dp"
-                android:text="Let's discover new events!"
+                android:text="Create one now!"
                 android:textColor="@color/green1"
                 android:textSize="15sp"
                 android:textStyle="italic"

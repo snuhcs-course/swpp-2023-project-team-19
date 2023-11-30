@@ -73,10 +73,6 @@ public class HomeViewModelTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
     }
 
     private List<EventDataModel> createMockEventData() {

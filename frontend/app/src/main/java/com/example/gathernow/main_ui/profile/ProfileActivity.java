@@ -143,6 +143,7 @@ public class ProfileActivity extends Fragment {
         discoverNew.setPaintFlags(discoverNew.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         discoverNew.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), FragHome.class);
+            intent.putExtra("targetFragment", "createEvent");
             startActivity(intent);
         });
     }

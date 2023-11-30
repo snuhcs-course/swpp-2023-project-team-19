@@ -61,6 +61,7 @@ public class EventsActivity extends Fragment {
     private ImageView sadFrog;
     private int userId;
     private EventsViewModel eventsViewModel;
+    private UserLocalDataSource userLocalDataSource;
 
     private List<EventDataModel> eventDataModelList = new ArrayList<EventDataModel>();
 
@@ -96,6 +97,7 @@ public class EventsActivity extends Fragment {
         }
 
         eventsViewModel = new EventsViewModel(getContext());
+        userLocalDataSource = new UserLocalDataSource(getContext());
     }
 
     @Override
@@ -120,7 +122,7 @@ public class EventsActivity extends Fragment {
         eventsViewModel.getPendingEvents().observe(getViewLifecycleOwner(), eventDataModels -> fetchPendingEventsUI(eventDataModels, rootView));
         Log.e("EventsActivity", "getPendingEvents() called");
 
-        eventsViewModel.fetchUserAppliedEvents();
+        eventsViewModel.fetchUserAppliedEvents(userLocalDataSource);
         Log.e("EventsActivity", "fetchUserAppliedEvents() called");
 
 
