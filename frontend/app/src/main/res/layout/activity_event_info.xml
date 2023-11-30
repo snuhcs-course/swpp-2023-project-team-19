@@ -42,7 +42,7 @@
             <ImageView
                 android:id="@+id/event_img"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="200dp"
                 android:scaleType="centerCrop"
                 app:layout_constraintHeight_percent="0.25"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -62,16 +62,15 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/result_button"
-                style="@style/PositiveButton"
+                android:background="@color/green2"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:textSize="12sp"
                 android:visibility="invisible"
                 app:layout_constraintLeft_toLeftOf="@id/verticalGuideline"
                 app:layout_constraintTop_toBottomOf="@id/event_title"
-                app:layout_constraintHeight_percent="0.05"
                 />
 
             <!--            User host-->

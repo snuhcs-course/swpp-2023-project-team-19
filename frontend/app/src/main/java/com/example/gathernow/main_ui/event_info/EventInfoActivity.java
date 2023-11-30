@@ -273,13 +273,16 @@ public class EventInfoActivity extends AppCompatActivity {
         numMaxParticipants.setText(numMaxParticipantsFormat);
 
         eventDate.setText(eventDataModel.getEventDate());
-        eventTime.setText(eventDataModel.getEventTime());
+        String fixed_time = eventDataModel.getEventTime().substring(0, 5);
+        eventTime.setText(fixed_time);
         eventLastRegisterDate.setText(eventDataModel.getEventRegisterDate());
-        eventLastRegisterTime.setText(eventDataModel.getEventRegisterTime());
+        String fixed_regTime = eventDataModel.getEventRegisterTime().substring(0, 5);
+        eventLastRegisterTime.setText(fixed_regTime);
         eventDuration.setText(eventDataModel.getEventDuration());
         eventLocation.setText(eventDataModel.getEventLocation());
 
         String priceFormat = String.format(Locale.ENGLISH, "%,d", eventDataModel.getEventPrice());
+        priceFormat = priceFormat + " ₩";
         eventPrice.setText(priceFormat);
 //      setButtonVisibility(eventDataModel.getHostId());
 //

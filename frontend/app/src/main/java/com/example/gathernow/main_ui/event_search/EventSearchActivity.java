@@ -42,7 +42,7 @@ public class EventSearchActivity extends AppCompatActivity {
         View rootView = findViewById(android.R.id.content);
         eventSearchViewModel = new EventSearchViewModel(this);
         no_event_layout = findViewById(R.id.no_event_layout);
-        //no_event_layout.setVisibility(View.GONE);
+        no_event_layout.setVisibility(View.GONE);
         //no_event_text = no_event_layout.findViewById(R.id.no_event_text);
         eventCardContainer = findViewById(R.id.eventCardContainer);
 
