@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gathernow.FragHome;
+import com.example.gathernow.main_ui.cards.EventCardView;
 import com.example.gathernow.main_ui.event_applicant_info.ApplicantsInfoActivity;
 import com.example.gathernow.main_ui.event_application_form.ApplicationFormActivity;
 import com.example.gathernow.DeleteSuccessful;

@@ -75,6 +75,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/profile_no_event_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/edittext_bg"

@@ -53,7 +53,6 @@ public class EventCardView extends LinearLayout {
     public void setOnEventCardClickListener(OnClickListener listener) {
         setOnClickListener(listener);
     }
-
     // Setter methods to update the UI elements
     public void setEventPhoto(String event_type, String event_images) {
         if (event_images != null) {

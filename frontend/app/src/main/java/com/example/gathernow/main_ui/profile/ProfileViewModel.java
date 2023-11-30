@@ -48,6 +48,10 @@ public class ProfileViewModel extends ViewModel {
     }
 
     public void fetchUserProfile(UserLocalDataSource userLocalDataSource) {
+        if (userLocalDataSource.getUserId() == null) {
+            Log.d("ProfileViewModel", "User not logged in");
+            return;
+        }
         int userId = Integer.parseInt(userLocalDataSource.getUserId());
         userRemoteRepository.getUserInfo(userId, new CallbackInterface() {
             @Override
