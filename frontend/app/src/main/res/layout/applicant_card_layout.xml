@@ -23,9 +23,8 @@
 
             <ImageView
                 android:id="@+id/applicant_image"
-                android:layout_width="0dp"
+                android:layout_width="50dp"
                 android:layout_height="50dp"
-                app:layout_constraintWidth_percent="0.26"
                 android:src="@drawable/ic_profile_foreground"
                 android:scaleType="centerCrop"
                 android:background="@drawable/circle_shape"

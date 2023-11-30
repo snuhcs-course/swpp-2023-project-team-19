@@ -14,9 +14,11 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +36,10 @@ import com.example.gathernow.main_ui.event_filter.EventFilterActivity;
 import com.example.gathernow.main_ui.event_search.EventSearchActivity;
 import com.example.gathernow.main_ui.home.HomeActivity;
 import com.example.gathernow.main_ui.profile.ProfileActivity;
+import com.example.gathernow.utils.ImageLoader.ImageLoader;
+import com.example.gathernow.utils.ImageLoader.ProxyImageLoader;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.Marker;
 import com.squareup.picasso.Picasso;
 
@@ -66,11 +71,15 @@ public class EventInfoActivity extends AppCompatActivity {
 
     private double eventLongitude;
     private double eventLatitude;
+    private MapFragment mapFragment;
+
+    ScrollView scrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
+        scrollView = findViewById(R.id.content);
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
         userId = intent.getIntExtra("userId", -1);
@@ -208,22 +217,10 @@ public class EventInfoActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
-        /*
-        else if("filter".equals(sourceFrag)){
-            Log.e("BackButton", "Going back to Filter in else case");
-            Intent intent = new Intent(this, EventFilterActivity.class);
-            intent.putExtra("targetFragment", "filter");
-            startActivity(intent);
-            finish();
-        }*/
         else{
             Log.e("BackButton", "Going back to Home in else case");
-            //Intent intent = new Intent(this, FragHome.class);
-            //startActivity(intent);
-            //finish();
             super.onBackPressed();
         }
-
     }
 
     private void updateHostInfoUI(UserDataModel userDataModel) {
@@ -236,9 +233,13 @@ public class EventInfoActivity extends AppCompatActivity {
         TextView profileName = findViewById(R.id.profile_name);
         profileName.setText(hostName);
 
-        hostAvatar = "http://20.2.88.70:8000" + userDataModel.getAvatar();
+        hostAvatar = userDataModel.getAvatar();
         ImageView profile_img = findViewById(R.id.profile_img);
-        Picasso.get().load(hostAvatar).into(profile_img);
+        //Picasso.get().load(hostAvatar).into(profile_img);
+
+        int resourceId = R.drawable.ic_user_no_profile;
+        ImageLoader imageLoader = new ProxyImageLoader(hostAvatar, resourceId);
+        imageLoader.displayImage(profile_img);
     }
 
     private void updateEventInfoUI(EventDataModel eventDataModel) {
@@ -273,13 +274,16 @@ public class EventInfoActivity extends AppCompatActivity {
         numMaxParticipants.setText(numMaxParticipantsFormat);
 
         eventDate.setText(eventDataModel.getEventDate());
-        eventTime.setText(eventDataModel.getEventTime());
+        String fixed_time = eventDataModel.getEventTime().substring(0, 5);
+        eventTime.setText(fixed_time);
         eventLastRegisterDate.setText(eventDataModel.getEventRegisterDate());
-        eventLastRegisterTime.setText(eventDataModel.getEventRegisterTime());
+        String fixed_regTime = eventDataModel.getEventRegisterTime().substring(0, 5);
+        eventLastRegisterTime.setText(fixed_regTime);
         eventDuration.setText(eventDataModel.getEventDuration());
         eventLocation.setText(eventDataModel.getEventLocation());
 
         String priceFormat = String.format(Locale.ENGLISH, "%,d", eventDataModel.getEventPrice());
+        priceFormat = "₩ " + priceFormat;
         eventPrice.setText(priceFormat);
 //      setButtonVisibility(eventDataModel.getHostId());
 //
@@ -289,7 +293,7 @@ public class EventInfoActivity extends AppCompatActivity {
         eventLongitude = eventDataModel.getEventLongitude();
         eventLatitude = eventDataModel.getEventLatitude();
         FragmentManager fm = getSupportFragmentManager();
-        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
+        mapFragment = (MapFragment)fm.findFragmentById(R.id.map_fragment);
         if (mapFragment == null) {
             mapFragment = MapFragment.newInstance();
             fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
@@ -316,6 +320,33 @@ public class EventInfoActivity extends AppCompatActivity {
                 marker.setPosition(new LatLng(eventLatitude, eventLongitude));
                 marker.setMap(naverMap);
                 marker.setCaptionText("Event location");
+
+                UiSettings uiSettings = naverMap.getUiSettings();
+                uiSettings.setLocationButtonEnabled(false); // This hides the GPS button
+                uiSettings.setZoomGesturesEnabled(true);
+                uiSettings.setScrollGesturesEnabled(true);
+                uiSettings.setZoomControlEnabled(true);
+
+                View mapView = mapFragment.getView();
+                if (mapView != null) {
+                    mapView.setOnTouchListener(new View.OnTouchListener() {
+                        @Override
+                        public boolean onTouch(View v, MotionEvent event) {
+                            // When the map is touched, request the parent ScrollView to not intercept touch events
+                            switch (event.getAction()) {
+                                case MotionEvent.ACTION_DOWN:
+                                    scrollView.requestDisallowInterceptTouchEvent(true);
+                                    break;
+                                case MotionEvent.ACTION_UP:
+                                case MotionEvent.ACTION_CANCEL:
+                                    scrollView.requestDisallowInterceptTouchEvent(false);
+                                    break;
+                            }
+                            // Let the map handle the touch event
+                            return false;
+                        }
+                    });
+                }
             }
         });
     }
@@ -371,6 +402,7 @@ public class EventInfoActivity extends AppCompatActivity {
                 eventImage.setImageResource(R.mipmap.ic_image6_others_foreground);
                 break;
         }
+        eventImage.getLayoutParams().width = 1000;
     }
 
     public void onDeleteEvent(View view) {

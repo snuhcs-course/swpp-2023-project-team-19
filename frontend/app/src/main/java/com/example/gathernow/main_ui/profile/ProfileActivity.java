@@ -29,6 +29,8 @@ import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.authenticate.UserLocalDataSource;
 import com.example.gathernow.utils.EventCardHelper;
+import com.example.gathernow.utils.ImageLoader.ImageLoader;
+import com.example.gathernow.utils.ImageLoader.ProxyImageLoader;
 import com.squareup.picasso.Picasso;
 
 /**
@@ -143,6 +145,7 @@ public class ProfileActivity extends Fragment {
         discoverNew.setPaintFlags(discoverNew.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         discoverNew.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), FragHome.class);
+            intent.putExtra("targetFragment", "createEvent");
             startActivity(intent);
         });
     }
@@ -156,8 +159,13 @@ public class ProfileActivity extends Fragment {
 
             // Update avatar
             String avatarUrl = userDataModel.getAvatar();
-            String userAvatarUrl = "http://20.2.88.70:8000" + avatarUrl;
-            Picasso.get().load(userAvatarUrl).into(profileImg);
+            //String userAvatarUrl = "http://20.2.88.70:8000" + avatarUrl;
+            //Picasso.get().load(userAvatarUrl).into(profileImg);
+
+            int resourceId = R.drawable.ic_user_no_profile;
+            ImageLoader imageLoader = new ProxyImageLoader(avatarUrl, resourceId);
+            imageLoader.displayImage(profileImg);
+
 
             userInfo.setVisibility(View.VISIBLE);
             loadingLayout.setVisibility(View.GONE);

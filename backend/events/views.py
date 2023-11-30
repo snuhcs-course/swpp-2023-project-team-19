@@ -189,6 +189,7 @@ def events_filter(request):
         dates = request.GET.getlist('date')  # Returns a list of dates
         times = request.GET.getlist('time')  # Returns a list of times
         is_free = request.GET.get('is_free')  # Returns 'true' or 'false' as a string
+        location_address = request.GET.get('location_address')
 
 
         now = make_aware(datetime.now())
@@ -256,6 +257,10 @@ def events_filter(request):
                 queryset = queryset.filter(event_price=0)
             else:
                 queryset = queryset.exclude(event_price=0)
+
+        # Applying location address filter
+        if location_address:
+            queryset = queryset.filter(event_location__icontains=location_address)
 
         # Serializing the data
         serializer = EventSerializer(queryset, many=True)

@@ -12,13 +12,20 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.lang.ref.Reference;
+import java.net.InetSocketAddress;
+import java.net.Proxy;
 import java.sql.Date;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
 import com.example.gathernow.R;
+import com.example.gathernow.utils.ImageLoader.ImageLoader;
+import com.example.gathernow.utils.ImageLoader.ProxyImageLoader;
+import com.squareup.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
+
+import okhttp3.OkHttpClient;
 
 public class EventCardView extends LinearLayout {
 
@@ -53,6 +60,7 @@ public class EventCardView extends LinearLayout {
     public void setOnEventCardClickListener(OnClickListener listener) {
         setOnClickListener(listener);
     }
+    /*
     // Setter methods to update the UI elements
     public void setEventPhoto(String event_type, String event_images) {
         if (event_images != null) {
@@ -80,7 +88,33 @@ public class EventCardView extends LinearLayout {
                 event_photo.setImageResource(R.mipmap.ic_image6_others_foreground);
                 break;
         }
+    }*/
+
+    public void setEventPhoto(String event_type, String event_images) {
+        int resourceId = R.mipmap.ic_image6_others_foreground; // default image
+        switch (event_type) {
+            case "Leisure":
+                resourceId = R.mipmap.ic_image1_leisure;
+                break;
+            case "Sports":
+                resourceId = R.mipmap.ic_image2_sports_foreground;
+                break;
+            case "Workshops":
+                resourceId = R.mipmap.ic_image3_workshops_foreground;
+                break;
+            case "Parties":
+                resourceId = R.mipmap.ic_image4_parties_foreground;
+                break;
+            case "Cultural activities":
+                resourceId = R.mipmap.ic_image5_cultural_activities_foreground;
+                break;
+        }
+
+        ImageLoader imageLoader = new ProxyImageLoader(event_images, resourceId);
+        imageLoader.displayImage(event_photo);
     }
+
+
 
     public void setEventName(String name) {
         event_name.setText(name);
