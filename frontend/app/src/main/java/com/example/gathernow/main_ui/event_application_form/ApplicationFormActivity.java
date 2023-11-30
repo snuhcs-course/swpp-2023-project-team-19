@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,6 +43,17 @@ public class ApplicationFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_application_form);
 
+        View rootLayout = findViewById(R.id.container);
+
+        // Add a touch listener to hide the keyboard when tapping on a blank space
+        rootLayout.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKB();
+                return false;
+            }
+        });
+
         // Receiving the user id from the previous activity
         Intent intent = getIntent();
         hostId = intent.getIntExtra("hostId", 0);
@@ -73,6 +86,14 @@ public class ApplicationFormActivity extends AppCompatActivity {
             username = applicantData.getName();
             userAvatar = applicantData.getAvatar();
         });
+    }
+
+    private void hideKB() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void getEventInfo() {
