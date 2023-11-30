@@ -21,7 +21,7 @@ class Event(models.Model):
     event_location = models.CharField(max_length=255, null=True, blank=True)
     event_longitude = models.FloatField(null=True, blank=True)
     event_latitude = models.FloatField(null=True, blank=True)
-    event_description = models.TextField(null=True, blank=True)
+    event_description = models.TextField(null=True, blank=True, db_collation='utf8mb4_unicode_ci')
     created_at = models.DateTimeField(auto_now_add=True)
     event_num_joined = models.IntegerField(default=0)
     event_register_date = models.DateField(null=True, blank=True)
