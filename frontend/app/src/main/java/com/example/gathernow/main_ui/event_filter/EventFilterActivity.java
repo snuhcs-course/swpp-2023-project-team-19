@@ -81,10 +81,16 @@ public class EventFilterActivity extends AppCompatActivity {
     }
 
     void updateFilteredEventsUI(List<EventDataModel> eventDataList, View rootView){
+        Log.d("FilterActivity", "Im here");
         if(!eventDataList.isEmpty()){
             no_event_layout.setVisibility(View.GONE);
             fetchEventsUI(eventDataList, rootView);
             Log.d("FilterActivity", "Show events!");
+        }
+        else{
+            Log.d("FilterActivity", "Event data is null or empty");
+            loadingLayout.setVisibility(View.GONE);
+            no_event_layout.setVisibility(View.VISIBLE);
         }
     }
 
