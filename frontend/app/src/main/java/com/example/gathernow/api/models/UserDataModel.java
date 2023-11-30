@@ -44,6 +44,10 @@ public class UserDataModel {
 
     }
 
+    public UserDataModel() {
+
+    }
+
     // get name, avatar
     public String getName() {
         return name;
@@ -55,5 +59,14 @@ public class UserDataModel {
 
     public Integer getUserId() {
         return user_id;
+    }
+
+    // set email, password
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
