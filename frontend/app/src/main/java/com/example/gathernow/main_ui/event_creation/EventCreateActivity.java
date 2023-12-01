@@ -575,10 +575,6 @@ public class EventCreateActivity extends Fragment {
             // Retrieve the selected location and locationName from MapActivity
             LatLng selectedLocation = data.getParcelableExtra("selectedLocation");
             String locationName = data.getStringExtra("locationName");
-
-            // Now you can use the selectedLocation and locationName as needed
-            // For example, update UI or perform any other actions
-            // ...
             // Log.d selectedLocation
             Log.d("EventCreateActivity", "selectedLocation: " + selectedLocation);
             Log.d("EventLocation", selectedLocation.longitude + " " + selectedLocation.latitude);
@@ -592,7 +588,6 @@ public class EventCreateActivity extends Fragment {
     // Define a constant for the request code
     private static final int MAP_ACTIVITY_REQUEST_CODE = 123;
 
-    // Replace this method with your actual geocoding logic
     private LatLng getLatLngFromLocationInput(String locationInput) {
         // Placeholder coordinates (Seoul, South Korea) - Replace with actual logic
         return new LatLng(37.5665, 126.9780);
