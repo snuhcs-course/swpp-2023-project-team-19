@@ -98,6 +98,9 @@ public class HomeActivity extends Fragment {
 
         //get current login user id
         UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
+        if (userLocalDataSource.getUserId() == null) {
+            return;
+        }
         int userId = Integer.parseInt(userLocalDataSource.getUserId());
 
         if (eventDataList == null || eventDataList.isEmpty()){

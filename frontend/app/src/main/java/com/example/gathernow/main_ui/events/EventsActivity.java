@@ -107,6 +107,10 @@ public class EventsActivity extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         //get current login user id
         UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
+        if (userLocalDataSource.getUserId() == null) {
+            Log.e("EventsActivity", "User not logged in");
+            return rootView;
+        }
         userId = Integer.valueOf(userLocalDataSource.getUserId());
 
         initializeUI(rootView);
@@ -124,8 +128,6 @@ public class EventsActivity extends Fragment {
 
         eventsViewModel.fetchUserAppliedEvents(userLocalDataSource);
         Log.e("EventsActivity", "fetchUserAppliedEvents() called");
-
-
 
         return rootView;
     }
