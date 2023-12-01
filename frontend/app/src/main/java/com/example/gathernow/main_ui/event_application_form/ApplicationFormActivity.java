@@ -122,10 +122,10 @@ public class ApplicationFormActivity extends AppCompatActivity {
         String applicant_name = username;
 
         TextView applicant_contact_input = findViewById(R.id.applicant_contact);
-        String applicant_contact = applicant_contact_input.getText().toString();
+        String applicant_contact = applicant_contact_input.getText().toString().trim();
 
         TextView applicant_message_input = findViewById(R.id.applicant_message);
-        String applicant_message = applicant_message_input.getText().toString();
+        String applicant_message = applicant_message_input.getText().toString().trim();
 
         ApplicationDataModelBuilder applicationBuilder = new ApplicationDataModelBuilder();
         applicationBuilder.setApplicantContact(applicant_contact)
