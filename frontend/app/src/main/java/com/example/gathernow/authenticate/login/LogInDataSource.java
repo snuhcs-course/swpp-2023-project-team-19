@@ -7,6 +7,7 @@ import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
 import com.example.gathernow.api.ServiceApi;
+import com.example.gathernow.api.models.UserDataModelBuilder;
 import com.example.gathernow.authenticate.AuthCallback;
 import com.example.gathernow.authenticate.UserLocalDataSource;
 
@@ -25,7 +26,10 @@ public class LogInDataSource {
 
     public void logIn(String email, String password, AuthCallback callback) {
         service = RetrofitClient.getClient().create(ServiceApi.class);
-        UserDataModel requestData = new UserDataModel(email, password);
+        UserDataModel requestData = new UserDataModelBuilder()
+                .setEmail(email)
+                .setPassword(password)
+                .build();
         service.userLogIn(requestData).enqueue(new Callback<CodeMessageResponse>() {
             @Override
             public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {

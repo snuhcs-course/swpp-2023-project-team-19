@@ -73,11 +73,9 @@ public class HomeViewModelTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-
-
-
     }
+
+
 
     private List<EventDataModel> createMockEventData() {
         // Parse the JSON array and create a list of EventDataModel objects

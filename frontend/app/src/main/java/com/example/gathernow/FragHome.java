@@ -62,6 +62,13 @@ public class FragHome extends AppCompatActivity implements BottomNavigationView
                             .commit();
                     bottomNavigationView.setSelectedItemId(R.id.menu_profile);
                 }
+                else if (targetFragment.equals("createEvent")) {
+                    getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.flFragment, new EventCreateActivity())
+                            .commit();
+                    bottomNavigationView.setSelectedItemId(R.id.menu_create);
+                }
             } else {
                 getSupportFragmentManager()
                         .beginTransaction()

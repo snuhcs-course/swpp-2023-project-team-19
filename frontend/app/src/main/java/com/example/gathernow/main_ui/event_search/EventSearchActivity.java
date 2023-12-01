@@ -33,6 +33,7 @@ public class EventSearchActivity extends AppCompatActivity {
     String query;
     RelativeLayout no_event_layout;
     LinearLayout eventCardContainer;
+    TextView no_event_text;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +42,8 @@ public class EventSearchActivity extends AppCompatActivity {
         View rootView = findViewById(android.R.id.content);
         eventSearchViewModel = new EventSearchViewModel(this);
         no_event_layout = findViewById(R.id.no_event_layout);
+        no_event_layout.setVisibility(View.GONE);
+        //no_event_text = no_event_layout.findViewById(R.id.no_event_text);
         eventCardContainer = findViewById(R.id.eventCardContainer);
 
         searchBar = findViewById(R.id.search_bar);

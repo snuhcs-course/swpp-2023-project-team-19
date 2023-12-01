@@ -16,9 +16,9 @@ import com.example.gathernow.main_ui.UserRemoteDataSource;
 import com.example.gathernow.main_ui.UserRemoteRepository;
 
 public class ApplicationFormViewModel extends ViewModel {
-    private ServiceApi service;
-    private EventRepository eventRepository;
-    private UserRemoteRepository userRemoteRepository;
+    ServiceApi service;
+    EventRepository eventRepository;
+    UserRemoteRepository userRemoteRepository;
     private MutableLiveData<EventDataModel> eventData = new MutableLiveData<>();
     private MutableLiveData<String> alertMessage = new MutableLiveData<>();
     private final MutableLiveData<UserDataModel> applicantData = new MutableLiveData<>();

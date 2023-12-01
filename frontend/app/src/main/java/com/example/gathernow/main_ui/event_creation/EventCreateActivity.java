@@ -11,8 +11,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -379,13 +381,31 @@ public class EventCreateActivity extends Fragment {
 //                                    FragmentTransaction transaction = fragmentManager.beginTransaction();
 //                                    transaction.remove(EventCreateActivity.this);
 //                                    transaction.commit();
-//
-
         });
 
-
-
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Add a touch listener to hide the keyboard when tapping on a blank space
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
+            }
+        });
+    }
+
+    private void hideKeyboard() {
+        View view = requireActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(requireActivity().INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void onCreateEventButton() {
@@ -428,7 +448,7 @@ public class EventCreateActivity extends Fragment {
             eventThumbnailImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             eventThumbnailImageView.setAdjustViewBounds(true);
             noPhotoText.setVisibility(View.VISIBLE);
-            noPhotoText.setText("Don't like the previous photo? Try uploding another one!");
+            noPhotoText.setText("Don't like the previous photo?\n Try uploding another one!");
             eventThumbnailFilePath = null;
             uploadImgButton.setText("Upload event photo");
             imageUploaded = false;
