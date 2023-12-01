@@ -145,7 +145,7 @@ def events_by_id(request, event_id):
         # Serialize and return the filtered events
         serializer = EventSerializer(future_events, many=True)
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'DELETE':
         events.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
