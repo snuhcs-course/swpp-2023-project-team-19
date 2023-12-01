@@ -13,7 +13,7 @@ class Application(models.Model):
     applicant_id = models.IntegerField(default=0)
     applicant_name  = models.CharField(max_length=255, null=True, blank=True)
     applicant_avatar = models.CharField(max_length=255, null=True, blank=True)
-    applicant_contact = models.CharField(max_length=255, null=True, blank=True)
+    applicant_contact = models.CharField(max_length=255, null=True, blank=True, db_collation='utf8mb4_unicode_ci')
     message = models.TextField(null=True, blank=True, db_collation='utf8mb4_unicode_ci')
     request_status = models.IntegerField(default=0)
     # 0: Pending , 1: Accepted, 2: Rejected
