@@ -96,7 +96,6 @@ public class EventFilterActivity extends AppCompatActivity {
             selectedDateChips = intent.getStringArrayListExtra("selectedDateChips");
             selectedTimeChips = intent.getStringArrayListExtra("selectedTimeChips");
             selectedEventLocation = intent.getStringArrayListExtra("selectedEventLocation");
-
         }
     }
 
@@ -105,6 +104,7 @@ public class EventFilterActivity extends AppCompatActivity {
         //get current login user id
         UserLocalDataSource userLocalDataSource = new UserLocalDataSource(this);
         int userId = Integer.parseInt(userLocalDataSource.getUserId());
+        Log.d("FilterActivity", "eventDataList " + eventDataList);
 
         if (eventDataList == null || eventDataList.isEmpty()){
             Log.d("EventFilterActivity", "Event data is null or empty");
@@ -117,9 +117,6 @@ public class EventFilterActivity extends AppCompatActivity {
             loadingLayout.setVisibility(View.GONE);
             scrollView.setVisibility(View.VISIBLE);
         }
-
-
-
 
     }
 
@@ -145,6 +142,26 @@ public class EventFilterActivity extends AppCompatActivity {
         }
         //query.append("?is_free=").append(isFreeEvent);
 
+        // "Others" in languages should include: Uzbek, Khmer, Filipino, Nepali, Kazakh, Mongolian, Burmese, Portuguese, Hindi, Arabic, Bengali, Urdu, Turkish
+        for (int i = 0; i < selectedLanguageChips.size(); i++) {
+            if (selectedLanguageChips.get(i).equals("Others")) {
+                selectedLanguageChips.set(i, "Other");
+                selectedLanguageChips.add("Uzbek");
+                selectedLanguageChips.add("Khmer");
+                selectedLanguageChips.add("Filipino");
+                selectedLanguageChips.add("Nepali");
+                selectedLanguageChips.add("Kazakh");
+                selectedLanguageChips.add("Mongolian");
+                selectedLanguageChips.add("Burmese");
+                selectedLanguageChips.add("Portuguese");
+                selectedLanguageChips.add("Hindi");
+                selectedLanguageChips.add("Arabic");
+                selectedLanguageChips.add("Bengali");
+                selectedLanguageChips.add("Urdu");
+                selectedLanguageChips.add("Turkish");
+            }
+        }
+
         // Add "&" if there are additional parameters
         if ((selectedLanguageChips != null && !selectedLanguageChips.isEmpty()) || (selectedEventTypeChips != null && !selectedEventTypeChips.isEmpty()) ||
                 (selectedDateChips != null && !selectedDateChips.isEmpty()) || (selectedTimeChips != null && !selectedTimeChips.isEmpty())
@@ -158,7 +175,7 @@ public class EventFilterActivity extends AppCompatActivity {
         appendParameterList(query, "date", selectedDateChips);
         appendParameterList(query, "time", selectedTimeChips);
         appendParameterList(query, "location_address", selectedEventLocation);
-        //Log.d("FilterActivity", "Query: " + query.toString());
+        Log.d("FilterActivity", "Query: " + query.toString());
         return query.toString();
     }
 
