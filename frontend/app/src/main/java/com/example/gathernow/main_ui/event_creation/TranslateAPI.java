@@ -44,8 +44,8 @@ public class TranslateAPI {
 
 
     public static String translate_address(String input){
-        String clientId = "b625hew8rf";  // replace client id here
-        String clientSecret = "wbxm0cQ0uLFV9jttEzEaS047QcQuqzJIDN6Rn71l";  // replace client secret here
+        String clientId = "";  // replace client id here
+        String clientSecret = "";  // replace client secret here
 
         String apiURL = "https://naveropenapi.apigw.ntruss.com/nmt/v1/translation";
         String text;
