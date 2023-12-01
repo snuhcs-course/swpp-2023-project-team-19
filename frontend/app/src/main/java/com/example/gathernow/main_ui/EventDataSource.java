@@ -456,7 +456,8 @@ public class EventDataSource {
                         callback.onSuccess(new ArrayList<>());
                     }
                 } else {
-                    callback.onError("Failed to get user events");
+                    //callback.onError("No related events");
+                    callback.onSuccess(new ArrayList<>());
                 }
             }
 
