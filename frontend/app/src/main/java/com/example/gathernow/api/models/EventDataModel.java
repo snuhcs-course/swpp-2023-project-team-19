@@ -77,6 +77,10 @@ public class EventDataModel {
         this.event_register_time = event_register_time;
     }
 
+    public EventDataModel() {
+
+    }
+
     // Query event data
     public EventDataModel(String event_type, String event_title, Integer event_num_participants, String event_date, String event_time, String event_duration, String event_language, Integer event_price, String event_location, Double event_longitude, Double event_latitude, String event_description, Integer event_num_joined, Integer host_id, Integer event_id, String event_register_date, String event_register_time, String event_images){
         this.event_id = event_id;
@@ -170,4 +174,109 @@ public class EventDataModel {
         return event_latitude;
     }
 
+    // setter methods
+    public void setEventImages(String eventImages) {
+        this.event_images = eventImages;
+    }
+
+    public void setEventLongitude(Double eventLongitude) {
+        this.event_longitude = eventLongitude;
+    }
+
+    public void setEventLatitude(Double eventLatitude) {
+        this.event_latitude = eventLatitude;
+    }
+
+    public void setEventLanguage(String eventLanguage) {
+        this.event_language = eventLanguage;
+    }
+
+    public void setEventPrice(Integer eventPrice) {
+        this.event_price = eventPrice;
+    }
+
+    public void setEventLocation(String eventLocation) {
+        this.event_location = eventLocation;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.event_description = eventDescription;
+    }
+
+    public void setEventNumJoined(Integer eventNumJoined) {
+        this.event_num_joined = eventNumJoined;
+    }
+
+    public void setHostId(Integer hostId) {
+        this.host_id = hostId;
+    }
+
+    public void setEventId(Integer eventId) {
+        this.event_id = eventId;
+    }
+
+    public void setEventRegisterDate(String eventRegisterDate) {
+        this.event_register_date = eventRegisterDate;
+    }
+
+    public void setEventRegisterTime(String eventRegisterTime) {
+        this.event_register_time = eventRegisterTime;
+    }
+
+    public void setEventType(String eventType) {
+        this.event_type = eventType;
+    }
+
+    public void setEventTitle(String eventTitle) {
+        this.event_title = eventTitle;
+    }
+
+    public void setEventNumParticipants(Integer eventNumParticipants) {
+        this.event_num_participants = eventNumParticipants;
+    }
+
+    public void setEventDate(String eventDate) {
+        this.event_date = eventDate;
+    }
+
+    public void setEventTime(String eventTime) {
+        this.event_time = eventTime;
+    }
+
+    public void setEventDuration(String eventDuration) {
+        this.event_duration = eventDuration;
+    }
+
+    public void setEventPrice(int eventPrice) {
+        this.event_price = eventPrice;
+    }
+
+    public void setEventLongitude(double eventLongitude) {
+        this.event_longitude = eventLongitude;
+    }
+
+    public void setEventLatitude(double eventLatitude) {
+        this.event_latitude = eventLatitude;
+    }
+
+    public void setEventNumJoined(int eventNumJoined) {
+        this.event_num_joined = eventNumJoined;
+    }
+
+    public void setHostId(int hostId) {
+        this.host_id = hostId;
+    }
+
+    public void setEventId(int eventId) {
+        this.event_id = eventId;
+    }
+
+
+    public int getEventMaxParticipants() {
+        return event_num_participants;
+    }
+
+    public int getEventJoined() {
+        return event_num_joined;
+    }
 }

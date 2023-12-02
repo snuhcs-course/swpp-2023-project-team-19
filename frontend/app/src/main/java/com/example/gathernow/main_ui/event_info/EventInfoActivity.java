@@ -299,6 +299,21 @@ public class EventInfoActivity extends AppCompatActivity {
             fm.beginTransaction().add(R.id.map_fragment, mapFragment).commit();
         }
 
+        mapFragment.getMapAsync(naverMap -> {
+            // For example, set the camera position
+            // Testing with specifed location. Will generalize it latter.
+            CameraPosition cameraPosition = new CameraPosition(
+                    new LatLng(eventLatitude, eventLongitude),
+                    15.0 // Zoom level (adjust as needed)
+            );
+            Log.d("EventInfo Testing", "Event location: " + eventLatitude + ", " + eventLongitude);
+            naverMap.setCameraPosition(cameraPosition);
+            Marker marker = new Marker();
+            marker.setPosition(new LatLng(eventLatitude, eventLongitude));
+            marker.setMap(naverMap);
+            marker.setCaptionText("Event location");
+
+
         // location text is clickable and will open NaverMap
         eventLocation.setPaintFlags(eventLocation.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         eventLocation.setOnClickListener(v -> {
