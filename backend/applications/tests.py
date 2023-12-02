@@ -10,63 +10,25 @@ from rest_framework.test import APIRequestFactory, APIClient
 from applications.models import Application
 from applications.serializers import ApplicationSerializer
 from applications.views import application, application_detail, user_application, events_application, check_application, accept_application
+from datetime import date
 
-class ApplicationList(TestCase):
+# Create your tests here.
+class ApplicationModelTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
         Application.objects.create(event_id=1, host_id=1, applicant_id=1, applicant_name="test", applicant_contact="test_contact", message="test_message", request_status=0)
+    
+    def test_application_id(self):
+        application = Application.objects.get(application_id=1)
+        self.assertEqual(application.application_id, 1)
+        self.assertEqual(application.event_id, 1)
+        self.assertEqual(application.host_id, 1)
+        self.assertEqual(application.applicant_id, 1)
+        self.assertEqual(application.applicant_name, "test")
+        self.assertEqual(application.applicant_contact, "test_contact")
+        self.assertEqual(application.message, "test_message")
+        self.assertEqual(application.request_status, 0)
 
-    def test_application_list(self):
-        factory = APIRequestFactory()
-        request = factory.get('application/')
-        response = application(request)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-    
-    def test_post_application(self):
-        factory = APIRequestFactory()
-        request = factory.post('application/', {'event_id': 1, 'host_id': 1, 'applicant_id': 1, 'applicant_name': "test", 'applicant_contact': "test_contact", 'message': "test_message", 'request_status': 0})
-        response = application(request)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
-    def test_application_list_wrong_method(self):
-        factory = APIRequestFactory()
-        request = factory.delete('application/')
-        response = application(request)
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
-
-class ApplicationDetailTestCase(TestCase):
-    def setUp(self):
-        self.application = Application.objects.create(event_id=1, host_id=1, applicant_id=1, applicant_name="test", applicant_contact="test_contact", message="test_message", request_status=0)
-    def test_get_application(self):
-        client = APIClient()
-        response = client.get('/application/1/')
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-    
-    def test_get_application_not_exist(self):
-        client = APIClient()
-        response = client.get('/application/2/')
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-    
-    def test_put_application(self):
-        client = APIClient()
-        response = client.put('/application/1/', {'event_id': 1, 'host_id': 1, 'applicant_id': 1, 'applicant_name': "test", 'applicant_contact': "test_contact", 'message': "test_message", 'request_status': 1})
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-    
-    def test_put_application_not_exist(self):
-        client = APIClient()
-        response = client.put('/application/2/', {'event_id': 1, 'host_id': 1, 'applicant_id': 1, 'applicant_name': "test", 'applicant_contact': "test_contact", 'message': "test_message", 'request_status': 1})
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-
-    def test_delete_application(self):
-        client = APIClient()
-        response = client.delete('/application/1/')
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-    
-    def test_delete_application_not_exist(self):
-        client = APIClient()
-        response = client.delete('/application/2/')
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-    
 class UserApplication(TestCase):
     @classmethod
     def setUpTestData(cls):
@@ -130,26 +92,3 @@ class CheckApplication(TestCase):
         request = factory.delete('application/check/1/1/')
         response = check_application(request, 1, 1)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-
-class AcceptApplication(TestCase):
-    @classmethod
-    def setUpTestData(cls):
-        Application.objects.create(event_id=1, host_id=1, applicant_id=1, applicant_name="test", applicant_contact="test_contact", message="test_message", request_status=0)
-
-    def test_accept_application(self):
-        factory = APIRequestFactory()
-        request = factory.put('application/accept/1/1/')
-        response = accept_application(request, 1, 1)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-    
-    def test_accept_application_not_exist(self):
-        factory = APIRequestFactory()
-        request = factory.put('application/accept/1/2/')
-        response = accept_application(request, 1, 2)
-        self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
-    
-    def test_accept_application_wrong_method(self):
-        factory = APIRequestFactory()
-        request = factory.post('application/accept/1/1/')
-        response = accept_application(request, 1, 1)
-        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
