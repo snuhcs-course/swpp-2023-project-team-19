@@ -102,7 +102,26 @@ public class EventInfoActivity extends AppCompatActivity {
         // View Model
         eventInfoViewModel = new EventInfoViewModel(eventRepository);
         // Observe event data changes
-        eventInfoViewModel.getAlertMessage().observe(this, message -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
+        eventInfoViewModel.getAlertMessage().observe(this, message -> {
+            if (message != null && (message.equals("Event not found") || message.equals("Application data not found"))) {
+                // open a dialog to notify the user that the event is not found, then go back to home page
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+                alertBuilder
+                        .setTitle("Event not found")
+                        .setCancelable(false)
+                        .setMessage("The event you are looking for is deleted. Do you want to go back?")
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            // Go back to home page
+                            Intent intent1 = new Intent(this, FragHome.class);
+                            startActivity(intent1);
+                            finish();
+                        });
+                alertBuilder.show();
+            }
+            else {
+                Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
         eventInfoViewModel.getEventData().observe(this, this::updateEventInfoUI);
         eventInfoViewModel.getHostData().observe(this, this::updateHostInfoUI);
         eventInfoViewModel.getShowRegisterButton().observe(this, showRegisterButton -> {
@@ -365,6 +384,8 @@ public class EventInfoActivity extends AppCompatActivity {
             }
         });
     }
+    );
+    }
 
     private void openNaverMap(double eventLongitude, double eventLatitude) {
         // Create a Uri with the specified latitude and longitude
@@ -441,6 +462,7 @@ public class EventInfoActivity extends AppCompatActivity {
     }
 
     public void onRegisterEvent(View v) {
+        // check whether the current event is staled or not...?
 
         Intent intent = new Intent(v.getContext(), ApplicationFormActivity.class);
 

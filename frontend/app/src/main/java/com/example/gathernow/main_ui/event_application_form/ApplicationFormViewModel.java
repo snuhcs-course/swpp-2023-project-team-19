@@ -1,5 +1,7 @@
 package com.example.gathernow.main_ui.event_application_form;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -42,6 +44,24 @@ public class ApplicationFormViewModel extends ViewModel {
             @Override
             public void onError(String message) {
                 alertMessage.setValue(message);
+            }
+        });
+    }
+
+    public void fetchEventData(int eventId) {
+        eventRepository.getEventInfo(eventId, new CallbackInterface() {
+            @Override
+            public <T> void onSuccess(T result) {
+                Log.d("ApplicationFormView debug", "success");
+                EventDataModel res = (EventDataModel) result;
+                if (res == null) {
+                    alertMessage.setValue("Event not found");
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+
             }
         });
     }
