@@ -3,16 +3,24 @@ package com.example.gathernow.main_ui.event_info;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.lifecycle.Observer;
 
 import com.example.gathernow.api.models.EventDataModel;
 import com.example.gathernow.api.models.EventDataModelBuilder;
+import com.example.gathernow.api.models.UserDataModel;
+import com.example.gathernow.api.models.UserDataModelBuilder;
 import com.example.gathernow.main_ui.CallbackInterface;
 import com.example.gathernow.main_ui.EventRepository;
+import com.example.gathernow.main_ui.UserRemoteDataSource;
+import com.example.gathernow.main_ui.UserRemoteRepository;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -20,6 +28,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
@@ -27,13 +36,17 @@ import org.mockito.junit.MockitoJUnitRunner;
 public class EventInfoViewModelTest {
     @Rule
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+    private EventInfoViewModel eventInfoViewModel;
+    @Spy
+    @InjectMocks
+    private UserRemoteRepository userRemoteRepository;
     @Spy
     @InjectMocks
     private EventRepository eventRepository;
-    private EventInfoViewModel eventInfoViewModel;
 
     @Before
     public void setUp() {
+        MockitoAnnotations.openMocks(this);
         eventInfoViewModel = new EventInfoViewModel(eventRepository);
     }
 
@@ -61,6 +74,16 @@ public class EventInfoViewModelTest {
                 .build();
     }
 
+    private UserDataModel mockUserDataResult() {
+        return new UserDataModelBuilder()
+                .setUserId(2)
+                .setName("Kiwi")
+                .setEmail("kiwi@gmail.com")
+                .setCreatedAt("2023-11-27 16:22:41.734874")
+                .setAvatar("avatar_image/picture10.png")
+                .build();
+    }
+
     @Test
     public void testLoadEventInfoSuccessful() {
         // Mock data, assume user_id == host_id
@@ -71,6 +94,7 @@ public class EventInfoViewModelTest {
         doAnswer(invocation -> {
             // Simulate a successful response
             ((CallbackInterface) invocation.getArgument(1)).onSuccess(mockEventDataResult());
+            System.out.println("Mock the repository response");
             return null;
         }).when(eventRepository).getEventInfo(eq(eventId), any(CallbackInterface.class));
 
@@ -105,9 +129,45 @@ public class EventInfoViewModelTest {
 
         // When: Trigger the loadEventInfo method
         eventInfoViewModel.loadEventInfo(eventId, userId);
+        // Then: Verify that the repository is called
+        verify(eventRepository, times(1)).getEventInfo(eq(eventId), any(CallbackInterface.class));
         eventInfoViewModel.getEventData().removeObserver(eventDataModelObserver);
     }
 
+    @Test
+    public void testLoadHostInfo() {
+        int hostId = 2;
+
+        // Mock the repository
+        doAnswer(invocation -> {
+            // Simulate a successful response
+            ((CallbackInterface) invocation.getArgument(1)).onSuccess(mockUserDataResult());
+            System.out.println("Mock the repository response");
+            return null;
+        }).when(userRemoteRepository).getUserInfo(eq(hostId), any(CallbackInterface.class));
+
+        System.out.println("Finished mocking the repository response");
+        Observer<UserDataModel> userDataModelObserver = userDataModel -> {
+            // Then: Assert that the data is correct
+            System.out.println("Observe userData: " + userDataModel.getUserId());
+            assertNotNull(userDataModel);
+            // Print out the userData to see what it looks like
+            System.out.println("Observe userData: " + userDataModel.getUserId());
+        };
+
+        eventInfoViewModel.getHostData().observeForever(userDataModelObserver);
+
+        // When: Trigger the loadHostInfo method
+        eventInfoViewModel.loadHostInfo(hostId);
+        // Then: Verify that the repository is called
+//        verify(userRemoteRepository, times(1)).getUserInfo(eq(hostId), any(CallbackInterface.class));
+//        System.out.println("Finished loadHostInfo: "+ eventInfoViewModel.getHostData().getValue().getName());
+//        eventInfoViewModel.getHostData().removeObserver(userDataModelObserver);
+
+
+    }
+
+    @Test
     public void testDeleteApplication() {
     }
 }
