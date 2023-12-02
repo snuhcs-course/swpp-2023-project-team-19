@@ -1,6 +1,5 @@
 import unittest
 import coverage
-from datetime import datetime, timedelta
 
 from django.test import TestCase
 from django.urls import reverse
@@ -9,32 +8,14 @@ from rest_framework.test import APIRequestFactory, APIClient
 
 from events.models import Event
 from events.serializers import EventSerializer
-from events.views import event_list, event_detail, events_by_id, events_by_user, increase_num_joined, decrease_num_joined, events_filter, events_search
+from events.views import event_list, event_detail, events_by_id, events_by_user
+from datetime import date
 
 # Create your tests here.
 class EventModelTestCase(TestCase):
     @classmethod
     def setUpTestData(cls):
-        Event.objects.create(
-            event_id=1,
-            host_id=1,
-            event_type="test",
-            event_title="test",
-            event_num_participants=1,
-            event_date="2023-11-30",
-            event_time="00:00:00",
-            event_duration="test",
-            event_language="test",
-            event_price=1,
-            event_location="test",
-            event_longitude=0.0,  # Update with appropriate values
-            event_latitude=0.0,   # Update with appropriate values
-            event_description="test",
-            created_at="2023-11-30",
-            event_num_joined=1,
-            event_register_date="2023-11-30",  # Update with appropriate values
-            event_register_time="00:00:00",    # Update with appropriate values
-        )
+        Event.objects.create(event_id=1, host_id=1, event_type="test", event_title="test", event_num_participants=1, event_date="2021-01-01", event_time="00:00:00", event_duration="test", event_language="test", event_price=1, event_location="test", event_description="test", created_at="2021-01-01", event_num_joined=1)
 
     def test_event_id(self):
         event = Event.objects.get(event_id=1)
@@ -43,25 +24,20 @@ class EventModelTestCase(TestCase):
         self.assertEqual(event.event_type, "test")
         self.assertEqual(event.event_title, "test")
         self.assertEqual(event.event_num_participants, 1)
-        self.assertEqual(event.event_date.isoformat(), "2023-11-30")
+        self.assertEqual(event.event_date.isoformat(), "2021-01-01")
         self.assertEqual(event.event_time.strftime('%H:%M:%S'), "00:00:00")
         self.assertEqual(event.event_duration, "test")
         self.assertEqual(event.event_language, "test")
         self.assertEqual(event.event_price, 1)
         self.assertEqual(event.event_location, "test")
-        self.assertEqual(event.event_longitude, 0.0)  # Update with appropriate values
-        self.assertEqual(event.event_latitude, 0.0)   # Update with appropriate values
         self.assertEqual(event.event_description, "test")
         self.assertEqual(event.event_num_joined, 1)
-        self.assertEqual(event.event_register_date.isoformat(), "2023-11-30")  # Update with appropriate values
-        self.assertEqual(event.event_register_time.strftime('%H:%M:%S'), "00:00:00")  # Update with appropriate values
-
 
 # Create test case for events/views.py
 class EventListTestCase(TestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.event = Event.objects.create(event_id = 1, host_id = 1, event_type = "test", event_title = "test", event_num_participants = 1, event_date = "2023-01-01", event_time = "00:00:00", event_duration = "test", event_language = "test", event_price = 1, event_location = "test", event_description = "test", created_at = "2023-01-01", event_num_joined = 1)
+        self.event = Event.objects.create(event_id = 1, host_id = 1, event_type = "test", event_title = "test", event_num_participants = 1, event_date = "2021-01-01", event_time = "00:00:00", event_duration = "test", event_language = "test", event_price = 1, event_location = "test", event_description = "test", created_at = "2021-01-01", event_num_joined = 1)
     
     def test_get_event_list(self):
         request = self.factory.get('/events/')
@@ -69,63 +45,63 @@ class EventListTestCase(TestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_post_event_list(self):
-        request = self.factory.post('/events/', {'event_id': 1, 'host_id': 1, 'event_type': "test", 'event_title': "test", 'event_num_participants': 1, 'event_date': "2023-01-01", 'event_time': "00:00:00", 'event_duration': "test", 'event_language': "test", 'event_price': 1, 'event_location': "test", 'event_description': "test", 'created_at': "2023-01-01", 'event_num_joined': 1}, format='json')
+        request = self.factory.post('/events/', {'event_id': 1, 'host_id': 1, 'event_type': "test", 'event_title': "test", 'event_num_participants': 1, 'event_date': "2021-01-01", 'event_time': "00:00:00", 'event_duration': "test", 'event_language': "test", 'event_price': 1, 'event_location': "test", 'event_description': "test", 'created_at': "2021-01-01", 'event_num_joined': 1}, format='json')
         response = event_list(request)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
     
 class EventDetailTestCase(TestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.event = Event.objects.create(event_id = 1, host_id = 1, event_type = "test", event_title = "test", event_num_participants = 1, event_date = "2023-01-01", event_time = "00:00:00", event_duration = "test", event_language = "test", event_price = 1, event_location = "test", event_description = "test", created_at = "2023-01-01", event_num_joined = 1)
+        self.event = Event.objects.create(event_id = 1, host_id = 1, event_type = "test", event_title = "test", event_num_participants = 1, event_date = "2021-01-01", event_time = "00:00:00", event_duration = "test", event_language = "test", event_price = 1, event_location = "test", event_description = "test", created_at = "2021-01-01", event_num_joined = 1)
 
     def test_exception_event_detail(self):
-        request = self.factory.get('/events/one/2/')
+        request = self.factory.get('/events/2/')
         response = event_detail(request, 2)
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_get_event_detail(self):
-        request = self.factory.get('/events/one/1/')
+        request = self.factory.get('/events/1/')
         response = event_detail(request, 1)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
     def test_put_event_detail(self):
-        request = self.factory.put('/events/one/1/', {'event_id': 1, 'host_id': 1, 'event_type': "test", 'event_title': "test", 'event_num_participants': 1, 'event_date': "2023-01-01", 'event_time': "00:00:00", 'event_duration': "test", 'event_language': "test", 'event_price': 1, 'event_location': "test", 'event_description': "test", 'created_at': "2023-01-01", 'event_num_joined': 1}, format='json')
+        request = self.factory.put('/events/1/', {'event_id': 1, 'host_id': 1, 'event_type': "test", 'event_title': "test", 'event_num_participants': 1, 'event_date': "2021-01-01", 'event_time': "00:00:00", 'event_duration': "test", 'event_language': "test", 'event_price': 1, 'event_location': "test", 'event_description': "test", 'created_at': "2021-01-01", 'event_num_joined': 1}, format='json')
         response = event_detail(request, 1)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-
+    
     def test_delete_event_detail(self):
-        request = self.factory.delete('/events/one/1/')
+        request = self.factory.delete('/events/1/')
         response = event_detail(request, 1)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-    
+
 class EventsByUserTest(TestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.event = Event.objects.create(event_id = 1, host_id = 1, event_type = "test", event_title = "test", event_num_participants = 1, event_date = "2023-01-01", event_time = "00:00:00", event_duration = "test", event_language = "test", event_price = 1, event_location = "test", event_description = "test", created_at = "2023-01-01", event_num_joined = 1)
+        self.event = Event.objects.create(event_id = 1, host_id = 1, event_type = "test", event_title = "test", event_num_participants = 1, event_date = "2021-01-01", event_time = "00:00:00", event_duration = "test", event_language = "test", event_price = 1, event_location = "test", event_description = "test", created_at = "2021-01-01", event_num_joined = 1)
 
     def test_get_events_by_user(self):
-        request = self.factory.get('/events/by_user/1/')
+        request = self.factory.get('/events/user/1/')
         response = events_by_user(request, 1)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
     
 
-class EventsByIdTestCase(TestCase):
+class EventsByIdTest(TestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
-        self.event = Event.objects.create(event_id = 1, host_id = 1, event_type = "test", event_title = "test", event_num_participants = 1, event_date = "2023-01-01", event_time = "00:00:00", event_duration = "test", event_language = "test", event_price = 1, event_location = "test", event_longitude = 0.0, event_latitude = 0.0,  event_description = "test", created_at = "2023-01-01", event_num_joined = 1)
+        self.event = Event.objects.create(event_id = 1, host_id = 1, event_type = "test", event_title = "test", event_num_participants = 1, event_date = "2021-01-01", event_time = "00:00:00", event_duration = "test", event_language = "test", event_price = 1, event_location = "test", event_description = "test", created_at = "2021-01-01", event_num_joined = 1)
     
     def test_get_events_by_id(self):
-        request = self.factory.get('/events/by_id/1/')
+        request = self.factory.get('/events/id/1/')
         response = events_by_id(request, 1)
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    
     def test_delete_events_by_id(self):
-        request = self.factory.delete('/events/by_id/1/')
+        request = self.factory.delete('/events/id/1/')
         response = events_by_id(request, 1)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
     
     def test_method_events_by_id(self):
-        request = self.factory.post('/events/by_id/1/')
+        request = self.factory.post('/events/id/1/')
         response = events_by_id(request, 1)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
     
