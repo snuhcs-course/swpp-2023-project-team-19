@@ -1,19 +1,14 @@
 package com.example.gathernow.main_ui.event_info;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 import com.example.gathernow.api.models.ApplicationDataModel;
@@ -24,7 +19,6 @@ import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.api.models.UserDataModelBuilder;
 import com.example.gathernow.main_ui.CallbackInterface;
 import com.example.gathernow.main_ui.EventRepository;
-import com.example.gathernow.main_ui.UserRemoteDataSource;
 import com.example.gathernow.main_ui.UserRemoteRepository;
 
 import org.junit.Before;
@@ -32,10 +26,7 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -48,12 +39,44 @@ public class EventInfoViewModelTest {
     @Mock
     private EventRepository eventRepository;
     @Mock
-    private MutableLiveData<EventDataModel> eventData;
+    private Observer<EventDataModel> eventDataObserver;
+    @Mock
+    private Observer<Boolean> showDeleteApplicationSuccessObserver;
+    @Mock
+    private Observer<Boolean> showDeleteEventSuccessObserver;
+    @Mock
+    private Observer<Boolean> showViewApplicantsButtonObserver;
+    @Mock
+    private Observer<Boolean> showDeleteButtonObserver;
+    @Mock
+    private Observer<Boolean> showResultButtonObserver;
+    @Mock
+    private Observer<Boolean> showCancelButtonObserver;
+    @Mock
+    private Observer<Boolean> showRegisterButtonObserver;
+    @Mock
+    private Observer<String> applicationStatusObserver;
+    @Mock
+    private Observer<Boolean> clickableRegisterButtonObserver;
+    @Mock private Observer<Boolean> clickableCancelButtonObserver;
+    @Mock private Observer<UserDataModel> hostDataObserver;
 
     @Before
     public void setUp() {
 //        MockitoAnnotations.openMocks(this);
         eventInfoViewModel = new EventInfoViewModel(eventRepository);
+        eventInfoViewModel.getEventData().observeForever(eventDataObserver);
+        eventInfoViewModel.getShowDeleteApplicationSuccess().observeForever(showDeleteApplicationSuccessObserver);
+        eventInfoViewModel.getShowDeleteEventSuccess().observeForever(showDeleteEventSuccessObserver);
+        eventInfoViewModel.getShowViewApplicantsButton().observeForever(showViewApplicantsButtonObserver);
+        eventInfoViewModel.getShowDeleteEventButton().observeForever(showDeleteButtonObserver);
+        eventInfoViewModel.getShowResultButton().observeForever(showResultButtonObserver);
+        eventInfoViewModel.getShowCancelRegButton().observeForever(showCancelButtonObserver);
+        eventInfoViewModel.getShowRegisterButton().observeForever(showRegisterButtonObserver);
+        eventInfoViewModel.getApplicationStatus().observeForever(applicationStatusObserver);
+        eventInfoViewModel.getClickableRegisterButton().observeForever(clickableRegisterButtonObserver);
+        eventInfoViewModel.getClickableCancelButton().observeForever(clickableCancelButtonObserver);
+        eventInfoViewModel.getHostData().observeForever(hostDataObserver);
     }
 
     private EventDataModel mockEventDataResult() {
@@ -80,6 +103,30 @@ public class EventInfoViewModelTest {
                 .build();
     }
 
+    private EventDataModel mockEventData_DeadlinePassed() {
+        return new EventDataModelBuilder()
+                .setEventId(0)
+                .setEventType("Leisure")
+                .setEventTitle("Test Event")
+                .setEventMaxParticipants(10)
+                .setEventJoined(0)
+                .setEventDate("2024-04-20")
+                .setEventTime("12:00:00")
+                .setEventDuration("2 hours")
+                .setEventLanguage("English")
+                .setEventPrice(0)
+                .setEventLocation("Test Location")
+                .setEventLongitude(0.0)
+                .setEventLatitude(0.0)
+                .setEventDescription("Test description")
+                .setHostId(0)
+                .setHostId(0)
+                .setEventRegisterDate("2023-04-20")
+                .setEventRegisterTime("12:00:00")
+                .setEventImages("Test Image")
+                .build();
+    }
+
     private UserDataModel mockUserDataResult() {
         return new UserDataModelBuilder()
                 .setUserId(2)
@@ -95,52 +142,25 @@ public class EventInfoViewModelTest {
         // Mock data, assume user_id == host_id
         int eventId = 0;
         int userId = 0;
+        EventDataModel fakeEventInfo = mockEventDataResult();
 
         // Mock the repository
         doAnswer(invocation -> {
             // Simulate a successful response
-            ((CallbackInterface) invocation.getArgument(1)).onSuccess(mockEventDataResult());
+            ((CallbackInterface) invocation.getArgument(1)).onSuccess(fakeEventInfo);
             System.out.println("Mock the repository response");
             return null;
         }).when(eventRepository).getEventInfo(eq(eventId), any(CallbackInterface.class));
 
-        Observer<EventDataModel> eventDataModelObserver = eventInfo -> {
-            // Then: Assert that the data is correct
-            System.out.println("Observe eventInfo: " + eventInfo);
-            assertNotNull(eventInfo);
-            // Print out the eventInfo to see what it looks like
-            System.out.println("Observe eventInfo: " + eventInfo.getEventId());
-//            assertEquals(eventInfo, mockEventDataResult());
-            assert(eventInfo.getEventId() == 0);
-            assert(eventInfo.getEventType().equals("Leisure"));
-            assert(eventInfo.getEventTitle().equals("Test Event"));
-            assert(eventInfo.getEventMaxParticipants() == 10);
-            assert(eventInfo.getEventJoined() == 0);
-            assert(eventInfo.getEventDate().equals("2024-04-20"));
-            assert(eventInfo.getEventTime().equals("12:00:00"));
-            assert(eventInfo.getEventDuration().equals("2 hours"));
-            assert(eventInfo.getEventLanguage().equals("English"));
-            assert(eventInfo.getEventPrice() == 0);
-            assert(eventInfo.getEventLocation().equals("Test Location"));
-            assert(eventInfo.getEventLongitude() == 0.0);
-            assert(eventInfo.getEventLatitude() == 0.0);
-            assert(eventInfo.getEventDescription().equals("Test description"));
-            assert(eventInfo.getHostId() == 0);
-            assert(eventInfo.getEventRegisterDate().equals("2024-04-20"));
-            assert(eventInfo.getEventRegisterTime().equals("12:00:00"));
-            assert(eventInfo.getEventImages().equals("Test Image"));
-        };
-
-        eventInfoViewModel.getEventData().observeForever(eventDataModelObserver);
-
         // When: Trigger the loadEventInfo method
         eventInfoViewModel.loadEventInfo(eventId, userId);
         // Then: Verify that the repository is called
-        verify(eventRepository, times(1)).getEventInfo(eq(eventId), any(CallbackInterface.class));
-        eventInfoViewModel.getEventData().removeObserver(eventDataModelObserver);
+        verify(eventRepository).getEventInfo(eq(eventId), any(CallbackInterface.class));
+        verify(eventDataObserver).onChanged(eq(fakeEventInfo));
+//        eventInfoViewModel.getEventData().removeObserver(eventDataModelObserver);
     }
 
-    @Ignore("TODO")
+    @Ignore("Not working")
     public void testLoadHostInfo() {
         int hostId = 2;
 
@@ -155,21 +175,7 @@ public class EventInfoViewModelTest {
         // When: Trigger the loadHostInfo method
         eventInfoViewModel.loadHostInfo(hostId);
         verify(userRemoteRepository, times(1)).getUserInfo(eq(hostId), any(CallbackInterface.class));
-
-        Observer<UserDataModel> userDataModelObserver = userDataModel -> {
-            // Then: Assert that the data is correct
-            System.out.println("Observe userData: " + userDataModel.getUserId());
-            assertNotNull(userDataModel);
-            // Print out the userData to see what it looks like
-            System.out.println("Observe userData: " + userDataModel.getUserId());
-        };
-
-        eventInfoViewModel.getHostData().observeForever(userDataModelObserver);
-
-        // Then: Verify that the repository is called
-//        System.out.println("Finished loadHostInfo: "+ eventInfoViewModel.getHostData().getValue().getName());
-//        eventInfoViewModel.getHostData().removeObserver(userDataModelObserver);
-
+        assertNotNull(eventInfoViewModel.getHostData().getValue());
 
     }
 
@@ -182,23 +188,9 @@ public class EventInfoViewModelTest {
 
         // When: Trigger setButtonVisibility method
         eventInfoViewModel.setButtonVisibility(hostId, userId, eventId);
-
-        // Observer
-        Observer<Boolean> showViewApplicantButtonObserver = showViewApplicantButton -> {
-            // Then: Assert that the data is correct
-            System.out.println("Observe showViewApplicantButton: " + showViewApplicantButton);
-            assert(showViewApplicantButton);
-        };
-
-        Observer<Boolean> showDeleteButtonObserver = showDeleteButton -> {
-            // Then: Assert that the data is correct
-            System.out.println("Observe showDeleteButton: " + showDeleteButton);
-            assert(showDeleteButton);
-        };
-
-        eventInfoViewModel.getShowViewApplicantsButton().observeForever(showViewApplicantButtonObserver);
-        eventInfoViewModel.getShowDeleteEventButton().observeForever(showDeleteButtonObserver);
-
+        // Then: Assert that the data is correct
+        assert(eventInfoViewModel.getShowDeleteEventButton().getValue());
+        assert(eventInfoViewModel.getShowViewApplicantsButton().getValue());
         // Then: Verify that the repository is not called
         verify(eventRepository, never()).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
 
@@ -216,13 +208,13 @@ public class EventInfoViewModelTest {
     }
 
     @Test
-    public void testButtonVisibility_Participant_NotApplied_DeadlineNotPassed() {
+    public void testButtonVisibility_Participant_Applied_Pending_DeadlineNotPassed() {
         // Mock data, assume user_id == host_id
         int hostId = 0;
         int userId = 1;
         int eventId = 0;
 
-        when(eventData.getValue()).thenReturn(mockEventDataResult());
+        eventInfoViewModel.getEventData().setValue(mockEventDataResult());
 
         // Mock the repository response
         doAnswer(invocation -> {
@@ -237,29 +229,39 @@ public class EventInfoViewModelTest {
         eventInfoViewModel.setButtonVisibility(userId, hostId, eventId);
         // Then: Verify that the repository is called
         verify(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+        // Then: Assert that the data is correct
+        assert(eventInfoViewModel.getShowResultButton().getValue());
+        assert(eventInfoViewModel.getShowCancelRegButton().getValue());
+        assert(eventInfoViewModel.getApplicationStatus().getValue().equals("PENDING"));
+        assert(eventInfoViewModel.getClickableCancelButton().getValue());
+    }
 
-        // Observer
-        Observer<Boolean> showResultButtonObserver = showResultButton -> {
-            // Then: Assert that the data is correct
-            System.out.println("Observe showResultButton: " + showResultButton);
-            assert(showResultButton);
-        };
+    @Test
+    public void testButtonVisibility_Participant_Applied_Pending_DeadlinePassed() {
+        // Mock data, assume user_id == host_id
+        int hostId = 0;
+        int userId = 1;
+        int eventId = 0;
 
-        Observer<Boolean> showCancelButtonObserver = showCancelButton -> {
-            // Then: Assert that the data is correct
-            System.out.println("Observe showCancelButton: " + showCancelButton);
-            assert(showCancelButton);
-        };
+        eventInfoViewModel.getEventData().setValue(mockEventData_DeadlinePassed());
 
-        Observer<String> applicationStatusObserver = applicationStatus -> {
-            // Then: Assert that the data is correct
-            System.out.println("Observe applicationStatus: " + applicationStatus);
-            assert(applicationStatus.equals("PENDING"));
-        };
+        // Mock the repository response
+        doAnswer(invocation -> {
+            // Simulate a successful response
+            ((CallbackInterface) invocation.getArgument(2)).onSuccess(mockNotAppliedApplicationResult());
+            System.out.println("Mock the repository response");
+            return null;
+        }).when(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
 
-        eventInfoViewModel.getShowResultButton().observeForever(showResultButtonObserver);
-        eventInfoViewModel.getShowCancelRegButton().observeForever(showCancelButtonObserver);
-        eventInfoViewModel.getApplicationStatus().observeForever(applicationStatusObserver);
+        // When: Trigger setButtonVisibility method
+        eventInfoViewModel.setButtonVisibility(userId, hostId, eventId);
+        // Then: Verify that the repository is called
+        verify(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+        // Then: Assert that the data is correct
+        assert(eventInfoViewModel.getShowResultButton().getValue());
+        assert(eventInfoViewModel.getShowCancelRegButton().getValue());
+        assert(eventInfoViewModel.getApplicationStatus().getValue().equals("PENDING"));
+        assert(!eventInfoViewModel.getClickableCancelButton().getValue());
     }
 
     private ApplicationDataModel mockAppliedApplicationResult() {
@@ -274,13 +276,13 @@ public class EventInfoViewModelTest {
     }
 
     @Test
-    public void testButtonVisibility_Participant_Applied_DeadlineNotPassed() {
+    public void testButtonVisibility_Participant_Applied_Confirmed_DeadlineNotPassed() {
         // Mock data, assume user_id == host_id
         int hostId = 0;
         int userId = 1;
         int eventId = 0;
 
-        when(eventData.getValue()).thenReturn(mockEventDataResult());
+        eventInfoViewModel.getEventData().setValue(mockEventDataResult());
 
         // Mock the repository response
         doAnswer(invocation -> {
@@ -289,9 +291,149 @@ public class EventInfoViewModelTest {
             System.out.println("Mock the repository response");
             return null;
         }).when(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+
+        // When: Trigger setButtonVisibility method
+        eventInfoViewModel.setButtonVisibility(userId, hostId, eventId);
+
+        // Then: Verify that the repository is called
+        verify(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+
+        // Then: Assert that the data is correct
+        assert(eventInfoViewModel.getShowResultButton().getValue());
+        assert(eventInfoViewModel.getShowCancelRegButton().getValue());
+        assert(eventInfoViewModel.getApplicationStatus().getValue().equals("ACCEPTED"));
+        assert(eventInfoViewModel.getClickableCancelButton().getValue());
+    }
+
+    @Test
+    public void testButtonVisibility_Participant_Applied_Confirmed_DeadlinePassed() {
+        // Mock data, assume user_id == host_id
+        int hostId = 0;
+        int userId = 1;
+        int eventId = 0;
+
+        eventInfoViewModel.getEventData().setValue(mockEventData_DeadlinePassed());
+
+        // Mock the repository response
+        doAnswer(invocation -> {
+            // Simulate a successful response
+            ((CallbackInterface) invocation.getArgument(2)).onSuccess(mockAppliedApplicationResult());
+            System.out.println("Mock the repository response");
+            return null;
+        }).when(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+
+        // When: Trigger setButtonVisibility method
+        eventInfoViewModel.setButtonVisibility(userId, hostId, eventId);
+
+        // Then: Verify that the repository is called
+        verify(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+        // Then: Assert that the data is correct
+        assert(eventInfoViewModel.getShowResultButton().getValue());
+        assert(eventInfoViewModel.getShowCancelRegButton().getValue());
+        assert(eventInfoViewModel.getApplicationStatus().getValue().equals("ACCEPTED"));
+        assert(!eventInfoViewModel.getClickableCancelButton().getValue());
+    }
+
+    @Test
+    public void testButtonVisibility_Participant_Register_DeadlineNotPassed(){
+        // Mock data, assume user_id == host_id
+        int hostId = 0;
+        int userId = 1;
+        int eventId = 0;
+
+        eventInfoViewModel.getEventData().setValue(mockEventDataResult());
+
+        // Mock the repository response
+        doAnswer(invocation -> {
+            // Simulate a successful response
+            ((CallbackInterface) invocation.getArgument(2)).onError("No application found");
+            System.out.println("Mock the repository response");
+            return null;
+        }).when(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+
+        // When: Trigger setButtonVisibility method
+        eventInfoViewModel.setButtonVisibility(userId, hostId, eventId);
+
+        // Then: Verify that the repository is called
+        verify(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+
+        // Then: Assert that the data is correct
+        assert(eventInfoViewModel.getShowRegisterButton().getValue());
+        assert(eventInfoViewModel.getClickableRegisterButton().getValue());
+    }
+
+    @Test
+    public void testButtonVisibility_Participant_Register_DeadlinePassed(){
+        // Mock data, assume user_id == host_id
+        int hostId = 0;
+        int userId = 1;
+        int eventId = 0;
+
+        eventInfoViewModel.getEventData().setValue(mockEventData_DeadlinePassed());
+
+        // Mock the repository response
+        doAnswer(invocation -> {
+            // Simulate a successful response
+            ((CallbackInterface) invocation.getArgument(2)).onError("No application found");
+            System.out.println("Mock the repository response");
+            return null;
+        }).when(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+
+        // When: Trigger setButtonVisibility method
+        eventInfoViewModel.setButtonVisibility(userId, hostId, eventId);
+
+        // Then: Verify that the repository is called
+        verify(eventRepository).checkUserAppliedEvent(eq(eventId), eq(userId), any(CallbackInterface.class));
+
+        // Then: Assert that the data is correct
+        assert(eventInfoViewModel.getShowRegisterButton().getValue());
+        assert(!eventInfoViewModel.getClickableRegisterButton().getValue());
+
+    }
+
+    @Test
+    public void testDeleteEvent() {
+        // Mock event_id data
+        int eventId = 0;
+        String expectedSuccessMessage = "Event deleted successfully";
+        // Mock the repository response
+        doAnswer(invocation -> {
+            // Simulate a successful response
+            ((CallbackInterface) invocation.getArgument(1)).onSuccess(expectedSuccessMessage);
+            System.out.println("Mock the repository response");
+            return null;
+        }).when(eventRepository).deleteEvent(eq(eventId), any(CallbackInterface.class));
+
+        // When: Trigger the deleteEvent method
+        eventInfoViewModel.deleteEvent(eventId);
+        // Then: Verify that the repository is called
+        verify(eventRepository).deleteEvent(eq(eventId), any(CallbackInterface.class));
+
+        // Assert that the getShowDeleteEventSuccess() returns true
+        assert(eventInfoViewModel.getShowDeleteEventSuccess().getValue());
+
     }
 
     @Test
     public void testDeleteApplication() {
+        // Mock application_id data
+        int applicationId = 0;
+        eventInfoViewModel.getApplicationData().setValue(mockAppliedApplicationResult());
+
+        String expectedSuccessMessage = "Application deleted successfully";
+        // Mock the repository response
+        doAnswer(invocation -> {
+            // Simulate a successful response
+            ((CallbackInterface) invocation.getArgument(1)).onSuccess(expectedSuccessMessage);
+            System.out.println("Mock the repository response");
+            return null;
+        }).when(eventRepository).deleteApplication(eq(applicationId), any(CallbackInterface.class));
+
+        // When: Trigger the deleteApplication method
+        eventInfoViewModel.deleteApplication();
+        // Then: Verify that the repository is called
+        verify(eventRepository).deleteApplication(eq(applicationId), any(CallbackInterface.class));
+        // Assert that the getShowDeleteApplicationSuccess() returns true
+        assert(eventInfoViewModel.getShowDeleteApplicationSuccess().getValue());
     }
 }
