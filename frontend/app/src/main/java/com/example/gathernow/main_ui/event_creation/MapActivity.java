@@ -75,7 +75,6 @@ public class MapActivity extends AppCompatActivity {
                     if (isLocationPermissionGranted()) {
                         // Enable location tracking
                         naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
-
                         // Get the last known location
                         LatLng lastKnownLocation = getLastKnownLocation();
                         if (lastKnownLocation != null) {
@@ -83,6 +82,13 @@ public class MapActivity extends AppCompatActivity {
                             CameraPosition cameraPosition = new CameraPosition(lastKnownLocation, 13f);
                             // Move the camera to the specified position
                             naverMap.moveCamera(CameraUpdate.toCameraPosition(cameraPosition).animate(CameraAnimation.Easing));
+                        } else {
+                            // Default location is Seoul
+                            LatLng seoulLocation = new LatLng(37.5665, 126.9780);
+                            CameraPosition defaultCameraPosition = new CameraPosition(seoulLocation, 13f);
+                            naverMap.moveCamera(CameraUpdate.toCameraPosition(defaultCameraPosition).animate(CameraAnimation.Easing));
+                            // Alternatively, you can show a message to the user
+                            Toast.makeText(MapActivity.this, "Last known location not available. Showing default location.", Toast.LENGTH_SHORT).show();
                         }
                     } else {
                         requestLocationPermission();
@@ -233,6 +239,15 @@ public class MapActivity extends AppCompatActivity {
         super.onResume();
         if (mapView != null) {
             mapView.onResume();
+            // Check and move the camera if location permissions are already granted
+            if (naverMap != null && isLocationPermissionGranted()) {
+                naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+                LatLng lastKnownLocation = getLastKnownLocation();
+                if (lastKnownLocation != null) {
+                    CameraPosition cameraPosition = new CameraPosition(lastKnownLocation, 13f);
+                    naverMap.moveCamera(CameraUpdate.toCameraPosition(cameraPosition).animate(CameraAnimation.Easing));
+                }
+            }
         }
     }
 
@@ -314,10 +329,12 @@ public class MapActivity extends AppCompatActivity {
                         Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return null;
         }
-
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (locationManager != null) {
-            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location gpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            Location networkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            // Use the more accurate location if available, else use the other one
+            Location lastKnownLocation = (gpsLocation != null) ? gpsLocation : networkLocation;
             if (lastKnownLocation != null) {
                 return new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
             }
