@@ -118,6 +118,20 @@ public class EventInfoActivity extends AppCompatActivity {
                         });
                 alertBuilder.show();
             }
+            else if (message != null && message.equals("Network error")) {
+                // open a dialog to reload the page
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+                alertBuilder
+                        .setTitle("Network error")
+                        .setCancelable(false)
+                        .setMessage("Reload the page?")
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            // reload
+                            finish();
+                            startActivity(getIntent());
+                        });
+                alertBuilder.show();
+            }
             else {
                 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
             }
