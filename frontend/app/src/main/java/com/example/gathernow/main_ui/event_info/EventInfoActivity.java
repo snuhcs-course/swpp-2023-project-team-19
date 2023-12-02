@@ -365,6 +365,8 @@ public class EventInfoActivity extends AppCompatActivity {
             }
         });
     }
+    );
+    }
 
     private void openNaverMap(double eventLongitude, double eventLatitude) {
         // Create a Uri with the specified latitude and longitude

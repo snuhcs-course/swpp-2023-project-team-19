@@ -65,6 +65,7 @@ public class EventInfoViewModelTest {
     public void setUp() {
 //        MockitoAnnotations.openMocks(this);
         eventInfoViewModel = new EventInfoViewModel(eventRepository);
+        eventInfoViewModel.setUserRemoteRepository(userRemoteRepository);
         eventInfoViewModel.getEventData().observeForever(eventDataObserver);
         eventInfoViewModel.getShowDeleteApplicationSuccess().observeForever(showDeleteApplicationSuccessObserver);
         eventInfoViewModel.getShowDeleteEventSuccess().observeForever(showDeleteEventSuccessObserver);
@@ -160,14 +161,15 @@ public class EventInfoViewModelTest {
 //        eventInfoViewModel.getEventData().removeObserver(eventDataModelObserver);
     }
 
-    @Ignore("Not working")
+    @Test
     public void testLoadHostInfo() {
         int hostId = 2;
+        UserDataModel fakeHostInfo = mockUserDataResult();
 
         // Mock the repository
         doAnswer(invocation -> {
             // Simulate a successful response
-            ((CallbackInterface) invocation.getArgument(1)).onSuccess(mockUserDataResult());
+            ((CallbackInterface) invocation.getArgument(1)).onSuccess(fakeHostInfo);
             System.out.println("Mock the repository response");
             return null;
         }).when(userRemoteRepository).getUserInfo(eq(hostId), any(CallbackInterface.class));
@@ -176,7 +178,7 @@ public class EventInfoViewModelTest {
         eventInfoViewModel.loadHostInfo(hostId);
         verify(userRemoteRepository, times(1)).getUserInfo(eq(hostId), any(CallbackInterface.class));
         assertNotNull(eventInfoViewModel.getHostData().getValue());
-
+        verify(hostDataObserver).onChanged(eq(fakeHostInfo));
     }
 
     @Test

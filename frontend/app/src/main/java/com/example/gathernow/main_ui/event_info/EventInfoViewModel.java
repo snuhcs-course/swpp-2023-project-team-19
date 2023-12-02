@@ -18,7 +18,7 @@ import java.util.Objects;
 
 public class EventInfoViewModel extends ViewModel {
     private final EventRepository eventInfoRepository;
-    private final UserRemoteRepository userRemoteRepository;
+    private UserRemoteRepository userRemoteRepository;
     private final MutableLiveData<EventDataModel> eventData = new MutableLiveData<>();
     private final MutableLiveData<ApplicationDataModel> applicationData = new MutableLiveData<>();
     private final MutableLiveData<UserDataModel> hostData = new MutableLiveData<>();
@@ -290,4 +290,7 @@ public class EventInfoViewModel extends ViewModel {
 
     }
 
+    public void setUserRemoteRepository(UserRemoteRepository userRemoteRepository) {
+        this.userRemoteRepository = userRemoteRepository;
+    }
 }
