@@ -50,7 +50,7 @@ public class EventInfoViewModel extends ViewModel {
         return clickableRegisterButton;
     }
     public MutableLiveData<String> getApplicationStatus() {
-        Log.d("EventInfo Testing", "Application status: " + applicationStatus.getValue());
+//        Log.d("EventInfo Testing", "Application status: " + applicationStatus.getValue());
         return applicationStatus;
     }
 
@@ -96,16 +96,20 @@ public class EventInfoViewModel extends ViewModel {
         return showDeleteApplicationSuccess;
     }
 
+    public MutableLiveData<ApplicationDataModel> getApplicationData() {
+        return applicationData;
+    }
+
     public void loadEventInfo(int eventId, int userId) {
         eventInfoRepository.getEventInfo(eventId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
-                Log.d("EventInfoViewModel", "Load event info successfully");
+//                Log.d("EventInfoViewModel", "Load event info successfully");
                 EventDataModel res = (EventDataModel) result;
                 eventData.postValue(res);
                 loadHostInfo(res.getHostId());
                 setButtonVisibility(userId, res.getHostId(), res.getEventId());
-                Log.d("EventInfoViewModel", "Event longitude: " + res.getEventLongitude() + " Event latitude: " + res.getEventLatitude());
+//                Log.d("EventInfoViewModel", "Event longitude: " + res.getEventLongitude() + " Event latitude: " + res.getEventLatitude());
 
             }
 
@@ -116,15 +120,15 @@ public class EventInfoViewModel extends ViewModel {
         });
     }
 
-    private void setButtonVisibility(int userId, int hostId, int eventId) {
+    public void setButtonVisibility(int userId, int hostId, int eventId) {
         if (hostId == userId) {
             showViewApplicantsButton.setValue(true);
             showDeleteEventButton.setValue(true);
         } else {
-            eventInfoRepository.checkUserAppliedEvent(userId, eventId, new CallbackInterface() {
+            eventInfoRepository.checkUserAppliedEvent(eventId, userId, new CallbackInterface() {
                 @Override
                 public <T> void onSuccess(T result) {
-                    Log.d("EventInfoViewModel", "Check user applied event successfully");
+//                    Log.d("EventInfoViewModel", "Check user applied event successfully");
                     ApplicationDataModel res = (ApplicationDataModel) result;
                     applicationData.postValue(res);
                     int status = res.getRequestStatus();
@@ -134,8 +138,10 @@ public class EventInfoViewModel extends ViewModel {
                         applicationStatus.setValue("PENDING");
                         showCancelRegButton.setValue(true);
                         // When the deadline is passed, no cancellation is allowed
-                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
-                            clickableCancelButton.setValue(false);
+                        if (eventData.getValue() != null) {
+                            if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
+                                clickableCancelButton.setValue(false);
+                            }
                         }
                     } else if (status == 1) {
                         // application is accepted
@@ -143,8 +149,10 @@ public class EventInfoViewModel extends ViewModel {
                         applicationStatus.setValue("ACCEPTED");
                         showCancelRegButton.setValue(true);
                         // When the deadline is passed, no cancellation is allowed
-                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
-                            clickableCancelButton.setValue(false);
+                        if (eventData.getValue() != null) {
+                            if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
+                                clickableCancelButton.setValue(false);
+                            }
                         }
                     } else if(status == 2){
                         // application is rejected
@@ -166,11 +174,14 @@ public class EventInfoViewModel extends ViewModel {
                     if (message.equals("No application found")) {
                         showRegisterButton.setValue(true);
                         // When the deadline passed or the event is full, no registration is allowed
-                        Log.d("EventInfo Testing", Objects.requireNonNull(eventData.getValue()).getEventRegisterDate());
-                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime()) ||
-                                reachedMaxParticipants(eventData.getValue().getEventNumJoined(), eventData.getValue().getEventNumParticipants())){
-                            clickableRegisterButton.setValue(false);
+//                        Log.d("EventInfo Testing", Objects.requireNonNull(eventData.getValue()).getEventRegisterDate());
+                        if (eventData.getValue() != null) {
+                            if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime()) ||
+                                    reachedMaxParticipants(eventData.getValue().getEventNumJoined(), eventData.getValue().getEventNumParticipants())){
+                                clickableRegisterButton.setValue(false);
+                            }
                         }
+
                     } else {
                         alertMessage.postValue(message);
                     }
@@ -188,10 +199,10 @@ public class EventInfoViewModel extends ViewModel {
         java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH:mm:ss", Locale.US);
         String currentDateString = dateFormat.format(currentDate);
         String currentTimeString = timeFormat.format(currentDate);
-        Log.d("EventInfo Testing", "Current date: " + currentDateString);
-        Log.d("EventInfo Testing", "Current time: " + currentTimeString);
-        Log.d("EventInfo Testing", "Event register date: " + event_register_date);
-        Log.d("EventInfo Testing", "Event register time: " + event_register_time);
+//        Log.d("EventInfo Testing", "Current date: " + currentDateString);
+//        Log.d("EventInfo Testing", "Current time: " + currentTimeString);
+//        Log.d("EventInfo Testing", "Event register date: " + event_register_date);
+//        Log.d("EventInfo Testing", "Event register time: " + event_register_time);
 
         // Compare current date and time with event registration deadline
         if (currentDateString.compareTo(event_register_date) > 0) {
@@ -213,7 +224,7 @@ public class EventInfoViewModel extends ViewModel {
         userRemoteRepository.getUserInfo(hostId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
-                Log.d("EventInfoViewModel", "Load host info successfully");
+//                Log.d("EventInfoViewModel", "Load host info successfully");
                 hostData.postValue((UserDataModel) result);
             }
 
@@ -228,7 +239,7 @@ public class EventInfoViewModel extends ViewModel {
         eventInfoRepository.deleteEvent(eventId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
-                Log.d("EventInfoViewModel", (String) result);
+//                Log.d("EventInfoViewModel", (String) result);
                 showDeleteEventSuccess.postValue(true);
             }
 
@@ -251,7 +262,7 @@ public class EventInfoViewModel extends ViewModel {
         eventInfoRepository.deleteApplication(applicationId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
-                Log.d("EventInfoViewModel", (String) result);
+//                Log.d("EventInfoViewModel", (String) result);
                 showDeleteApplicationSuccess.postValue(true);
 //                alertMessage.postValue((String) result);
             }

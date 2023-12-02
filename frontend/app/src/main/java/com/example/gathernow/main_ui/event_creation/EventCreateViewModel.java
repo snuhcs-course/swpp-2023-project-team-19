@@ -43,7 +43,7 @@ public class EventCreateViewModel extends ViewModel {
         String eventFileThumbnail = ImageHelper.handleImagePicker(context, uri, "event_thumbnail");
         if (eventFileThumbnail != null) {
             this.eventFileThumbnail.postValue(eventFileThumbnail);
-            Log.d("EventCreateViewModel", "handleEventThumbnailUpload: " + eventFileThumbnail);
+//            Log.d("EventCreateViewModel", "handleEventThumbnailUpload: " + eventFileThumbnail);
         }
     }
 
