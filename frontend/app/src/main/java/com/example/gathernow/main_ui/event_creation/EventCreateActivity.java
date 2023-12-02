@@ -11,11 +11,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +58,7 @@ public class EventCreateActivity extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private boolean imageUploaded = false;
+    private boolean imageUploaded = false, fromFragHome = false;
     private ImageView eventThumbnailImageView;
     private String eventThumbnailFilePath = null;
     private EventCreateViewModel eventCreateViewModel;
@@ -65,7 +68,7 @@ public class EventCreateActivity extends Fragment {
     private Button eventTimeButton;
     private Button eventLastRegisterDateButton;
     private Button eventLastRegisterTimeButton;
-    private TextView eventLanguagesView;
+    private TextView eventLanguagesView, noPhotoText;
     private String eventLanguages = "";
     private String eventName = "";
     private String eventDescription = "";
@@ -117,6 +120,13 @@ public class EventCreateActivity extends Fragment {
         EventRepository eventRepository = new EventRepository(eventDataSource);
         eventCreateViewModel = new EventCreateViewModel(getContext(), eventRepository);
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            fromFragHome = bundle.getBoolean("fromFragHome", false);
+        }
+        Log.d("EventCreateActivity", "fromFragHome: " + fromFragHome);
+
+
     }
 
     private TextView eventNameText;
@@ -132,6 +142,7 @@ public class EventCreateActivity extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_event_create, container, false);
         eventThumbnailImageView = rootView.findViewById(R.id.event_image);
+        noPhotoText = rootView.findViewById(R.id.no_photo_text);
 
         // alert message
         eventCreateViewModel.getAlertMessage().observe(getViewLifecycleOwner(), message -> {
@@ -141,7 +152,19 @@ public class EventCreateActivity extends Fragment {
                 startActivity(intent);
                 getActivity().finish();
             }
-            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+
+
+
+            if(!fromFragHome){
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            }
+            else{
+                fromFragHome = false;
+                Log.d("EventCreateActivity", "fromFragHome(else): " + fromFragHome);
+            }
+            Log.d("EventCreateActivity", "fromFragHome(after else): " + fromFragHome);
+
+
         });
 
         // upload image
@@ -150,6 +173,7 @@ public class EventCreateActivity extends Fragment {
             if (uri != null) {
                 eventThumbnailImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
                 eventThumbnailImageView.setImageURI(uri);
+                noPhotoText.setVisibility(View.GONE);
                 eventCreateViewModel.handleEventThumbnailUpload(uri);
             }
         });
@@ -357,13 +381,31 @@ public class EventCreateActivity extends Fragment {
 //                                    FragmentTransaction transaction = fragmentManager.beginTransaction();
 //                                    transaction.remove(EventCreateActivity.this);
 //                                    transaction.commit();
-//
-
         });
 
-
-
         return rootView;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Add a touch listener to hide the keyboard when tapping on a blank space
+        view.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
+            }
+        });
+    }
+
+    private void hideKeyboard() {
+        View view = requireActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) requireActivity().getSystemService(requireActivity().INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 
     private void onCreateEventButton() {
@@ -404,8 +446,11 @@ public class EventCreateActivity extends Fragment {
             // TODO: Delete selected image
             eventThumbnailImageView.setImageResource(R.mipmap.ic_sad_frog_foreground);
             eventThumbnailImageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
+            eventThumbnailImageView.setAdjustViewBounds(true);
+            noPhotoText.setVisibility(View.VISIBLE);
+            noPhotoText.setText("Don't like the previous photo?\n Try uploding another one!");
             eventThumbnailFilePath = null;
-            uploadImgButton.setText("Upload");
+            uploadImgButton.setText("Upload event photo");
             imageUploaded = false;
         }
 

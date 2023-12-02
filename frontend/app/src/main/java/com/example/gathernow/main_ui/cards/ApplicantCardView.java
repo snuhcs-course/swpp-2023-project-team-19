@@ -70,13 +70,22 @@ public class ApplicantCardView extends LinearLayout {
             rejectButton.setVisibility(INVISIBLE);
             acceptedButton.setVisibility(VISIBLE);
             acceptedButton.setText("Accepted");
-        } else {
+        }
+        else if(status == 2){
+            // Applicants already been rejected
+            approveButton.setVisibility(INVISIBLE);
+            rejectButton.setVisibility(INVISIBLE);
+            acceptedButton.setVisibility(VISIBLE);
+            acceptedButton.setText("Rejected");
+            acceptedButton.setEnabled(false);
+        }
+        else {
             approveButton.setVisibility(VISIBLE);
             rejectButton.setVisibility(VISIBLE);
             acceptedButton.setVisibility(INVISIBLE);
 
-            approveButton.setOnClickListener(view -> applicantCardViewModel.acceptApplication(applicationId, eventId));
-            rejectButton.setOnClickListener(view -> applicantCardViewModel.rejectApplication(applicationId));
+            approveButton.setOnClickListener(view -> applicantCardViewModel.acceptApplication(applicationId, 1, eventId));
+            rejectButton.setOnClickListener(view -> applicantCardViewModel.acceptApplication(applicationId, 2, eventId));
         }
     }
 

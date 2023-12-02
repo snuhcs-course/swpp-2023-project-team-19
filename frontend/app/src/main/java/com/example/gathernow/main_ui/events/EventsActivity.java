@@ -61,6 +61,7 @@ public class EventsActivity extends Fragment {
     private ImageView sadFrog;
     private int userId;
     private EventsViewModel eventsViewModel;
+    private UserLocalDataSource userLocalDataSource;
 
     private List<EventDataModel> eventDataModelList = new ArrayList<EventDataModel>();
 
@@ -96,6 +97,7 @@ public class EventsActivity extends Fragment {
         }
 
         eventsViewModel = new EventsViewModel(getContext());
+        userLocalDataSource = new UserLocalDataSource(getContext());
     }
 
     @Override
@@ -105,6 +107,10 @@ public class EventsActivity extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_events, container, false);
         //get current login user id
         UserLocalDataSource userLocalDataSource = new UserLocalDataSource(getActivity());
+        if (userLocalDataSource.getUserId() == null) {
+            Log.e("EventsActivity", "User not logged in");
+            return rootView;
+        }
         userId = Integer.valueOf(userLocalDataSource.getUserId());
 
         initializeUI(rootView);
@@ -120,10 +126,8 @@ public class EventsActivity extends Fragment {
         eventsViewModel.getPendingEvents().observe(getViewLifecycleOwner(), eventDataModels -> fetchPendingEventsUI(eventDataModels, rootView));
         Log.e("EventsActivity", "getPendingEvents() called");
 
-        eventsViewModel.fetchUserAppliedEvents();
+        eventsViewModel.fetchUserAppliedEvents(userLocalDataSource);
         Log.e("EventsActivity", "fetchUserAppliedEvents() called");
-
-
 
         return rootView;
     }

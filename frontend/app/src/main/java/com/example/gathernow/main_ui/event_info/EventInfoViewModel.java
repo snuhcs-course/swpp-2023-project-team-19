@@ -154,7 +154,17 @@ public class EventInfoViewModel extends ViewModel {
                                 clickableCancelButton.setValue(false);
                             }
                         }
-                    } else {
+                    } else if(status == 2){
+                        // application is rejected
+                        showRegisterButton.setValue(true);
+                        // When the deadline passed or the event is full, no registration is allowed
+                        Log.d("EventInfo Testing", Objects.requireNonNull(eventData.getValue()).getEventRegisterDate());
+                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime()) ||
+                                reachedMaxParticipants(eventData.getValue().getEventNumJoined(), eventData.getValue().getEventNumParticipants())){
+                            clickableRegisterButton.setValue(false);
+                        }
+                    }
+                    else {
                         alertMessage.postValue("Application status not found");
                     }
                 }

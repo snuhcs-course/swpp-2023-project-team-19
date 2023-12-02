@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/event_create_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,13 +14,36 @@
         android:padding="30dp"
         tools:context=".main_ui.event_creation.EventCreateActivity">
 
-        <ImageView
-            android:id="@+id/event_image"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="250dp"
-            android:layout_marginTop="15dp"
-            android:src="@mipmap/ic_sad_frog_foreground"
-            android:contentDescription="Event thumbnail" />
+            android:layout_height="match_parent"
+            android:background="@drawable/image_border">
+
+
+            <ImageView
+                android:id="@+id/event_image"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:src="@mipmap/ic_sad_frog_foreground"
+                android:contentDescription="Event thumbnail" />
+
+            <TextView
+                android:id="@+id/no_photo_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="No event photo.\nUpload one now! (*optional)"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"
+                android:visibility="visible" />
+
+        </FrameLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/event_image_upload"
@@ -27,7 +52,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:text="Upload"
+            android:text="Upload event photo"
             android:textSize="15sp" />
 
 
@@ -131,7 +156,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:inputType="text" />
+            android:inputType="text"
+            android:hint="etc. 2 hours, 1 day"/>
 
         <TextView
             android:id="@+id/event_language_hint"

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main_ui.event_filter.EventFilterActivity"
@@ -65,7 +66,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/line">
+        android:layout_below="@+id/line"
+        android:id="@+id/scroll">
 
         <LinearLayout
             android:id="@+id/eventCardContainer"
@@ -74,6 +76,19 @@
             android:orientation="vertical"/>
 
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/loading_layout">
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

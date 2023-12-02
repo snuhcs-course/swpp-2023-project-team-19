@@ -47,19 +47,23 @@ public class ProfileViewModel extends ViewModel {
         return userEvents;
     }
 
-    public void fetchUserProfile() {
+    public void fetchUserProfile(UserLocalDataSource userLocalDataSource) {
+        if (userLocalDataSource.getUserId() == null) {
+            Log.d("ProfileViewModel", "User not logged in");
+            return;
+        }
         int userId = Integer.parseInt(userLocalDataSource.getUserId());
         userRemoteRepository.getUserInfo(userId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
                 Log.d("ProfileViewModel", "Loaded user info");
-                userData.setValue((UserDataModel) result);
+                userData.postValue((UserDataModel) result);
                 fetchUserEvents(userId);
             }
 
             @Override
             public void onError(String message) {
-                alertMessage.setValue(message);
+                alertMessage.postValue(message);
             }
         });
     }
@@ -74,17 +78,17 @@ public class ProfileViewModel extends ViewModel {
                     if (!resultList.isEmpty() && resultList.get(0) instanceof EventDataModel) {
                         List<EventDataModel> events = (List<EventDataModel>) resultList;
                         Collections.reverse(events);
-                        userEvents.setValue(events);
+                        userEvents.postValue(events);
                     } else {
-                        userEvents.setValue(new ArrayList<EventDataModel>());
+                        userEvents.postValue(new ArrayList<EventDataModel>());
                     }
                 }
             }
 
             @Override
             public void onError(String message) {
-                alertMessage.setValue(message);
-                userEvents.setValue(new ArrayList<EventDataModel>());
+                alertMessage.postValue(message);
+                userEvents.postValue(new ArrayList<EventDataModel>());
             }
         });
     }

@@ -2,9 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signupRootLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="30dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".authenticate.register.SignUpActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -12,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.05" />
 
     <TextView
         android:id="@+id/signupText"
@@ -126,6 +129,8 @@
         app:layout_constraintTop_toBottomOf="@id/password_confirm" />
 
     <androidx.appcompat.widget.AppCompatButton
+        style="@style/PositiveButton"
+        android:background="@color/green1"
         android:onClick="onUploadProfilePicture"
         android:id="@+id/upload_profile_pic"
         android:layout_width="wrap_content"
@@ -135,6 +140,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         android:text="Upload Profile Picture"
         />
+
+    <TextView
+        android:id="@+id/optional"
+        style="@style/TextField"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="10dp"
+        android:text="*Optional"
+        app:layout_constraintTop_toBottomOf="@id/alert"
+        app:layout_constraintLeft_toRightOf="@id/upload_profile_pic" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:onClick="onSignUp"

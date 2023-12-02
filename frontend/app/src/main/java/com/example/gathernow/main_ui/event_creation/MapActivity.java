@@ -1,27 +1,42 @@
 package com.example.gathernow.main_ui.event_creation;
 
+import static com.example.gathernow.main_ui.event_creation.TranslateAPI.translate_address;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import com.example.gathernow.R;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.naver.maps.geometry.LatLng;
+import com.naver.maps.map.CameraAnimation;
 import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.CameraUpdate;
 import com.naver.maps.map.MapView;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.LocationTrackingMode;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.HttpUrl;
@@ -38,8 +53,8 @@ public class MapActivity extends AppCompatActivity {
     private Marker selectedMarker;
     private LatLng selectedLocation;
     private String locationName;
-
-    private String apiKeyId = "gb5ymxyg6a"; // Replace with your Naver API client ID
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1001;
+    private String apiKeyId = ""; // Replace with your Naver API client ID
     private String apiKey = ""; // Replace with your Naver API client secret
 
     @Override
@@ -56,7 +71,22 @@ public class MapActivity extends AppCompatActivity {
                 public void onMapReady(NaverMap naverMap) {
                     MapActivity.this.naverMap = naverMap;
 
-                    // ... (Previous code)
+                    // Check and request location permissions
+                    if (isLocationPermissionGranted()) {
+                        // Enable location tracking
+                        naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+
+                        // Get the last known location
+                        LatLng lastKnownLocation = getLastKnownLocation();
+                        if (lastKnownLocation != null) {
+                            // Create a CameraPosition with target location and zoom level
+                            CameraPosition cameraPosition = new CameraPosition(lastKnownLocation, 13f);
+                            // Move the camera to the specified position
+                            naverMap.moveCamera(CameraUpdate.toCameraPosition(cameraPosition).animate(CameraAnimation.Easing));
+                        }
+                    } else {
+                        requestLocationPermission();
+                    }
 
                     naverMap.setOnMapClickListener((point, coord) -> {
                         if (selectedMarker != null) {
@@ -101,7 +131,7 @@ public class MapActivity extends AppCompatActivity {
             // Set up the buttons
             builder.setPositiveButton("OK", (dialog, which) -> {
                 String additionalInfo = input.getText().toString();
-                resultIntent.putExtra("locationName", locationName + additionalInfo);
+                resultIntent.putExtra("locationName", additionalInfo + ", " + locationName);
                 // Set the result to be sent back
                 setResult(Activity.RESULT_OK, resultIntent);
                 // Finish MapActivity
@@ -129,7 +159,6 @@ public class MapActivity extends AppCompatActivity {
                 .header("X-NCP-APIGW-API-KEY", apiKey)
                 .build();
 
-        // Execute the request asynchronously
         // Execute the request asynchronously
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -166,12 +195,18 @@ public class MapActivity extends AppCompatActivity {
                         String area3 = extractNameFromRegion(region, "area3");
                         String area4 = extractNameFromRegion(region, "area4");
 
+                        String koreanAddress = area1 + area2 + area3 + area4;
+                        String englishAddress = translate_address(koreanAddress);
+                        Log.d("MapActivity", "Address: " + koreanAddress);
+                        Log.d("MapActivity", "Address: " + englishAddress);
+
                         // Concatenate the area names
-                        return area1 + area2 + area3 + area4;
+                        return englishAddress;
                     }
                 }
                 return null;
             }
+
 
             private String extractNameFromRegion(JsonObject region, String areaKey) {
                 if (region.has(areaKey)) {
@@ -239,5 +274,54 @@ public class MapActivity extends AppCompatActivity {
         if (mapView != null) {
             mapView.onLowMemory();
         }
+    }
+
+    private boolean isLocationPermissionGranted() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED;
+        }
+        return true;
+    }
+
+    private void requestLocationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    LOCATION_PERMISSION_REQUEST_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        if (requestCode == LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                if (naverMap != null) {
+                    // Enable location tracking after permission is granted
+                    naverMap.setLocationTrackingMode(LocationTrackingMode.Follow);
+                }
+            } else {
+                Toast.makeText(this, "Location permission denied", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    @Nullable
+    private LatLng getLastKnownLocation() {
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return null;
+        }
+
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (locationManager != null) {
+            Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (lastKnownLocation != null) {
+                return new LatLng(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude());
+            }
+        }
+        return null;
     }
 }

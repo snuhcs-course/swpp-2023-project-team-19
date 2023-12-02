@@ -274,13 +274,13 @@ public class EventDataSource {
                 if (response.isSuccessful()) {
                     if (response.body() != null && !response.body().isEmpty()){
                         callback.onSuccess(response.body());
-                        Log.e("UserEventDisplay", "Event is available");
+                        //Log.e("UserEventDisplay", "Event is available");
                     }
                     else{
                         //no events case
                         //callback.onSuccess(null);
                         callback.onSuccess(new ArrayList<>());
-                        Log.e("UserEventDisplay", "Empty Event list");
+                        //Log.e("UserEventDisplay", "Empty Event list");
                     }
                 }
                 else {
@@ -289,19 +289,19 @@ public class EventDataSource {
                     if (response.errorBody() != null) {
                         try {
                             String errorBody = response.errorBody().string();
-                            Log.e("EventDisplay", "Failed with response: " + errorBody);
+                            //Log.e("EventDisplay", "Failed with response: " + errorBody);
                         } catch (IOException e) {
-                            Log.e("EventDisplay", "Error while reading errorBody", e);
+                            //Log.e("EventDisplay", "Error while reading errorBody", e);
                         }
                     } else {
-                        Log.e("EventDisplay", "Response not successful and error body is null");
+                        //Log.e("EventDisplay", "Response not successful and error body is null");
                     }
                 }
             }
 
             @Override
             public void onFailure(Call<List<EventDataModel>> call, Throwable t) {
-                Log.e("EventDisplay", "Error occurred", t);
+                //Log.e("EventDisplay", "Error occurred", t);
             }
 
         });
@@ -330,7 +330,7 @@ public class EventDataSource {
         });
     }
 
-    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+    public void applyForEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
         service.apply_event(applicationDataModel).enqueue(new Callback<CodeMessageResponse>() {
             @Override
             public void onResponse(Call<CodeMessageResponse> call, Response<CodeMessageResponse> response) {
@@ -354,10 +354,35 @@ public class EventDataSource {
                 callbackInterface.onError("Network error");
             }
         });
+
     }
 
-    public void acceptEventApplication(int applicationId, CallbackInterface callbackInterface) {
-        service.acceptStatus(applicationId).enqueue(new Callback<ApplicationDataModel>() {
+    public void applyEvent(ApplicationDataModel applicationDataModel, CallbackInterface callbackInterface) {
+        service.delete_if_applied(applicationDataModel.getApplicantId(), applicationDataModel.getEventId())
+                .enqueue(new Callback<ApplicationDataModel>() {
+                    @Override
+                    public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
+                        if (response.isSuccessful()) {
+                            callbackInterface.onSuccess("Reapplied for event");
+                            applyForEvent(applicationDataModel, callbackInterface);
+
+
+                        } else {
+                            callbackInterface.onError("New application done");
+                            applyForEvent(applicationDataModel, callbackInterface);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ApplicationDataModel> call, Throwable t) {
+                        callbackInterface.onError("Network error");
+                    }
+                });
+    }
+
+
+    public void acceptEventApplication(int applicationId, int status, CallbackInterface callbackInterface) {
+        service.acceptStatus(applicationId, status).enqueue(new Callback<ApplicationDataModel>() {
             @Override
             public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
                 if (response.isSuccessful()) {
@@ -431,7 +456,8 @@ public class EventDataSource {
                         callback.onSuccess(new ArrayList<>());
                     }
                 } else {
-                    callback.onError("Failed to get user events");
+                    //callback.onError("No related events");
+                    callback.onSuccess(new ArrayList<>());
                 }
             }
 
