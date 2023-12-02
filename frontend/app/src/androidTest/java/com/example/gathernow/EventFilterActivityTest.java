@@ -5,8 +5,6 @@ import androidx.test.core.app.ApplicationProvider;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
-// import androidx.test.rule.ActivityTestRule;
-
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -34,7 +32,7 @@ public class EventFilterActivityTest {
     @Before
     public void setUp() throws Exception {
 
-        // Create an intent that mimics the one from your snippet
+        // Create an intent that mimics the intent passed from the previous activity
         Intent intent = new Intent(ApplicationProvider.getApplicationContext(), EventFilterActivity.class);
         intent.putExtra("isFreeEvent", true); // Example, set as needed
         intent.putStringArrayListExtra("selectedLanguageChips", new ArrayList<>(Arrays.asList("English", "Spanish"))); // Example values
@@ -46,19 +44,14 @@ public class EventFilterActivityTest {
         ActivityScenario<EventFilterActivity> scenario = ActivityScenario.launch(intent);
     }
 
-    // test if the activity is launched
     @Test
     public void testEventFilterActivity() {
-        // Now the activity is started with the required state, proceed to test the UI
         onView(withId(R.id.filter_layout)).check(matches(isDisplayed()));
     }
 
-    // test button click
     @Test
     public void testButtonClick() {
-        // Assuming you have a button with an ID `button_id` in EventFilterActivity
         onView(withId(R.id.filter_button)).perform(click());
-        // assert that the button click does what you expect: in this case, it should launch a fragment
         onView(withId(R.id.frag_filter_layout)).check(matches(isDisplayed()));
     }
 

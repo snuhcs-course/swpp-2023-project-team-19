@@ -20,27 +20,18 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d751061-23ed-49f1-a13d-3be89a41e7b7" name="Changes" comment="feat: integrate Naver Map api">
-      <change beforePath="$PROJECT_DIR$/../backend/.coverage" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/.coverage" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/applications/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/applications/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/backend/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/backend/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/events/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/events/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../backend/events/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/../backend/events/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+<<<<<<< main
+    <list default="true" id="0d751061-23ed-49f1-a13d-3be89a41e7b7" name="Changes" comment="feat: pick location based on user real time location">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/MapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/MapActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/local.properties" beforeDir="false" afterPath="$PROJECT_DIR$/local.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[/Users/hoduchieu01/.android/avd/Pixel_3a_API_34_extension_level_7_arm64-v8a.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[R3CW80G6RMP]" />
   <component name="ExternalProjectsData">
     <projectState path="$PROJECT_DIR$">
       <ProjectState />
@@ -324,7 +315,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700278209707</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat: pick location based on user real time location">
+      <created>1701426162386</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701426162386</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -350,7 +348,8 @@
     <MESSAGE value="add: application form frontend" />
     <MESSAGE value="feat: implement register, pending, accepeted status in event card" />
     <MESSAGE value="feat: integrate Naver Map api" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: integrate Naver Map api" />
+    <MESSAGE value="feat: pick location based on user real time location" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: pick location based on user real time location" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gathernow$Tests_in__com_example_gathernow_.ic" NAME="Tests in 'com.example.gathernow' Coverage Results" MODIFIED="1698303608596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -14,7 +14,7 @@
         android:text="\@Event name here"
         android:textSize="26sp"
         android:paddingBottom="10dp"
-        android:paddingLeft="30dp"
+        android:paddingHorizontal="30dp"
         android:paddingTop="30dp"
         android:textStyle="bold"/>
 

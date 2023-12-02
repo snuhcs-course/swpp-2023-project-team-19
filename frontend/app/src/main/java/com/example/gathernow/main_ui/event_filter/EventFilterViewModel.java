@@ -37,11 +37,17 @@ public class EventFilterViewModel extends ViewModel {
         eventRepository.getFilteredEvents(query, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
+                Log.d("EventFilterViewModel", "On Success");
+
                 if (result instanceof List<?>) {
                     List<?> resultList = (List<?>) result;
                     if (!resultList.isEmpty() && resultList.get(0) instanceof EventDataModel) {
                         List<EventDataModel> events = (List<EventDataModel>) resultList;
                         filteredEvents.setValue(events);
+                        Log.d("EventFilterViewModel", "Event:"+events);
+                    }
+                    else{
+                        filteredEvents.setValue(Collections.emptyList());
                     }
                 }
                 Log.d("EventFilterViewModel", "Filtered event found");
@@ -51,6 +57,7 @@ public class EventFilterViewModel extends ViewModel {
             public void onError(String message) {
                 alertMessage.setValue(message);
                 Log.d("EventFilterViewModel", "Filtered event not found");
+                filteredEvents.setValue(Collections.emptyList());
             }
         });
     }
