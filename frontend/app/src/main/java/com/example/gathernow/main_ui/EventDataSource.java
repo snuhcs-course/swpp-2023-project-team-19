@@ -107,7 +107,7 @@ public class EventDataSource {
         });
     }
 
-    public void checkUserAppliedEvent(int userId, int eventId, CallbackInterface callback) {
+    public void checkUserAppliedEvent(int eventId, int userId, CallbackInterface callback) {
         service.check_if_applied(userId, eventId).enqueue(new Callback<ApplicationDataModel>() {
             @Override
             public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {

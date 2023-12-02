@@ -50,7 +50,7 @@ public class EventInfoViewModel extends ViewModel {
         return clickableRegisterButton;
     }
     public MutableLiveData<String> getApplicationStatus() {
-        Log.d("EventInfo Testing", "Application status: " + applicationStatus.getValue());
+//        Log.d("EventInfo Testing", "Application status: " + applicationStatus.getValue());
         return applicationStatus;
     }
 
@@ -116,15 +116,15 @@ public class EventInfoViewModel extends ViewModel {
         });
     }
 
-    private void setButtonVisibility(int userId, int hostId, int eventId) {
+    public void setButtonVisibility(int userId, int hostId, int eventId) {
         if (hostId == userId) {
             showViewApplicantsButton.setValue(true);
             showDeleteEventButton.setValue(true);
         } else {
-            eventInfoRepository.checkUserAppliedEvent(userId, eventId, new CallbackInterface() {
+            eventInfoRepository.checkUserAppliedEvent(eventId, userId, new CallbackInterface() {
                 @Override
                 public <T> void onSuccess(T result) {
-                    Log.d("EventInfoViewModel", "Check user applied event successfully");
+//                    Log.d("EventInfoViewModel", "Check user applied event successfully");
                     ApplicationDataModel res = (ApplicationDataModel) result;
                     applicationData.postValue(res);
                     int status = res.getRequestStatus();
@@ -134,9 +134,13 @@ public class EventInfoViewModel extends ViewModel {
                         applicationStatus.setValue("PENDING");
                         showCancelRegButton.setValue(true);
                         // When the deadline is passed, no cancellation is allowed
-                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
-                            clickableCancelButton.setValue(false);
-                        }
+                        if (eventData.getValue() != null)
+                            if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
+                                clickableCancelButton.setValue(false);
+                            }
+//                        if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime())) {
+//                            clickableCancelButton.setValue(false);
+//                        }
                     } else if (status == 1) {
                         // application is accepted
                         showResultButton.setValue(true);
@@ -156,7 +160,7 @@ public class EventInfoViewModel extends ViewModel {
                     if (message.equals("No application found")) {
                         showRegisterButton.setValue(true);
                         // When the deadline passed or the event is full, no registration is allowed
-                        Log.d("EventInfo Testing", Objects.requireNonNull(eventData.getValue()).getEventRegisterDate());
+//                        Log.d("EventInfo Testing", Objects.requireNonNull(eventData.getValue()).getEventRegisterDate());
                         if (deadlinePassed(Objects.requireNonNull(eventData.getValue()).getEventRegisterDate(), eventData.getValue().getEventRegisterTime()) ||
                                 reachedMaxParticipants(eventData.getValue().getEventNumJoined(), eventData.getValue().getEventNumParticipants())){
                             clickableRegisterButton.setValue(false);
