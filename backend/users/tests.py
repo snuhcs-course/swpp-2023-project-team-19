@@ -110,7 +110,7 @@ class UserAvatarViewTest(TestCase):
 
     def test_get_user_avatar_exists(self):
         user_id = self.user.user_id
-        request = self.factory.get(f'/user/avatar/{user_id}/')
+        request = self.factory.get(f'/useravatar/{user_id}/')
         response = self.avatar_view(request, user_id=user_id)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -118,7 +118,7 @@ class UserAvatarViewTest(TestCase):
 
     def test_get_user_avatar_not_found(self):
         user_id = 999
-        request = self.factory.get(f'/user/avatar/{user_id}/')
+        request = self.factory.get(f'/useravatar/{user_id}/')
         response = self.avatar_view(request, user_id=user_id)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
@@ -127,7 +127,7 @@ class UserAvatarViewTest(TestCase):
     def test_get_user_avatar_no_avatar(self):
         user = User.objects.create(user_id=2)
         user_id = user.user_id
-        request = self.factory.get(f'/user/avatar/{user_id}/')
+        request = self.factory.get(f'/useravatar/{user_id}/')
         response = self.avatar_view(request, user_id=user_id)
 
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
@@ -152,7 +152,7 @@ class GetUserIdTest(TestCase):
         self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
 
     def test_get_user_info_method_not_allowed(self):
-        request = self.factory.post(f'/userinfo/{self.user.user_id}/')
+        request = self.factory.delete(f'/userinfo/{self.user.user_id}/')
         response = get_userId(request, user_id=self.user.user_id)
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
 
