@@ -42,5 +42,20 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private boolean isBackPressed = false;
+
+    @Override
+    public void onBackPressed() {
+        if (isBackPressed) {
+            finishAffinity();
+            System.exit(0);
+        }
+        this.isBackPressed = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        // reset back pressed after 2 seconds
+        new android.os.Handler().postDelayed(
+                () -> isBackPressed = false, 2000);
+    }
+
 
 }
