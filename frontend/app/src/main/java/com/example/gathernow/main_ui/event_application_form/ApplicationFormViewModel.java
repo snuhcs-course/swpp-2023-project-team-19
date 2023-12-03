@@ -46,6 +46,27 @@ public class ApplicationFormViewModel extends ViewModel {
         });
     }
 
+    public void fetchEventData(int eventId) {
+        eventRepository.getEventInfo(eventId, new CallbackInterface() {
+            @Override
+            public <T> void onSuccess(T result) {
+//                Log.d("ApplicationFormView debug", "success");
+                EventDataModel res = (EventDataModel) result;
+                eventData.setValue(res);
+                if (res == null) {
+                    alertMessage.setValue("Event not found");
+                } else {
+                    alertMessage.setValue("Event found");
+                }
+            }
+
+            @Override
+            public void onError(String message) {
+                alertMessage.setValue(message);
+            }
+        });
+    }
+
     public MutableLiveData<String> getAlertMessage() {
         return alertMessage;
     }

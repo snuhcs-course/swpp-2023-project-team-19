@@ -1,5 +1,6 @@
 package com.example.gathernow.main_ui.event_application_form;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.gathernow.ApplySuccessful;
+import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
 import com.example.gathernow.api.CodeMessageResponse;
 import com.example.gathernow.api.RetrofitClient;
@@ -69,11 +71,13 @@ public class ApplicationFormActivity extends AppCompatActivity {
         hostName = intent.getStringExtra("hostName");
         hostAvatar = intent.getStringExtra("hostAvatar");
 
-        // query event info from database
-        getEventInfo();
 
         // View model
         applicationFormViewModel = new ApplicationFormViewModel();
+
+        // query event info from database
+        getEventInfo();
+
         applicationFormViewModel.fetchUserData(userId);
         applicationFormViewModel.getAlertMessage().observe(this, message -> {
             if (message.equals("Application sent successfully")) {
@@ -147,7 +151,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
         int resourceId = R.drawable.ic_user_no_profile;
         ImageLoader imageLoader = new ProxyImageLoader(hostAvatar, resourceId);
         imageLoader.displayImage(profileImage);
-
+        applicationFormViewModel.fetchEventData(eventId);
     }
 
     public void onSendApplicationEvent(View v) {
