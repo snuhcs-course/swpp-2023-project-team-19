@@ -106,10 +106,6 @@ public class EventInfoViewModel extends ViewModel {
             public <T> void onSuccess(T result) {
 //                Log.d("EventInfoViewModel", "Load event info successfully");
                 EventDataModel res = (EventDataModel) result;
-                if (res == null) {
-                    alertMessage.postValue("Event not found");
-                    return;
-                }
                 eventData.postValue(res);
                 loadHostInfo(res.getHostId());
                 setButtonVisibility(userId, res.getHostId(), res.getEventId());

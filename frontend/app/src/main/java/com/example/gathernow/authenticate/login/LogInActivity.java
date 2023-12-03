@@ -84,7 +84,7 @@ public class LogInActivity extends AppCompatActivity {
 
     public void loginButtonOnClick(View view) {
         // Check user's input
-        String email = this.emailInput.getText().toString();
+        String email = this.emailInput.getText().toString().trim();
         String password = this.passwordInput.getText().toString();
 
         logInViewModel.logIn(email, password);

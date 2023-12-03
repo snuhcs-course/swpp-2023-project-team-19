@@ -1,5 +1,7 @@
 package com.example.gathernow.main_ui.event_application_form;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,16 +12,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.gathernow.ApplySuccessful;
-import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
+import com.example.gathernow.api.CodeMessageResponse;
+import com.example.gathernow.api.RetrofitClient;
+import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;
 import com.example.gathernow.api.models.ApplicationDataModelBuilder;
+import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.utils.ImageLoader.ImageLoader;
 import com.example.gathernow.utils.ImageLoader.ProxyImageLoader;
+import com.squareup.picasso.Picasso;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ApplicationFormActivity extends AppCompatActivity {
     private int userId;
@@ -62,12 +69,11 @@ public class ApplicationFormActivity extends AppCompatActivity {
         hostName = intent.getStringExtra("hostName");
         hostAvatar = intent.getStringExtra("hostAvatar");
 
-        // View model
-        applicationFormViewModel = new ApplicationFormViewModel();
-
         // query event info from database
         getEventInfo();
 
+        // View model
+        applicationFormViewModel = new ApplicationFormViewModel();
         applicationFormViewModel.fetchUserData(userId);
         applicationFormViewModel.getAlertMessage().observe(this, message -> {
             if (message.equals("Application sent successfully")) {
@@ -134,18 +140,19 @@ public class ApplicationFormActivity extends AppCompatActivity {
         TextView profileName = findViewById(R.id.user_name);
         String displayUserText = "Hosted by " + hostName;
         profileName.setText(displayUserText);
+
         ImageView profileImage = findViewById(R.id.profile_image);
         //Picasso.get().load(hostAvatar).into(profileImage);
 
         int resourceId = R.drawable.ic_user_no_profile;
         ImageLoader imageLoader = new ProxyImageLoader(hostAvatar, resourceId);
         imageLoader.displayImage(profileImage);
-        applicationFormViewModel.fetchEventData(eventId);
 
     }
 
     public void onSendApplicationEvent(View v) {
         Toast.makeText(this, "Sending application...", Toast.LENGTH_SHORT).show();
+
         Integer applicant_id = userId;
         Integer event_id = eventId;
         Integer host_id = hostId;
@@ -153,8 +160,6 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
         TextView applicant_contact_input = findViewById(R.id.applicant_contact);
         String applicant_contact = applicant_contact_input.getText().toString().trim();
-
-
         TextView applicant_message_input = findViewById(R.id.applicant_message);
         String applicant_message = applicant_message_input.getText().toString().trim();
 
@@ -168,6 +173,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
                 .setApplicantAvatar(userAvatar);
 
         ApplicationDataModel newApplication = applicationBuilder.build();
+//        ApplicationDataModel newApplication = new ApplicationDataModel(applicant_contact, applicant_message, applicant_id, event_id, host_id, applicant_name, userAvatar);
         applicationFormViewModel.applyEvent(newApplication);
     }
 

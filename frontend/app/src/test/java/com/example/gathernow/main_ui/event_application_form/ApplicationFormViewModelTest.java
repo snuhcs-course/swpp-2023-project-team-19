@@ -6,10 +6,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;
-import com.example.gathernow.api.models.EventDataModel;
-import com.example.gathernow.api.models.EventDataModelBuilder;
 import com.example.gathernow.api.models.UserDataModel;
-import com.example.gathernow.api.models.UserDataModelBuilder;
 import com.example.gathernow.main_ui.CallbackInterface;
 import com.example.gathernow.main_ui.EventRepository;
 import com.example.gathernow.main_ui.UserRemoteRepository;
@@ -48,8 +45,6 @@ public class ApplicationFormViewModelTest extends TestCase {
 
     @Mock
     private Observer<String> mockAlertMessageObserver;
-    @Mock
-    private Observer<EventDataModel> mockEventDataObserver;
 
     @Captor
     private ArgumentCaptor<CallbackInterface> callbackCaptor;
@@ -65,69 +60,12 @@ public class ApplicationFormViewModelTest extends TestCase {
         viewModel.userRemoteRepository = mockUserRemoteRepository;
         viewModel.getApplicantData().observeForever(mockUserDataObserver);
         viewModel.getAlertMessage().observeForever(mockAlertMessageObserver);
-        viewModel.getEventData().observeForever(mockEventDataObserver);
     }
     private UserDataModel mockUserDataModels() {
-        return new UserDataModelBuilder()
-                .setName("Kiwi")
-                .setEmail("kiwi@gmail.com")
-                .setUserId(2)
-                .setAvatar("avatar_image/picture10.png")
-                .setCreatedAt("2023-11-27 16:22:41.734874")
-                .build();
+        UserDataModel userDataModels = new UserDataModel("Kiwi", "kiwi@gmail.com", 2, "2023-11-27 16:22:41.734874", "avatar_image/picture10.png");
+        return userDataModels;
     }
 
-    private EventDataModel mockEventDataModels() {
-        return new EventDataModelBuilder()
-                .setEventId(0)
-                .setEventType("Leisure")
-                .setEventTitle("Test Event")
-                .setEventMaxParticipants(10)
-                .setEventJoined(0)
-                .setEventDate("2024-04-20")
-                .setEventTime("12:00:00")
-                .setEventDuration("2 hours")
-                .setEventLanguage("English")
-                .setEventPrice(0)
-                .setEventLocation("Test Location")
-                .setEventLongitude(0.0)
-                .setEventLatitude(0.0)
-                .setEventDescription("Test description")
-                .setHostId(0)
-                .setHostId(0)
-                .setEventRegisterDate("2024-04-20")
-                .setEventRegisterTime("12:00:00")
-                .setEventImages("Test Image")
-                .build();
-    }
-
-    @Test
-    public void fetchEventData_success() {
-        int eventId = 0;
-        EventDataModel eventDataModel = mockEventDataModels();
-
-        viewModel.fetchEventData(eventId);
-
-        Mockito.verify(mockEventRepository).getEventInfo(Mockito.eq(eventId), callbackCaptor.capture());
-        callbackCaptor.getValue().onSuccess(eventDataModel);
-
-        Mockito.verify(mockEventDataObserver).onChanged(Mockito.eq(eventDataModel));
-        Mockito.verifyNoMoreInteractions(mockAlertMessageObserver);
-    }
-
-    @Test
-    public void fetchEventData_null() {
-        int eventId = 0;
-        String errorMessage = "Event not found";
-
-        viewModel.fetchEventData(eventId);
-
-        Mockito.verify(mockEventRepository).getEventInfo(Mockito.eq(eventId), callbackCaptor.capture());
-        callbackCaptor.getValue().onSuccess(null);
-
-        Mockito.verify(mockAlertMessageObserver).onChanged(Mockito.eq(errorMessage));
-        Mockito.verify(mockEventDataObserver).onChanged(Mockito.eq(null));
-    }
 
     @Test
     public void fetchUserData_success() {
@@ -171,7 +109,7 @@ public class ApplicationFormViewModelTest extends TestCase {
 
 
     @Test
-    public void applyEvent_validInput_eventAvailable_success() {
+    public void applyEvent_validInput_success() {
         ApplicationDataModel applicationDataModel = mockApplicationDataModelsList().get(0);
 
         viewModel.applyEvent(applicationDataModel);
