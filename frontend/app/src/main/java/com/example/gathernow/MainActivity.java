@@ -3,6 +3,7 @@ package com.example.gathernow;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,6 +41,21 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(view.getContext(), LogInActivity.class);
             startActivity(intent);
         });
+    }
+
+    private boolean isBackPressed = false;
+
+    @Override
+    public void onBackPressed() {
+        if (isBackPressed) {
+            finishAffinity();
+            System.exit(0);
+        }
+        this.isBackPressed = true;
+        Toast.makeText(this, "Press back again to exit", Toast.LENGTH_SHORT).show();
+        // reset back pressed after 2 seconds
+        new android.os.Handler().postDelayed(
+                () -> isBackPressed = false, 2000);
     }
 
 
