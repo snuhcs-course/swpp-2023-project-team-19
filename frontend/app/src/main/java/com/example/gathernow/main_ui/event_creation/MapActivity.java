@@ -136,8 +136,13 @@ public class MapActivity extends AppCompatActivity {
             builder.setView(input);
             // Set up the buttons
             builder.setPositiveButton("OK", (dialog, which) -> {
-                String additionalInfo = input.getText().toString();
-                resultIntent.putExtra("locationName", additionalInfo + ", " + locationName);
+                String additionalInfo = input.getText().toString().trim();
+                if (additionalInfo.isEmpty()) {
+                    resultIntent.putExtra("locationName", locationName);
+                }
+                else{
+                    resultIntent.putExtra("locationName", additionalInfo + ", \n" + locationName);
+                }
                 // Set the result to be sent back
                 setResult(Activity.RESULT_OK, resultIntent);
                 // Finish MapActivity
@@ -185,6 +190,7 @@ public class MapActivity extends AppCompatActivity {
                 } else {
                     // Handle unsuccessful response
                     Log.e("MapActivity", "Unsuccessful response");
+                    locationName = "Link to Naver map";
                 }
             }
 
@@ -203,11 +209,21 @@ public class MapActivity extends AppCompatActivity {
 
                         String koreanAddress = area1 + area2 + area3 + area4;
                         String englishAddress = translate_address(koreanAddress);
+                        String finalAddress = "";
+                        if(koreanAddress.isEmpty()){
+                            finalAddress = "Link to Naver map";
+                        }
+                        else if (englishAddress == null) {
+                            finalAddress = koreanAddress;
+                        }
+                        else{
+                            finalAddress = englishAddress;
+                        }
                         Log.d("MapActivity", "Address: " + koreanAddress);
                         Log.d("MapActivity", "Address: " + englishAddress);
 
                         // Concatenate the area names
-                        return englishAddress;
+                        return finalAddress;
                     }
                 }
                 return null;

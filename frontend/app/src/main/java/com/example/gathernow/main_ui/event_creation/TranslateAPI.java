@@ -20,10 +20,12 @@ import java.util.Map;
 
 // 네이버 기계 번역 (Papago SMT) API 예제
 public class TranslateAPI {
+    static String clientId = "b625hew8rf";//애플리케이션 클라이언트 아이디값";
+    static String clientSecret = "wbxm0cQ0uLFV9jttEzEaS047QcQuqzJIDN6Rn71l";//애플리케이션 클라이언트 시크릿값";
 
     public static void main(String[] args) {
-        String clientId = "";//애플리케이션 클라이언트 아이디값";
-        String clientSecret = "";//애플리케이션 클라이언트 시크릿값";
+        //String clientId = "";//애플리케이션 클라이언트 아이디값";
+        //String clientSecret = "";//애플리케이션 클라이언트 시크릿값";
 
         String apiURL = "https://openapi.naver.com/v1/papago/n2mt";
         String text;
@@ -44,8 +46,8 @@ public class TranslateAPI {
 
 
     public static String translate_address(String input){
-        String clientId = "";  // replace client id here
-        String clientSecret = "";  // replace client secret here
+        //String clientId = "";  // replace client id here
+        //String clientSecret = ""; // replace client secret here
 
         String apiURL = "https://naveropenapi.apigw.ntruss.com/nmt/v1/translation";
         String text;

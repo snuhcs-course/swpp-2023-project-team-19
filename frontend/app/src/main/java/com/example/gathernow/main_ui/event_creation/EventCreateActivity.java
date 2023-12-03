@@ -205,7 +205,7 @@ public class EventCreateActivity extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                eventCreateViewModel.setEventName(s.toString());
+                eventCreateViewModel.setEventName(s.toString().trim());
             }
 
             @Override
@@ -225,7 +225,7 @@ public class EventCreateActivity extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                eventCreateViewModel.setEventDuration(s.toString());
+                eventCreateViewModel.setEventDuration(s.toString().trim());
             }
 
             @Override
@@ -268,7 +268,7 @@ public class EventCreateActivity extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                eventCreateViewModel.setEventDescription(s.toString());
+                eventCreateViewModel.setEventDescription(s.toString().trim());
             }
 
             @Override

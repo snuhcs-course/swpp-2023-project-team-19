@@ -94,8 +94,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void onSignUp(View v) {
-        String name = nameInput.getText().toString();
-        String email = emailInput.getText().toString();
+        String name = nameInput.getText().toString().trim();
+        String email = emailInput.getText().toString().trim();
         String password = passwordInput.getText().toString();
         String password_confirm = pwConfirmInput.getText().toString();
 

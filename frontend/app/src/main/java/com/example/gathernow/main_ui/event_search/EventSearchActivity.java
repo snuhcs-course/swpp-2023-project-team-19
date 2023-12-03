@@ -50,7 +50,8 @@ public class EventSearchActivity extends AppCompatActivity {
         searchBar.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_DONE || (event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                 // User pressed "Done" on the keyboard or clicked "Enter"
-                query = searchBar.getText().toString();
+                query = searchBar.getText().toString().trim();
+
                 Log.d("EventSearch", "query: " + query);
                 // Do something with the search text
                 eventCardContainer.removeAllViews();
