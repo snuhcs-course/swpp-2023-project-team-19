@@ -80,8 +80,43 @@ public class ApplicationFormActivity extends AppCompatActivity {
                 Intent intent1 = new Intent(this, ApplySuccessful.class);
                 startActivity(intent1);
                 finish();
-            } else {
-                Toast.makeText(ApplicationFormActivity.this, message, Toast.LENGTH_SHORT).show();
+            } else if (message.equals("Event not found")) {
+                // open a dialog to notify the user that the event is not found, then go back to home page
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+                alertBuilder
+                        .setTitle("Error")
+                        .setCancelable(false)
+                        .setMessage("The event you are applying is deleted. Please try again later.")
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            // Go back to home page
+                            Intent intent1 = new Intent(this, FragHome.class);
+                            startActivity(intent1);
+                            finish();
+                        });
+                alertBuilder.show();
+            }
+//            else if (message.equals("Network error")) {
+//                // open a dialog to notify the user that network error, then reload the page
+//                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+//                alertBuilder
+//                        .setTitle("Error")
+//                        .setCancelable(false)
+//                        .setMessage("Network error. Please try again later.")
+//                        .setPositiveButton("OK", (dialog, which) -> {
+//                            // Reload the page
+//                            Intent intent1 = new Intent(this, ApplicationFormActivity.class);
+//                            intent1.putExtra("hostId", hostId);
+//                            intent1.putExtra("userId", userId);
+//                            intent1.putExtra("eventId", eventId);
+//                            intent1.putExtra("eventName", eventName);
+//                            intent1.putExtra("hostName", hostName);
+//                            intent1.putExtra("hostAvatar", hostAvatar);
+//                            startActivity(intent1);
+//                            finish();
+//                        });
+//            }
+            else {
+//                Toast.makeText(ApplicationFormActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
         applicationFormViewModel.getApplicantData().observe(this, applicantData -> {
@@ -116,6 +151,8 @@ public class ApplicationFormActivity extends AppCompatActivity {
     }
 
     public void onSendApplicationEvent(View v) {
+        Toast.makeText(this, "Sending application...", Toast.LENGTH_SHORT).show();
+
         Integer applicant_id = userId;
         Integer event_id = eventId;
         Integer host_id = hostId;
@@ -123,7 +160,6 @@ public class ApplicationFormActivity extends AppCompatActivity {
 
         TextView applicant_contact_input = findViewById(R.id.applicant_contact);
         String applicant_contact = applicant_contact_input.getText().toString().trim();
-
         TextView applicant_message_input = findViewById(R.id.applicant_message);
         String applicant_message = applicant_message_input.getText().toString().trim();
 
@@ -139,7 +175,6 @@ public class ApplicationFormActivity extends AppCompatActivity {
         ApplicationDataModel newApplication = applicationBuilder.build();
 //        ApplicationDataModel newApplication = new ApplicationDataModel(applicant_contact, applicant_message, applicant_id, event_id, host_id, applicant_name, userAvatar);
         applicationFormViewModel.applyEvent(newApplication);
-
     }
 
 
