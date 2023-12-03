@@ -1,8 +1,5 @@
 package com.example.gathernow.main_ui.event_application_form;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,22 +10,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.gathernow.ApplySuccessful;
 import com.example.gathernow.FragHome;
 import com.example.gathernow.R;
-import com.example.gathernow.api.CodeMessageResponse;
-import com.example.gathernow.api.RetrofitClient;
-import com.example.gathernow.api.ServiceApi;
 import com.example.gathernow.api.models.ApplicationDataModel;
 import com.example.gathernow.api.models.ApplicationDataModelBuilder;
-import com.example.gathernow.api.models.UserDataModel;
 import com.example.gathernow.utils.ImageLoader.ImageLoader;
 import com.example.gathernow.utils.ImageLoader.ProxyImageLoader;
-import com.squareup.picasso.Picasso;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class ApplicationFormActivity extends AppCompatActivity {
     private int userId;
@@ -89,7 +80,7 @@ public class ApplicationFormActivity extends AppCompatActivity {
                 alertBuilder
                         .setTitle("Error")
                         .setCancelable(false)
-                        .setMessage("The event you are applying is deleted")
+                        .setMessage("The event you are applying is deleted. Please try again later.")
                         .setPositiveButton("OK", (dialog, which) -> {
                             // Go back to home page
                             Intent intent1 = new Intent(this, FragHome.class);
@@ -133,29 +124,50 @@ public class ApplicationFormActivity extends AppCompatActivity {
     }
 
     public void onSendApplicationEvent(View v) {
-        Integer applicant_id = userId;
-        Integer event_id = eventId;
-        Integer host_id = hostId;
-        String applicant_name = username;
+        // Check if event is still available
+        applicationFormViewModel.fetchEventData(eventId);
+        applicationFormViewModel.getAlertMessage().observe(this, message -> {
+            if (message.equals("Event not found")) {
+                // open a dialog to notify the user that the event is not found, then go back to home page
+                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+                alertBuilder
+                        .setTitle("Error")
+                        .setCancelable(false)
+                        .setMessage("The event you are applying is deleted. Please try again later.")
+                        .setPositiveButton("OK", (dialog, which) -> {
+                            // Go back to home page
+                            Intent intent1 = new Intent(this, FragHome.class);
+                            startActivity(intent1);
+                            finish();
+                        });
+                alertBuilder.show();
+            } else {
+                Integer applicant_id = userId;
+                Integer event_id = eventId;
+                Integer host_id = hostId;
+                String applicant_name = username;
 
-        TextView applicant_contact_input = findViewById(R.id.applicant_contact);
-        String applicant_contact = applicant_contact_input.getText().toString();
+                TextView applicant_contact_input = findViewById(R.id.applicant_contact);
+                String applicant_contact = applicant_contact_input.getText().toString().trim();
 
-        TextView applicant_message_input = findViewById(R.id.applicant_message);
-        String applicant_message = applicant_message_input.getText().toString();
 
-        ApplicationDataModelBuilder applicationBuilder = new ApplicationDataModelBuilder();
-        applicationBuilder.setApplicantContact(applicant_contact)
-                .setApplicantId(applicant_id)
-                .setMessage(applicant_message)
-                .setEventId(event_id)
-                .setHostId(host_id)
-                .setApplicantName(applicant_name)
-                .setApplicantAvatar(userAvatar);
+                TextView applicant_message_input = findViewById(R.id.applicant_message);
+                String applicant_message = applicant_message_input.getText().toString().trim();
 
-        ApplicationDataModel newApplication = applicationBuilder.build();
+                ApplicationDataModelBuilder applicationBuilder = new ApplicationDataModelBuilder();
+                applicationBuilder.setApplicantContact(applicant_contact)
+                        .setApplicantId(applicant_id)
+                        .setMessage(applicant_message)
+                        .setEventId(event_id)
+                        .setHostId(host_id)
+                        .setApplicantName(applicant_name)
+                        .setApplicantAvatar(userAvatar);
+
+                ApplicationDataModel newApplication = applicationBuilder.build();
 //        ApplicationDataModel newApplication = new ApplicationDataModel(applicant_contact, applicant_message, applicant_id, event_id, host_id, applicant_name, userAvatar);
-        applicationFormViewModel.applyEvent(newApplication);
+                applicationFormViewModel.applyEvent(newApplication);
+            }
+        });
 
     }
 

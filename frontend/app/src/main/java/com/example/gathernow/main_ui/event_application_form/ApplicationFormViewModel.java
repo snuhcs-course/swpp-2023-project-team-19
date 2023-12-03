@@ -34,6 +34,10 @@ public class ApplicationFormViewModel extends ViewModel {
         return applicantData;
     }
 
+    public LiveData<EventDataModel> getEventData() {
+        return eventData;
+    }
+
     public void fetchUserData(int userId) {
         userRemoteRepository.getUserInfo(userId, new CallbackInterface() {
             @Override
@@ -52,8 +56,9 @@ public class ApplicationFormViewModel extends ViewModel {
         eventRepository.getEventInfo(eventId, new CallbackInterface() {
             @Override
             public <T> void onSuccess(T result) {
-                Log.d("ApplicationFormView debug", "success");
+//                Log.d("ApplicationFormView debug", "success");
                 EventDataModel res = (EventDataModel) result;
+                eventData.setValue(res);
                 if (res == null) {
                     alertMessage.setValue("Event not found");
                 }
@@ -61,7 +66,7 @@ public class ApplicationFormViewModel extends ViewModel {
 
             @Override
             public void onError(String message) {
-
+                alertMessage.setValue(message);
             }
         });
     }
