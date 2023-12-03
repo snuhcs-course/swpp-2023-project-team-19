@@ -397,6 +397,7 @@ public class EventInfoActivity extends AppCompatActivity {
                 }
             }
         });
+    });
     }
     );
     }
