@@ -102,7 +102,7 @@ public class MapActivity extends AppCompatActivity {
             builder.setView(input);
             // Set up the buttons
             builder.setPositiveButton("OK", (dialog, which) -> {
-                String additionalInfo = input.getText().toString();
+                String additionalInfo = input.getText().toString().trim();
                 if (additionalInfo.isEmpty()) {
                     resultIntent.putExtra("locationName", locationName);
                 }
