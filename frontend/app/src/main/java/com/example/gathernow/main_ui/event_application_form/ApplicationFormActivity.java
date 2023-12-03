@@ -88,8 +88,29 @@ public class ApplicationFormActivity extends AppCompatActivity {
                             finish();
                         });
                 alertBuilder.show();
-            } else {
-                Toast.makeText(ApplicationFormActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+//            else if (message.equals("Network error")) {
+//                // open a dialog to notify the user that network error, then reload the page
+//                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
+//                alertBuilder
+//                        .setTitle("Error")
+//                        .setCancelable(false)
+//                        .setMessage("Network error. Please try again later.")
+//                        .setPositiveButton("OK", (dialog, which) -> {
+//                            // Reload the page
+//                            Intent intent1 = new Intent(this, ApplicationFormActivity.class);
+//                            intent1.putExtra("hostId", hostId);
+//                            intent1.putExtra("userId", userId);
+//                            intent1.putExtra("eventId", eventId);
+//                            intent1.putExtra("eventName", eventName);
+//                            intent1.putExtra("hostName", hostName);
+//                            intent1.putExtra("hostAvatar", hostAvatar);
+//                            startActivity(intent1);
+//                            finish();
+//                        });
+//            }
+            else {
+//                Toast.makeText(ApplicationFormActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
         applicationFormViewModel.getApplicantData().observe(this, applicantData -> {
@@ -124,51 +145,30 @@ public class ApplicationFormActivity extends AppCompatActivity {
     }
 
     public void onSendApplicationEvent(View v) {
-        // Check if event is still available
-        applicationFormViewModel.fetchEventData(eventId);
-        applicationFormViewModel.getAlertMessage().observe(this, message -> {
-            if (message.equals("Event not found")) {
-                // open a dialog to notify the user that the event is not found, then go back to home page
-                AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
-                alertBuilder
-                        .setTitle("Error")
-                        .setCancelable(false)
-                        .setMessage("The event you are applying is deleted. Please try again later.")
-                        .setPositiveButton("OK", (dialog, which) -> {
-                            // Go back to home page
-                            Intent intent1 = new Intent(this, FragHome.class);
-                            startActivity(intent1);
-                            finish();
-                        });
-                alertBuilder.show();
-            } else {
-                Integer applicant_id = userId;
-                Integer event_id = eventId;
-                Integer host_id = hostId;
-                String applicant_name = username;
+        Toast.makeText(this, "Sending application...", Toast.LENGTH_SHORT).show();
+        Integer applicant_id = userId;
+        Integer event_id = eventId;
+        Integer host_id = hostId;
+        String applicant_name = username;
 
-                TextView applicant_contact_input = findViewById(R.id.applicant_contact);
-                String applicant_contact = applicant_contact_input.getText().toString().trim();
+        TextView applicant_contact_input = findViewById(R.id.applicant_contact);
+        String applicant_contact = applicant_contact_input.getText().toString().trim();
 
 
-                TextView applicant_message_input = findViewById(R.id.applicant_message);
-                String applicant_message = applicant_message_input.getText().toString().trim();
+        TextView applicant_message_input = findViewById(R.id.applicant_message);
+        String applicant_message = applicant_message_input.getText().toString().trim();
 
-                ApplicationDataModelBuilder applicationBuilder = new ApplicationDataModelBuilder();
-                applicationBuilder.setApplicantContact(applicant_contact)
-                        .setApplicantId(applicant_id)
-                        .setMessage(applicant_message)
-                        .setEventId(event_id)
-                        .setHostId(host_id)
-                        .setApplicantName(applicant_name)
-                        .setApplicantAvatar(userAvatar);
+        ApplicationDataModelBuilder applicationBuilder = new ApplicationDataModelBuilder();
+        applicationBuilder.setApplicantContact(applicant_contact)
+                .setApplicantId(applicant_id)
+                .setMessage(applicant_message)
+                .setEventId(event_id)
+                .setHostId(host_id)
+                .setApplicantName(applicant_name)
+                .setApplicantAvatar(userAvatar);
 
-                ApplicationDataModel newApplication = applicationBuilder.build();
-//        ApplicationDataModel newApplication = new ApplicationDataModel(applicant_contact, applicant_message, applicant_id, event_id, host_id, applicant_name, userAvatar);
-                applicationFormViewModel.applyEvent(newApplication);
-            }
-        });
-
+        ApplicationDataModel newApplication = applicationBuilder.build();
+        applicationFormViewModel.applyEvent(newApplication);
     }
 
 
