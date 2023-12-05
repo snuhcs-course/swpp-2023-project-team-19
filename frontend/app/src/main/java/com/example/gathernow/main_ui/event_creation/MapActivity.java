@@ -141,7 +141,7 @@ public class MapActivity extends AppCompatActivity {
                     resultIntent.putExtra("locationName", locationName);
                 }
                 else{
-                    resultIntent.putExtra("locationName", additionalInfo + ", \n" + locationName);
+                    resultIntent.putExtra("locationName", additionalInfo + ", " + locationName);
                 }
                 // Set the result to be sent back
                 setResult(Activity.RESULT_OK, resultIntent);
