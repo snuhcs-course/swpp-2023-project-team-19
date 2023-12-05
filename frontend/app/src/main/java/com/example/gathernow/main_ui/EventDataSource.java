@@ -363,12 +363,12 @@ public class EventDataSource {
                     @Override
                     public void onResponse(Call<ApplicationDataModel> call, Response<ApplicationDataModel> response) {
                         if (response.isSuccessful()) {
-                            callbackInterface.onSuccess("Reapplied for event");
+                            callbackInterface.onSuccess("Application done");
                             applyForEvent(applicationDataModel, callbackInterface);
 
 
                         } else {
-                            callbackInterface.onError("New application done");
+                            callbackInterface.onError("Application done");
                             applyForEvent(applicationDataModel, callbackInterface);
                         }
                     }
