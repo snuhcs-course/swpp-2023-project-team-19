@@ -474,12 +474,16 @@ public class EventCreateActivity extends Fragment {
 
     private void showDatePickerDialog(@NonNull LiveData<Calendar> eventLiveDate, Consumer<Calendar> eventDateConsumer) {
         Calendar currentDate = eventLiveDate.getValue();
+
+        Calendar nextDate = Calendar.getInstance();;
+        nextDate.add(Calendar.DAY_OF_MONTH, 1);
+
         if (currentDate == null) {
             currentDate = Calendar.getInstance();
         }
         int year = currentDate.get(Calendar.YEAR);
         int month = currentDate.get(Calendar.MONTH);
-        int day = currentDate.get(Calendar.DAY_OF_MONTH);
+        int day = nextDate.get(Calendar.DAY_OF_MONTH);
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(requireContext(), (datePicker1, year1, monthOfYear, dayOfMonth) -> {
             Calendar selectedDate = Calendar.getInstance();
@@ -488,7 +492,7 @@ public class EventCreateActivity extends Fragment {
             eventDateConsumer.accept(selectedDate);
         }, year, month, day);
         // set the minimum date to today
-        datePickerDialog.getDatePicker().setMinDate(Calendar.getInstance().getTimeInMillis());
+        datePickerDialog.getDatePicker().setMinDate(nextDate.getTimeInMillis());
         datePickerDialog.show();
     }
 
