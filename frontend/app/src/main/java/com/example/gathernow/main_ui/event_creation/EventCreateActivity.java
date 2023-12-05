@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -152,8 +153,6 @@ public class EventCreateActivity extends Fragment {
                 startActivity(intent);
                 getActivity().finish();
             }
-
-
 
             if(!fromFragHome){
                 Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
