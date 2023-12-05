@@ -464,7 +464,14 @@ public class EventCreateActivity extends Fragment {
 //                    eventTypeInputIdx[0] = i + 1;
         }).setPositiveButton("Select", (dialogInterface, i) -> {
             int selectedId = eventCreateViewModel.getEventTypeInputIdx();
+            if (selectedId == -1) {
+                // If no option is selected, default to the first option
+                selectedId = 0;
+                eventCreateViewModel.setEventTypeInputIdx(selectedId);
+            }
             selectedEventType = eventCreateViewModel.getTypeChoices()[selectedId];
+            eventTypeView.setText(selectedEventType);
+
             Log.d("EventCreateActivity Testing", "Event type: " + selectedEventType);
         }).setNegativeButton("Cancel", (dialogInterface, i) -> {
             dialogInterface.dismiss();
