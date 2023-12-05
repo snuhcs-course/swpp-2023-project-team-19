@@ -174,6 +174,7 @@ public class EventCreateViewModel extends ViewModel {
     public void setEventName(String eventName) {
         if (eventName.isEmpty()) {
             alertMessage.postValue("Event name cannot be empty");
+            this.eventName.setValue(eventName);
             return;
         }
         this.eventName.setValue(eventName);
@@ -187,6 +188,7 @@ public class EventCreateViewModel extends ViewModel {
     public void setEventDescription(String eventDescription) {
         if (eventDescription.isEmpty()) {
             alertMessage.postValue("Event description cannot be empty");
+            this.eventDescription.setValue(eventDescription);
             return;
         }
         this.eventDescription.setValue(eventDescription);
@@ -200,6 +202,7 @@ public class EventCreateViewModel extends ViewModel {
     public void setEventDuration(String eventDuration) {
         if (eventDuration.isEmpty()) {
             alertMessage.postValue("Event duration cannot be empty");
+            this.eventDuration.setValue(eventDuration);
             return;
         }
         this.eventDuration.setValue(eventDuration);
@@ -213,6 +216,7 @@ public class EventCreateViewModel extends ViewModel {
     public void setEventLocation(String eventLocation) {
         if (eventLocation.isEmpty()) {
             alertMessage.postValue("Event location cannot be empty");
+            this.eventLocation.setValue(eventLocation);
             return;
         }
         this.eventLocation.setValue(eventLocation);
