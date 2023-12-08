@@ -10,7 +10,6 @@ Find it hard to explore events that are organized in certain languages as a fore
 - Filter Search​: Filter and search events based on your likings
 - English Map Integration: Map location all displayed in English
 - Direct Navigation: Linking exact location to Naver Map to ease navigation
-- ...
 
 ## Getting Started
 
