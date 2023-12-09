@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.gathernow"
+    namespace = "com.mugswpp.gathernow"
     compileSdk = 33
 
     defaultConfig {
-        applicationId = "com.example.gathernow"
+        applicationId = "com.mugswpp.gathernow"
         minSdk = 24
         targetSdk = 33
         versionCode = 1
