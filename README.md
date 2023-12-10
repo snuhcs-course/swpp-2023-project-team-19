@@ -18,8 +18,8 @@ Find it hard to explore events that are organized in certain languages as a fore
     - Android Studio [version, e.g., 4.2.1]
     - Minimum Android SDK Version [e.g., 21]
 - Backend
-    - Install Python dependencies via `pip install -r requirements.txt`. Please follow this documentation for more details: [https://github.com/snuhcs-course/swpp-2023-project-team-19/tree/main/backend](https://github.com/snuhcs-course/swpp-2023-project-team-19/tree/main/backend)
+    - Install Python dependencies via `pip install -r requirements.txt`. Please follow this documentation for more details: [https://github.com/snuhcs-course/swpp-2023-project-team-19/tree/main/backend/README.md](https://github.com/snuhcs-course/swpp-2023-project-team-19/tree/main/backend/README.md)
 
 ### Release
-The `app-release.apk` file is located in the `frontend/release` folder. Please download the file and install it on your Android device. 
-Download the `app-release.apk` at [https://github.com/snuhcs-course/swpp-2023-project-team-19/blob/main/frontend/app/release/app-release.apk](https://github.com/snuhcs-course/swpp-2023-project-team-19/blob/main/frontend/app/release/app-release.apk)
+The `app-release.apk` file is located in the `frontend/app/release` folder. Please download the file and install it on your Android device. 
+Download the `app-release.apk` at [frontend/app/release/app-release.apk](https://github.com/snuhcs-course/swpp-2023-project-team-19/blob/main/frontend/app/release/app-release.apk)
