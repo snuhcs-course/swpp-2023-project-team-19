@@ -20,9 +20,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0d751061-23ed-49f1-a13d-3be89a41e7b7" name="Changes" comment="feat: integrate Naver Map api">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/MapActivity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_map.xml" afterDir="false" />
+    <list default="true" id="0d751061-23ed-49f1-a13d-3be89a41e7b7" name="Changes" comment="feat: pick location based on user real time location">
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/fileHashes.bin" afterDir="false" />
@@ -30,35 +28,105 @@
       <change beforePath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/8.0/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetDropDown.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/compile_and_runtime_not_namespaced_r_class_jar/debug/R.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/data_binding_layout_info_type_merge/debug/out/fragment_event_home-layout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/data_binding_layout_info_type_package/debug/out/fragment_event_home-layout.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/12/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/12/classes.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/9/classes.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex/debug/mergeProjectDexDebug/9/classes.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/dex_archive_input_jar_hashes/debug/out" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/dex_archive_input_jar_hashes/debug/out" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug/mergeDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug/mergeDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/debug/packageDebugResources/compile-file-map.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/zip-cache/androidResources" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/gathernow/MainActivity.class" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/gathernow/MainActivity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/javac/debug/classes/com/example/gathernow/ServiceApi.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/local_only_symbol_list/debug/R-def.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/local_only_symbol_list/debug/R-def.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/packaged_res/debug/layout/fragment_event_home.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/out/resources-debug.ap_" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/processed_res/debug/out/resources-debug.ap_" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/gathernow/MainActivity.dex" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/gathernow/MainActivity.dex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/project_dex_archive/debug/out/com/example/gathernow/ServiceApi.dex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/runtime_symbol_list/debug/R.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/runtime_symbol_list/debug/R.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/stable_resource_ids_file/debug/stableIds.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/stable_resource_ids_file/debug/stableIds.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/symbol_list_with_package_name/debug/package-aware-r.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/tmp/compileDebugJavaWithJavac/previous-compilation-data.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/ApplicantsInfoActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/ApplicantsInfoActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/ApplicationFormActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/ApplicationFormActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/ApplySuccessfulTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/ApplySuccessfulTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/CreateSuccessfulTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/CreateSuccessfulTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/DeleteSuccessfulTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/DeleteSuccessfulTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/EventFilterActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/EventFilterActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/EventInfoActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/EventInfoActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/EventSearchActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/EventSearchActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/ExampleInstrumentedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/ExampleInstrumentedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/FilterFragmentTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/FilterFragmentTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/FragHomeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/FragHomeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/LogInActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/LogInActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/MainActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/MainActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/MapActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/MapActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/androidTest/java/com/example/gathernow/SignUpActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/androidTest/java/com/mugswpp/gathernow/SignUpActivityTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/EventCreateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/EventCreateActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_event_create.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_event_create.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/ApplySuccessful.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/ApplySuccessful.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/DeleteSuccessful.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/DeleteSuccessful.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/FilterFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/FilterFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/FragHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/FragHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/CodeMessageResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/CodeMessageResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/RetrofitClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/RetrofitClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/ServiceApi.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/ServiceApi.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/TokenResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/TokenResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/models/ApplicationDataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/models/ApplicationDataModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/models/ApplicationDataModelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/models/ApplicationDataModelBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/models/EventDataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/models/EventDataModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/models/EventDataModelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/models/EventDataModelBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/models/UserDataModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/models/UserDataModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/api/models/UserDataModelBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/api/models/UserDataModelBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/AuthCallback.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/AuthCallback.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/UserLocalDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/UserLocalDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/login/LogInActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/login/LogInActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/login/LogInDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/login/LogInDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/login/LogInViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/login/LogInViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/login/LogInViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/login/LogInViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/login/LoginRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/login/LoginRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/register/SignUpActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/register/SignUpActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/register/SignUpDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/register/SignUpDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/register/SignUpRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/register/SignUpRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/register/SignUpViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/register/SignUpViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/authenticate/register/SignUpViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/authenticate/register/SignUpViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/CallbackInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/CallbackInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/EventDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/EventDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/EventRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/EventRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/UserRemoteDataSource.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/UserRemoteDataSource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/UserRemoteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/UserRemoteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/cards/ApplicantCardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/cards/ApplicantCardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/cards/ApplicantCardViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/cards/ApplicantCardViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/cards/EventCardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/cards/EventCardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_applicant_info/ApplicantsInfoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_applicant_info/ApplicantsInfoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_applicant_info/ApplicantsInfoViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_applicant_info/ApplicantsInfoViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_application_form/ApplicationFormActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_application_form/ApplicationFormActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_application_form/ApplicationFormViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_application_form/ApplicationFormViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/CreateSuccessfulActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_creation/CreateSuccessfulActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/EventCreateActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_creation/EventCreateActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/EventCreateViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_creation/EventCreateViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/EventCreateViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_creation/EventCreateViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/MapActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_creation/MapActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_creation/TranslateAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_creation/TranslateAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_filter/EventFilterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_filter/EventFilterActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_filter/EventFilterViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_filter/EventFilterViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_info/EventInfoActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_info/EventInfoActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_info/EventInfoViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_info/EventInfoViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_info/EventInfoViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_info/EventInfoViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_search/EventSearchActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_search/EventSearchActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/event_search/EventSearchViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/event_search/EventSearchViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/events/EventsActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/events/EventsActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/events/EventsViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/events/EventsViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/events/EventsViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/events/EventsViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/home/HomeActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/home/HomeActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/home/HomeViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/home/HomeViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/home/HomeViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/home/HomeViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/profile/ProfileActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/profile/ProfileActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/profile/ProfileViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/profile/ProfileViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/main_ui/profile/ProfileViewModelFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/main_ui/profile/ProfileViewModelFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/utils/DateTimeHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/utils/DateTimeHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/utils/EventCardHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/utils/EventCardHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/utils/ImageHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/utils/ImageHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/utils/ImageLoader/ImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/utils/ImageLoader/ImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/utils/ImageLoader/ProxyImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/utils/ImageLoader/ProxyImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/gathernow/utils/ImageLoader/RealImageLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/mugswpp/gathernow/utils/ImageLoader/RealImageLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/ExampleUnitTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/ExampleUnitTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/event_applicant_info/ApplicantsInfoViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/event_applicant_info/ApplicantsInfoViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/event_application_form/ApplicationFormViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/event_application_form/ApplicationFormViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/event_creation/EventCreateViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/event_creation/EventCreateViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/event_filter/EventFilterActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/event_filter/EventFilterActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/event_filter/EventFilterViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/event_filter/EventFilterViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/event_info/EventInfoViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/event_info/EventInfoViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/event_search/EventSearchActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/event_search/EventSearchActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/event_search/EventSearchViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/event_search/EventSearchViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/events/EventsViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/events/EventsViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/home/HomeViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/home/HomeViewModelTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/test/java/com/example/gathernow/main_ui/profile/ProfileViewModelTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/test/java/com/mugswpp/gathernow/main_ui/profile/ProfileViewModelTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,6 +172,12 @@
       </list>
     </option>
   </component>
+  <component name="GenerateSignedApkSettings">
+    <option name="KEY_STORE_PATH" value="$PROJECT_DIR$/key" />
+    <option name="KEY_ALIAS" value="key0" />
+    <option name="REMEMBER_PASSWORDS" value="true" />
+    <option name="BUILD_TARGET_KEY" value="apk" />
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -126,33 +200,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED&quot;: &quot;EventCardView&quot;,
-    &quot;android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19-new1/frontend/app/src/main/java/com/example/gathernow/ApplicantCardView.java_SELECTED&quot;: &quot;ApplicantCardView&quot;,
-    &quot;android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19-new1/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED&quot;: &quot;EventCardView&quot;,
-    &quot;android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED&quot;: &quot;EventCardView&quot;,
-    &quot;android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/java/com/example/gathernow/ParticipantCardView.java_SELECTED&quot;: &quot;ApplicantCardView&quot;,
-    &quot;android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/ver2/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED&quot;: &quot;EventCardView&quot;,
-    &quot;android-custom-viewC:/Users/Chee_Yee/AndroidStudioProjects/swpp-2023-project-team-19-ver2/frontend/app/src/main/java/com/example/gathernow/ApplicantCardView.java_SELECTED&quot;: &quot;ApplicantCardView&quot;,
-    &quot;android-custom-viewC:/Users/Chee_Yee/AndroidStudioProjects/swpp-2023-project-team-19-ver2/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED&quot;: &quot;EventCardView&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/hoduchieu01/swpp-2023-project-team-19/frontend&quot;,
-    &quot;memory.settings.postsync.last.time.stamp&quot;: &quot;1697262817945&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ApkExportedModule": "gathernow.app",
+    "ExportApk.ApkPathForgathernow.app": "/Users/hoduchieu01/swpp-2023-project-team-19/frontend/app",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED": "EventCardView",
+    "android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19-new1/frontend/app/src/main/java/com/example/gathernow/ApplicantCardView.java_SELECTED": "ApplicantCardView",
+    "android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19-new1/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED": "EventCardView",
+    "android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED": "EventCardView",
+    "android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/swpp-2023-project-team-19/frontend/app/src/main/java/com/example/gathernow/ParticipantCardView.java_SELECTED": "ApplicantCardView",
+    "android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/ver2/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED": "EventCardView",
+    "android-custom-viewC:/Users/Chee_Yee/AndroidStudioProjects/swpp-2023-project-team-19-ver2/frontend/app/src/main/java/com/example/gathernow/ApplicantCardView.java_SELECTED": "ApplicantCardView",
+    "android-custom-viewC:/Users/Chee_Yee/AndroidStudioProjects/swpp-2023-project-team-19-ver2/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_SELECTED": "EventCardView",
+    "cidr.known.project.marker": "true",
+    "last_opened_file_path": "/Users/hoduchieu01/swpp-2023-project-team-19/frontend",
+    "memory.settings.postsync.last.time.stamp": "1697262817945",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_EventCardView_DIMENSIONS&quot;: [
-      &quot;1080&quot;,
-      &quot;1920&quot;
+  "keyToStringList": {
+    "ExportApk.BuildVariants": [
+      "release"
+    ],
+    "android-custom-view/Users/minkhi/AndroidStudioProjects/swpp-2023-project-team-19/event/frontend/app/src/main/java/com/example/gathernow/EventCardView.java_EventCardView_DIMENSIONS": [
+      "1080",
+      "1920"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="android.template.1030693880">
       <recent name="com.example.gathernow" />
@@ -349,7 +428,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700278209707</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat: pick location based on user real time location">
+      <created>1701426162386</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701426162386</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -375,7 +461,8 @@
     <MESSAGE value="add: application form frontend" />
     <MESSAGE value="feat: implement register, pending, accepeted status in event card" />
     <MESSAGE value="feat: integrate Naver Map api" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: integrate Naver Map api" />
+    <MESSAGE value="feat: pick location based on user real time location" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: pick location based on user real time location" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/gathernow$Tests_in__com_example_gathernow_.ic" NAME="Tests in 'com.example.gathernow' Coverage Results" MODIFIED="1698303608596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

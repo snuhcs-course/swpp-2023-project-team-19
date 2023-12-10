@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".main_ui.event_search.EventSearchActivity"
@@ -46,28 +47,6 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/sad_frog1"
             android:text="No related events :(\n"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/try_other_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/no_events_text"
-            android:text="Try another keyword or..."
-            android:textStyle="italic"
-            android:textSize="15sp"/>
-
-        <TextView
-            android:id="@+id/go_home_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/try_other_text"
-            android:layout_marginTop="10dp"
-            android:text="Back to home"
-            android:clickable="true"
-            android:textColor="@color/green1"
             android:textSize="15sp"/>
 
     </RelativeLayout>
